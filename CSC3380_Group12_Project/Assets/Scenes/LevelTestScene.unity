@@ -605,7 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::newMoveScript
   moveSpeed: 20
   jumpStr: 40
-  gravity: 0.3
+  gravity: 0
 --- !u!143 &1613967558
 CharacterController:
   m_ObjectHideFlags: 0
