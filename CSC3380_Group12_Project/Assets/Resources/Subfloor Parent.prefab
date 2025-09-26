@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8329769405240834229}
   m_Layer: 0
-  m_Name: Subfloor
+  m_Name: Subfloor Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2302514543248865298
 Transform:
   m_ObjectHideFlags: 0
@@ -276,7 +276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9027340812225395639
 Transform:
   m_ObjectHideFlags: 0

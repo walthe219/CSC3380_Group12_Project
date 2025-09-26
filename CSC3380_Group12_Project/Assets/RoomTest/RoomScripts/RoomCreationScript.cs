@@ -4,6 +4,7 @@ public class RoomCreationScript : MonoBehaviour
 {
     Object[] prefab_arr;
 
+    public GameObject portalLink;
     public float componentRadius = 10;
     public Vector3 roomCenterPos = Vector3.zero;
 
@@ -12,7 +13,7 @@ public class RoomCreationScript : MonoBehaviour
         prefab_arr = Resources.LoadAll("Subfloors", typeof(GameObject));
 
         GameObject room = new GameObject("Test Generated Room");
-        room.transform.position = roomCenterPos;
+        room.transform.position += roomCenterPos;
 
         Vector3 pos = new Vector3(componentRadius, 0, -componentRadius);
         for (int i = 0; i < 4; i++)
