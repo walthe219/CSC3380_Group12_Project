@@ -5,13 +5,14 @@ public class RoomCreationScript : MonoBehaviour
     Object[] prefab_arr;
 
     public GameObject portalLink;
-    public GameObject cam;
     public float cameraHeight;
+    public GameObject camPrefab;
     public GameObject screen;
     public float componentRadius = 10;
     public Vector3 roomCenterPos = Vector3.zero;
 
     private GameObject room;
+    private Camera roomCam;
 
     private void Start()
     {
@@ -35,7 +36,7 @@ public class RoomCreationScript : MonoBehaviour
             PlaceSubroom((GameObject)(prefab_arr[i+1]), pos, 90 * i, room);
         }
 
-        Instantiate(cam,Vector3.zero + )
+        Instantiate(camPrefab, Vector3.up * cameraHeight, Quaternion.identity, room.transform);
     }
 
     private void Update()
