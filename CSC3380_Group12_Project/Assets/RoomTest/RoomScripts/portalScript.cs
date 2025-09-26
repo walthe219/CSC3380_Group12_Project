@@ -7,6 +7,8 @@ public class portalScript : MonoBehaviour
     public Transform destination;
     public float heightOffset = 1;
     public float distanceOffset = 1;
+    public GameObject portal;
+
 
     private float timer = 9999;
     public float waitTime = 3;
@@ -43,6 +45,16 @@ public class portalScript : MonoBehaviour
 
         }
         else Debug.Log("Object needs Player tag to use teleporter");
+    }
+
+    public void ActivatePortal()
+    {
+
+    }
+
+    public void DeactivatePortal()
+    {
+
     }
 
     private void Update()

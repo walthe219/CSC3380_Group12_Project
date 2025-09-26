@@ -462,7 +462,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 39058036}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1446859464}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -664,7 +664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3558290217470339397, guid: d406eeb1924515d4791c266b8679d59c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5933812064802162517, guid: d406eeb1924515d4791c266b8679d59c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -712,6 +712,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d406eeb1924515d4791c266b8679d59c, type: 3}
+--- !u!4 &1446859464 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4236321204810843802, guid: 125aaf8cecb70234f937af103e069e14, type: 3}
+  m_PrefabInstance: {fileID: 8968889118671009284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1446903690 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5201894871237487989, guid: d406eeb1924515d4791c266b8679d59c, type: 3}
@@ -753,7 +758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2005224648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -768,7 +773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomCreationScript
   portalLink: {fileID: 0}
   componentRadius: 10
-  roomCenterPos: {x: 0, y: 0, z: 0}
+  roomCenterPos: {x: 10, y: 0, z: 0}
 --- !u!4 &2005224649
 Transform:
   m_ObjectHideFlags: 0
@@ -778,7 +783,7 @@ Transform:
   m_GameObject: {fileID: 2005224647}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -100, y: 0, z: 0}
+  m_LocalPosition: {x: 100, y: 100, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -835,6 +840,10 @@ PrefabInstance:
     - target: {fileID: 1901507051140553368, guid: 6437ce4dd46c346489046ad5c08b3b8a, type: 3}
       propertyPath: m_Name
       value: Portal (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901507051140553368, guid: 6437ce4dd46c346489046ad5c08b3b8a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6865946865117144250, guid: 6437ce4dd46c346489046ad5c08b3b8a, type: 3}
       propertyPath: destination
@@ -901,6 +910,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small Room
       objectReference: {fileID: 0}
+    - target: {fileID: 5991389361315399933, guid: 214703b9bb384cd49a8908887dc6629d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -957,6 +970,10 @@ PrefabInstance:
     - target: {fileID: 1901507051140553368, guid: 6437ce4dd46c346489046ad5c08b3b8a, type: 3}
       propertyPath: m_Name
       value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901507051140553368, guid: 6437ce4dd46c346489046ad5c08b3b8a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6572468428716031924, guid: 6437ce4dd46c346489046ad5c08b3b8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1057,7 +1074,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4236321204810843802, guid: 125aaf8cecb70234f937af103e069e14, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 738377382}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 125aaf8cecb70234f937af103e069e14, type: 3}
 --- !u!1660057539 &9223372036854775807
@@ -1065,13 +1085,12 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1290708125}
-  - {fileID: 1357638756}
   - {fileID: 8968889118671009284}
+  - {fileID: 1357638756}
   - {fileID: 3453204714892348599}
   - {fileID: 6349772936752690068}
-  - {fileID: 738377382}
+  - {fileID: 2117070355}
   - {fileID: 1224682987}
   - {fileID: 2005224649}
   - {fileID: 160793070}
   - {fileID: 553200006}
-  - {fileID: 2117070355}
