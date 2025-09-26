@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class portalScript : MonoBehaviour
@@ -9,22 +10,39 @@ public class portalScript : MonoBehaviour
 
     private float timer = 9999;
     public float waitTime = 3;
-    private newMoveScript move  = null;
+
+    private MonoBehaviour movementScript  = null;
+    private MonoBehaviour lookScript = null;
 
     private void OnTriggerEnter(Collider other)
     {
+
+
         if (other.tag.Equals("Player"))
         {
-            move = other.GetComponent<newMoveScript>();
-            move.enabled = false;
+            movementScript = other.GetComponent<newMoveScript>();
+            if (movementScript == null)
+            {
+                Debug.LogError("Change MovementScript in portalScript code");
+            }
+            movementScript.enabled = false;
 
-            other.transform.position = destination.position + transform.forward*distanceOffset + transform.up * heightOffset;
+            lookScript = other.GetComponent<cameraScript>();
+            if (lookScript == null)
+            {
+                Debug.LogError("Change LookScript in portalScript code");
+            }
+            lookScript.enabled = false;
+
+
+            other.transform.position = destination.position + destination.forward * distanceOffset + destination.up * heightOffset;
             other.transform.rotation = destination.rotation;
 
-            Debug.Log("Teleported to " + destination.position);
+            Debug.Log("Teleported to " + destination.position + " with Rotation " + destination.rotation);
             timer = 0;
-           
+
         }
+        else Debug.Log("Object needs Player tag to use teleporter");
     }
 
     private void Update()
@@ -35,11 +53,13 @@ public class portalScript : MonoBehaviour
         }
         else
         {
-            if (move != null)
+            if (movementScript != null)
             {
                 Debug.Log("Reenabled");
-                move.enabled = true;
-                move = null;
+                movementScript.enabled = true;
+                movementScript = null;
+                lookScript.enabled = true;
+                lookScript = null;
             }
             
         }
