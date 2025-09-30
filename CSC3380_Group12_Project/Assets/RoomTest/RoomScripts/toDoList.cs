@@ -12,7 +12,7 @@ public class toDoList {
      *  more advanced tile Randomization
      *  
      *  Note:
-     *  Room may not spawn in correct postion if run in start
-     *  Creates a memory leak somehow probaably from Resource.loadAll() if i were to guess
+     *  Room may not spawn in correct postion if position set in start()
+     *  Creates a memory leak somehow probably from Resource.loadAll() if i were to guess need to fix this
      */
 }
