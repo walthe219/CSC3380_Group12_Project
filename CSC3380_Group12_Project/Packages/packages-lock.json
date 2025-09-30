@@ -1,28 +1,9 @@
 {
   "dependencies": {
-    "com.unity.2d.tilemap": {
-      "version": "1.0.0",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.modules.tilemap": "1.0.0",
-        "com.unity.modules.uielements": "1.0.0"
-      }
-    },
-    "com.unity.2d.tilemap.extras": {
-      "version": "5.0.1",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.2d.tilemap": "1.0.0",
-        "com.unity.modules.tilemap": "1.0.0",
-        "com.unity.modules.jsonserialize": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.burst": {
       "version": "1.8.24",
       "depth": 3,
+
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
@@ -132,6 +113,7 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+
     "com.unity.probuilder": {
       "version": "6.0.7",
       "depth": 0,
@@ -159,9 +141,29 @@
         "com.unity.rendering.light-transport": "1.0.1"
       }
     },
+
+    "com.unity.render-pipelines.universal": {
+      "version": "17.2.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "17.2.0",
+        "com.unity.shadergraph": "17.2.0",
+        "com.unity.render-pipelines.universal-config": "17.0.3"
+      }
+    },
+    "com.unity.render-pipelines.universal-config": {
+      "version": "17.0.3",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "17.0.3"
+      }
+    },
     "com.unity.rendering.light-transport": {
       "version": "1.0.1",
       "depth": 3,
+
       "source": "builtin",
       "dependencies": {
         "com.unity.collections": "2.2.0",
@@ -204,7 +206,9 @@
     },
     "com.unity.test-framework.performance": {
       "version": "3.1.0",
+
       "depth": 4,
+
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.33",
