@@ -12,7 +12,7 @@ public class AmmoDisplay : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        ammoDisplay = GameObject.Find("AmmoDisplay").GetComponent<TextMeshProUGUI>();
     }
 
     //Implememnt reload and shooting delay
@@ -31,10 +31,19 @@ public class AmmoDisplay : MonoBehaviour
         } 
     }
 
+    void ammoToText(){
+        if(ammoDisplay != null){
+            ammoDisplay.text = ammo.ToString();
+        }
+        else{
+            Debug.Log("ammoDisplay is null");
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        ammoDisplay.text = ammo.ToString();
+        ammoToText();
         shoot();
         reload();
     
