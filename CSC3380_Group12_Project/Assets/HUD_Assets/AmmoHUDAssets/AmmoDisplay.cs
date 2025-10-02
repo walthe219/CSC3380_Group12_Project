@@ -1,27 +1,43 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class AmmoDisplay : MonoBehaviour
 {
 
-    public int ammo=-1;
+    private int ammo=-1;
     public bool isFiring;
+    public bool isReloading;
     public TextMeshProUGUI ammoDisplay;
-    public int magSize = 10;
+    private int magSize = 10;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        setMagSize(30);
+        ammo=magSize;
         ammoDisplay = GameObject.Find("AmmoDisplay").GetComponent<TextMeshProUGUI>();
+        
+    }
+
+    public int setMagSize(int magSize){
+        this.magSize = magSize;
+        return magSize;
     }
 
     //Implememnt reload and shooting delay
     //Maybe couple seconds after relaod before you cans start shooting again
-    void reload(){
-        if(Input.GetKeyDown(KeyCode.R)){
+     IEnumerator reload(){
+            isReloading = true;
+            Debug.Log("Reloading......");
+            yield return new WaitForSeconds(3f);
             ammo=magSize;
-        }
+            isReloading=false;
+            Debug.Log("Reloaded!");
+        
     }
+
+    
 
     void shoot(){
         if(Input.GetMouseButtonDown(0) && !isFiring && ammo > 0){//left click = 0
@@ -45,7 +61,8 @@ public class AmmoDisplay : MonoBehaviour
     {
         ammoToText();
         shoot();
-        reload();
-    
+        if (Input.GetKeyDown(KeyCode.R) && !isReloading) {
+            StartCoroutine(reload());
+        }
     }
 }
