@@ -5,14 +5,15 @@ using System.Collections;
 
 public class HealthAmtDisplay : MonoBehaviour
 {
-
+    //*************************Move this to testplayer script
     public TextMeshProUGUI HealthDisplay;
+    TestPlayer p1;
     private int Health;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        setHealth(99);
+        
         HealthDisplay = GameObject.Find("HealthAmtDisplay").GetComponent<TextMeshProUGUI>();
         
       
@@ -34,16 +35,11 @@ public class HealthAmtDisplay : MonoBehaviour
         this.Health = Health;
     }
 
-    void takeDmg(){
-        if(Input.GetKeyDown(KeyCode.L)){
-            Health--;
-        }
-    }
-
+  
     // Update is called once per frame
     void Update()
     {
         healthtoText();
-        takeDmg();
+
     }
 }
