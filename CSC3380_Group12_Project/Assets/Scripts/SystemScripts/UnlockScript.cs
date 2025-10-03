@@ -1,7 +1,8 @@
 using UnityEngine;
-
+#pragma warning restore 0414
 public class UnlockScript : MonoBehaviour
 {
+
     bool HealthInc = false;
     bool StaminaInc = false;
     bool MagSizeInc = false;
@@ -22,4 +23,6 @@ public class UnlockScript : MonoBehaviour
                 break;
         }
     }
+
 }
+#pragma warning restore 0414

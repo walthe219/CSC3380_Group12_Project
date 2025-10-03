@@ -11,10 +11,12 @@ public class AmmoDisplay : MonoBehaviour
     private bool isReloading;
     public TextMeshProUGUI ammoDisplay;
     private int magSize = 10;
+    private int delay_x;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         setMagSize(30);
+        delayTime(3);
         ammo=magSize;
         ammoDisplay = GameObject.Find("AmmoDisplay").GetComponent<TextMeshProUGUI>();
         
@@ -25,12 +27,16 @@ public class AmmoDisplay : MonoBehaviour
         return magSize;
     }
 
+    void delayTime(int delay_x){
+        this.delay_x = delay_x;
+    }
+
     //Implememnt reload and shooting delay
     //Maybe couple seconds after relaod before you cans start shooting again
      IEnumerator reload(){
             isReloading = true;
             Debug.Log("Reloading......");
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(delay_x);
             ammo=magSize;
             isReloading=false;
             Debug.Log("Reloaded!");

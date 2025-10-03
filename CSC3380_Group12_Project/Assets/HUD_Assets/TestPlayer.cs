@@ -9,6 +9,7 @@ public class TestPlayer : MonoBehaviour
     public int currentHealth;
     public int maxHealth = 100;
     private int sacAmt;
+    private int healAmt;
 
     public HealthBar healthBar;
     public AmmoDisplay AD;
@@ -29,6 +30,15 @@ public class TestPlayer : MonoBehaviour
         }
         healthBar.setHealth(currentHealth); 
     }
+
+    void heal(int healAmt){
+        if(currentHealth < 100){
+        this.healAmt = healAmt;
+        currentHealth = currentHealth + healAmt;
+        }
+        healthBar.setHealth(currentHealth);
+    }
+
 
     void healthtoText(){
          if(HealthDisplay != null){
@@ -52,6 +62,9 @@ public class TestPlayer : MonoBehaviour
         healthtoText();
         if(Input.GetKeyDown(KeyCode.L)){
         takeDmg(10);
+       }
+       if(Input.GetKeyDown(KeyCode.H)){
+        heal(10);
        }
     }
 }
