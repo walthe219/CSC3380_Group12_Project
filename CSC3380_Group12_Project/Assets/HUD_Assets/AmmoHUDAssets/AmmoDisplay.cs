@@ -7,8 +7,8 @@ public class AmmoDisplay : MonoBehaviour
 {
 
     private int ammo=-1;
-    public bool isFiring;
-    public bool isReloading;
+    private bool isFiring;
+    private bool isReloading;
     public TextMeshProUGUI ammoDisplay;
     private int magSize = 10;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
