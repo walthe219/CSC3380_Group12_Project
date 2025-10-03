@@ -31,6 +31,7 @@ public class NumOfRoomsComp : MonoBehaviour
     }
 
     public int finishedRoomsInc(){
+        //if(all enemies dead) then ->
         finishedRooms++;
         return finishedRooms;
     }
