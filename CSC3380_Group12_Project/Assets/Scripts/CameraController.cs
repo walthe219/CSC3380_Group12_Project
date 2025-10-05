@@ -9,19 +9,19 @@ public class CameraController : MonoBehaviour
 
     public float sensitivity;
     public Camera cam;
-    public InputAction camControls;
+    public InputAction look;
 
     float rotY = 0f;
     float rotX = 0f;
 
     private void OnEnable()
     {
-        camControls.Enable();
+        look.Enable();
     }
 
     private void OnDisable()
     {
-        camControls.Disable();
+        look.Disable();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,14 +29,19 @@ public class CameraController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        camControls.
+        if(InputSystem.actions)
+        {
+            look = InputSystem.actions.FindAction("Player/Look");
+        }
+        OnEnable();
     }
 
     // Update is called once per frame
     void Update()
     {
-        rotY += camControls.ReadValue( * sensitivity;
-        rotX += Input.GetAxis("Mouse Y") * sensitivity;
+        
+        rotY += look.ReadValue<Vector2>().x * sensitivity;
+        rotX += look.ReadValue<Vector2>().y * sensitivity;
 
         rotX = Mathf.Clamp(rotX, minX, maxX);
 
