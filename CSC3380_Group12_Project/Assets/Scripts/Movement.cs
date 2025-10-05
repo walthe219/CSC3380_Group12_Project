@@ -7,11 +7,13 @@ public class Movement : MonoBehaviour
     CharacterController controller;
     public InputAction move;
     public InputAction jump;
+    public InputAction sprint;
 
     public Transform groundCheck;
     public LayerMask groundMask;
 
     bool isGrounded;
+    bool isSprinting;
 
     Vector3 movement;
     Vector3 input;
@@ -19,6 +21,7 @@ public class Movement : MonoBehaviour
     float speed;
     public float runSpeed;
     public float airSpeed;
+    public float sprintSpeed;
     Vector3 yVelocity;
 
     float gravity;
@@ -50,6 +53,7 @@ public class Movement : MonoBehaviour
         {
             move = InputSystem.actions.FindAction("Player/Move");
             jump = InputSystem.actions.FindAction("Player/Jump");
+            sprint = InputSystem.actions.FindAction("Player/Sprint");
             OnEnable();
         }
         lastJumpTime = 0;
@@ -73,7 +77,7 @@ public class Movement : MonoBehaviour
         ApplyGravity();
     }
 
-    // Handles the movement inputs
+    // Handles all the movement inputs
     void InputHandle()
     {
         input = new Vector3(move.ReadValue<Vector2>().x, 0f, move.ReadValue<Vector2>().y);
@@ -85,12 +89,21 @@ public class Movement : MonoBehaviour
         {
             Jump();   
         }
+        if(sprint.IsPressed() && isGrounded)
+        {
+            isSprinting = true;
+        }
+        if(!sprint.IsPressed())
+        {
+            isSprinting = false;
+        }
     }
 
     // Movement settings when on the ground
     void GroundMovement()
     {
-        speed = runSpeed;
+        // if sprinting use sprintSpeed, if not sprinting use runSpeed
+        speed = isSprinting ? sprintSpeed : runSpeed;
         if (input.x != 0)
         {
             movement.x += input.x * speed;
