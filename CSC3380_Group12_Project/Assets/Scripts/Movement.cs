@@ -24,9 +24,11 @@ public class Movement : MonoBehaviour
     float gravity;
     public float normalGravity;
 
+    float lastJumpTime;
     int jumpCharges;
     public int maxJumpCharges;
     public float jumpHeight;
+
 
     private void OnEnable()
     {
@@ -50,11 +52,13 @@ public class Movement : MonoBehaviour
             jump = InputSystem.actions.FindAction("Player/Jump");
             OnEnable();
         }
+        lastJumpTime = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         InputHandle();
         if(isGrounded)
         {
@@ -64,11 +68,12 @@ public class Movement : MonoBehaviour
         {
             AirMovement();
         }
-        checkGround();
+        CheckGround();
         controller.Move(movement * Time.deltaTime);
         ApplyGravity();
     }
 
+    // Handles the movement inputs
     void InputHandle()
     {
         input = new Vector3(move.ReadValue<Vector2>().x, 0f, move.ReadValue<Vector2>().y);
@@ -76,12 +81,13 @@ public class Movement : MonoBehaviour
         input = transform.TransformDirection(input);
         input = Vector3.ClampMagnitude(input, 1f);
 
-        if (jump.IsPressed() && jumpCharges > 0)
+        if (jump.WasPressedThisFrame() && jumpCharges > 0)
         {
-            Jump();
+            Jump();   
         }
     }
 
+    // Movement settings when on the ground
     void GroundMovement()
     {
         speed = runSpeed;
@@ -104,29 +110,35 @@ public class Movement : MonoBehaviour
         movement = Vector3.ClampMagnitude(movement, speed);
     }
 
+    // Movement settings when in the air
     void AirMovement()
     {
         movement.x += input.x * airSpeed;
         movement.z += input.z * airSpeed;
-
+         
         movement = Vector3.ClampMagnitude(movement, speed);
     }
 
-    void checkGround()
+    // Checks if the player is on the ground, resets jump charges if TRUE
+    void CheckGround()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundMask);
-        if(isGrounded)
+
+        if(isGrounded && (Time.time - lastJumpTime > 0.1))
         {
             jumpCharges = maxJumpCharges;
         }
     }
 
+    // Jump
     void Jump()
     {
         yVelocity.y = Mathf.Sqrt(jumpHeight * -2f * normalGravity);
         jumpCharges--;
+        lastJumpTime = Time.time;
     }
 
+    // Applies gravity to the player
     void ApplyGravity()
     {
         gravity = normalGravity;
