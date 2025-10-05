@@ -7,6 +7,15 @@
             "id": "5d1bb7ac-9c8b-4580-9bdb-f4b7d872b623",
             "actions": [
                 {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "7083b36d-0d69-45de-b022-0838a2060b6f",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Move",
                     "type": "Value",
                     "id": "e4783537-7a25-4f99-8c5b-0ab5c703ffb6",
@@ -16,13 +25,13 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "7083b36d-0d69-45de-b022-0838a2060b6f",
-                    "expectedControlType": "Axis",
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "83d5171b-d941-4cd6-ba7a-cefab47286a9",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Fire",
@@ -252,6 +261,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6cd81d5-9fce-4955-86cb-ab13726ab895",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -32,8 +32,8 @@ public class CameraController : MonoBehaviour
         if(InputSystem.actions)
         {
             look = InputSystem.actions.FindAction("Player/Look");
-        }
-        OnEnable();
+            OnEnable();
+        }   
     }
 
     // Update is called once per frame
