@@ -82,7 +82,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckGround();
         InputHandle();
         if(isGrounded && !isSliding)
         {
@@ -102,7 +102,7 @@ public class Movement : MonoBehaviour
                 isSliding = false;
             }
         }
-        CheckGround();
+        
         controller.Move(movement * Time.deltaTime);
         ApplyGravity();
     }
@@ -179,7 +179,12 @@ public class Movement : MonoBehaviour
     // Checks if the player is on the ground, resets jump charges if TRUE
     void CheckGround()
     {
+        bool currState = isGrounded;
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundMask);
+        if(!currState && isGrounded)
+        {
+            forwardDirection = transform.forward;
+        }
 
         if(isGrounded && (Time.time - lastJumpTime > 0.1))
         {
@@ -203,10 +208,10 @@ public class Movement : MonoBehaviour
         isCrouching = true;
         if (speed > runSpeed)
         {
+            forwardDirection = transform.forward;
             isSliding = true;
             if (isGrounded)
             {
-                forwardDirection = transform.forward;
                 IncreaseSpeed(slideSpeedIncrease);
             }
             slideTimer = maxSlideTimer;
