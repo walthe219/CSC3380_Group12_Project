@@ -10,7 +10,7 @@
                     "name": "Look",
                     "type": "Value",
                     "id": "7083b36d-0d69-45de-b022-0838a2060b6f",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -43,7 +43,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Slide",
+                    "name": "Crouch",
                     "type": "Button",
                     "id": "5741964e-0f22-4e98-b920-3318921129d4",
                     "expectedControlType": "",
@@ -251,30 +251,8 @@
                 },
                 {
                     "name": "",
-                    "id": "f0f2bb77-d8a2-43b5-b636-0acee333c9c7",
-                    "path": "<Mouse>/delta/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e6a0b4cb-9c18-4dee-b1ee-9b3a0e60db43",
-                    "path": "<Mouse>/delta/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8be125cb-8cee-46a0-9d25-c0ab47f9342d",
-                    "path": "<Mouse>/delta",
+                    "id": "917fbb29-7038-40e5-baae-960329a041b2",
+                    "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -307,11 +285,11 @@
                 {
                     "name": "",
                     "id": "447b6d19-efab-43c5-837c-13011803f8e5",
-                    "path": "<Keyboard>/ctrl",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Slide",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
