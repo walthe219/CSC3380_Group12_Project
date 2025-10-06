@@ -48,7 +48,6 @@ public class Movement : MonoBehaviour
     float slideTimer;
     public float maxSlideTimer;
 
-
     private void OnEnable()
     {
         move.Enable();
@@ -98,7 +97,6 @@ public class Movement : MonoBehaviour
             SlideMovement();
             DecreaseSpeed(slideSpeedDecrease);
             slideTimer -= 1f * Time.deltaTime;
-            print(slideTimer);
             if (slideTimer < 0)
             {
                 isSliding = false;
@@ -171,6 +169,7 @@ public class Movement : MonoBehaviour
         movement = Vector3.ClampMagnitude(movement, speed);
     }
 
+    // Movement settings when sliding, currently can only go forwards when sliding unless cancelled
     void SlideMovement()
     {
         movement += forwardDirection;
@@ -205,9 +204,9 @@ public class Movement : MonoBehaviour
         if (speed > runSpeed)
         {
             isSliding = true;
-            forwardDirection = transform.forward;
             if (isGrounded)
             {
+                forwardDirection = transform.forward;
                 IncreaseSpeed(slideSpeedIncrease);
             }
             slideTimer = maxSlideTimer;
@@ -227,12 +226,12 @@ public class Movement : MonoBehaviour
     {
         speed += speedIncrease;
     }
+
     void DecreaseSpeed(float speedDecrease)
     {
         speed -= speedDecrease * Time.deltaTime;
     }
 
-    // Applies gravity to the player
     void ApplyGravity()
     {
         gravity = normalGravity;
