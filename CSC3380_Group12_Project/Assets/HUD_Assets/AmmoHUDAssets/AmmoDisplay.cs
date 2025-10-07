@@ -6,7 +6,7 @@ using System.Collections;
 public class AmmoDisplay : MonoBehaviour
 {
 
-    private int ammo=-1;
+    public int ammo=-1;
     private bool isFiring;
     private bool isReloading;
     public TextMeshProUGUI ammoDisplay;
