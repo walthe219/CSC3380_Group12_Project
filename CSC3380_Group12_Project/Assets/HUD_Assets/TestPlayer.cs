@@ -24,14 +24,14 @@ public class TestPlayer : MonoBehaviour
         healthBar.setMaxHealth(maxHealth);
     }
 
-      void takeDmg(int damage){
+      void takeDmg(int damage){ //test func
         if(currentHealth > 0){
         currentHealth -= damage;
         }
         healthBar.setHealth(currentHealth); 
     }
 
-    void heal(int healAmt){
+    void heal(int healAmt){ //test func
         if(currentHealth < 100){
         this.healAmt = healAmt;
         currentHealth = currentHealth + healAmt;
