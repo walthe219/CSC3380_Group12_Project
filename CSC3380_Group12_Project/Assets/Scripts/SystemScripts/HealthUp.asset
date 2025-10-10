@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c814496a69e754db46ecded53c7d8c, type: 3}
   m_Name: HealthUp
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData1
-  deltaHealth: 0
+  deltaHealth: 10
   deltaAmmo: 0
   deltaStamina: 0
