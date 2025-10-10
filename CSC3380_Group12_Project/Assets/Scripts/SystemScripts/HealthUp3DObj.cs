@@ -2,15 +2,7 @@ using UnityEngine;
 
 public class HealthUp3DObj : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+ public UpgradeData1 HealthUp;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 }

@@ -17,8 +17,9 @@ public class UnlockScript : MonoBehaviour
     public void unlock(string upgrade){
         bool HealthInc = false;
         bool StaminaInc = false;
-        bool MagSizeInc = false;
-  
+        bool MagSizeInc = false;  //Make sure to pass the bools in the invoke
+                                  //so the way to approach this is if the unlock function passes an upgrade to set the bool value to true in the subscriber function  
+                          
         
         switch(upgrade){
             case "HealthInc":
