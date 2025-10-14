@@ -21,11 +21,11 @@ public class PlayerStats : MonoBehaviour
     }
 
     private void OnEnable(){
-        UnlockScript.unlockD += PlayerStatUpgrdMngr;
+        //UnlockScript.unlockD += PlayerStatUpgrdMngr;
     }
 
     private void OnDisable(){
-        UnlockScript.unlockD -= PlayerStatUpgrdMngr;
+        //UnlockScript.unlockD -= PlayerStatUpgrdMngr;
     }
 
     private void PlayerStatUpgrdMngr(string upgrade){
