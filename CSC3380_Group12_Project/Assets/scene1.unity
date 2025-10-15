@@ -1009,6 +1009,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d0e32dbd5317a4ca208948bb66c687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnlockScript
+  HealthInc: 0
+  hasDash: 0
+  hasDJ: 0
+  StaminaInc: 0
+  MagSizeInc: 0
 --- !u!4 &1809179064
 Transform:
   m_ObjectHideFlags: 0
