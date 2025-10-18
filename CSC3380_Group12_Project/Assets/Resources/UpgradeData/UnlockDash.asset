@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91c814496a69e754db46ecded53c7d8c, type: 3}
-  m_Name: AmmoUp
-  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData1
-  HealthUp: {fileID: 11400000, guid: f55d90e9970df894c9485c1ca0415fb3, type: 2}
-  deltaHealth: 0
-  deltaAmmo: 1
-  deltaStamina: 0
+  m_Name: UnlockDash
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  baseHealth: 0
+  baseStamina: 0
+  baseAmmo: 0
+  moveSpeed: 0
+  numJumps: 0
+  damage: 0
+  ID: UnlockDash
+  unlocks: 00000000
