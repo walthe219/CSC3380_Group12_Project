@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
-
     CharacterController controller;
     public InputAction move;
     public InputAction jump;
@@ -20,6 +19,7 @@ public class Movement : MonoBehaviour
 
     Vector3 movement;
     Vector3 input;
+    Vector3 moveDirection;
 
     float speed;
     public float runSpeed;
@@ -48,6 +48,14 @@ public class Movement : MonoBehaviour
     float slideTimer;
     public float maxSlideTimer;
 
+    public float maxSlopeAngle;
+    float slopeAngle;
+    RaycastHit slopeTouch;
+
+    Transform playerPos;
+    bool isFalling; // Not actually falling, only when then player's y-position is decreasing
+    float prevYPos;
+
     private void OnEnable()
     {
         move.Enable();
@@ -68,7 +76,9 @@ public class Movement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        playerPos = GetComponent<Transform>();
         startHeight = transform.localScale.y;
+        prevYPos = playerPos.position.y;
         if (InputSystem.actions)
         {
             move = InputSystem.actions.FindAction("Player/Move");
@@ -83,6 +93,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         CheckGround();
+        HeightChange();
         InputHandle();
         if(isGrounded && !isSliding)
         {
@@ -210,7 +221,11 @@ public class Movement : MonoBehaviour
         {
             forwardDirection = transform.forward;
             isSliding = true;
-            if (isGrounded)
+            if (isGrounded && isFalling)
+            {
+                IncreaseSpeed(slideSpeedIncrease*3);
+            }
+            else if (isGrounded)
             {
                 IncreaseSpeed(slideSpeedIncrease);
             }
@@ -242,5 +257,28 @@ public class Movement : MonoBehaviour
         gravity = normalGravity;
         yVelocity.y += gravity * Time.deltaTime;
         controller.Move(yVelocity * Time.deltaTime);
+    }
+
+    bool OnSlope()
+    {
+        if(Physics.Raycast(transform.position, Vector3.down, out slopeTouch, crouchHeight * 0.5f + 0.3f))
+        {
+            slopeAngle = Vector3.Angle(Vector3.up, slopeTouch.normal);
+            return slopeAngle < maxSlopeAngle && slopeAngle != 0;
+        }
+
+        return false;
+    }
+
+    Vector3 GetSlopeMoveDirection()
+    {
+        return Vector3.ProjectOnPlane(moveDirection, slopeTouch.normal).normalized;
+    }
+
+    void HeightChange()
+    {
+        float currYPos = playerPos.position.y;
+        isFalling = currYPos < prevYPos ? true : false;
+        prevYPos = currYPos;
     }
 }
