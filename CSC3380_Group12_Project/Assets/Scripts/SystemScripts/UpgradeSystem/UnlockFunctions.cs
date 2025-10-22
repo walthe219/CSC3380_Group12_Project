@@ -25,31 +25,39 @@ using UnityEngine;
 public static class UnlockFunctions
 {
 
-    public static event Action Dash;
-    public static event Action Slide;
-    public static event Action Grapple;
-    public static event Action WallRun;
+    public static event Action UnlockDashEvent;
+    public static event Action UnlockSlideEvent;
+    public static event Action UnlockGrappleEvent;
+    public static event Action UnlockWallRunEvent;
 
     public enum Unlockable
     {
-        Dash, Slide, Grapple, WallRun
+        DASH, SLIDE, GRAPPLE, WALLRUN
     }
 
     public static Action getAction(Unlockable u)
     {
         switch (u)
         {
-            case Unlockable.Dash:
-                return Dash;
-            case Unlockable.Slide:
-                return Slide;
-            case Unlockable.Grapple:
-                return Grapple;
-            case Unlockable.WallRun:
-                return WallRun;
+            case Unlockable.DASH:
+                return UnlockDashEvent;
+            case Unlockable.SLIDE:
+                return UnlockSlideEvent;
+            case Unlockable.GRAPPLE:
+                return UnlockGrappleEvent;
+            case Unlockable.WALLRUN:
+                return UnlockWallRunEvent;
             default:
-                Debug.LogError("");
+                Debug.LogError($"Unlockable case {u} not defined");
                 return null;
+        }
+    }
+
+    public static void callAction(Unlockable u) { 
+        Action action = getAction(u);
+        if (action != null)
+        {
+            action?.Invoke();
         }
     }
 }

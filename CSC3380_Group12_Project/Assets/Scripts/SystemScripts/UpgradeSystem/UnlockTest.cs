@@ -7,7 +7,7 @@ public class UnlockTest : MonoBehaviour
 {
     private void Start()
     {
-        UnlockFunctions.Dash += unlockDash;
+        UnlockFunctions.UnlockDashEvent += unlockDash;
         Debug.Log("Subscribed to Dash");
     }
 

@@ -20,10 +20,10 @@ public class UpgradeManager : MonoBehaviour
         BaseStats.set(DefaultStats);
         CurrentStats.set(DefaultStats);
     }
-    public void applyUpgrade(UpgradeData upgrade)
+    public void applyUpgrade(Upgrade upgrade)
     {
-        BaseStats.add(upgrade);
-        CurrentStats.add(upgrade);
+        BaseStats.add(upgrade.data);
+        CurrentStats.add(upgrade.data);
         upgrade.activate();
     }
 
@@ -32,7 +32,7 @@ public class UpgradeManager : MonoBehaviour
     {
         Debug.Log("Adding Upgrade " +  upgrade.data.ID);
         acquiredUpgrades.Add(upgrade);
-        applyUpgrade(upgrade.data);
+        applyUpgrade(upgrade);
 
     }
 
