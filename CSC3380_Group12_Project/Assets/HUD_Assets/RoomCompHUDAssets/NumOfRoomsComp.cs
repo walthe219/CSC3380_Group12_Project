@@ -6,6 +6,10 @@ using System.Collections;
 public class NumOfRoomsComp : MonoBehaviour
 {
 
+    //In this class, we will want to use an event system. First, whoever is making the script that keeps track of enemies, we create an event with them that has 
+    //Action<int> so that when a room is cleared by having all enemies killed, they can invoke an event with the number of rooms completed and I can create a local
+    //rooms completed variable that will be linked to the UI
+
     private int finishedRooms;
     private int abc;
     public TextMeshProUGUI finishedRoomsText;
