@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88849f3e4e87a674b8e418018b3a834e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestPlayer
+  CurrentPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
   currentHealth: 0
   maxHealth: 100
   healthBar: {fileID: 0}
+  AD: {fileID: 0}
+  HealthDisplay: {fileID: 0}

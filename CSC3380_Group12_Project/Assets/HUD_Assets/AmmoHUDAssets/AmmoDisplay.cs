@@ -6,19 +6,28 @@ using System.Collections;
 public class AmmoDisplay : MonoBehaviour
 {
 
-    public int ammo=-1;
+    
     private bool isFiring;
     private bool isReloading;
     public TextMeshProUGUI ammoDisplay;
     private int magSize = 10;
     private int delay_x;
+    [SerializeField] PlayerStats CurrentPlayerStats;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
+    {  
+        if(CurrentPlayerStats == null){
+            Debug.Log("CurrentPlayerStats not assigned in insepctor (AmmoDisplay)");
+        }
+
+        if (ammoDisplay == null){
+            Debug.LogError("ammoDisplay Text UI is not assigned in Inspector!");
+        }
+        
         setMagSize(30);
         delayTime(3);
-        ammo=magSize;
-        ammoDisplay = GameObject.Find("AmmoDisplay").GetComponent<TextMeshProUGUI>();
+        CurrentPlayerStats.ammo=magSize;
+        //ammoDisplay = GameObject.Find("AmmoDisplay").GetComponent<TextMeshProUGUI>();
         
     }
 
@@ -37,25 +46,30 @@ public class AmmoDisplay : MonoBehaviour
             isReloading = true;
             Debug.Log("Reloading......");
             yield return new WaitForSeconds(delay_x);
-            ammo=magSize;
+            CurrentPlayerStats.ammo=magSize;
             isReloading=false;
             Debug.Log("Reloaded!");
         
     }
 
+    IEnumerator ResetFiring()
+{
+    yield return null;  // wait 1 frame
+    isFiring = false;
+}
     
 
     void shoot(){
-        if(Input.GetMouseButtonDown(0) && !isFiring && ammo > 0){//left click = 0
+        if(Input.GetMouseButtonDown(0) && !isFiring && CurrentPlayerStats.ammo > 0){//left click = 0
             isFiring = true;
-            ammo--;
+            CurrentPlayerStats.ammo--;
             isFiring = false;
         } 
     }
 
     void ammoToText(){
         if(ammoDisplay != null){
-            ammoDisplay.text = ammo.ToString();
+            ammoDisplay.text = CurrentPlayerStats.ammo.ToString();
         }
         else{
             Debug.Log("ammoDisplay is null");

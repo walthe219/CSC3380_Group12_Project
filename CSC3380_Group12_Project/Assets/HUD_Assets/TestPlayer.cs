@@ -5,8 +5,9 @@ using System.Collections;
 
 public class TestPlayer : MonoBehaviour
 {
+    [SerializeField] PlayerStats CurrentPlayerStats;
 
-    public int currentHealth;
+    public float currentHealth;
     public int maxHealth = 100;
     private int sacAmt;
     private int healAmt;
@@ -20,6 +21,12 @@ public class TestPlayer : MonoBehaviour
     void Start()
     {
         HealthDisplay = GameObject.Find("HealthDisplay").GetComponent<TextMeshProUGUI>();
+        if(CurrentPlayerStats != null){
+            currentHealth = CurrentPlayerStats.health;
+        }
+        else{
+            Debug.Log("CurrentPlayerStats not in inspector");
+        }
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
     }
