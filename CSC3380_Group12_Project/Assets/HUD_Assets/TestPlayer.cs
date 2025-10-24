@@ -21,35 +21,33 @@ public class TestPlayer : MonoBehaviour
     void Start()
     {
         HealthDisplay = GameObject.Find("HealthDisplay").GetComponent<TextMeshProUGUI>();
-        if(CurrentPlayerStats != null){
-            currentHealth = CurrentPlayerStats.health;
-        }
-        else{
+        if(CurrentPlayerStats == null){
             Debug.Log("CurrentPlayerStats not in inspector");
         }
-        currentHealth = maxHealth;
+        
+        CurrentPlayerStats.health = maxHealth;
         healthBar.setMaxHealth(maxHealth);
     }
 
       void takeDmg(int damage){ //test func
-        if(currentHealth > 0){
-        currentHealth -= damage;
+        if(CurrentPlayerStats.health > 0){
+        CurrentPlayerStats.health -= damage;
         }
-        healthBar.setHealth(currentHealth); 
+        healthBar.setHealth(CurrentPlayerStats.health); 
     }
 
     void heal(int healAmt){ //test func
-        if(currentHealth < 100){
+        if(CurrentPlayerStats.health < 100){
         this.healAmt = healAmt;
-        currentHealth = currentHealth + healAmt;
+        CurrentPlayerStats.health = CurrentPlayerStats.health + healAmt;
         }
-        healthBar.setHealth(currentHealth);
+        healthBar.setHealth(CurrentPlayerStats.health);
     }
 
 
     void healthtoText(){
          if(HealthDisplay != null){
-            HealthDisplay.text = currentHealth.ToString();
+            HealthDisplay.text = CurrentPlayerStats.health.ToString();
         }
         else{
             Debug.Log("Health is null");
