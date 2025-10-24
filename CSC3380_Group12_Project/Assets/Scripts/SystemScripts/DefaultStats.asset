@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1163c186fc93a4740a607c9418f61877, type: 3}
   m_Name: DefaultStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  baseHealth: 250
-  baseStamina: 150
-  baseAmmo: 20
+  health: 100
+  stamina: 0
+  ammo: 0
   moveSpeed: 0
   numJumps: 0
   damage: 0
