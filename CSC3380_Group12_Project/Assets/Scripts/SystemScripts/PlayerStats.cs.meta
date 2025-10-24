@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1163c186fc93a4740a607c9418f61877
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - HealthUp: {fileID: 11400000, guid: f55d90e9970df894c9485c1ca0415fb3, type: 2}
+  - AmmoUp: {fileID: 11400000, guid: 543485c4c20ddb64a9097a565a900dbd, type: 2}
+  - MagUp: {fileID: 11400000, guid: c13576a7d39857f43873a46cb0a575a7, type: 2}
+  - StamUp: {fileID: 11400000, guid: 6fbb4b3b3f2605646a2564bde841bd15, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

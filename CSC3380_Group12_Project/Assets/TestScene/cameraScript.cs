@@ -29,33 +29,4 @@ public class cameraScript : MonoBehaviour
         cam.transform.localRotation = Quaternion.AngleAxis(rotation.y, Vector3.left);
     }
 
-
-
-    /*
-    public float mouseSensitivity = 20f;
-    public float yCamLimit = 90f;
-    public GameObject cam;
-
-
-    InputAction look;
-    Vector2 rotation = Vector2.zero;
-
-    private void Start()
-    {
-        look = InputSystem.actions.FindAction("Look");
-    }
-
-    private void Update()
-    {
-
-        rotation.x += look.ReadValue<Vector2>().x * mouseSensitivity;
-        rotation.y += Mathf.Clamp(look.ReadValue<Vector2>().y, -yCamLimit, yCamLimit) * mouseSensitivity;
-    }
-
-    private void FixedUpdate()
-    {
-        cam.transform.localRotation = Quaternion.AngleAxis(rotation.x,Vector3.up);
-        transform.localRotation = Quaternion.AngleAxis(rotation.y,Vector3.left);
-    }
-    */
 }
