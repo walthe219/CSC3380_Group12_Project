@@ -606,6 +606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StaminaDisplay
   stamina: 0
   staminaText: {fileID: 315218787}
+  CurrentPlayerStats: {fileID: 0}
 --- !u!1 &383887644
 GameObject:
   m_ObjectHideFlags: 0
