@@ -41,13 +41,13 @@ public class GunScript : MonoBehaviour
 
             Debug.Log(hit.transform.name);
 
-            /*Target target = hit.transform.GetComponent<Target>();
+            SubTarget target = hit.transform.GetComponent<SubTarget>();
             if (target != null)
             {
 
                 target.TakeDamage(damage);
 
-            }*/
+            }
 
             //Instantiate(impactEffect, hit.point, Quaternion.LookRotation(-hit.normal));
 
