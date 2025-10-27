@@ -25,6 +25,6 @@ public class SubTarget : MonoBehaviour
 
     void Cripple(float damage)
     {
-        target.TakeDamage(damage*0.75f, transform.name);
+        target.TakeDamage(damage*0.5f, transform.name);
     }
 }

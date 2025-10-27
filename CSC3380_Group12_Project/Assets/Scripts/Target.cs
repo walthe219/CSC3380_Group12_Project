@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
+
     public float totalHealth = 100f;
+    public RunnerReferences runRef;
 
     public void TakeDamage(float damage, string location)
     {
@@ -13,6 +15,7 @@ public class Target : MonoBehaviour
         {
             Die();
         }
+
     }
 
     void Die()
