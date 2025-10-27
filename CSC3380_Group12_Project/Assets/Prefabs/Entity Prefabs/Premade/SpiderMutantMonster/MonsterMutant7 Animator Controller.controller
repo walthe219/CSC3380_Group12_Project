@@ -52,7 +52,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
-  m_BlendParameter: speed
+  m_BlendParameter: runSpeed
   m_BlendParameterY: Blend
   m_MinThreshold: 0
   m_MaxThreshold: 1
@@ -173,7 +173,7 @@ AnimatorController:
   m_Name: MonsterMutant7 Animator Controller
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: speed
+  - m_Name: runSpeed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -2154,7 +2154,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BehaviorMap
-  m_Speed: 1
+  m_Speed: 0.75
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2038035018423438477}

@@ -107,7 +107,8 @@ public class RunnerBehavior : MonoBehaviour
         if (runRef.anim.GetCurrentAnimatorStateInfo(0).IsTag("attack"))
         {
             hurtboxStatus = true;
-            runRef.agent.speed = 0;
+            runRef.agent.speed = 0f;
+            
         } else
         {
             hurtboxStatus = true;
@@ -123,8 +124,8 @@ public class RunnerBehavior : MonoBehaviour
         {
             runRef.lHand.enabled = true;
             runRef.rHand.enabled = true;
-            /*runRef.lSpike.enabled = true;
-            runRef.rSpike.enabled = true;*/
+            runRef.lSpike.enabled = true;
+            runRef.rSpike.enabled = true;
         } 
         else
         {
