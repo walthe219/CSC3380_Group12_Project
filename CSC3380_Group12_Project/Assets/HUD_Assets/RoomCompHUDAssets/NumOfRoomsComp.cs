@@ -10,39 +10,56 @@ public class NumOfRoomsComp : MonoBehaviour
     //Action<int> so that when a room is cleared by having all enemies killed, they can invoke an event with the number of rooms completed and I can create a local
     //rooms completed variable that will be linked to the UI
 
+    public float numRoomsComp;
     private int finishedRooms;
-    private int abc;
+    private float abc;
     public TextMeshProUGUI finishedRoomsText;
+    [SerializeField] PlayerStats CurrentPlayerStats;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        finishedRooms = 0;
+        if(CurrentPlayerStats == null){
+            Debug.Log("CurrentPlayerStats not assigned in insepctor (NumOfRooomsComp)");
+        }
+        CurrentPlayerStats.numRoomsComp = 0;
         finishedRoomsText = GameObject.Find("NumOfRooms").GetComponent<TextMeshProUGUI>();
     }
 
     void NORToText(){
         if(finishedRoomsText != null){
-            finishedRoomsText.text = finishedRooms.ToString();
+            finishedRoomsText.text = CurrentPlayerStats.numRoomsComp.ToString();
         }
         else{
             Debug.Log("finishedRooms is null");
         }
     }
 
-    public int setFinishedRooms(int abc){
-        this.abc = finishedRooms;
-        return finishedRooms;
+    public float setFinishedRooms(float abc){
+        this.abc = CurrentPlayerStats.numRoomsComp;
+        return CurrentPlayerStats.numRoomsComp;
     }
 
-    public int finishedRoomsInc(){
+    public float finishedRoomsInc(){
         //if(all enemies dead) then ->
-        finishedRooms++;
-        return finishedRooms;
+        CurrentPlayerStats.numRoomsComp++;
+        return CurrentPlayerStats.numRoomsComp;
+    }
+
+    public float finishedRoomsDec(){ //test func
+        CurrentPlayerStats.numRoomsComp--;
+        return CurrentPlayerStats.numRoomsComp;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.M)){
+            finishedRoomsInc();
+        }
+        if (Input.GetKeyDown(KeyCode.N)){
+            finishedRoomsDec();
+        }
+        
         NORToText();
     }
 }

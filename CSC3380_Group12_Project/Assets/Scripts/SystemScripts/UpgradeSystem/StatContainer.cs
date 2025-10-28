@@ -21,6 +21,7 @@ public class StatContainer: ScriptableObject
     public float moveSpeed;
     public int numJumps;
     public float damage;
+    public float numRoomsComp;
    
 
     /*
@@ -34,6 +35,7 @@ public class StatContainer: ScriptableObject
         moveSpeed = changeStat(moveSpeed,other.moveSpeed);
         numJumps = (int)changeStat(numJumps, other.numJumps);
         damage = changeStat(damage, other.damage);
+        numRoomsComp = changeStat(numRoomsComp, other.numRoomsComp);
     }
 
     /*
