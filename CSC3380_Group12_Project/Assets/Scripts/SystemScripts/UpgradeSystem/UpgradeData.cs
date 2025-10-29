@@ -8,6 +8,12 @@ using System;
 public class UpgradeData : StatContainer
 {
     public string ID;
+    public bool isRepeatable;
     public UnlockFunctions.Unlockable[] unlocks = new UnlockFunctions.Unlockable[0];
     public string description;
+
+    public override string ToString()
+    {
+        return ID;
+    }
 }

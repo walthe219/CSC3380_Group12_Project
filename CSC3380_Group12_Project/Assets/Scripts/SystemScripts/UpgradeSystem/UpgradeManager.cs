@@ -41,6 +41,7 @@ public class UpgradeManager : MonoBehaviour
     {
         Upgrade u = new Upgrade(currentUpgradeSpace.pullUpgrade());
         addUpgrade(u);
+        currentUpgradeSpace.print();
     }
 
     public void removeUpgrade(Upgrade upgrade){}
