@@ -5,13 +5,17 @@ public class HealthBar : MonoBehaviour
 {
 
     [SerializeField] PlayerStats CurrentPlayerStats;
+
     public Slider slider;
 
     
     private void Start()
     {
+
         if (CurrentPlayerStats != null)
         {
+            
+
             // Initialize the slider using the player’s current health
             setMaxHealth(CurrentPlayerStats.health);
         }

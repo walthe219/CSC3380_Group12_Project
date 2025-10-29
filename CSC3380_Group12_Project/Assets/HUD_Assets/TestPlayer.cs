@@ -6,9 +6,10 @@ using System.Collections;
 public class TestPlayer : MonoBehaviour
 {
     [SerializeField] PlayerStats CurrentPlayerStats;
+    [SerializeField] PlayerStats DefaultStats;
 
     public float currentHealth;
-    public int maxHealth = 100;
+    public int maxHealth;
     private int sacAmt;
     private int healAmt;
 
@@ -25,8 +26,10 @@ public class TestPlayer : MonoBehaviour
             Debug.Log("CurrentPlayerStats not in inspector");
         }
         
-        CurrentPlayerStats.health = maxHealth;
-        healthBar.setMaxHealth(maxHealth);
+        CurrentPlayerStats.health = DefaultStats.health;
+
+        //CurrentPlayerStats.health = maxHealth; IMPORTANT: do not assign currentplayerstats.blah to a variable and then use the variable it does not work as expected
+        healthBar.setMaxHealth(CurrentPlayerStats.health);
     }
 
       void takeDmg(int damage){ //test func

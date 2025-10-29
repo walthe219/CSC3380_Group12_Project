@@ -10,12 +10,14 @@ public class AmmoDisplay : MonoBehaviour
     private bool isFiring;
     private bool isReloading;
     public TextMeshProUGUI ammoDisplay;
-    private int magSize = 10;
+    private int magSize;
     private int delay_x;
     [SerializeField] PlayerStats CurrentPlayerStats;
+    [SerializeField] PlayerStats DefaultStats;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {  
+    {   
+        CurrentPlayerStats.ammo = DefaultStats.ammo;
         if(CurrentPlayerStats == null){
             Debug.Log("CurrentPlayerStats not assigned in insepctor (AmmoDisplay)");
         }
@@ -24,16 +26,19 @@ public class AmmoDisplay : MonoBehaviour
             Debug.LogError("ammoDisplay Text UI is not assigned in Inspector!");
         }
         
-        setMagSize(30);
-        delayTime(3);
-        CurrentPlayerStats.ammo=magSize;
-        //ammoDisplay = GameObject.Find("AmmoDisplay").GetComponent<TextMeshProUGUI>();
         
+        
+        ammoToText();                   
+     
+        delayTime(3);
     }
 
-    public int setMagSize(int magSize){
+    public void setMagSize(int magSize){
         this.magSize = magSize;
-        return magSize;
+        if (CurrentPlayerStats != null)
+            CurrentPlayerStats.ammo = magSize;
+
+        ammoToText();
     }
 
     void delayTime(int delay_x){

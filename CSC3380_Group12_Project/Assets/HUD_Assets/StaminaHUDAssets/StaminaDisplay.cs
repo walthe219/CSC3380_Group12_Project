@@ -15,6 +15,7 @@ public class StaminaDisplay : MonoBehaviour
     private int regenAmt;
 
     [SerializeField] PlayerStats CurrentPlayerStats;
+    [SerializeField] PlayerStats DefaultStats;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,7 +25,7 @@ public class StaminaDisplay : MonoBehaviour
         }
 
         delayTimeStam(2);
-        CurrentPlayerStats.stamina = 100;
+        CurrentPlayerStats.stamina = DefaultStats.stamina;
         staminaText = GameObject.Find("StamDisplay").GetComponent<TextMeshProUGUI>();
 
     }
