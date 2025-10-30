@@ -67,10 +67,18 @@ public class healthUIMngr : MonoBehaviour
             //extra dmg
         }
     }
-
+//UnlockFunctions.callAction(UnlockFunctions.Unlockable.DASH);
     public void ApplyDashUpgrade(){
-        UnlockFunctions.callAction(UnlockFunctions.Unlockable.DASH);
+    if (dashUpgrade != null){
+        // Ensure the upgrade knows which event to trigger
+        dashUpgrade.unlocks = new UnlockFunctions.Unlockable[] { UnlockFunctions.Unlockable.DASH };
+
+        Upgrade dash = new Upgrade(dashUpgrade);
+        upgradeManager.addUpgrade(dash); // This calls applyUpgrade(), which calls activate(), triggering the event
+
+        Debug.Log("Applied Dash!");
     }
+}
 
     // Update is called once per frame
     void Update()

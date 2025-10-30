@@ -26,7 +26,6 @@ public class UpgradeManager : MonoBehaviour
         CurrentStats.add(upgrade.data);
         upgrade.activate();
 
-        OnUpgradeAdded?.Invoke();
     }
 
         
