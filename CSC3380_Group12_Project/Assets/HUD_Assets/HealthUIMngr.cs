@@ -3,24 +3,27 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
-public class TestPlayer : MonoBehaviour
+public class healthUIMngr : MonoBehaviour
 {
     [SerializeField] PlayerStats CurrentPlayerStats;
     [SerializeField] PlayerStats DefaultStats;
+    [SerializeField] UpgradeManager upgradeManager;
+    [SerializeField] UpgradeData dashUpgrade;
 
-    public float currentHealth;
-    public int maxHealth;
+    private float currentHealth;
+    private int maxHealth;
     private int sacAmt;
     private int healAmt;
+    private bool dashapplied = false;
 
     public HealthBar healthBar;
-    public AmmoDisplay AD;
     public TextMeshProUGUI HealthDisplay;
  
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+         //test func
         HealthDisplay = GameObject.Find("HealthDisplay").GetComponent<TextMeshProUGUI>();
         if(CurrentPlayerStats == null){
             Debug.Log("CurrentPlayerStats not in inspector");
@@ -30,6 +33,7 @@ public class TestPlayer : MonoBehaviour
 
         //CurrentPlayerStats.health = maxHealth; IMPORTANT: do not assign currentplayerstats.blah to a variable and then use the variable it does not work as expected
         healthBar.setMaxHealth(CurrentPlayerStats.health);
+        ApplyDashUpgrade();
     }
 
       void takeDmg(int damage){ //test func
@@ -64,9 +68,23 @@ public class TestPlayer : MonoBehaviour
         }
     }
 
+    public void ApplyDashUpgrade(){
+    if (dashUpgrade != null){
+        Upgrade dash = new Upgrade(dashUpgrade);
+        upgradeManager.addUpgrade(dash);
+        Debug.Log("Applied Dash! " );
+
+       
+        }
+    }
+
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if(!dashapplied){
+            ApplyDashUpgrade(); //This proves that the upgrade is being applied
+            dashapplied = true;
+        }
         healthtoText();
         if(Input.GetKeyDown(KeyCode.L)){
         takeDmg(10);

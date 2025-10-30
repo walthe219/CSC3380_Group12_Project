@@ -10,7 +10,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] PlayerStats CurrentStats; //Current values for stats, ex. current health of speed, effected by indivual actions
 
     [SerializeField] UpgradeSpace currentUpgradeSpace;
-
+    public event System.Action OnUpgradeAdded;
 
     private void Start()
     {
@@ -25,6 +25,8 @@ public class UpgradeManager : MonoBehaviour
         BaseStats.add(upgrade.data);
         CurrentStats.add(upgrade.data);
         upgrade.activate();
+
+        OnUpgradeAdded?.Invoke();
     }
 
         
@@ -34,6 +36,11 @@ public class UpgradeManager : MonoBehaviour
         acquiredUpgrades.Add(upgrade);
         applyUpgrade(upgrade);
 
+    }
+
+    public List<Upgrade> GetAcquiredUpgrades()
+    {
+        return acquiredUpgrades;
     }
 
     [ContextMenu("addUpgrade()")]
