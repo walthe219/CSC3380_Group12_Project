@@ -1,75 +1,98 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-
 
 public class HoldTabMenu : MonoBehaviour
 {
     [SerializeField] GameObject menuPanel;
     [SerializeField] UpgradeManager upgradeManager;
+    [SerializeField] TextMeshProUGUI upgradesText;
+    
+
     private InputAction holdTab;
-    public TextMeshProUGUI upgradesText;
-    
 
-
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
-        // Create a new InputAction for Tab as a button
+        // Setup Tab input
         holdTab = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/tab");
-
-        // Show menu while Tab is held
         holdTab.performed += _ => menuPanel.SetActive(true);
-
-        // Hide menu when Tab is released
         holdTab.canceled += _ => menuPanel.SetActive(false);
-
-        upgradeManager.OnUpgradeAdded += UpdateUpgradeText;
     }
 
-    private void Start()
+    void Start()
     {
+        // Create dummy upgrades for testing
+        UpgradeData dashData = ScriptableObject.CreateInstance<UpgradeData>();
+        dashData.ID = "Dash";
 
-        
+        UpgradeData jumpData = ScriptableObject.CreateInstance<UpgradeData>();
+        jumpData.ID = "ExtraJump";
 
-    // Quick test add a dummy upgrade if none exist
+        // Directly add them to acquiredUpgrades
+        // NOTE: This works only if acquiredUpgrades is public or has a public method to expose it
+        upgradeManager.GetAcquiredUpgrades().Add(new Upgrade(dashData));
+        upgradeManager.GetAcquiredUpgrades().Add(new Upgrade(jumpData));
 
+        // Update TMP
+        UpdateUpgradeText();
     }
 
     private void OnEnable()
     {
         holdTab.Enable();
 
-        // Ensure menu starts hidden
         if (menuPanel != null)
             menuPanel.SetActive(false);
+
+        //Subscribe to dash event
+        UnlockFunctions.UnlockDashEvent += OnDashUnlocked;
     }
 
     private void OnDisable()
     {
         holdTab.Disable();
+
+        //unsubscribe to the dash event
+        UnlockFunctions.UnlockDashEvent -= OnDashUnlocked;
     }
 
-    public void UpdateUpgradeText()
+    private void OnDashUnlocked()
 {
-    if (upgradesText != null)
-    {
-        Debug.Log("Acquired upgrades: " + string.Join(", ", upgradeManager.GetAcquiredUpgrades().Select(u => u.data.ID)));
-        upgradesText.text = string.Join(", ", upgradeManager.GetAcquiredUpgrades().Select(u => u.data.ID));
-    }
+    // Create the Upgrade from the assigned Dash UpgradeData SO
+    UpgradeData dashUnlocked = ScriptableObject.CreateInstance<UpgradeData>();
+    dashUnlocked.ID = "DashReal";
+    upgradeManager.GetAcquiredUpgrades().Add(new Upgrade(dashUnlocked));
+
+    // Update TMP display
+    UpdateUpgradeText();
+
+    Debug.Log("Dash upgrade applied via event!");
 }
 
-    private void Update()
+    private void UpdateUpgradeText()
     {
+        if (upgradesText == null) return;
+
+        List<Upgrade> acquired = upgradeManager.GetAcquiredUpgrades();
+        upgradesText.text = "";
+
+        for (int i = 0; i < acquired.Count; i++)
+        {
+            upgradesText.text += acquired[i].data.ID;
+            if (i < acquired.Count - 1)
+                upgradesText.text += ", ";
+        }
+
+        Debug.Log("Acquired upgrades: " + upgradesText.text);
+    }
+
+    private void Update()
+    {   
+
         if (menuPanel.activeSelf && upgradesText != null)
         {
-            // Convert the list of upgrades to a comma-separated string
-            string upgradesList = string.Join(", ", upgradeManager.GetAcquiredUpgrades().Select(u => u.data.ID));
-            upgradesText.text = upgradesList;
+            UpdateUpgradeText();
         }
     }
 }

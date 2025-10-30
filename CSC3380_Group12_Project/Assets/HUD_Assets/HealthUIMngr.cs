@@ -33,7 +33,7 @@ public class healthUIMngr : MonoBehaviour
 
         //CurrentPlayerStats.health = maxHealth; IMPORTANT: do not assign currentplayerstats.blah to a variable and then use the variable it does not work as expected
         healthBar.setMaxHealth(CurrentPlayerStats.health);
-        ApplyDashUpgrade();
+        
     }
 
       void takeDmg(int damage){ //test func
@@ -69,13 +69,7 @@ public class healthUIMngr : MonoBehaviour
     }
 
     public void ApplyDashUpgrade(){
-    if (dashUpgrade != null){
-        Upgrade dash = new Upgrade(dashUpgrade);
-        upgradeManager.addUpgrade(dash);
-        Debug.Log("Applied Dash! " );
-
-       
-        }
+        UnlockFunctions.callAction(UnlockFunctions.Unlockable.DASH);
     }
 
     // Update is called once per frame
