@@ -2,10 +2,10 @@ using UnityEngine;
 using System;
 
 /*
- * Contains all the data for an upgrade, inherits upgradeable stat fields from StatsContainer
+ * Contains all the data for an upgrade, inherits upgradeable stat fields from UpgradeableStatContainer
  */
 [CreateAssetMenu(fileName = "UpgradeData", menuName = "Scriptable Objects/UpgradeData", order =1)]
-public class UpgradeData : StatContainer
+public class UpgradeData : UpgradeableStatContainer
 {
     public string ID;
     public bool isRepeatable;

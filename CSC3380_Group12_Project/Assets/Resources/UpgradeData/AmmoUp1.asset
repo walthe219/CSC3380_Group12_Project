@@ -18,6 +18,9 @@ MonoBehaviour:
   moveSpeed: 0
   numJumps: 0
   damage: 0
+  numRoomsComp: 0
+  rizz: 200
   ID: AmmoUp1
+  isRepeatable: 0
   unlocks: 00000000
   description: 

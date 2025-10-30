@@ -19,6 +19,7 @@ public class cameraScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+/*
     private void Update()
     {
         rotation.x += look.ReadValue<Vector2>().x *mouseSens * Time.deltaTime;
@@ -27,6 +28,21 @@ public class cameraScript : MonoBehaviour
 
         transform.localRotation = Quaternion.AngleAxis(rotation.x, Vector3.up);
         cam.transform.localRotation = Quaternion.AngleAxis(rotation.y, Vector3.left);
+    }*/
+
+    private float xRot = 0f;
+
+    void Update()
+    {
+        Vector2 looking = look.ReadValue<Vector2>() * mouseSens * Time.deltaTime;
+
+        xRot -= looking.y;
+        xRot = Mathf.Clamp(xRot, -90f, 90f);
+
+        cam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
+        transform.Rotate(Vector3.up * looking.x);
+
+
     }
 
 }

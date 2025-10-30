@@ -73,8 +73,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::portalScript
   destination: {fileID: 0}
   heightOffset: 1
-  distanceOffset: 1.5
-  waitTime: 0.05
+  distanceOffset: 2.5
+  waitTime: 0.002
+  portalLockout: 5
 --- !u!1 &2709405727033909438
 GameObject:
   m_ObjectHideFlags: 0

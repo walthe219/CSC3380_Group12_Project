@@ -1,12 +1,12 @@
 using UnityEngine;
 
 /*
- * Represents all the players stats, inherits stat fields for upgradable stats from StatContainer, for nonupgradable stats add here
+ * Represents all the players stats, inherits stat fields for upgradable stats from UpgradeableStatContainer, for nonupgradable stats add here
  */
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "Scriptable Objects/PlayerStats", order=1)]
-public class PlayerStats : StatContainer
+public class PlayerStats : UpgradeableStatContainer
 {
-
+    public int numRoomsComp;
     private void OnEnable(){
         
     }
