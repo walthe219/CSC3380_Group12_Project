@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   health: 0
-  stamina: 0
+  stamina: 50
   ammo: 0
   moveSpeed: 0
   numJumps: 0
