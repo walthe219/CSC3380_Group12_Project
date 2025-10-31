@@ -34,6 +34,7 @@ void Pause(){
     Cursor.lockState = CursorLockMode.None;
 }
 
+//load menu function is just a test function from tutorial
 public void LoadMenu(){
     Debug.Log("Loading Menu");
 }
