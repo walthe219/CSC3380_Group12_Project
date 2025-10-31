@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 94efdf4f10841c6478ce28e8bbf63912
+guid: d843296f75721a74080cf1ae3afed9d8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -133,5 +133,5 @@ AssetOrigin:
   productId: 315588
   packageName: Prototype Map
   packageVersion: 1.0.2
-  assetPath: Assets/AngeloMaN87/Prototype Map/Textures/PrototypeMap_Blue.png
+  assetPath: Assets/AngeloMaN87/Prototype Map/Textures/PrototypeMap_Grey.png
   uploadId: 770492

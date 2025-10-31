@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7df661f0c2b768b4990a80d2eafbf51e
+guid: b9e8e2fc0724d5941ad454b0ddf9d947
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
@@ -11,5 +11,5 @@ AssetOrigin:
   productId: 315588
   packageName: Prototype Map
   packageVersion: 1.0.2
-  assetPath: Assets/AngeloMaN87/Prototype Map/Materials/PrototypeMap.mat
+  assetPath: Assets/AngeloMaN87/Prototype Map/Materials/PrototypeMap_Obstacles.mat
   uploadId: 770492
