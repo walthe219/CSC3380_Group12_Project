@@ -6,7 +6,7 @@ public class NewMovement : MonoBehaviour
 {
 
     [Header("Movement")]
-    Rigidbody body;
+    private Rigidbody body;
     public float moveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
@@ -25,7 +25,7 @@ public class NewMovement : MonoBehaviour
 
     public bool isSliding;
 
-    Vector3 moveDir;
+    private Vector3 moveDir;
 
     [Header("Jumping")]
     public float jumpPower;
@@ -50,6 +50,7 @@ public class NewMovement : MonoBehaviour
     private float dashTime;
     public float maxDashTime;
     public bool isDashing = false;
+    public float dashDrag;
 
     [Header("Stamina")]
     [SerializeField] PlayerStats currPlayerStats;
@@ -182,6 +183,10 @@ public class NewMovement : MonoBehaviour
         {
             body.linearDamping = groundDrag;
         }
+        else if (isDashing)
+        {
+            body.linearDamping = dashDrag;
+        }
         else
         {
             body.linearDamping = 0;
@@ -282,12 +287,7 @@ public class NewMovement : MonoBehaviour
         // Can only dash if the stamina is at least 50
         if (dash.WasPressedThisFrame() && curStamina >= 50 && (horzInput != 0 || vertInput != 0))
         {
-            body.AddForce(moveDir.normalized * dashForce, ForceMode.Impulse);
-            moveSpeed = dashSpeed;
-            isDashing = true;
-            dashTime = maxDashTime;
-            curStamina -= 50;
-            staminaRechargeTimer = 0;
+            Dash();
         }
 
         // Checks for drastic change in desiredSpeed
@@ -315,6 +315,7 @@ public class NewMovement : MonoBehaviour
         {
             moveSpeed = Mathf.Lerp(start, desiredSpeed, time / diff);
 
+            // Increases speed on slope depending on time spent on slope and slope angle
             if (OnSlope())
             {
                 float slopeAngle = Vector3.Angle(Vector3.up, slopeDetect.normal);
@@ -407,6 +408,17 @@ public class NewMovement : MonoBehaviour
         body.AddForce(transform.up * jumpPower, ForceMode.Impulse);
         lastJumpTime = Time.time;
         jumpCount--;
+    }
+
+    // Dashes
+    private void Dash()
+    {
+        body.AddForce(moveDir.normalized * dashForce, ForceMode.Impulse);
+        moveSpeed = dashSpeed;
+        isDashing = true;
+        dashTime = maxDashTime;
+        curStamina -= 50;
+        staminaRechargeTimer = 0;
     }
 
     // Makes isDashing false if the player has been dashing for the max dash time

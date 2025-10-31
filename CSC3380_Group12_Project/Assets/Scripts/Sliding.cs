@@ -38,6 +38,8 @@ public class Sliding : MonoBehaviour
         slide.Disable();
     }
 
+    // Enables the slide ability in the code 
+    // (add more detail probably)
     public void ApplySlideUpgrade()
     {
         if (slideData != null)
