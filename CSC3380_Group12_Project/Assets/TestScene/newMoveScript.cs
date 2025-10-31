@@ -31,8 +31,8 @@ public class newMoveScript : MonoBehaviour
     {
         //Movement Calculations
         Vector2 moveValue = move.ReadValue<Vector2>();
-        xMove = transform.right * moveValue.x * moveSpeed;
-        zMove = transform.forward * moveValue.y * moveSpeed;
+        xMove = transform.right * moveValue.x * moveSpeed * Time.fixedDeltaTime;
+        zMove = transform.forward * moveValue.y * moveSpeed * Time.fixedDeltaTime;
 
         //Jump Calculations
         if (controller.isGrounded)
@@ -50,7 +50,7 @@ public class newMoveScript : MonoBehaviour
         }
         yMove = transform.up * yVelocity;
 
-        controller.Move((xMove + yMove/Time.deltaTime + zMove) * Time.fixedDeltaTime);
+        controller.Move((xMove + yMove + zMove));
     }
   
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class RoomGenerator 
@@ -6,7 +7,15 @@ public static class RoomGenerator
     /*
      * Creates a new Room using the paramters given in RoomManager
      */
-    public static Room CreateRoom(Vector3 roomCenterPos, Object[] possibleTiles,float tileRadius,float gapSize,float roomHeight, GameObject portalLink, GameObject camPrefab, GameObject teleporterPrefab)
+
+    static GameObject camPrefab;
+    static GameObject teleporterPrefab;
+    public static void initializePrefabs(GameObject cam, GameObject portal)
+    {
+        camPrefab = cam;
+        teleporterPrefab = portal;
+    }
+    public static Room CreateRoom(Vector3 roomCenterPos, Object[] possibleTiles,float tileRadius,float gapSize,float roomHeight, GameObject portalLink, UpgradeData upgrade)
     {
 
         GameObject room = new GameObject("Room");
@@ -44,7 +53,7 @@ public static class RoomGenerator
 
         //ADD NAVMESH HERE
 
-        return new Room(room, roomTeleporter, portalLink, roomCam,null);
+        return new Room(room, roomTeleporter, portalLink, roomCam,upgrade);
 
     }
 

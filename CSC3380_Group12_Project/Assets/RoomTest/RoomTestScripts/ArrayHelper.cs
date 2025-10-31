@@ -27,5 +27,20 @@ public static class ArrayHelper
         }
         return cloned;
     }
+    public static string print(Object[] arr)
+    {
+        if(arr.Length == 0)
+        {
+            return "[]";
+        }
+        string s = "["+arr[0].ToString()+" ";
+        for (int i = 1; i < arr.Length; i++)
+        {
+            s += arr[i].ToString()+", ";
+        }
+        s = s.Substring(0, s.Length - 2) + "]";
+
+        return s;
+    }
 
 }

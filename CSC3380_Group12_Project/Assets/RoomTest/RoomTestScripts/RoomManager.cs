@@ -21,10 +21,26 @@ public class RoomManager : MonoBehaviour
     private Room[] rooms = new Room[4];
     private Object[] prefab_arr;
 
-    private Room currentlySelectedRoom;
+    [SerializeField] Room currentlySelectedRoom;
+
+    public static RoomManager Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Destroy duplicate instances
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Persist across scene loads
+        }
+    }
+
     public void Start()
     {
         prefab_arr = Resources.LoadAll(prefabFolderPath, typeof(GameObject));
+        RoomGenerator.initializePrefabs(cameraPrefab, teleporterPrefab);
         generateRoomTest();
     }
     public void generateNewRooms(int numRooms,float tileRadius, float gapSize, float roomHeight)
@@ -33,6 +49,10 @@ public class RoomManager : MonoBehaviour
         {
             Debug.LogError("Can't generate more than 4 rooms");
         }
+
+
+        UpgradeData[] potentialRoomRewards = UpgradeManager.Instance.samplePossibleUpgrades(4);
+        Debug.Log("Room Rewards: " + ArrayHelper.print(potentialRoomRewards));
 
         for (int i = 0; i < numRooms; i++)
         {
@@ -45,7 +65,8 @@ public class RoomManager : MonoBehaviour
             Vector3 roomPos = new Vector3(xDir*roomGenDistance,roomGenHeight,zDir*roomGenDistance);
 
 
-            rooms[i] = RoomGenerator.CreateRoom(roomPos, prefab_arr, tileRadius, gapSize, roomHeight, mainRoomTeleporters[i],cameraPrefab,teleporterPrefab); //create new 
+            rooms[i] = RoomGenerator.CreateRoom(roomPos, prefab_arr, tileRadius, gapSize, roomHeight, mainRoomTeleporters[i], potentialRoomRewards[i]); //create new 
+            mainRoomTextDisplays[i].GetComponent<TextDisplay>().changeText(potentialRoomRewards[i].ID);
         }
     }
     
@@ -60,6 +81,12 @@ public class RoomManager : MonoBehaviour
         {
             if(other!=room) other.delete();
         }
+    }
+
+    public void selectRoom()
+    {
+        currentlySelectedRoom = null;
+        deleteExcept(currentlySelectedRoom);
     }
     
     [ContextMenu("generateRoomTest()")]

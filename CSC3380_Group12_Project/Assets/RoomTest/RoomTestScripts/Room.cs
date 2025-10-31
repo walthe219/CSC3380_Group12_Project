@@ -21,5 +21,6 @@ public class Room
     public void delete()
     {
         Object.Destroy(room);
+        mainRoomTeleporter.GetComponent<portalScript>().DeactivatePortal();
     }
 }

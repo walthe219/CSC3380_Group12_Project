@@ -11,6 +11,20 @@ public class UpgradeManager : MonoBehaviour
 
     [SerializeField] UpgradeSpace currentUpgradeSpace;
 
+    public static UpgradeManager Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Destroy duplicate instances
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Persist across scene loads
+        }
+    }
+
 
     private void Start()
     {
@@ -45,5 +59,11 @@ public class UpgradeManager : MonoBehaviour
     }
 
     public void removeUpgrade(Upgrade upgrade){}
+
+    //See UpgradeSpace.samplePossibleUpgrades()
+    public UpgradeData[] samplePossibleUpgrades(int num)
+    {
+        return currentUpgradeSpace.samplePossibleUpgrades(num);
+    }
 
 }

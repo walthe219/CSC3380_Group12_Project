@@ -62,8 +62,16 @@ public class portalScript : MonoBehaviour
         else Debug.LogError("Object needs 'Player' tag to use teleporter");
     }
 
-    public void ActivatePortal() { }
-    public void DeactivatePortal() { }
+    public void ActivatePortal() 
+    {
+        //enable portal frame
+        //turn collider on
+    }
+    public void DeactivatePortal() 
+    {
+        //disable portal frame
+        //turn collider off
+    }
 
     private void Update()
     {
