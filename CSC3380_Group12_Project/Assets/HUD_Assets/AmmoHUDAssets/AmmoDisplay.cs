@@ -41,7 +41,7 @@ public class AmmoDisplay : MonoBehaviour
         ammoToText();
     }
 
-    void delayTime(int delay_x){
+    public void delayTime(int delay_x){
         this.delay_x = delay_x;
     }
 
