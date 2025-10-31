@@ -19,7 +19,7 @@ public class MouseView : MonoBehaviour
     }
     private void OnDisable()
     {
-        lookMove.Disable();
+        //lookMove.Disable();
     }
 
     void Start()

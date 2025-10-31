@@ -34,9 +34,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDisable()
     {
-        playerMove.Disable();
+       /* playerMove.Disable();
         playerCrouch.Disable();
-        playerJump.Disable();
+        playerJump.Disable();*/
     }
 
     void Start()
