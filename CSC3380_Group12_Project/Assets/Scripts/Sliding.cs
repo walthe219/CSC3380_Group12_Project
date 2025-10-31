@@ -17,6 +17,7 @@ public class Sliding : MonoBehaviour
     private float slideYScale = 0.5f;
     private float startYScale;
 
+    [Header("Inputs")]
     public InputAction move;
     public InputAction slide;
     private float horzInput;
@@ -74,6 +75,7 @@ public class Sliding : MonoBehaviour
         horzInput = move.ReadValue<Vector2>().x;
         vertInput = move.ReadValue<Vector2>().y;
 
+        // Only slide if slide AND a move key is pressed
         if (slide.WasPressedThisFrame() && (horzInput != 0 || vertInput != 0))
         {
             StartSlide();
@@ -92,6 +94,7 @@ public class Sliding : MonoBehaviour
         }
     }
 
+    // Controls all sliding movement (slope/not on slope)
     private void SlidingMovement()
     {
         Vector3 inputDir = orientation.forward * vertInput + orientation.right * horzInput;
@@ -110,12 +113,14 @@ public class Sliding : MonoBehaviour
             body.AddForce(moveScript.GetSlopeMoveDirection(inputDir) * slideForce, ForceMode.Force);
         }
 
+        // Stops the slide if the timer elapses
         if (slideTimer <= 0)
         {
             StopSlide();
         }
     }
 
+    // Shrinks the player and then starts the slide timer
     private void StartSlide()
     {
         moveScript.isSliding = true;
@@ -125,6 +130,7 @@ public class Sliding : MonoBehaviour
         body.AddForce(Vector3.down * 5f, ForceMode.Impulse);
     }
 
+    // Enlarges the player
     private void StopSlide()
     {
         moveScript.isSliding = false;

@@ -280,7 +280,7 @@ public class NewMovement : MonoBehaviour
         }
 
         // Can only dash if the stamina is at least 50
-        if (dash.WasPressedThisFrame() && curStamina >= 50)
+        if (dash.WasPressedThisFrame() && curStamina >= 50 && (horzInput != 0 || vertInput != 0))
         {
             body.AddForce(moveDir.normalized * dashForce, ForceMode.Impulse);
             moveSpeed = dashSpeed;

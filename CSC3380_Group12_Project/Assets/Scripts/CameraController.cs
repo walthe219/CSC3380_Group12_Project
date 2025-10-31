@@ -4,15 +4,15 @@ using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
 
-    private float minX = -90f;
-    private float maxX = 90f;
-
     public float sensitivity;
     public Transform orientation;
     public InputAction look;
-    
-    float rotY = 0f;
-    float rotX = 0f;
+
+    private float minX = -90f;
+    private float maxX = 90f;
+
+    private float rotY = 0f;
+    private float rotX = 0f;
 
     private void OnEnable()
     {
@@ -47,13 +47,15 @@ public class CameraController : MonoBehaviour
         rotY += look.ReadValue<Vector2>().x * Time.deltaTime * sensitivity;
         rotX += -look.ReadValue<Vector2>().y * Time.deltaTime * sensitivity;
 
+        // Limits how far up and down the player can look
         rotX = Mathf.Clamp(rotX, minX, maxX);
 
-        //transform.localEulerAngles = new Vector3(0, rotY, 0);
-        //cam.transform.localEulerAngles = new Vector3(-rotX, 0, 0);
+        // Moves the camera using the inputs
         transform.rotation = Quaternion.Euler(rotX, rotY, 0);
         orientation.rotation = Quaternion.Euler(0, rotY, 0);
     }
+    
+    // Changes the sensitivity to NewMouseSensitivity
     public void SetMouseSensitivity(float NewMouseSensitivity)
     {
         sensitivity = NewMouseSensitivity;
