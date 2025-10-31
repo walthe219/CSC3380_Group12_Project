@@ -52,8 +52,7 @@ public class NewMovement : MonoBehaviour
     public bool isDashing = false;
 
     [Header("Stamina")]
-    //[SerializeField] PlayerStats currPlayerStats;
-
+    [SerializeField] PlayerStats currPlayerStats;
     public float curStamina;
     private float maxStamina = 100f;
     private float staminaRechargeDelay = 2f;
@@ -75,6 +74,11 @@ public class NewMovement : MonoBehaviour
     float vertInput;
     float horzInput;
 
+    [Header("Upgrade Unlocks")]
+    [SerializeField] UpgradeManager uManager;
+    [SerializeField] UpgradeData dashData;
+    
+
     [Header("Testing")]
     public float test;
     
@@ -86,7 +90,8 @@ public class NewMovement : MonoBehaviour
         jump.Enable();
         sprint.Enable();
         crouch.Enable();
-        dash.Enable();
+
+        //dash.Enable();
     }
 
     private void OnDisable()
@@ -96,6 +101,21 @@ public class NewMovement : MonoBehaviour
         sprint.Disable();
         crouch.Disable();
         dash.Enable();
+    }
+
+    public void ApplyDashUpgrade()
+    {
+        if (dashData != null)
+        {
+            // Ensure the upgrade knows which event to trigger
+            dashData.unlocks = new UnlockFunctions.Unlockable[] { UnlockFunctions.Unlockable.DASH };
+
+            Upgrade dashUp = new Upgrade(dashData);
+            uManager.addUpgrade(dashUp); // This calls applyUpgrade(), which calls activate(), triggering the event
+            dash.Enable();
+
+            Debug.Log("Applied Dash!");
+        }
     }
 
     public enum MovementState
@@ -115,6 +135,7 @@ public class NewMovement : MonoBehaviour
         body.freezeRotation = true;
         startYScale = transform.localScale.y;
         curStamina = maxStamina;
+        ApplyDashUpgrade();
 
         if (InputSystem.actions)
         {
@@ -154,7 +175,7 @@ public class NewMovement : MonoBehaviour
             StaminaRecharge();
         }
 
-        //currPlayerStats = (int)curStamina;
+        currPlayerStats.stamina = (int)curStamina;
 
         // Drag Handler
         if (isGrounded)
