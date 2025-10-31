@@ -49,11 +49,11 @@ public class AmmoDisplay : MonoBehaviour
     //Maybe couple seconds after relaod before you cans start shooting again
      IEnumerator reload(){
             isReloading = true;
-            Debug.Log("Reloading......");
+            //Debug.Log("Reloading......");
             yield return new WaitForSeconds(delay_x);
             CurrentPlayerStats.ammo=magSize;
             isReloading=false;
-            Debug.Log("Reloaded!");
+            //Debug.Log("Reloaded!");
         
     }
 
