@@ -44,12 +44,11 @@ public class StaminaDisplay : MonoBehaviour
     }
 
     void deplete(int deplAmt){
-        if (Input.GetKeyDown(KeyCode.U)) {
         if(CurrentPlayerStats.stamina > 0){
-        CurrentPlayerStats.stamina = CurrentPlayerStats.stamina - 10;
+        CurrentPlayerStats.stamina = CurrentPlayerStats.stamina - deplAmt;
         Debug.Log("depleting");
         }
-        }
+        
     }
 
     void delayTimeStam(int delay_x){
@@ -71,11 +70,15 @@ public class StaminaDisplay : MonoBehaviour
     void Update()
     {
         stamToText();
-        deplete(10);
+        
 
         if (Input.GetKeyDown(KeyCode.N) && !isCoroutineRunning) {
             
            StartCoroutine(regenerate(10));
+        }
+        if (Input.GetKeyDown(KeyCode.U)) {
+            
+           deplete(10);
         }
     }
 }

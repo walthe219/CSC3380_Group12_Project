@@ -61,13 +61,16 @@ public class healthUIMngr : MonoBehaviour
         }
     }
 
-    void sacrifice(int sacAmt){ //sacAmt will allow us to pass in a value to divide health by
+    /*void sacrifice(int sacAmt){ //sacAmt will allow us to pass in a value to divide health by
         if(Input.GetKeyDown(KeyCode.O)){
             currentHealth = currentHealth/sacAmt;
             //extra dmg
         }
     }
-//UnlockFunctions.callAction(UnlockFunctions.Unlockable.DASH);
+    */
+
+/* correct format ************************************* make sure you drag the upgrade into inspector of the script that wants to add upgrade, follow this format, and then set a bool at the end
+//so you can do if(bool){dash();} for example
     public void ApplyDashUpgrade(){
     if (dashUpgrade != null){
         // Ensure the upgrade knows which event to trigger
@@ -79,12 +82,13 @@ public class healthUIMngr : MonoBehaviour
         Debug.Log("Applied Dash!");
     }
 }
+*/
 
     // Update is called once per frame
     void Update()
     {   
         if(!dashapplied){
-            ApplyDashUpgrade(); //This proves that the upgrade is being applied
+            //ApplyDashUpgrade(); //This proves that the upgrade is being applied
             dashapplied = true;
         }
         healthtoText();

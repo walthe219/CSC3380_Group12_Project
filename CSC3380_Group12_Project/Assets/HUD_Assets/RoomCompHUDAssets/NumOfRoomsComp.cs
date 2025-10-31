@@ -10,24 +10,22 @@ public class NumOfRoomsComp : MonoBehaviour
     //Action<int> so that when a room is cleared by having all enemies killed, they can invoke an event with the number of rooms completed and I can create a local
     //rooms completed variable that will be linked to the UI
 
-    public float numRoomsComp;
+    private float RoomsComp;
     private int finishedRooms;
     private float abc;
     public TextMeshProUGUI finishedRoomsText;
-    [SerializeField] PlayerStats CurrentPlayerStats;
+    private PlayerStats playerstats;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(CurrentPlayerStats == null){
-            Debug.Log("CurrentPlayerStats not assigned in insepctor (NumOfRooomsComp)");
-        }
-        CurrentPlayerStats.numRoomsComp = 0;
+        playerstats = new PlayerStats();
+        playerstats.RoomsComp = 0;
         finishedRoomsText = GameObject.Find("NumOfRooms").GetComponent<TextMeshProUGUI>();
     }
 
     void NORToText(){
         if(finishedRoomsText != null){
-            finishedRoomsText.text = CurrentPlayerStats.numRoomsComp.ToString();
+            finishedRoomsText.text = playerstats.RoomsComp.ToString();
         }
         else{
             Debug.Log("finishedRooms is null");
@@ -35,19 +33,19 @@ public class NumOfRoomsComp : MonoBehaviour
     }
 
     public float setFinishedRooms(float abc){
-        this.abc = CurrentPlayerStats.numRoomsComp;
-        return CurrentPlayerStats.numRoomsComp;
+        this.abc = playerstats.RoomsComp;
+        return playerstats.RoomsComp;
     }
 
     public float finishedRoomsInc(){
         //if(all enemies dead) then ->
-        CurrentPlayerStats.numRoomsComp++;
-        return CurrentPlayerStats.numRoomsComp;
+        playerstats.RoomsComp++;
+       return playerstats.RoomsComp;
     }
 
     public float finishedRoomsDec(){ //test func
-        CurrentPlayerStats.numRoomsComp--;
-        return CurrentPlayerStats.numRoomsComp;
+        playerstats.RoomsComp--;
+        return playerstats.RoomsComp;
     }
 
     // Update is called once per frame
@@ -59,6 +57,7 @@ public class NumOfRoomsComp : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.N)){
             finishedRoomsDec();
         }
+        Debug.Log("Rooms Completed is: " + RoomsComp);
         
         NORToText();
     }

@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "Scriptable Objects/PlayerStats", order=1)]
 public class PlayerStats : StatContainer
 {
-
+    public float RoomsComp;
     private void OnEnable(){
         
     }

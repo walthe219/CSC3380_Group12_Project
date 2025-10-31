@@ -22,6 +22,7 @@ public class HoldTabMenu : MonoBehaviour
 
     void Start()
     {
+        /*
         // Create dummy upgrades for testing
         UpgradeData dashData = ScriptableObject.CreateInstance<UpgradeData>();
         dashData.ID = "Dash";
@@ -36,6 +37,7 @@ public class HoldTabMenu : MonoBehaviour
 
         // Update TMP
         UpdateUpgradeText();
+        */
     }
 
     private void OnEnable()

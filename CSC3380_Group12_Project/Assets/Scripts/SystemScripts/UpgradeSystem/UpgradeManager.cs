@@ -10,7 +10,24 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] PlayerStats CurrentStats; //Current values for stats, ex. current health of speed, effected by indivual actions
 
     [SerializeField] UpgradeSpace currentUpgradeSpace;
-    public event System.Action OnUpgradeAdded;
+    public static UpgradeManager instance;
+
+    void Awake(){
+    {
+        if (instance != null && instance != this)
+        {
+            Debug.LogWarning("Duplicate UpgradeManager found — destroying this one.");
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+}
+
+
+    
 
     private void Start()
     {
