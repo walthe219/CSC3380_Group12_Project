@@ -52,13 +52,13 @@ public class NumOfRoomsComp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M)){
-            finishedRoomsInc();
-        }
-        if (Input.GetKeyDown(KeyCode.N)){
-            finishedRoomsDec();
-        }
-        Debug.Log("Rooms Completed is: " + RoomsComp);
+        //if (Input.GetKeyDown(KeyCode.M)){
+            //finishedRoomsInc();
+        //}
+        //if (Input.GetKeyDown(KeyCode.N)){
+            //finishedRoomsDec();
+        //}
+        //Debug.Log("Rooms Completed is: " + RoomsComp);
         
         NORToText();
     }
