@@ -63,13 +63,13 @@ public class HoldTabMenu : MonoBehaviour
 {
     // Create the Upgrade from the assigned Dash UpgradeData SO
     UpgradeData dashUnlocked = ScriptableObject.CreateInstance<UpgradeData>();
-    dashUnlocked.ID = "DashReal";
+    dashUnlocked.ID = "Dash";
     upgradeManager.GetAcquiredUpgrades().Add(new Upgrade(dashUnlocked));
 
     // Update TMP display
     UpdateUpgradeText();
 
-    Debug.Log("Dash upgrade applied via event!");
+    //Debug.Log("Dash upgrade applied via event!");
 }
 
     private void UpdateUpgradeText()
@@ -86,7 +86,7 @@ public class HoldTabMenu : MonoBehaviour
                 upgradesText.text += ", ";
         }
 
-        Debug.Log("Acquired upgrades: " + upgradesText.text);
+        //Debug.Log("Acquired upgrades: " + upgradesText.text);
     }
 
     private void Update()
