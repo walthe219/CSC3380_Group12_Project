@@ -6916,7 +6916,7 @@ PrefabInstance:
     - target: {fileID: 1156191955611795780, guid: 0eedd316e7d948641b8a52076e1ac2d1, type: 3}
       propertyPath: playerstats
       value: 
-      objectReference: {fileID: 11400000, guid: b865cfe92b7869a449f3768ef358b6aa, type: 2}
+      objectReference: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
     - target: {fileID: 1156191955611795780, guid: 0eedd316e7d948641b8a52076e1ac2d1, type: 3}
       propertyPath: CurrentPlayerStats
       value: 
