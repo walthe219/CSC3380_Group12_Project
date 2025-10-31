@@ -51,7 +51,7 @@ public class AmmoDisplay : MonoBehaviour
             isReloading = true;
             Debug.Log("Reloading......");
             yield return new WaitForSeconds(delay_x);
-            CurrentPlayerStats.ammo=magSize;
+            CurrentPlayerStats.ammo=DefaultStats.ammo;
             isReloading=false;
             Debug.Log("Reloaded!");
         
