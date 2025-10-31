@@ -35,7 +35,7 @@ public class StaminaDisplay : MonoBehaviour
             staminaText.text = CurrentPlayerStats.stamina.ToString();
         }
         else{
-            Debug.Log("stamina is null");
+            Debug.Log("StamDisplay is null");
         }
     }
 
@@ -46,7 +46,7 @@ public class StaminaDisplay : MonoBehaviour
     void deplete(int deplAmt){
         if(CurrentPlayerStats.stamina > 0){
         CurrentPlayerStats.stamina = CurrentPlayerStats.stamina - deplAmt;
-        Debug.Log("depleting");
+        //Debug.Log("depleting");
         }
         
     }
@@ -60,7 +60,7 @@ public class StaminaDisplay : MonoBehaviour
             isCoroutineRunning=true;
             CurrentPlayerStats.stamina = CurrentPlayerStats.stamina+regenAmt;
             yield return new WaitForSeconds(delay_x);
-            Debug.Log("regenerating");
+            //Debug.Log("regenerating");
             isCoroutineRunning=false;
         }
         
@@ -72,13 +72,13 @@ public class StaminaDisplay : MonoBehaviour
         stamToText();
         
 
-        if (Input.GetKeyDown(KeyCode.N) && !isCoroutineRunning) {
+        /*if (Input.GetKeyDown(KeyCode.N) && !isCoroutineRunning) {
             
            StartCoroutine(regenerate(10));
         }
         if (Input.GetKeyDown(KeyCode.U)) {
             
-           deplete(10);
+           deplete(10);*/
         }
     }
 }
