@@ -71,14 +71,5 @@ public class StaminaDisplay : MonoBehaviour
     {
         stamToText();
         
-
-        /*if (Input.GetKeyDown(KeyCode.N) && !isCoroutineRunning) {
-            
-           StartCoroutine(regenerate(10));
-        }
-        if (Input.GetKeyDown(KeyCode.U)) {
-            
-           deplete(10);*/
-        }
     }
 }
