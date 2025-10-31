@@ -3,30 +3,37 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
-public class TestPlayer : MonoBehaviour
+public class healthUIMngr : MonoBehaviour
 {
     [SerializeField] PlayerStats CurrentPlayerStats;
+    [SerializeField] PlayerStats DefaultStats;
+    [SerializeField] UpgradeManager upgradeManager;
+    [SerializeField] UpgradeData dashUpgrade;
 
-    public float currentHealth;
-    public int maxHealth = 100;
+    private float currentHealth;
+    private int maxHealth;
     private int sacAmt;
     private int healAmt;
+    private bool dashapplied = false;
 
     public HealthBar healthBar;
-    public AmmoDisplay AD;
     public TextMeshProUGUI HealthDisplay;
  
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+         //test func
         HealthDisplay = GameObject.Find("HealthDisplay").GetComponent<TextMeshProUGUI>();
         if(CurrentPlayerStats == null){
             Debug.Log("CurrentPlayerStats not in inspector");
         }
         
-        CurrentPlayerStats.health = maxHealth;
-        healthBar.setMaxHealth(maxHealth);
+        CurrentPlayerStats.health = DefaultStats.health;
+
+        //CurrentPlayerStats.health = maxHealth; IMPORTANT: do not assign currentplayerstats.blah to a variable and then use the variable it does not work as expected
+        healthBar.setMaxHealth(CurrentPlayerStats.health);
+        
     }
 
       void takeDmg(int damage){ //test func
@@ -54,16 +61,36 @@ public class TestPlayer : MonoBehaviour
         }
     }
 
-    void sacrifice(int sacAmt){ //sacAmt will allow us to pass in a value to divide health by
+    /*void sacrifice(int sacAmt){ //sacAmt will allow us to pass in a value to divide health by
         if(Input.GetKeyDown(KeyCode.O)){
             currentHealth = currentHealth/sacAmt;
             //extra dmg
         }
     }
+    */
+
+/* correct format ************************************* make sure you drag the upgrade into inspector of the script that wants to add upgrade, follow this format, and then set a bool at the end
+//so you can do if(bool){dash();} for example
+    public void ApplyDashUpgrade(){
+    if (dashUpgrade != null){
+        // Ensure the upgrade knows which event to trigger
+        dashUpgrade.unlocks = new UnlockFunctions.Unlockable[] { UnlockFunctions.Unlockable.DASH };
+
+        Upgrade dash = new Upgrade(dashUpgrade);
+        upgradeManager.addUpgrade(dash); // This calls applyUpgrade(), which calls activate(), triggering the event
+
+        Debug.Log("Applied Dash!");
+    }
+}
+*/
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if(!dashapplied){
+            //ApplyDashUpgrade(); //This proves that the upgrade is being applied
+            dashapplied = true;
+        }
         healthtoText();
         if(Input.GetKeyDown(KeyCode.L)){
         takeDmg(10);
