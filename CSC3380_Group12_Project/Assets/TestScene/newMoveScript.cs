@@ -13,10 +13,12 @@ public class newMoveScript : MonoBehaviour
     InputAction move;
     InputAction jump;
 
-    Vector3 xMove = Vector3.zero;
-    Vector3 yMove = Vector3.zero;
-    Vector3 zMove = Vector3.zero;
-    float yVelocity = 0f;
+    [Header("Velocity Values")]
+    [SerializeField] Vector3 xMove = Vector3.zero;
+    [SerializeField] Vector3 yMove = Vector3.zero;
+    [SerializeField] Vector3 zMove = Vector3.zero;
+
+    [SerializeField]float yVelocity = 0f;
 
     private void Start()
     {
@@ -43,13 +45,12 @@ public class newMoveScript : MonoBehaviour
         }
         else
         {
-            yVelocity -= gravity;
+            yVelocity -= gravity *Time.deltaTime;
             
         }
         yMove = transform.up * yVelocity;
+
+        controller.Move((xMove + yMove/Time.deltaTime + zMove) * Time.fixedDeltaTime);
     }
-    private void FixedUpdate()
-    {
-        controller.Move((xMove + yMove + zMove) * Time.fixedDeltaTime);
-    }
+  
 }

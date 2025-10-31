@@ -17,8 +17,11 @@ public class RoomManager : MonoBehaviour
     public Transform mainRoomPostion;
     public GameObject[] mainRoomTeleporters;
     public GameObject[] mainRoomScreens;
+    public GameObject[] mainRoomTextDisplays;
     private Room[] rooms = new Room[4];
     private Object[] prefab_arr;
+
+    private Room currentlySelectedRoom;
     public void Start()
     {
         prefab_arr = Resources.LoadAll(prefabFolderPath, typeof(GameObject));
@@ -42,14 +45,21 @@ public class RoomManager : MonoBehaviour
             Vector3 roomPos = new Vector3(xDir*roomGenDistance,roomGenHeight,zDir*roomGenDistance);
 
 
-            rooms[i] = RoomGenerator.CreateRoom(roomPos, prefab_arr, tileRadius, gapSize, roomHeight, mainRoomTeleporters[i],cameraPrefab,teleporterPrefab); //create new room
-            
+            rooms[i] = RoomGenerator.CreateRoom(roomPos, prefab_arr, tileRadius, gapSize, roomHeight, mainRoomTeleporters[i],cameraPrefab,teleporterPrefab); //create new 
         }
     }
     
     void deleteRoom(Room room)
     {
         if(room!=null) room.delete();
+    }
+
+    void deleteExcept(Room room)
+    {
+        foreach (Room other in rooms)
+        {
+            if(other!=room) other.delete();
+        }
     }
     
     [ContextMenu("generateRoomTest()")]

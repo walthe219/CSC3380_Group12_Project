@@ -9,7 +9,7 @@ public static class RoomGenerator
     public static Room CreateRoom(Vector3 roomCenterPos, Object[] possibleTiles,float tileRadius,float gapSize,float roomHeight, GameObject portalLink, GameObject camPrefab, GameObject teleporterPrefab)
     {
 
-        GameObject room = new GameObject("Test Generated Room");
+        GameObject room = new GameObject("Room");
         Object[] prefab_arr = ArrayHelper.Clone(possibleTiles);
         Stack<Object> tileStack = new Stack<Object>();
         GameObject[] placedTiles = new GameObject[4];
@@ -28,20 +28,21 @@ public static class RoomGenerator
             }
             else pos.z *= -1;
 
-            placedTiles[i] = PlaceTile(getRandomTile(ref tileStack,prefab_arr), pos, 90 * i, room);
-            Debug.Log(tileStack.Count);
+            placedTiles[i] = PlaceTile(getRandomTile(ref tileStack, prefab_arr), pos, 90 * i, room);
         }
 
 
         GameObject roomCam = Object.Instantiate(camPrefab, Vector3.up * roomHeight, Quaternion.Euler(90, 0, 0), room.transform);
 
         Transform teleporterTransform = placedTiles[0].transform.Find("PortalPoint");
+        if (teleporterTransform == null) {
+            Debug.LogError($"Tile {placedTiles[0].name} does not have child named PortalPoint.");
+        }
         GameObject roomTeleporter = Object.Instantiate(teleporterPrefab, teleporterTransform.position, teleporterTransform.localRotation, room.transform);
         roomTeleporter.GetComponent<portalScript>().LinkPortal(portalLink);
-
         room.transform.position = roomCenterPos;
 
-        //add navmesh
+        //ADD NAVMESH HERE
 
         return new Room(room, roomTeleporter, portalLink, roomCam,null);
 
@@ -56,10 +57,8 @@ public static class RoomGenerator
         if (tileStack.Count == 0)
         {
             tileStack = new Stack<Object>(ArrayHelper.Shuffle(ArrayHelper.Clone(prefab_arr)));
-            Debug.Log("shuffled tileStack: "+tileStack.Count);
         }
         GameObject tile = (GameObject)tileStack.Pop();
-        Debug.Log(tileStack.Count);  
         return tile;
     }
 
@@ -71,7 +70,7 @@ public static class RoomGenerator
         return Object.Instantiate(tile, offset, Quaternion.Euler(new Vector3(0, rotation, 0)), room.transform);
     }
 
-    private static GameObject createCamera()
+    /*private static GameObject createCamera()
     {
         GameObject cameraObj = new GameObject("Room Camera");
         Camera cam = cameraObj.AddComponent<Camera>();
@@ -79,7 +78,7 @@ public static class RoomGenerator
         cam.targetTexture = texture;
 
         return cameraObj;
-    }
+    }*/
 
     
 }

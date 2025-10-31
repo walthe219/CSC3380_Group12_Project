@@ -7,29 +7,36 @@ using UnityEngine;
  */
 public class portalScript : MonoBehaviour
 {
-    [SerializeField] Transform destination; //where to teleport, usally another teleporter's transfrom
+    [SerializeField] Transform destination; //where to teleport, usally another portal
     public float heightOffset = 1; // distance above destination to teleport
-    public float distanceOffset = 2f; //distance in front of destination to teleport
-    public float waitTime = 0.05f; //how long to disable move and lookscript, if too short then player position will not change
-    public float portalLockout = 5f;
+    public float distanceOffset = 2f; //distance in front of destination
+    public float disableTime = 0.05f; //how long to disable move and lookscript, if too short then player position will not 
 
 
-    private float timer = 9999;
+    [SerializeField]float portalTimer = 9999;
     private MonoBehaviour movementScript  = null;
     private MonoBehaviour lookScript = null;
 
-    public static bool canTeleport = true;
+    static bool teleportOnCoolDown = false;
+    static float staticTimerStart = float.NaN;
+    static float teleportCoolDownDuration = 3f;
 
     private void OnTriggerEnter(Collider other)
-    {
+    { 
         if (other.tag.Equals("Player"))
         {
-           
+            if (teleportOnCoolDown)
+            {
+                Debug.Log("Cannot teleport yet");
+                return;
+            }
 
+            //Disable controller scripts so teleport is not overwritten
             movementScript = other.GetComponent<newMoveScript>();
             if (movementScript == null)
             {
                 Debug.LogError("Change move script name in portalScript code GetComponent<SCRIPT NAME HERE>");
+                return;
             }
             movementScript.enabled = false;
 
@@ -37,21 +44,22 @@ public class portalScript : MonoBehaviour
             if (lookScript == null)
             {
                 Debug.LogError("Change look script name in portalScript code GetComponent<SCRIPT NAME HERE>");
+                return;
             }
             lookScript.enabled = false;
 
-
-            if (!canTeleport) return;
+            //Teleport player
             other.transform.position = destination.position + destination.forward * distanceOffset + destination.up * heightOffset;
             other.transform.rotation = destination.rotation;
 
-            Debug.Log("Teleported to " + destination.position + " with Rotation " + destination.rotation);
-            timer = 0;
+            Debug.Log("Teleported to " + destination.position + " with Rotation " + destination.rotation+ $"\nTeleport on cooldown for {teleportCoolDownDuration} seconds".ToUpper());
+            portalTimer = 0;
+            staticTimerStart = Time.time;
 
-            canTeleport = false;
-
+            teleportOnCoolDown = true;
+            
         }
-        else Debug.Log("Object needs 'Player' tag to use teleporter");
+        else Debug.LogError("Object needs 'Player' tag to use teleporter");
     }
 
     public void ActivatePortal() { }
@@ -59,37 +67,47 @@ public class portalScript : MonoBehaviour
 
     private void Update()
     {
-        if (timer < waitTime)
+
+        if (portalTimer < disableTime)
         {
-            timer += Time.deltaTime;
+            portalTimer += Time.deltaTime;
         }
-        else if (timer < portalLockout)
+        else
         {
             if (movementScript != null)
             {
-                Debug.Log("Reenabled");
+                //Debug.Log("Controls Reenabled");
                 movementScript.enabled = true;
                 movementScript = null;
                 lookScript.enabled = true;
                 lookScript = null;
             }
-        }
-        else
-        {
            
-
-            canTeleport = true;
+        }
+        
+        if(Time.time - staticTimerStart> teleportCoolDownDuration)
+        {
+            if (teleportOnCoolDown)
+            {
+                Debug.Log("Teleport off cooldown");
+                teleportOnCoolDown = false;
+            }
 
         }
     }
 
     /*
-     * Links two portals together
+     * Links two portals together by setting their destinations to each other
      */
     public void LinkPortal(GameObject other)
     {
+        portalScript otherScript = other.GetComponent<portalScript>();
+        if (otherScript == null) {
+            Debug.LogError("can only LinkPortal() with and object using portalScript");
+            return;
+        }
         setDestination(other.transform);
-        other.GetComponent<portalScript>().setDestination(this.transform);
+        otherScript.setDestination(this.transform);
     }
 
     public void setDestination(Transform pos)
