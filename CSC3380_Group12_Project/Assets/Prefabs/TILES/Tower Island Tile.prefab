@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2533608839384501954}
   - component: {fileID: 3334613650753147784}
   - component: {fileID: 5688819831327036412}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8070620825957622058}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tower Island Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7552123192724969338}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Portal Spot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,6 +239,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 825c8f8fbea22954e954fd00cd8cc8be, type: 3}
       propertyPath: m_Name
       value: Island_Ruins_Slope_Sculpted (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 825c8f8fbea22954e954fd00cd8cc8be, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364076815127437966, guid: 825c8f8fbea22954e954fd00cd8cc8be, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
