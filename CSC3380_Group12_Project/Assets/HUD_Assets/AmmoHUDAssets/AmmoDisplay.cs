@@ -14,9 +14,12 @@ public class AmmoDisplay : MonoBehaviour
     private int delay_x;
     [SerializeField] PlayerStats CurrentPlayerStats;
     [SerializeField] PlayerStats DefaultStats;
+    
+    [SerializeField] private HealthUIMngr hum;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {   
+        hum.GetComponent<HealthUIMngr>().takeDmg(10);
         CurrentPlayerStats.ammo = DefaultStats.ammo;
         if(CurrentPlayerStats == null){
             Debug.Log("CurrentPlayerStats not assigned in insepctor (AmmoDisplay)");
@@ -51,7 +54,7 @@ public class AmmoDisplay : MonoBehaviour
             isReloading = true;
             //Debug.Log("Reloading......");
             yield return new WaitForSeconds(delay_x);
-            CurrentPlayerStats.ammo=magSize;
+            CurrentPlayerStats.ammo=DefaultStats.ammo;
             isReloading=false;
             //Debug.Log("Reloaded!");
         
