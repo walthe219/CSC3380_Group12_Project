@@ -408,7 +408,7 @@ MonoBehaviour:
   groundCheck: {fileID: 3490948877638741259}
   groundMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   playerMove:
     m_Name: Player Move
     m_Type: 0
