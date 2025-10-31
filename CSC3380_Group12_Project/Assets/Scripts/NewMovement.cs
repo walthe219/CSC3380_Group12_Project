@@ -1,62 +1,29 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class NewMovement : MonoBehaviour
 {
 
-    //public Transform groundCheck;
-    //public LayerMask groundMask;
-    //
-    //bool isGrounded;
-    //bool isSprinting;
-    //bool isCrouching;
-    //bool isSliding;
-    //
-    //Vector3 movement;
-    //Vector3 input;
-    //
-    //float speed;
-    //public float runSpeed;
-    //public float airSpeed;
-    //public float sprintSpeed;
-    //public float crouchSpeed;
-    //public float slideSpeedIncrease;
-    //public float slideSpeedDecrease;
-    //Vector3 yVelocity;
-    //Vector3 forwardDirection;
-    //
-    //float gravity;
-    //public float normalGravity;
-    //
-    //float lastJumpTime = 0;
-    //int jumpCharges;
-    //public int maxJumpCharges;
-    //public float jumpHeight;
-    //
-    ////these values might need to be adjusted later if we move the player
-    //float startHeight;
-    //float crouchHeight = 0.5f;
-    //Vector3 crouchingCenter = new Vector3(0, 1.25f, 0);
-    //Vector3 standingCenter = new Vector3(0, 1, 0);
-    //
-    //float slideTimer;
-    //public float maxSlideTimer;
-    //
-    //float moveSpeed;
-
-    Rigidbody body;
-
     [Header("Movement")]
-    private float moveSpeed;
+    Rigidbody body;
+    public float moveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
+    public float slideSpeed;
+    public float dashSpeed;
+
+    private float desiredSpeed;
+    private float prevDesiredSpeed;
+
+    public float speedIncreaseMultiplier;
+    public float slopeIncreaseMultiplier;
 
     public float groundDrag;
     public Transform orientation;
     public MovementState state;
 
-    float vertInput;
-    float horzInput;
+    public bool isSliding;
 
     Vector3 moveDir;
 
@@ -76,6 +43,22 @@ public class NewMovement : MonoBehaviour
     [Header("Slope Handling")]
     public float maxSlopeAngle;
     private RaycastHit slopeDetect;
+    private bool leavingSlope;
+
+    [Header("Dashing")]
+    public float dashForce;
+    private float dashTime;
+    public float maxDashTime;
+    public bool isDashing = false;
+
+    [Header("Stamina")]
+    //[SerializeField] PlayerStats currPlayerStats;
+
+    public float curStamina;
+    private float maxStamina = 100f;
+    private float staminaRechargeDelay = 2f;
+    private float staminaRechargeTimer;
+    private float staminaRechargeRate = 20f;
 
     [Header("Ground Check")]
     public LayerMask groundMask;
@@ -87,15 +70,23 @@ public class NewMovement : MonoBehaviour
     public InputAction jump;
     public InputAction sprint;
     public InputAction crouch;
+    public InputAction dash;
 
+    float vertInput;
+    float horzInput;
 
+    [Header("Testing")]
+    public float test;
+    
 
     private void OnEnable()
     {
+        // Enabled by default
         move.Enable();
         jump.Enable();
         sprint.Enable();
         crouch.Enable();
+        dash.Enable();
     }
 
     private void OnDisable()
@@ -104,6 +95,7 @@ public class NewMovement : MonoBehaviour
         jump.Disable();
         sprint.Disable();
         crouch.Disable();
+        dash.Enable();
     }
 
     public enum MovementState
@@ -111,6 +103,8 @@ public class NewMovement : MonoBehaviour
         walking,
         crouching,
         sprinting,
+        sliding,
+        dashing,
         airborne
     }
 
@@ -120,13 +114,15 @@ public class NewMovement : MonoBehaviour
         body = GetComponent<Rigidbody>();
         body.freezeRotation = true;
         startYScale = transform.localScale.y;
-        
+        curStamina = maxStamina;
+
         if (InputSystem.actions)
         {
             move = InputSystem.actions.FindAction("Player/Move");
             jump = InputSystem.actions.FindAction("Player/Jump");
             sprint = InputSystem.actions.FindAction("Player/Sprint");
             crouch = InputSystem.actions.FindAction("Player/Crouch");
+            dash = InputSystem.actions.FindAction("Player/Dash");
             OnEnable();
         }
     }
@@ -134,20 +130,36 @@ public class NewMovement : MonoBehaviour
     private void Update()
     {
         // Ground Check
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.1f, groundMask);
-        
+        //isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);
+
         if (isGrounded && (Time.time - lastJumpTime > 0.25))
         {
             jumpCount = maxJumpCount;
             canJump = true;
+            leavingSlope = false;
         }
 
         InputHandle();
         SpeedControl();
 
+        // Start the recharge timer if stamina is below the max
+        if(isGrounded && curStamina != maxStamina)
+        {
+            staminaRechargeTimer += Time.deltaTime;
+        }
+
+        // Start recharging stamina if stamina is below the max and the recharge timer has passed the delay
+        if(curStamina != maxStamina && staminaRechargeTimer >= staminaRechargeDelay)
+        {
+            StaminaRecharge();
+        }
+
+        //currPlayerStats = (int)curStamina;
+
         // Drag Handler
         if (isGrounded)
         {
+            test += 1;
             body.linearDamping = groundDrag;
         }
         else
@@ -158,6 +170,10 @@ public class NewMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Ground Check
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);
+
+        DashTimer();
         MovePlayer();
     }
 
@@ -167,26 +183,48 @@ public class NewMovement : MonoBehaviour
         horzInput = move.ReadValue<Vector2>().x;
         vertInput = move.ReadValue<Vector2>().y;
 
+        // Sliding
+        if (isSliding)
+        {
+            state = MovementState.sliding;
+
+            if (OnSlope() && body.linearVelocity.y < 0.1f)
+            {
+                desiredSpeed = slideSpeed;
+            }
+            else
+            {
+                desiredSpeed = sprintSpeed;
+            }
+        }
+
         // Crouching
-        if (isGrounded && crouch.IsPressed())
+        else if (isGrounded && crouch.IsPressed())
         {
             // Changes state and speed
             state = MovementState.crouching;
-            moveSpeed = crouchSpeed;
+            desiredSpeed = crouchSpeed;
+        }
+
+        // Dashing
+        else if (dash.IsPressed())
+        {
+            state = MovementState.dashing;
+            //desiredSpeed = dashSpeed;
         }
 
         // Sprinting
         else if (isGrounded && sprint.IsPressed())
         {
             state = MovementState.sprinting;
-            moveSpeed = sprintSpeed;
+            desiredSpeed = sprintSpeed;
         }
 
         // Walking
         else if (isGrounded)
         {
             state = MovementState.walking;
-            moveSpeed = walkSpeed;
+            desiredSpeed = walkSpeed;
         }
 
         // Airborne
@@ -207,7 +245,7 @@ public class NewMovement : MonoBehaviour
         }
         else if (jump.IsPressed() && isGrounded && Time.time - lastJumpTime > 0.5)
         {
-            Jump(); 
+            Jump();
             // Allows the player to be able to hold the jump key and auto jump when they hit the ground again
         }
 
@@ -224,7 +262,58 @@ public class NewMovement : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
         }
 
-        
+        if (dash.WasPressedThisFrame() && curStamina >= 50)
+        {
+            body.AddForce(moveDir.normalized * dashForce, ForceMode.Impulse);
+            moveSpeed = dashSpeed;
+            isDashing = true;
+            dashTime = maxDashTime;
+            curStamina -= 50;
+            staminaRechargeTimer = 0;
+            // currPlayerStats.stamina - 50;
+        }
+
+        // Checks for drastic change in desiredSpeed
+        if (Mathf.Abs(desiredSpeed - prevDesiredSpeed) > 4f && moveSpeed != 0)
+        {
+            StopAllCoroutines();
+            StartCoroutine(SmoothlyLerpMoveSpeed());
+        }
+        else
+        {
+            moveSpeed = desiredSpeed;
+        }
+
+        prevDesiredSpeed = desiredSpeed;
+    }
+
+    // Changes the move speed to the desired speed gradually over time instead of instantly changing it
+    private IEnumerator SmoothlyLerpMoveSpeed()
+    {
+        float time = 0;
+        float diff = Mathf.Abs(desiredSpeed - moveSpeed);
+        float start = moveSpeed;
+
+        while (time < diff)
+        {
+            moveSpeed = Mathf.Lerp(start, desiredSpeed, time / diff);
+
+            if (OnSlope())
+            {
+                float slopeAngle = Vector3.Angle(Vector3.up, slopeDetect.normal);
+                float slopeAngleIncrease = 1 + (slopeAngle / 90f);
+
+                time += Time.deltaTime * speedIncreaseMultiplier * slopeIncreaseMultiplier * slopeAngleIncrease;
+            }
+            else
+            {
+                time += Time.deltaTime * speedIncreaseMultiplier;
+            }
+
+            yield return null;
+        }
+
+        moveSpeed = desiredSpeed;
     }
 
     private void MovePlayer()
@@ -233,13 +322,16 @@ public class NewMovement : MonoBehaviour
         moveDir = orientation.forward * vertInput + orientation.right * horzInput;
 
         // on a slope
-        if (OnSlope())
+        if (OnSlope() && !leavingSlope)
         {
-            body.AddForce(20f * moveSpeed * GetSlopeMoveDirection(), ForceMode.Force);
-            
-            body.AddForce(Vector3.down * 100f, ForceMode.Force);
+            body.AddForce(20f * moveSpeed * GetSlopeMoveDirection(moveDir), ForceMode.Force);
+
+            //if (body.linearVelocity.y > 0)
+            //{
+            body.AddForce(Vector3.down * 150f, ForceMode.Force);
+            //}
         }
-        
+
         // on ground
         if (isGrounded)
         {
@@ -252,20 +344,25 @@ public class NewMovement : MonoBehaviour
         }
 
         body.useGravity = !OnSlope();
-        
+
     }
 
     private void SpeedControl()
     {
         // Limits the speed on slope
-        if (OnSlope())
+        if (OnSlope() && !leavingSlope)
         {
             if (body.linearVelocity.magnitude > moveSpeed)
             {
                 body.linearVelocity = body.linearVelocity.normalized * moveSpeed;
             }
         }
-
+        
+        else if (moveSpeed > 10 || isDashing)
+        {
+            // No speed limiting
+        }
+        
         // Limits the speed on ground and airborne
         else
         {
@@ -277,20 +374,39 @@ public class NewMovement : MonoBehaviour
                 body.linearVelocity = new Vector3(limitedVelocty.x, body.linearVelocity.y, limitedVelocty.z);
             }
         }
-        
+
     }
 
     private void Jump()
     {
+        leavingSlope = true;
+
+        // Resets the y velocity (keeps all jumps the same)
         body.linearVelocity = new Vector3(body.linearVelocity.x, 0f, body.linearVelocity.z);
+
         body.AddForce(transform.up * jumpPower, ForceMode.Impulse);
         lastJumpTime = Time.time;
         jumpCount--;
     }
 
-    private bool OnSlope()
+    private void DashTimer()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeDetect, playerHeight * 0.5f + 0.3f))
+        dashTime -= Time.deltaTime;
+        if (dashTime <= 0)
+        {
+            isDashing = false;
+        }
+    }
+
+    private void StaminaRecharge()
+    {
+        curStamina += staminaRechargeRate * Time.deltaTime;
+        curStamina = Mathf.Min(curStamina, maxStamina);
+    }    
+
+    public bool OnSlope()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeDetect, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeDetect.normal);
             return angle < maxSlopeAngle && angle != 0;
@@ -299,9 +415,9 @@ public class NewMovement : MonoBehaviour
         return false;
     }
 
-    private Vector3 GetSlopeMoveDirection()
+    public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
-        return Vector3.ProjectOnPlane(moveDir, slopeDetect.normal).normalized;
+        return Vector3.ProjectOnPlane(direction, slopeDetect.normal).normalized;
     }
 
 }
