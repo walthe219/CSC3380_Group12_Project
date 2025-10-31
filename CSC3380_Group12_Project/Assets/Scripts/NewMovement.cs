@@ -101,6 +101,8 @@ public class NewMovement : MonoBehaviour
         dash.Enable();
     }
 
+    // Enables the dash ability in the code 
+    // (add more detail probably)
     public void ApplyDashUpgrade()
     {
         if (dashData != null)
@@ -149,6 +151,7 @@ public class NewMovement : MonoBehaviour
     {
         // Ground Check
         //isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);
+        isGrounded = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y + 0.35f, transform.position.z), 0.4f, groundMask);
 
         if (isGrounded && (Time.time - lastJumpTime > 0.25))
         {
@@ -187,10 +190,6 @@ public class NewMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Ground Check
-        //isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);
-        isGrounded = Physics.CheckSphere(new Vector3(transform.position.x, 0.35f, transform.position.z), 0.4f, groundMask);
-
         DashTimer();
         MovePlayer();
     }
@@ -261,10 +260,10 @@ public class NewMovement : MonoBehaviour
                 canJump = false;
             }
         }
+        // Allows the player to be able to hold the jump key and auto jump when they hit the ground again
         else if (jump.IsPressed() && isGrounded && Time.time - lastJumpTime > 0.5)
         {
             Jump();
-            // Allows the player to be able to hold the jump key and auto jump when they hit the ground again
         }
 
         if (crouch.WasPressedThisFrame())
@@ -280,6 +279,7 @@ public class NewMovement : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
         }
 
+        // Can only dash if the stamina is at least 50
         if (dash.WasPressedThisFrame() && curStamina >= 50)
         {
             body.AddForce(moveDir.normalized * dashForce, ForceMode.Impulse);
@@ -288,7 +288,6 @@ public class NewMovement : MonoBehaviour
             dashTime = maxDashTime;
             curStamina -= 50;
             staminaRechargeTimer = 0;
-            // currPlayerStats.stamina - 50;
         }
 
         // Checks for drastic change in desiredSpeed
@@ -333,7 +332,8 @@ public class NewMovement : MonoBehaviour
 
         moveSpeed = desiredSpeed;
     }
-
+    
+    // Moves the player when they are on slope/ground/air
     private void MovePlayer()
     {
         // Move direction
@@ -365,6 +365,7 @@ public class NewMovement : MonoBehaviour
 
     }
 
+    // Limits the player's speed unless they exceed a speed threshhold or are dashing
     private void SpeedControl()
     {
         // Limits the speed on slope
@@ -395,6 +396,7 @@ public class NewMovement : MonoBehaviour
 
     }
 
+    // Jumps
     private void Jump()
     {
         leavingSlope = true;
@@ -407,6 +409,7 @@ public class NewMovement : MonoBehaviour
         jumpCount--;
     }
 
+    // Makes isDashing false if the player has been dashing for the max dash time
     private void DashTimer()
     {
         dashTime -= Time.deltaTime;
@@ -416,12 +419,14 @@ public class NewMovement : MonoBehaviour
         }
     }
 
+    // Passively recharges the player's stamina 
     private void StaminaRecharge()
     {
         curStamina += staminaRechargeRate * Time.deltaTime;
         curStamina = Mathf.Min(curStamina, maxStamina);
     }    
 
+    // Checks if the player is standing on a slope
     public bool OnSlope()
     {
         
@@ -434,6 +439,7 @@ public class NewMovement : MonoBehaviour
         return false;
     }
 
+    // Gets the direction the player must move to walk parallel up the slope
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         return Vector3.ProjectOnPlane(direction, slopeDetect.normal).normalized;
