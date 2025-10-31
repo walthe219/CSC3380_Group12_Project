@@ -14,11 +14,12 @@ public class NumOfRoomsComp : MonoBehaviour
     private int finishedRooms;
     private float abc;
     public TextMeshProUGUI finishedRoomsText;
-    private PlayerStats playerstats;
+    //private PlayerStats playerstats;
+    [SerializeField] PlayerStats playerstats;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerstats = new PlayerStats();
+        //playerstats = new PlayerStats();
         playerstats.RoomsComp = 0;
         finishedRoomsText = GameObject.Find("NumOfRooms").GetComponent<TextMeshProUGUI>();
     }
