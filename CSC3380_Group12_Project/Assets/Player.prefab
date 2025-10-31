@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5049115436650554024}
   - component: {fileID: 3569453719282851058}
-  - component: {fileID: 2464737972820041452}
   - component: {fileID: 6796624350748608610}
   - component: {fileID: 4902070905680346198}
   m_Layer: 0
@@ -65,31 +64,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &2464737972820041452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 948115490480696473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0113fd7058a604e936e273047b0437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  minX: -60
-  maxX: 60
-  sensitivity: 0.5
-  cam: {fileID: 0}
-  look:
-    m_Name: Look
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: c8076048-483a-4ab8-90ea-27e5aba3a5b3
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!114 &6796624350748608610
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -61,8 +61,8 @@ public class NewMovement : MonoBehaviour
 
     [Header("Ground Check")]
     public LayerMask groundMask;
-    float playerHeight = 2;
-    bool isGrounded;
+    private float playerHeight = 2;
+    public bool isGrounded;
 
     [Header("Inputs")]
     public InputAction move;
@@ -71,17 +71,15 @@ public class NewMovement : MonoBehaviour
     public InputAction crouch;
     public InputAction dash;
 
-    float vertInput;
-    float horzInput;
+    private float vertInput;
+    private float horzInput;
 
     [Header("Upgrade Unlocks")]
     [SerializeField] UpgradeManager uManager;
     [SerializeField] UpgradeData dashData;
     
-
     [Header("Testing")]
     public float test;
-    
 
     private void OnEnable()
     {
@@ -117,7 +115,6 @@ public class NewMovement : MonoBehaviour
             Debug.Log("Applied Dash!");
         }
     }
-
     public enum MovementState
     {
         walking,
@@ -180,7 +177,6 @@ public class NewMovement : MonoBehaviour
         // Drag Handler
         if (isGrounded)
         {
-            test += 1;
             body.linearDamping = groundDrag;
         }
         else
@@ -192,7 +188,8 @@ public class NewMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Ground Check
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);
+        //isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);
+        isGrounded = Physics.CheckSphere(new Vector3(transform.position.x, 0.35f, transform.position.z), 0.4f, groundMask);
 
         DashTimer();
         MovePlayer();
@@ -427,6 +424,7 @@ public class NewMovement : MonoBehaviour
 
     public bool OnSlope()
     {
+        
         if (Physics.Raycast(transform.position, Vector3.down, out slopeDetect, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeDetect.normal);
