@@ -55,16 +55,16 @@ public class StaminaDisplay : MonoBehaviour
         this.delay_x = delay_x;
     }
 
-    IEnumerator regenerate(int regenAmt){
-        if(stamina < 100){
-            isCoroutineRunning=true;
-            CurrentPlayerStats.stamina = CurrentPlayerStats.stamina+regenAmt;
-            yield return new WaitForSeconds(delay_x);
-            //Debug.Log("regenerating");
-            isCoroutineRunning=false;
-        }
-        
-    }
+    //IEnumerator regenerate(int regenAmt){
+    //    if(stamina < 100){
+    //        isCoroutineRunning=true;
+    //        CurrentPlayerStats.stamina = CurrentPlayerStats.stamina+regenAmt;
+    //        yield return new WaitForSeconds(delay_x);
+    //        //Debug.Log("regenerating");
+    //        isCoroutineRunning=false;
+    //    }
+    //    
+    //}
 
     // Update is called once per frame
     void Update()
