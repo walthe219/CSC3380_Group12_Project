@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public static class RoomGenerator 
 {
@@ -10,6 +13,7 @@ public static class RoomGenerator
     {
 
         GameObject room = new GameObject("Room");
+        NavMeshSurface surface = room.AddComponent<NavMeshSurface>();
         Object[] prefab_arr = ArrayHelper.Clone(possibleTiles);
         Stack<Object> tileStack = new Stack<Object>();
         GameObject[] placedTiles = new GameObject[4];
@@ -43,6 +47,8 @@ public static class RoomGenerator
         room.transform.position = roomCenterPos;
 
         //ADD NAVMESH HERE
+        surface.BuildNavMesh();
+        room.layer = LayerMask.NameToLayer("Ground");
 
         return new Room(room, roomTeleporter, portalLink, roomCam,null);
 
