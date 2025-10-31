@@ -88,16 +88,12 @@ public class healthUIMngr : MonoBehaviour
     void Update()
     {   
         if(!dashapplied){
-            //ApplyDashUpgrade(); //This proves that the upgrade is being applied
+            //ApplyDashUpgrade(); //Tested in Michael's movement script and this ApplyDashUpgrade() communicates succesfully with tabmenu UI
             dashapplied = true;
         }
         healthtoText();
-        if(Input.GetKeyDown(KeyCode.L)){
-        takeDmg(10);
-       }
-       if(Input.GetKeyDown(KeyCode.H)){
-        heal(10);
-       }
+        
+       
     }
 }
 
