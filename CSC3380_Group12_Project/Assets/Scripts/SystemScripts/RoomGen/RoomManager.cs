@@ -33,11 +33,14 @@ public class RoomManager : MonoBehaviour
     private int currentEnemiesAlive;
     //------------------------------------------
 
+
+    //Events, names are not intutive should change these maybe
     public event Action<string> PassUpgradeId;
     public event Action<int> PassEnemiesAlive;
     public event Action RoomCleared;
     public event Action<string> RecieveReward;
 
+    //makes RoomManager a singelton class, a static MonoBehaviour
     public static RoomManager Instance { get; private set; }
     private void Awake()
     {
@@ -48,7 +51,6 @@ public class RoomManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Persist across scene loads
         }
     }
 
@@ -56,7 +58,7 @@ public class RoomManager : MonoBehaviour
     {
         prefab_arr = Resources.LoadAll(prefabFolderPath, typeof(GameObject));
         RoomGenerator.initializePrefabs(cameraPrefab, teleporterPrefab,enemyPrefab);
-        generateRoomTest();
+        generateNewRooms(numRooms: 4, tileRadius: maxTileRadius, gapSize: 0, roomHeight: 40);
     }
     void generateNewRooms(int numRooms,float tileRadius, float gapSize, float roomHeight)
     {
@@ -66,7 +68,7 @@ public class RoomManager : MonoBehaviour
             Debug.LogError("Can't generate more than 4 rooms");
         }
 
-
+        //Direct Reference to Singleton UpgradeManger, UpgradeManger needed for RoomManager to run, show try to use observer design pattern instead
         UpgradeData[] potentialRoomRewards = UpgradeManager.Instance.samplePossibleUpgrades(4);
         Debug.Log("Room Rewards: " + ArrayHelper.print(potentialRoomRewards));
 
@@ -84,6 +86,7 @@ public class RoomManager : MonoBehaviour
             rooms[i] = RoomGenerator.CreateRoom(roomPos, prefab_arr, tileRadius, gapSize, roomHeight, mainRoomTeleporters[i], potentialRoomRewards[i]); //create new 
 
             mainRoomTextDisplays[i].GetComponent<TextDisplay>().changeText(potentialRoomRewards[i].ID);
+            mainRoomTeleporters[i].GetComponent<portalScript>().PlayerEnterPortal += selectLinkedRoom;
         }
     }
     
@@ -102,30 +105,25 @@ public class RoomManager : MonoBehaviour
         rooms[0] = room;
     }
 
-     public void getLinkedRoom(GameObject mainRoomPortal)
+     void selectLinkedRoom(GameObject mainRoomPortal)
      {
-        //Debug.Log("Subscriber Called");
         foreach(Room room in rooms)
         {
             if (room.portalIsLinked(mainRoomPortal))
             {
-                selectRoom(room);
-                return;
+                Debug.Log("Selecting Room");
+                currentlySelectedRoom = room;
+                deleteExcept(currentlySelectedRoom);
+                PassUpgradeId?.Invoke(room.upgradeReward.ID);
+                currentEnemiesAlive = room.enemies.Length;
+                PassEnemiesAlive?.Invoke(currentEnemiesAlive);
+                Target.OnDeath += decrementEnemies;
+                room.roomTeleporter.GetComponent<portalScript>().DeactivatePortal();
+                break;
             }
         }
-     }
-
-     void selectRoom(Room room)
-     {
-        Debug.Log("Selecting Room");
-        currentlySelectedRoom = room;
-        deleteExcept(currentlySelectedRoom);
-        PassUpgradeId?.Invoke(room.upgradeReward.ID);
-        currentEnemiesAlive = room.enemies.Length;
-        PassEnemiesAlive?.Invoke(currentEnemiesAlive);
-        Target.OnDeath += decrementEnemies;
-        room.roomTeleporter.GetComponent<portalScript>().DeactivatePortal();
-     }
+        
+    }
 
     void decrementEnemies()
     {
@@ -152,11 +150,11 @@ public class RoomManager : MonoBehaviour
      }
 
     //called when enter main room
-    private void ResetFields(GameObject NOTUSED)
+    void ResetFields(GameObject NOTUSED)
     {
         PassUpgradeId?.Invoke("None");
         //deleteRoom(currentlySelectedRoom); this has been causing problems, room gets deleted during next room gen anyway so it not need for now, but ideally the bugs with this should be fixed
-        rooms = null;
+        //rooms = null;
         currentlySelectedRoom = null;
         generateRoomTest();
 

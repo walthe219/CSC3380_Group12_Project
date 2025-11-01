@@ -58,7 +58,6 @@ public static class RoomGenerator
 
         var roomPortalScript = roomTeleporter.GetComponent<portalScript>();
         roomPortalScript.LinkPortal(portalLink);
-        portalLink.GetComponent<portalScript>().PlayerEnterPortal += RoomManager.Instance.getLinkedRoom;
         room.transform.position = roomCenterPos;
 
         //ADD NAVMESH HERE

@@ -18,8 +18,7 @@ MonoBehaviour:
   moveSpeed: 0
   numJumps: 0
   damage: 0
-  numRoomsComp: 0
-  ID: StaminaUp1
+  ID: StaminaUp
   isRepeatable: 1
   unlocks: 
   description: 
