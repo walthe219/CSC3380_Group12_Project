@@ -1,0 +1,168 @@
+using System;
+using UnityEngine;
+
+/*
+ * Manages the creation of rooms, assignment of rooms to portals, assigment of upgrades to rooms, and deletion of rooms
+ */
+public class RoomManager : MonoBehaviour
+{
+    [Header("Tile Prefabs")]
+    [SerializeField] string prefabFolderPath = "Tiles";
+    [SerializeField] UnityEngine.Object[] prefab_arr;
+
+    [Header("RoomGen")]
+    [SerializeField] float roomGenDistance = 500;
+    [SerializeField] float roomGenHeight = 0;
+    [SerializeField] float maxTileRadius = 100;
+
+    [Header("Main Room")]
+    [SerializeField] Transform mainRoomPostion;
+    [SerializeField] GameObject[] mainRoomTeleporters;
+    [SerializeField] GameObject[] mainRoomScreens;
+    [SerializeField] GameObject[] mainRoomTextDisplays;
+
+    [Header("Prefabs")]
+    [SerializeField] GameObject teleporterPrefab;
+    [SerializeField] GameObject cameraPrefab;
+    [SerializeField] GameObject enemyPrefab;
+
+    //maybe in refactor put these into new class
+    //-------------------------------------------
+    private Room[] rooms;
+    private Room currentlySelectedRoom;
+    private int currentEnemiesAlive;
+    //------------------------------------------
+
+
+    //Events, names are not intutive should change these maybe
+    public event Action<string> PassUpgradeId;
+    public event Action<int> PassEnemiesAlive;
+    public event Action RoomCleared;
+    public event Action<string> RecieveReward;
+
+    //makes RoomManager a singelton class, a static MonoBehaviour
+    public static RoomManager Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Destroy duplicate instances
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    private void Start()
+    {
+        prefab_arr = Resources.LoadAll(prefabFolderPath, typeof(GameObject));
+        RoomGenerator.initializePrefabs(cameraPrefab, teleporterPrefab,enemyPrefab);
+        generateNewRooms(numRooms: 4, tileRadius: maxTileRadius, gapSize: 0, roomHeight: 40);
+    }
+    void generateNewRooms(int numRooms,float tileRadius, float gapSize, float roomHeight)
+    {
+        rooms = new Room[4];
+        if (numRooms > 4) 
+        {
+            Debug.LogError("Can't generate more than 4 rooms");
+        }
+
+        //Direct Reference to Singleton UpgradeManger, UpgradeManger needed for RoomManager to run, show try to use observer design pattern instead
+        UpgradeData[] potentialRoomRewards = UpgradeManager.Instance.samplePossibleUpgrades(4);
+        Debug.Log("Room Rewards: " + ArrayHelper.print(potentialRoomRewards));
+
+        for (int i = 0; i < numRooms; i++)
+        {
+            deleteRoom(rooms[i]);//deletes any rooms leftover
+
+            // i=0 => (0,+z), i=1 => (+x,0) i=2 => (0,-z) i=3 => (-x,0)
+            float xDir = (float)Mathf.Sin(Mathf.PI / 2 * i);
+            float zDir = (float)Mathf.Cos(Mathf.PI / 2 * i);
+
+            Vector3 roomPos = new Vector3(xDir*roomGenDistance,roomGenHeight,zDir*roomGenDistance);
+
+
+            rooms[i] = RoomGenerator.CreateRoom(roomPos, prefab_arr, tileRadius, gapSize, roomHeight, mainRoomTeleporters[i], potentialRoomRewards[i]); //create new 
+
+            mainRoomTextDisplays[i].GetComponent<TextDisplay>().changeText(potentialRoomRewards[i].ID);
+            mainRoomTeleporters[i].GetComponent<portalScript>().PlayerEnterPortal += selectLinkedRoom;
+        }
+    }
+    
+    void deleteRoom(Room room)
+    {
+        if(room!=null) room.delete();
+    }
+
+    void deleteExcept(Room room)
+    {
+        foreach (Room other in rooms)
+        {
+            if(other!=room) other.delete();
+        }
+        rooms = new Room[1];
+        rooms[0] = room;
+    }
+
+     void selectLinkedRoom(GameObject mainRoomPortal)
+     {
+        foreach(Room room in rooms)
+        {
+            if (room.portalIsLinked(mainRoomPortal))
+            {
+                Debug.Log("Selecting Room");
+                currentlySelectedRoom = room;
+                deleteExcept(currentlySelectedRoom);
+                PassUpgradeId?.Invoke(room.upgradeReward.ID);
+                currentEnemiesAlive = room.enemies.Length;
+                PassEnemiesAlive?.Invoke(currentEnemiesAlive);
+                Target.OnDeath += decrementEnemies;
+                room.roomTeleporter.GetComponent<portalScript>().DeactivatePortal();
+                break;
+            }
+        }
+        
+    }
+
+    void decrementEnemies()
+    {
+        currentEnemiesAlive--;
+        PassEnemiesAlive?.Invoke(currentEnemiesAlive);
+        if (currentEnemiesAlive == 0)
+        {
+            OnRoomClear();
+        }
+
+    }
+
+     void OnRoomClear()
+     {
+        Debug.Log("Room Cleared! Go back to the teleporter and return to the main room for your reward");
+        RoomCleared?.Invoke();
+        currentlySelectedRoom.roomTeleporter.GetComponent<portalScript>().ActivatePortal();
+
+        RecieveReward?.Invoke(currentlySelectedRoom.upgradeReward.ID);
+        PassUpgradeId?.Invoke("Recieved");
+
+        currentlySelectedRoom.roomTeleporter.GetComponent<portalScript>().PlayerEnterPortal += ResetFields;
+
+     }
+
+    //called when enter main room
+    void ResetFields(GameObject NOTUSED)
+    {
+        PassUpgradeId?.Invoke("None");
+        //deleteRoom(currentlySelectedRoom); this has been causing problems, room gets deleted during next room gen anyway so it not need for now, but ideally the bugs with this should be fixed
+        //rooms = null;
+        currentlySelectedRoom = null;
+        generateRoomTest();
+
+    }
+
+    [ContextMenu("generateRoomTest()")]
+    public void generateRoomTest()
+    {
+        generateNewRooms(numRooms:4, tileRadius:10, gapSize:0, roomHeight:40);
+    }
+}

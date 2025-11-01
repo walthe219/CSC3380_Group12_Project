@@ -1,0 +1,57 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+
+public class cameraScript : MonoBehaviour
+{
+    public float mouseSens;
+    public float yLimit = 89f;
+    public GameObject cam;
+
+    Vector2 rotation = Vector2.zero;
+
+    InputAction look;
+
+    private void Start()
+    {
+        mouseSens = 20f;
+        look = InputSystem.actions.FindAction("Look");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+/*
+    private void Update()
+    {
+        rotation.x += look.ReadValue<Vector2>().x *mouseSens * Time.deltaTime;
+        rotation.y += look.ReadValue<Vector2>().y * mouseSens * Time.deltaTime;
+        rotation.y = Mathf.Clamp(rotation.y, -yLimit, yLimit);
+
+        transform.localRotation = Quaternion.AngleAxis(rotation.x, Vector3.up);
+        cam.transform.localRotation = Quaternion.AngleAxis(rotation.y, Vector3.left);
+    }*/
+
+    private float xRot = 0f;
+
+    void Update()
+    {
+        Vector2 looking = look.ReadValue<Vector2>() * mouseSens * Time.deltaTime;
+
+        xRot -= looking.y;
+        xRot = Mathf.Clamp(xRot, -90f, 90f);
+
+        cam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
+        transform.Rotate(Vector3.up * looking.x);
+
+
+    }
+
+public void SetMouseSensitivity(float NewMouseSensitivity){
+    mouseSens = NewMouseSensitivity * 2f;
+    Debug.Log("Sensitivity set to: " + mouseSens);
+
+}
+
+
+}
+
