@@ -75,10 +75,6 @@ public class NewMovement : MonoBehaviour
     private float vertInput;
     private float horzInput;
 
-    [Header("Upgrade Unlocks")]
-    [SerializeField] UpgradeManager uManager;
-    [SerializeField] UpgradeData dashData;
-    
     [Header("Testing")]
     public float test;
 

@@ -23,10 +23,6 @@ public class Sliding : MonoBehaviour
     private float horzInput;
     private float vertInput;
 
-    [Header("Upgrade Unlocks")]
-    [SerializeField] UpgradeManager uManager;
-    [SerializeField] UpgradeData slideData;
-
     private void OnEnable()
     {
         move.Enable();

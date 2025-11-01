@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944a7b0f96f8945b28adaf98b3244c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
+  CurrentPlayerStats: {fileID: 0}
   slider: {fileID: 6101437794083596411}
 --- !u!1 &5472254930347013891
 GameObject:
