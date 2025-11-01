@@ -28,8 +28,8 @@ public class NewMovement : MonoBehaviour
     private Vector3 moveDir;
 
     [Header("Jumping")]
-    public float jumpPower;
-    public int maxJumpCount;
+    public float jumpPower; // Potential Upgradable
+    public int maxJumpCount; // Potential Upgradable
     public float airMultiplier;
     float lastJumpTime;
     int jumpCount;
@@ -46,7 +46,7 @@ public class NewMovement : MonoBehaviour
     private bool leavingSlope;
 
     [Header("Dashing")]
-    public float dashForce;
+    public float dashForce; // Potential Upgradable
     private float dashTime;
     public float maxDashTime;
     public bool isDashing = false;
@@ -55,10 +55,10 @@ public class NewMovement : MonoBehaviour
     [Header("Stamina")]
     [SerializeField] PlayerStats currPlayerStats;
     public float curStamina;
-    private float maxStamina = 100f;
+    private float maxStamina = 100f; // Potential Upgradable
     private float staminaRechargeDelay = 2f;
     private float staminaRechargeTimer;
-    private float staminaRechargeRate = 20f;
+    private float staminaRechargeRate = 20f; // Potential Upgradable
 
     [Header("Ground Check")]
     public LayerMask groundMask;

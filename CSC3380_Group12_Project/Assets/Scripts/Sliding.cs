@@ -11,7 +11,7 @@ public class Sliding : MonoBehaviour
 
     [Header("Sliding")]
     public float maxSlideTime;
-    public float slideForce;
+    public float slideForce; // Potential Upgradable
     private float slideTimer;
 
     private float slideYScale = 0.5f;
