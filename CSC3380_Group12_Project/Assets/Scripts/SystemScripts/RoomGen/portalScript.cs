@@ -7,22 +7,19 @@ using UnityEngine;
  */
 public class portalScript : MonoBehaviour
 {
+    [Header("Portal Settings")]
     [SerializeField] Transform destination; //where to teleport, usally another portal
-    public float heightOffset = 1; // distance above destination to teleport
-    public float distanceOffset = 2f; //distance in front of destination
-    public float disableTime = 0.05f; //how long to disable move and lookscript, if too short then player position will not 
+    [SerializeField] float heightOffset = 1; // distance above destination to teleport
+    [SerializeField] float distanceOffset = 2f; //distance in front of destination
+    [SerializeField] GameObject portalFrame;
+    [SerializeField] Collider portalCollider;
 
-    public GameObject portalFrame;
-    public Collider portalCollider;
-
-
-    [SerializeField]float portalTimer = 9999;
-    private MonoBehaviour movementScript  = null;
-    private MonoBehaviour lookScript = null;
-
+    static MonoBehaviour movementScript  = null;
+    static MonoBehaviour lookScript = null;
     static bool teleportOnCoolDown = false;
     static float staticTimerStart = float.NaN;
     static float teleportCoolDownDuration = 3f;
+    static float scriptDisableDuration = 0.05f; //how long to disable move and lookscript, if too short then player position will not 
 
     public event Action<GameObject> PlayerEnterPortal;
     //public event Action<GameObject> PlayerArrivePortal;
@@ -37,37 +34,39 @@ public class portalScript : MonoBehaviour
                 return;
             }
 
-            //Disable controller scripts so teleport is not overwritten
+            //Get control scripts so that they can be disabled
             movementScript = other.GetComponent<newMoveScript>();
             if (movementScript == null)
             {
                 Debug.LogError("Change move script name in portalScript code GetComponent<SCRIPT NAME HERE>");
                 return;
             }
-            movementScript.enabled = false;
-
             lookScript = other.GetComponent<cameraScript>();
             if (lookScript == null)
             {
                 Debug.LogError("Change look script name in portalScript code GetComponent<SCRIPT NAME HERE>");
                 return;
             }
+
+
+            //Disable controller scripts so teleport is not overwritten by these scripts
+            movementScript.enabled = false;
             lookScript.enabled = false;
 
             //Teleport player
             other.transform.position = destination.position + destination.forward * distanceOffset + destination.up * heightOffset;
             other.transform.rotation = destination.rotation;
-
             Debug.Log("Teleported to " + destination.position + " with Rotation " + destination.rotation+ $"\nTeleport on cooldown for {teleportCoolDownDuration} seconds".ToUpper());
-            portalTimer = 0;
+            
+            //Begin timer to reenable script and until player can teleport again
             staticTimerStart = Time.time;
-
             teleportOnCoolDown = true;
             PlayerEnterPortal?.Invoke(this.gameObject);
+            //Debug.Log("Start Time: " + staticTimerStart);
 
             
         }
-        else Debug.LogError("Object needs 'Player' tag to use teleporter");
+        else Debug.LogError("Object needs 'Player' tag to use portal");
     }
 
     public void ActivatePortal() 
@@ -84,16 +83,11 @@ public class portalScript : MonoBehaviour
 
     private void Update()
     {
-
-        if (portalTimer < disableTime)
-        {
-            portalTimer += Time.deltaTime;
-        }
-        else
+        if(Time.time - staticTimerStart > scriptDisableDuration)
         {
             if (movementScript != null)
             {
-                //Debug.Log("Controls Reenabled");
+                Debug.Log("Controls Reenabled");
                 movementScript.enabled = true;
                 movementScript = null;
                 lookScript.enabled = true;
@@ -144,8 +138,8 @@ public class portalScript : MonoBehaviour
     {
         if (movementScript != null || lookScript != null)
         {
-            movementScript.enabled = true;
-            lookScript.enabled = true;
+            //movementScript.enabled = true;
+            //lookScript.enabled = true;
         }
     }
 }

@@ -306,7 +306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1901507051140553368, guid: 6437ce4dd46c346489046ad5c08b3b8a, type: 3}
       propertyPath: m_Name
-      value: Portal
+      value: PortalReference
       objectReference: {fileID: 0}
     - target: {fileID: 1901507051140553368, guid: 6437ce4dd46c346489046ad5c08b3b8a, type: 3}
       propertyPath: m_IsActive

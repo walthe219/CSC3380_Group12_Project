@@ -4,33 +4,49 @@ using UnityEngine;
 public class Room
 {
     public GameObject room { private set; get; }
-    public GameObject roomTeleporter { private set; get; }
-    public GameObject mainRoomTeleporter { private set; get; }
+    public GameObject roomPortal { private set; get; }
+    public GameObject mainRoomPortal { private set; get; }
     public GameObject roomCam { private set; get; }
     public UpgradeData upgradeReward { private set; get; }
     public GameObject[] enemies { private set; get; }
-    public Room(GameObject room, GameObject roomTeleporter, GameObject mainRoomTeleporter, GameObject roomCam, UpgradeData upgradeReward, GameObject[] enemies)
+
+    public int roomNum;
+
+    public static int roomsCreated = 0;
+
+    public Room(GameObject room, GameObject roomPortal, GameObject mainRoomPortal, GameObject roomCam, UpgradeData upgradeReward, GameObject[] enemies)
     {
         this.room = room;
-        this.roomTeleporter = roomTeleporter;
-        this.mainRoomTeleporter = mainRoomTeleporter;
+        this.roomPortal = roomPortal;
+        this.mainRoomPortal = mainRoomPortal;
         this.roomCam = roomCam;
         this.upgradeReward = upgradeReward;
         this.enemies = enemies;
+        
+        room.gameObject.name = "Room " + roomNum;
+        roomNum = roomsCreated;
+        roomsCreated += 1;
 
-        mainRoomTeleporter.GetComponent<portalScript>().ActivatePortal();
+        mainRoomPortal.GetComponent<portalScript>().ActivatePortal();
     }
 
     public void delete()
     {
         Object.Destroy(room);
-        mainRoomTeleporter.GetComponent<portalScript>().DeactivatePortal();
+        mainRoomPortal.GetComponent<portalScript>().DeactivatePortal();
     }
 
     public bool portalIsLinked(GameObject portal)
     {
-        return portal == mainRoomTeleporter;
+        return portal == mainRoomPortal;
     }
+
+    public override string ToString()
+    {
+        return room.gameObject.name;
+    }
+
+
 
     
 }
