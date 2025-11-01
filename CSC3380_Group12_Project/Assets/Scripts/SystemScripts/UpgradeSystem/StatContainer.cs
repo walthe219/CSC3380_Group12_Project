@@ -18,9 +18,11 @@ public class StatContainer: ScriptableObject
     public float health;
     public float stamina;
     public int ammo;
+    public float damage;
     public float moveSpeed;
     public int numJumps;
-    public float damage;
+    public float dashPower;
+    public float slidePower;
    
 
     /*
@@ -31,9 +33,11 @@ public class StatContainer: ScriptableObject
         health = changeStat(health, other.health);
         stamina = changeStat(stamina, other.stamina);
         ammo = (int)changeStat(ammo, other.ammo);
+        damage = changeStat(damage, other.damage);
         moveSpeed = changeStat(moveSpeed,other.moveSpeed);
         numJumps = (int)changeStat(numJumps, other.numJumps);
-        damage = changeStat(damage, other.damage);
+        dashPower = changeStat(dashPower, other.dashPower);
+        slidePower = changeStat(slidePower, other.slidePower);
     }
 
     /*

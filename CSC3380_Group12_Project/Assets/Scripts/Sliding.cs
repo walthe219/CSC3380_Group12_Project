@@ -8,6 +8,7 @@ public class Sliding : MonoBehaviour
     public Transform playerObj;
     private Rigidbody body;
     private NewMovement moveScript;
+    [SerializeField] PlayerStats currPlayerStats;
 
     [Header("Sliding")]
     public float maxSlideTime;
@@ -26,7 +27,7 @@ public class Sliding : MonoBehaviour
     private void OnEnable()
     {
         move.Enable();
-        slide.Enable();
+        //slide.Enable();
     }
     private void OnDisable()
     {
@@ -44,8 +45,9 @@ public class Sliding : MonoBehaviour
             move = InputSystem.actions.FindAction("Player/Move");
             slide = InputSystem.actions.FindAction("Player/Slide");
             OnEnable();
+            slide.Disable();
         }
-            
+
 
         startYScale = playerObj.localScale.y;
     }
@@ -64,6 +66,13 @@ public class Sliding : MonoBehaviour
         if (slide.WasReleasedThisFrame() && moveScript.isSliding)
         {
             StopSlide();
+        }
+
+        UnlockFunctions.UnlockSlideEvent += unlockSliding;
+
+        if (slideForce != currPlayerStats.slidePower)
+        {
+            slideForce = currPlayerStats.slidePower;
         }
     }
 
@@ -117,4 +126,12 @@ public class Sliding : MonoBehaviour
         moveScript.isSliding = false;
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
     }
+
+    // Unlock sliding ability
+
+    public void unlockSliding()
+    {
+        slide.Enable();
+    }
+
 }

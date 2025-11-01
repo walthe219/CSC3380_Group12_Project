@@ -15,7 +15,9 @@ MonoBehaviour:
   health: 100
   stamina: 100
   ammo: 30
-  moveSpeed: 0
-  numJumps: 0
   damage: 0
+  moveSpeed: 7
+  numJumps: 1
+  dashPower: 50
+  slidePower: 200
   RoomsComp: 0
