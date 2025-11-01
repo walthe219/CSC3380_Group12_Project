@@ -38,23 +38,6 @@ public class Sliding : MonoBehaviour
         slide.Disable();
     }
 
-    // Enables the slide ability in the code 
-    // (add more detail probably)
-    public void ApplySlideUpgrade()
-    {
-        if (slideData != null)
-        {
-            // Ensure the upgrade knows which event to trigger
-            slideData.unlocks = new UnlockFunctions.Unlockable[] { UnlockFunctions.Unlockable.DASH };
-
-            Upgrade slideUp = new Upgrade(slideData);
-            uManager.addUpgrade(slideUp); // This calls applyUpgrade(), which calls activate(), triggering the event
-            slide.Enable();
-
-            Debug.Log("Applied Dash!");
-        }
-    }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {

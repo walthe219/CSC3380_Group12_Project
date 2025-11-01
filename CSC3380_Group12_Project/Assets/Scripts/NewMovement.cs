@@ -102,21 +102,9 @@ public class NewMovement : MonoBehaviour
         dash.Enable();
     }
 
-    // Enables the dash ability in the code 
-    // (add more detail probably)
-    public void ApplyDashUpgrade()
+    public void unlockDash()
     {
-        if (dashData != null)
-        {
-            // Ensure the upgrade knows which event to trigger
-            dashData.unlocks = new UnlockFunctions.Unlockable[] { UnlockFunctions.Unlockable.DASH };
-
-            Upgrade dashUp = new Upgrade(dashData);
-            uManager.addUpgrade(dashUp); // This calls applyUpgrade(), which calls activate(), triggering the event
-            dash.Enable();
-
-            Debug.Log("Applied Dash!");
-        }
+        dash.Enable();
     }
     public enum MovementState
     {
@@ -135,7 +123,7 @@ public class NewMovement : MonoBehaviour
         body.freezeRotation = true;
         startYScale = transform.localScale.y;
         curStamina = maxStamina;
-        ApplyDashUpgrade();
+        UnlockFunctions.UnlockDashEvent += unlockDash;
 
         if (InputSystem.actions)
         {
