@@ -74,8 +74,10 @@ MonoBehaviour:
   destination: {fileID: 0}
   heightOffset: 1
   distanceOffset: 2.5
-  waitTime: 0.002
-  portalLockout: 5
+  disableTime: 0.05
+  portalFrame: {fileID: 3118087510114696396}
+  portalCollider: {fileID: 2369764063617433233}
+  portalTimer: 9999
 --- !u!1 &2709405727033909438
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,9 @@ public class portalScript : MonoBehaviour
     public float distanceOffset = 2f; //distance in front of destination
     public float disableTime = 0.05f; //how long to disable move and lookscript, if too short then player position will not 
 
+    public GameObject portalFrame;
+    public Collider portalCollider;
+
 
     [SerializeField]float portalTimer = 9999;
     private MonoBehaviour movementScript  = null;
@@ -20,6 +23,9 @@ public class portalScript : MonoBehaviour
     static bool teleportOnCoolDown = false;
     static float staticTimerStart = float.NaN;
     static float teleportCoolDownDuration = 3f;
+
+    public event Action<GameObject> PlayerEnterPortal;
+    //public event Action<GameObject> PlayerArrivePortal;
 
     private void OnTriggerEnter(Collider other)
     { 
@@ -57,6 +63,8 @@ public class portalScript : MonoBehaviour
             staticTimerStart = Time.time;
 
             teleportOnCoolDown = true;
+            PlayerEnterPortal?.Invoke(this.gameObject);
+
             
         }
         else Debug.LogError("Object needs 'Player' tag to use teleporter");
@@ -64,13 +72,14 @@ public class portalScript : MonoBehaviour
 
     public void ActivatePortal() 
     {
-        //enable portal frame
-        //turn collider on
+        portalFrame.SetActive(true);
+        portalCollider.enabled = true;
     }
     public void DeactivatePortal() 
     {
-        //disable portal frame
-        //turn collider off
+        portalFrame.SetActive(false);
+        portalCollider.enabled = false;
+        
     }
 
     private void Update()
@@ -114,12 +123,29 @@ public class portalScript : MonoBehaviour
             Debug.LogError("can only LinkPortal() with and object using portalScript");
             return;
         }
+
         setDestination(other.transform);
+        ActivatePortal();
+        
         otherScript.setDestination(this.transform);
+        otherScript.ActivatePortal();
+
+
+        //PlayerEnterPortal += otherScript.PlayerArrivePortal;          OnArrive could possibly be useful, but this implementation is terrible idea, maybe can find a solution
+        //otherScript.PlayerEnterPortal+= PlayerArrivePortal;
     }
 
     public void setDestination(Transform pos)
     {
         destination = pos;
+    }
+
+    private void OnDestroy()
+    {
+        if (movementScript != null || lookScript != null)
+        {
+            movementScript.enabled = true;
+            lookScript.enabled = true;
+        }
     }
 }

@@ -10,10 +10,13 @@ public static class RoomGenerator
 
     static GameObject camPrefab;
     static GameObject teleporterPrefab;
-    public static void initializePrefabs(GameObject cam, GameObject portal)
+    static GameObject enemyPrefab;
+    public static void initializePrefabs(GameObject cam, GameObject portal,GameObject enemy)
     {
         camPrefab = cam;
         teleporterPrefab = portal;
+        enemyPrefab = enemy;
+
     }
     public static Room CreateRoom(Vector3 roomCenterPos, Object[] possibleTiles,float tileRadius,float gapSize,float roomHeight, GameObject portalLink, UpgradeData upgrade)
     {
@@ -23,9 +26,11 @@ public static class RoomGenerator
         Stack<Object> tileStack = new Stack<Object>();
         GameObject[] placedTiles = new GameObject[4];
 
+
+        //Place tiles down to create the room
         float totalRadius = gapSize / 2 + tileRadius;
         Vector3 pos = new Vector3(totalRadius, 0, -totalRadius);
-
+    
         //Starting at the bottome left, add and rotate each tile
         // even => flip z  odd => flip x:
         // i = 0 => (-x, -z), i = 1 => (-x, z), i = 2 => (x, z), i = 3 => (x, -z)
@@ -40,20 +45,38 @@ public static class RoomGenerator
             placedTiles[i] = PlaceTile(getRandomTile(ref tileStack, prefab_arr), pos, 90 * i, room);
         }
 
-
+        //Create Camera for the room preview
         GameObject roomCam = Object.Instantiate(camPrefab, Vector3.up * roomHeight, Quaternion.Euler(90, 0, 0), room.transform);
 
+
+        //Create room teleporter and link to teleporter in main room
         Transform teleporterTransform = placedTiles[0].transform.Find("PortalPoint");
         if (teleporterTransform == null) {
             Debug.LogError($"Tile {placedTiles[0].name} does not have child named PortalPoint.");
         }
         GameObject roomTeleporter = Object.Instantiate(teleporterPrefab, teleporterTransform.position, teleporterTransform.localRotation, room.transform);
-        roomTeleporter.GetComponent<portalScript>().LinkPortal(portalLink);
+
+        var roomPortalScript = roomTeleporter.GetComponent<portalScript>();
+        roomPortalScript.LinkPortal(portalLink);
+        portalLink.GetComponent<portalScript>().PlayerEnterPortal += RoomManager.Instance.getLinkedRoom;
         room.transform.position = roomCenterPos;
 
         //ADD NAVMESH HERE
 
-        return new Room(room, roomTeleporter, portalLink, roomCam,upgrade);
+        //Spawn enemies
+        List<GameObject> enemies = new List<GameObject>();
+        foreach(GameObject tile in placedTiles)
+        {
+            foreach(Transform child in tile.transform)
+            {
+                if (child.CompareTag("EnemyPoint"))
+                {
+                    enemies.Add(Object.Instantiate(enemyPrefab,child.position,child.rotation, room.transform));
+                }
+            }
+        }
+
+        return new Room(room, roomTeleporter, portalLink, roomCam,upgrade,enemies.ToArray());
 
     }
 

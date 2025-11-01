@@ -50,7 +50,7 @@ public class newMoveScript : MonoBehaviour
         }
         yMove = transform.up * yVelocity;
 
-        controller.Move((xMove + yMove + zMove));
+        controller.Move((xMove + yMove + zMove) *Time.deltaTime);
     }
   
 }

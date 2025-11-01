@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /*
@@ -5,23 +6,37 @@ using UnityEngine;
  */
 public class RoomManager : MonoBehaviour
 {
-    public string prefabFolderPath = "Tiles";
-    public float roomGenDistance = 500;
-    public float roomGenHeight = 0;
-    public float maxTileRadius = 100;
+    [Header("Tile Prefabs")]
+    [SerializeField] string prefabFolderPath = "Tiles";
+    [SerializeField] UnityEngine.Object[] prefab_arr;
 
-    public GameObject teleporterPrefab;
-    public GameObject cameraPrefab;
+    [Header("RoomGen")]
+    [SerializeField] float roomGenDistance = 500;
+    [SerializeField] float roomGenHeight = 0;
+    [SerializeField] float maxTileRadius = 100;
 
+    [Header("Main Room")]
+    [SerializeField] Transform mainRoomPostion;
+    [SerializeField] GameObject[] mainRoomTeleporters;
+    [SerializeField] GameObject[] mainRoomScreens;
+    [SerializeField] GameObject[] mainRoomTextDisplays;
 
-    public Transform mainRoomPostion;
-    public GameObject[] mainRoomTeleporters;
-    public GameObject[] mainRoomScreens;
-    public GameObject[] mainRoomTextDisplays;
-    private Room[] rooms = new Room[4];
-    private Object[] prefab_arr;
+    [Header("Prefabs")]
+    [SerializeField] GameObject teleporterPrefab;
+    [SerializeField] GameObject cameraPrefab;
+    [SerializeField] GameObject enemyPrefab;
 
-    [SerializeField] Room currentlySelectedRoom;
+    //maybe in refactor put these into new class
+    //-------------------------------------------
+    private Room[] rooms;
+    private Room currentlySelectedRoom;
+    private int currentEnemiesAlive;
+    //------------------------------------------
+
+    public event Action<string> PassUpgradeId;
+    public event Action<int> PassEnemiesAlive;
+    public event Action RoomCleared;
+    public event Action<string> RecieveReward;
 
     public static RoomManager Instance { get; private set; }
     private void Awake()
@@ -37,14 +52,15 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public void Start()
+    private void Start()
     {
         prefab_arr = Resources.LoadAll(prefabFolderPath, typeof(GameObject));
-        RoomGenerator.initializePrefabs(cameraPrefab, teleporterPrefab);
+        RoomGenerator.initializePrefabs(cameraPrefab, teleporterPrefab,enemyPrefab);
         generateRoomTest();
     }
-    public void generateNewRooms(int numRooms,float tileRadius, float gapSize, float roomHeight)
+    void generateNewRooms(int numRooms,float tileRadius, float gapSize, float roomHeight)
     {
+        rooms = new Room[4];
         if (numRooms > 4) 
         {
             Debug.LogError("Can't generate more than 4 rooms");
@@ -66,6 +82,7 @@ public class RoomManager : MonoBehaviour
 
 
             rooms[i] = RoomGenerator.CreateRoom(roomPos, prefab_arr, tileRadius, gapSize, roomHeight, mainRoomTeleporters[i], potentialRoomRewards[i]); //create new 
+
             mainRoomTextDisplays[i].GetComponent<TextDisplay>().changeText(potentialRoomRewards[i].ID);
         }
     }
@@ -81,14 +98,70 @@ public class RoomManager : MonoBehaviour
         {
             if(other!=room) other.delete();
         }
+        rooms = new Room[1];
+        rooms[0] = room;
     }
 
-    public void selectRoom()
-    {
-        currentlySelectedRoom = null;
+     public void getLinkedRoom(GameObject mainRoomPortal)
+     {
+        //Debug.Log("Subscriber Called");
+        foreach(Room room in rooms)
+        {
+            if (room.portalIsLinked(mainRoomPortal))
+            {
+                selectRoom(room);
+                return;
+            }
+        }
+     }
+
+     void selectRoom(Room room)
+     {
+        Debug.Log("Selecting Room");
+        currentlySelectedRoom = room;
         deleteExcept(currentlySelectedRoom);
+        PassUpgradeId?.Invoke(room.upgradeReward.ID);
+        currentEnemiesAlive = room.enemies.Length;
+        PassEnemiesAlive?.Invoke(currentEnemiesAlive);
+        Target.OnDeath += decrementEnemies;
+        room.roomTeleporter.GetComponent<portalScript>().DeactivatePortal();
+     }
+
+    void decrementEnemies()
+    {
+        currentEnemiesAlive--;
+        PassEnemiesAlive?.Invoke(currentEnemiesAlive);
+        if (currentEnemiesAlive == 0)
+        {
+            OnRoomClear();
+        }
+
     }
-    
+
+     void OnRoomClear()
+     {
+        Debug.Log("Room Cleared! Go back to the teleporter and return to the main room for your reward");
+        RoomCleared?.Invoke();
+        currentlySelectedRoom.roomTeleporter.GetComponent<portalScript>().ActivatePortal();
+
+        RecieveReward?.Invoke(currentlySelectedRoom.upgradeReward.ID);
+        PassUpgradeId?.Invoke("Recieved");
+
+        currentlySelectedRoom.roomTeleporter.GetComponent<portalScript>().PlayerEnterPortal += ResetFields;
+
+     }
+
+    //called when enter main room
+    private void ResetFields(GameObject NOTUSED)
+    {
+        PassUpgradeId?.Invoke("None");
+        deleteRoom(currentlySelectedRoom);
+        rooms = null;
+        currentlySelectedRoom = null;
+        generateRoomTest();
+
+    }
+
     [ContextMenu("generateRoomTest()")]
     public void generateRoomTest()
     {

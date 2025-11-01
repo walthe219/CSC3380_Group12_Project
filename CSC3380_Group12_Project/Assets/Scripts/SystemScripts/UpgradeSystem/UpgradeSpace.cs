@@ -53,6 +53,7 @@ public class UpgradeSpace
         if (u != null && !u.isRepeatable) { 
             possibleUpgrades.Remove(u);
         }
+        print();
         return u;
     }
 

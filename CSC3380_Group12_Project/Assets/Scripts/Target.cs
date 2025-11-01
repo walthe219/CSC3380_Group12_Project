@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Target : MonoBehaviour
@@ -5,7 +6,7 @@ public class Target : MonoBehaviour
 
     public float totalHealth = 100f;
     public RunnerReferences runRef;
-
+    public static event Action OnDeath;
     public void TakeDamage(float damage, string location)
     {
 
@@ -20,7 +21,7 @@ public class Target : MonoBehaviour
 
     void Die()
     {
-
+        OnDeath?.Invoke();
         Destroy(gameObject);
 
     }
