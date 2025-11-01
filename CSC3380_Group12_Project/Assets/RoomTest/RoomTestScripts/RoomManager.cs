@@ -155,7 +155,7 @@ public class RoomManager : MonoBehaviour
     private void ResetFields(GameObject NOTUSED)
     {
         PassUpgradeId?.Invoke("None");
-        deleteRoom(currentlySelectedRoom);
+        //deleteRoom(currentlySelectedRoom); this has been causing problems, room gets deleted during next room gen anyway so it not need for now, but ideally the bugs with this should be fixed
         rooms = null;
         currentlySelectedRoom = null;
         generateRoomTest();
