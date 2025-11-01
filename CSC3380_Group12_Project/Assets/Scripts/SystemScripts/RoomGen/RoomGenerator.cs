@@ -9,12 +9,12 @@ public static class RoomGenerator
      */
 
     static GameObject camPrefab;
-    static GameObject teleporterPrefab;
+    static GameObject portalPrefab;
     static GameObject enemyPrefab;
     public static void initializePrefabs(GameObject cam, GameObject portal,GameObject enemy)
     {
         camPrefab = cam;
-        teleporterPrefab = portal;
+        portalPrefab = portal;
         enemyPrefab = enemy;
 
     }
@@ -47,16 +47,17 @@ public static class RoomGenerator
 
         //Create Camera for the room preview
         GameObject roomCam = Object.Instantiate(camPrefab, Vector3.up * roomHeight, Quaternion.Euler(90, 0, 0), room.transform);
+        //createCamera();
 
 
-        //Create room teleporter and link to teleporter in main room
-        Transform teleporterTransform = placedTiles[0].transform.Find("PortalPoint");
-        if (teleporterTransform == null) {
+        //Create room portals and link to portals in main room
+        Transform portalTransform = placedTiles[0].transform.Find("PortalPoint");
+        if (portalTransform == null) {
             Debug.LogError($"Tile {placedTiles[0].name} does not have child named PortalPoint.");
         }
-        GameObject roomTeleporter = Object.Instantiate(teleporterPrefab, teleporterTransform.position, teleporterTransform.localRotation, room.transform);
+        GameObject roomPortal = Object.Instantiate(portalPrefab, portalTransform.position, portalTransform.localRotation, room.transform);
 
-        var roomPortalScript = roomTeleporter.GetComponent<portalScript>();
+        var roomPortalScript = roomPortal.GetComponent<portalScript>();
         roomPortalScript.LinkPortal(portalLink);
         room.transform.position = roomCenterPos;
 
@@ -75,7 +76,7 @@ public static class RoomGenerator
             }
         }
 
-        return new Room(room, roomTeleporter, portalLink, roomCam,upgrade,enemies.ToArray());
+        return new Room(room, roomPortal, portalLink, roomCam,upgrade,enemies.ToArray());
 
     }
 
