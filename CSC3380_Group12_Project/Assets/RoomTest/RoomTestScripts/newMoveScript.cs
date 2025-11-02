@@ -29,6 +29,7 @@ public class newMoveScript : MonoBehaviour
 
     private void Update()
     {
+
         //Movement Calculations
         Vector2 moveValue = move.ReadValue<Vector2>();
         xMove = transform.right * moveValue.x * moveSpeed * Time.fixedDeltaTime;

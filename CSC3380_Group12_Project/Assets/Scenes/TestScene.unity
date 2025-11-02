@@ -2273,7 +2273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 2.25
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -4593,8 +4593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e01d4d87f76ce478f1042990a12fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::newMoveScript
-  moveSpeed: 13
-  jumpStr: 20
+  moveSpeed: 200
+  jumpStr: 0.2
   gravity: 0.1
   xMove: {x: 0, y: 0, z: 0}
   yMove: {x: 0, y: 0, z: 0}

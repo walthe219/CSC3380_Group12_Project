@@ -970,6 +970,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 948115490480696473, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 948115490480696473, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -985,6 +989,10 @@ PrefabInstance:
       propertyPath: lookScript
       value: 
       objectReference: {fileID: 589055623}
+    - target: {fileID: 4644911705272029929, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4902070905680346198, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: currPlayerStats
       value: 
@@ -1053,6 +1061,14 @@ PrefabInstance:
       propertyPath: currPlayerStats
       value: 
       objectReference: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
+    - target: {fileID: 8749231691063554953, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9024034226001019150, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

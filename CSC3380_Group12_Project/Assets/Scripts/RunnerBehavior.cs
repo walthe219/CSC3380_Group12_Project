@@ -6,6 +6,9 @@ public class RunnerBehavior : MonoBehaviour
 {
 
     public RunnerReferences runRef;
+    public bool behaviorActivator;
+    public bool isActivated = false;
+    private float BehaviorTimer = 0;
 
     public Transform playerTarget;
     public Transform portalTarget;
@@ -34,16 +37,26 @@ public class RunnerBehavior : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(Time.time);
-        if (Time.time > 5f)
+        if (!isActivated)
         {
-            CheckTargetDistance();
+            behaviorActivator = Physics.CheckSphere(playerCheck.position, 100f, playerMask);
+            
+        }
+        if (behaviorActivator)
+        {
+            BehaviorTimer += Time.deltaTime;
+            if (BehaviorTimer > 3f)
+            {
+                CheckTargetDistance();
+            }
         }
         
     }
 
     void CheckTargetDistance()
     {
+
+        isActivated = true;
 
         isTargetingPlayer = Physics.CheckSphere(playerCheck.position, detectRadius, playerMask);
 
