@@ -67,7 +67,7 @@ public static class RoomGenerator
         surface.BuildNavMesh();
         room.layer = LayerMask.NameToLayer("Ground");
 
-        //Spawn enemies
+        //Spawn enemies, set NavMesh target destination
         List<GameObject> enemies = new List<GameObject>();
         foreach(GameObject tile in placedTiles)
         {
