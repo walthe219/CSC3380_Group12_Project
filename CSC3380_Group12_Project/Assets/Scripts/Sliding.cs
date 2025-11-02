@@ -8,7 +8,7 @@ public class Sliding : MonoBehaviour
     public Transform playerObj;
     private Rigidbody body;
     private NewMovement moveScript;
-    [SerializeField] PlayerStats currPlayerStats;
+    [SerializeField] PlayerStats basePlayerStats;
 
     [Header("Sliding")]
     public float maxSlideTime;
@@ -27,7 +27,7 @@ public class Sliding : MonoBehaviour
     private void OnEnable()
     {
         move.Enable();
-        //slide.Enable();
+        slide.Enable();
     }
     private void OnDisable()
     {
@@ -70,9 +70,9 @@ public class Sliding : MonoBehaviour
 
         UnlockFunctions.UnlockSlideEvent += unlockSliding;
 
-        if (slideForce != currPlayerStats.slidePower)
+        if (slideForce != basePlayerStats.slidePower)
         {
-            slideForce = currPlayerStats.slidePower;
+            slideForce = basePlayerStats.slidePower;
         }
     }
 

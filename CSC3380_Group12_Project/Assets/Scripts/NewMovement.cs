@@ -27,9 +27,12 @@ public class NewMovement : MonoBehaviour
 
     private Vector3 moveDir;
 
+    [SerializeField] PlayerStats currPlayerStats;
+    [SerializeField] PlayerStats basePlayerStats;
+
     [Header("Jumping")]
-    public float jumpPower; // Potential Upgradable
-    public int maxJumpCount; // Potential Upgradable
+    public float jumpPower;
+    public int maxJumpCount;
     public float airMultiplier;
     float lastJumpTime;
     int jumpCount;
@@ -46,19 +49,18 @@ public class NewMovement : MonoBehaviour
     private bool leavingSlope;
 
     [Header("Dashing")]
-    public float dashForce; // Potential Upgradable
+    public float dashForce;
     private float dashTime;
     public float maxDashTime;
     public bool isDashing = false;
     public float dashDrag;
 
     [Header("Stamina")]
-    [SerializeField] PlayerStats currPlayerStats;
     public float curStamina;
-    private float maxStamina = 100f; // Potential Upgradable
+    private float maxStamina = 100f;
     private float staminaRechargeDelay = 2f;
     private float staminaRechargeTimer;
-    private float staminaRechargeRate = 20f; // Potential Upgradable
+    private float staminaRechargeRate = 20f;
 
     [Header("Ground Check")]
     public LayerMask groundMask;
@@ -80,13 +82,11 @@ public class NewMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        // Enabled by default
         move.Enable();
         jump.Enable();
         sprint.Enable();
         crouch.Enable();
-
-        //dash.Enable();
+        dash.Enable();
     }
 
     private void OnDisable()
@@ -158,28 +158,27 @@ public class NewMovement : MonoBehaviour
         }
 
         // Upgrades
-        if (walkSpeed != currPlayerStats.moveSpeed)
+        if (walkSpeed != basePlayerStats.moveSpeed)
         {
-            walkSpeed = currPlayerStats.moveSpeed;
-            sprintSpeed = currPlayerStats.moveSpeed + 5;
-            crouchSpeed = currPlayerStats.moveSpeed - 2;
+            walkSpeed = basePlayerStats.moveSpeed;
+            sprintSpeed = basePlayerStats.moveSpeed + 5;
+            crouchSpeed = basePlayerStats.moveSpeed - 2;
         }
 
-        if (jumpCount != currPlayerStats.numJumps)
+        if (maxJumpCount != basePlayerStats.numJumps)
         {
-            jumpCount = currPlayerStats.numJumps;
+            maxJumpCount = basePlayerStats.numJumps;
         }
 
-        if (maxStamina != currPlayerStats.stamina)
+        if (maxStamina != basePlayerStats.stamina)
         {
-            maxStamina = currPlayerStats.stamina;
-            // This is potentially an issue since the current player stats uses stamina for the indicator
-
+            maxStamina = basePlayerStats.stamina;
+            staminaRechargeRate += 4;
         }
 
-        if (dashForce != currPlayerStats.dashPower)
+        if (dashForce != basePlayerStats.dashPower)
         {
-            dashForce = currPlayerStats.dashPower;
+            dashForce = basePlayerStats.dashPower;
         }
         
 

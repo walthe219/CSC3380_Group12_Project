@@ -33,6 +33,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] Room[] rooms;
     [SerializeField] Room currentlySelectedRoom;
     [SerializeField] int currentEnemiesAlive;
+    [SerializeField] PlayerStats currPlayerStats;
     //[SerializeField] string[] roomNames;
     //------------------------------------------
 
@@ -158,7 +159,7 @@ public class RoomManager : MonoBehaviour
         PassUpgradeId?.Invoke("Recieved");
 
         currentlySelectedRoom.roomPortal.GetComponent<portalScript>().PlayerEnterPortal += ResetFields;
-
+        currPlayerStats.numRoomsComp++;
      }
 
     //called when enter main room
