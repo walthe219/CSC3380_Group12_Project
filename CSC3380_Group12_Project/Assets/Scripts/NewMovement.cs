@@ -156,6 +156,13 @@ public class NewMovement : MonoBehaviour
             jumpCount = currPlayerStats.numJumps;
         }
 
+        if (maxStamina != currPlayerStats.stamina)
+        {
+            maxStamina = currPlayerStats.stamina;
+            // This is potentially an issue since the current player stats uses stamina for the indicator
+
+        }
+
         if (dashForce != currPlayerStats.dashPower)
         {
             dashForce = currPlayerStats.dashPower;
