@@ -20,7 +20,7 @@ MonoBehaviour:
   numJumps: 0
   dashPower: 10
   slidePower: 0
-  ID: 
+  ID: DashUp
   isRepeatable: 1
   unlocks: 
   description: 
