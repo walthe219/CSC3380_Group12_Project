@@ -20,13 +20,13 @@ public class NumOfRoomsComp : MonoBehaviour
     void Start()
     {
         //playerstats = new PlayerStats();
-        playerstats.RoomsComp = 0;
+        playerstats.numRoomsComp = 0;
         finishedRoomsText = GameObject.Find("NumOfRooms").GetComponent<TextMeshProUGUI>();
     }
 
     void NORToText(){
         if(finishedRoomsText != null){
-            finishedRoomsText.text = playerstats.RoomsComp.ToString();
+            finishedRoomsText.text = playerstats.numRoomsComp.ToString();
         }
         else{
             Debug.Log("finishedRooms is null");
@@ -34,19 +34,19 @@ public class NumOfRoomsComp : MonoBehaviour
     }
 
     public float setFinishedRooms(float abc){
-        this.abc = playerstats.RoomsComp;
-        return playerstats.RoomsComp;
+        this.abc = playerstats.numRoomsComp;
+        return playerstats.numRoomsComp;
     }
 
     public float finishedRoomsInc(){
         //if(all enemies dead) then ->
-        playerstats.RoomsComp++;
-       return playerstats.RoomsComp;
+        playerstats.numRoomsComp++;
+       return playerstats.numRoomsComp;
     }
 
     public float finishedRoomsDec(){ //test func
-        playerstats.RoomsComp--;
-        return playerstats.RoomsComp;
+        playerstats.numRoomsComp--;
+        return playerstats.numRoomsComp;
     }
 
     // Update is called once per frame

@@ -76,7 +76,7 @@ public class RoomManager : MonoBehaviour
         if (rooms != null)
         {
             Debug.Log("Destroying leftover rooms");
-            Array.ForEach(rooms, room => deleteRoom(room));
+            Array.ForEach(rooms, room => { if (room == null) deleteRoom(room);});
         }
         rooms = new Room[4];
 
@@ -165,8 +165,8 @@ public class RoomManager : MonoBehaviour
     void ResetFields(GameObject NOTUSED)
     {
         PassUpgradeId?.Invoke("None");
-        deleteRoom(currentlySelectedRoom); //this has been causing problems, room gets deleted during next room gen anyway so it not need for now, but ideally the bugs with this should be fixed
-        //rooms = null;
+        deleteRoom(currentlySelectedRoom);
+        rooms = null;
         currentlySelectedRoom = null;
         generateRoomTest();
 

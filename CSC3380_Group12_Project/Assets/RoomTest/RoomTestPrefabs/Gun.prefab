@@ -50,6 +50,7 @@ MonoBehaviour:
   range: 100
   fpsCam: {fileID: 0}
   muzzleFlash: {fileID: 3987598868839227793, guid: ac3bcff0f1e399845811be95837190cf, type: 3}
+  inputActions: {fileID: -944628639613478452, guid: 5ed8d681290318b4185183a4ed4b6f6c, type: 3}
   fireAction:
     m_Name: Fire
     m_Type: 0

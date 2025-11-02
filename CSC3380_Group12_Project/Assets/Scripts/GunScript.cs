@@ -10,13 +10,15 @@ public class GunScript : MonoBehaviour
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
+    public InputActionAsset inputActions;
     //public GameObject impactEffect;
 
     public InputAction fireAction;
 
     private void OnEnable()
     {
-        fireAction = InputSystem.actions.FindAction("Attack");
+        fireAction = InputSystem.actions.FindAction("Fire");
+     
     }
 
     void Update()

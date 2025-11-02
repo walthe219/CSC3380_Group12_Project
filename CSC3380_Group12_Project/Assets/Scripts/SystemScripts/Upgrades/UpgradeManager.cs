@@ -18,6 +18,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
+            Debug.LogWarning("Duplicate UpgradeManager found — destroying this one.");
             Destroy(gameObject); // Destroy duplicate instances
         }
         else
@@ -26,23 +27,6 @@ public class UpgradeManager : MonoBehaviour
             DontDestroyOnLoad(gameObject); // Persist across scene loads
         }
     }
-
-    void Awake(){
-    {
-        if (instance != null && instance != this)
-        {
-            Debug.LogWarning("Duplicate UpgradeManager found — destroying this one.");
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-}
-
-
-    
 
     void Start()
     {
