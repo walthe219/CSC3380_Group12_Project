@@ -6353,7 +6353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de912e925059c604ab68b3850bef2326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
-  prefabFolderPath: TestTiles
+  prefabFolderPath: Tiles
   prefab_arr: []
   roomGenDistance: 500
   roomGenHeight: 0
