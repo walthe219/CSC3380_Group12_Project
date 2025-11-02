@@ -14,6 +14,8 @@ public class CameraController : MonoBehaviour
     private float rotY = 0f;
     private float rotX = 0f;
 
+
+    
     private void OnEnable()
     {
         look.Enable();
@@ -37,7 +39,21 @@ public class CameraController : MonoBehaviour
         {
             look = InputSystem.actions.FindAction("Player/Look");
             OnEnable();
-        }   
+        }
+
+        //For portals to disable this script, through ControlScriptReference
+        ControlScriptReference.ScriptsEnabled += Enable;
+        ControlScriptReference.ScriptsDisabled += Disable;
+
+    }
+    private void Enable()
+    {
+        this.enabled = true;
+    }
+
+    private void Disable()
+    {
+        this.enabled = false;
     }
 
     // Update is called once per frame
@@ -53,6 +69,7 @@ public class CameraController : MonoBehaviour
         // Moves the camera using the inputs
         transform.rotation = Quaternion.Euler(rotX, rotY, 0);
         orientation.rotation = Quaternion.Euler(0, rotY, 0);
+
     }
     
     // Changes the sensitivity to NewMouseSensitivity

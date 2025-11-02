@@ -18,10 +18,11 @@ public class UpgradeableStatContainer: ScriptableObject
     public float health;
     public float stamina;
     public int ammo;
+    public float damage;
     public float moveSpeed;
     public int numJumps;
-    public float damage;
-
+    public float slidePower;
+    public float dashPower;
 
     /*
      * Takes in another UpgradeableStatContainer and modfies the stats of this UpgradeableStatContainer based on some function 
@@ -32,9 +33,11 @@ public class UpgradeableStatContainer: ScriptableObject
         health = changeFunc(health, other.health);
         stamina = changeFunc(stamina, other.stamina);
         ammo = (int)changeFunc(ammo, other.ammo);
+        damage = changeFunc(damage, other.damage);
         moveSpeed = changeFunc(moveSpeed, other.moveSpeed);
         numJumps = (int)changeFunc(numJumps, other.numJumps);
-        damage = changeFunc(damage, other.damage);
+        slidePower = changeFunc(slidePower, other.slidePower);
+        dashPower = changeFunc(dashPower, other.dashPower);
     }
 
     /*
