@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PortalPoint
   - EnemyPoint
+  - Enemy
+  - Runner
   layers:
   - Default
   - TransparentFX

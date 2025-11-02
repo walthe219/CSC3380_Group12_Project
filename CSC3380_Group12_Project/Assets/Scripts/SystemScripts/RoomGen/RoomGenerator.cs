@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ public static class RoomGenerator
         Object[] prefab_arr = ArrayHelper.Clone(possibleTiles);
         Stack<Object> tileStack = new Stack<Object>();
         GameObject[] placedTiles = new GameObject[4];
+        NavMeshSurface surface = room.AddComponent<NavMeshSurface>();
 
 
         //Place tiles down to create the room
@@ -62,6 +64,8 @@ public static class RoomGenerator
         room.transform.position = roomCenterPos;
 
         //ADD NAVMESH HERE
+        surface.BuildNavMesh();
+        room.layer = LayerMask.NameToLayer("Ground");
 
         //Spawn enemies
         List<GameObject> enemies = new List<GameObject>();
@@ -71,7 +75,13 @@ public static class RoomGenerator
             {
                 if (child.CompareTag("EnemyPoint"))
                 {
+                    if (enemyPrefab.tag == "Runner")
+                    {
+                        enemyPrefab.GetComponent<RunnerBehavior>().portalTarget = portalTransform;
+                        enemyPrefab.GetComponent<RunnerBehavior>().playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
+                    }
                     enemies.Add(Object.Instantiate(enemyPrefab,child.position,child.rotation, room.transform));
+                    child.GameObject().SetActive(false);
                 }
             }
         }
