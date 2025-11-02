@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91c814496a69e754db46ecded53c7d8c, type: 3}
-  m_Name: StaminaUp1
+  m_Name: SlideUp1
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   health: 0
   stamina: 0
@@ -19,8 +19,8 @@ MonoBehaviour:
   moveSpeed: 0
   numJumps: 0
   dashPower: 0
-  slidePower: 0
-  ID: StaminaUp
+  slidePower: 50
+  ID: SlideUp
   isRepeatable: 1
   unlocks: 
   description: 

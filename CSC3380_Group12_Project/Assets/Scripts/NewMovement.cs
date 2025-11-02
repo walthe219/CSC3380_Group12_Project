@@ -95,13 +95,9 @@ public class NewMovement : MonoBehaviour
         jump.Disable();
         sprint.Disable();
         crouch.Disable();
-        dash.Enable();
+        dash.Disable();
     }
 
-    public void unlockDash()
-    {
-        dash.Enable();
-    }
     public enum MovementState
     {
         walking,
@@ -129,6 +125,7 @@ public class NewMovement : MonoBehaviour
             crouch = InputSystem.actions.FindAction("Player/Crouch");
             dash = InputSystem.actions.FindAction("Player/Dash");
             OnEnable();
+            dash.Disable();
         }
     }
 
@@ -138,12 +135,32 @@ public class NewMovement : MonoBehaviour
         //isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);
         isGrounded = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y + 0.35f, transform.position.z), 0.4f, groundMask);
 
+        // If the player is grounded for longer that 0.25 seconds it resets the jump count
         if (isGrounded && (Time.time - lastJumpTime > 0.25))
         {
             jumpCount = maxJumpCount;
             canJump = true;
             leavingSlope = false;
         }
+
+        // Upgrades
+        if (walkSpeed != currPlayerStats.moveSpeed)
+        {
+            walkSpeed = currPlayerStats.moveSpeed;
+            sprintSpeed = currPlayerStats.moveSpeed + 5;
+            crouchSpeed = currPlayerStats.moveSpeed - 2;
+        }
+
+        if (jumpCount != currPlayerStats.numJumps)
+        {
+            jumpCount = currPlayerStats.numJumps;
+        }
+
+        if (dashForce != currPlayerStats.dashPower)
+        {
+            dashForce = currPlayerStats.dashPower;
+        }
+        
 
         InputHandle();
         SpeedControl();
@@ -439,6 +456,12 @@ public class NewMovement : MonoBehaviour
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         return Vector3.ProjectOnPlane(direction, slopeDetect.normal).normalized;
+    }
+
+    // Unlocks the dash ability
+    public void unlockDash()
+    {
+        dash.Enable();
     }
 
 }
