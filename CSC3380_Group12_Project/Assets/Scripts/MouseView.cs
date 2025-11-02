@@ -17,11 +17,7 @@ public class MouseView : MonoBehaviour
     {
         lookMove = InputSystem.actions.FindAction("Look");
     }
-    private void OnDisable()
-    {
-        lookMove.Disable();
-    }
-
+    
     void Start()
     {
 
