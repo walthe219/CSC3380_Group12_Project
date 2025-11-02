@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private bool onGround;
 
     private float currentPlayerHeight;
+    public bool canMove = true;
 
     private Vector3 movementVector;
     private Vector3 myVelocity;
@@ -32,13 +33,6 @@ public class PlayerMovement : MonoBehaviour
         playerJump = InputSystem.actions.FindAction("Jump");
     }
 
-    private void OnDisable()
-    {
-        playerMove.Disable();
-        playerCrouch.Disable();
-        playerJump.Disable();
-    }
-
     void Start()
     {
 
@@ -49,9 +43,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
-        GetInput();
-
+        if (canMove)
+        {
+            GetInput();
+        }
     }
 
     void GetInput()
@@ -67,6 +62,11 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+        /*if (playerMove.IsPressed())
+        {
+            Debug.Log("what the fuck is happening");
+        }*/
+
         /*float xMove = Input.GetAxisRaw("Horizontal");
         float zMove = Input.GetAxisRaw("Vertical");*/
         Vector2 tempVec = playerMove.ReadValue<Vector2>();
@@ -80,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
             myVelocity.y = Mathf.Sqrt(jumpH * -2f * myGravity);
             playerSpeed *= airDrag;
+            //Debug.Log("fuck");
 
         }
 

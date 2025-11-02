@@ -604,12 +604,24 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3102497995271984666, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: canMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3102497995271984666, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
       propertyPath: groundMask.m_Bits
       value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213357957387568129, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: sensitivity
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3597028914900616705, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3597028914900616705, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3861241399835707145, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
       propertyPath: m_LocalPosition.x
@@ -677,7 +689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8861729697446566761, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8861729697446566761, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
       propertyPath: m_TagString
@@ -1212,6 +1224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1303719747}
+  - component: {fileID: 1303719748}
   m_Layer: 7
   m_Name: Main Room
   m_TagString: Untagged
@@ -1239,6 +1252,38 @@ Transform:
   - {fileID: 1554551097}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1303719748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303719746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 1
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 073de03e2e0550b4c929dfaa9b5d7b0e, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &1333165550 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4504796100609925849, guid: 93d07b1611c971a428c2e31ce780ed9e, type: 3}
@@ -2067,7 +2112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3908052746375864177, guid: 125aaf8cecb70234f937af103e069e14, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4128798854717871648, guid: 125aaf8cecb70234f937af103e069e14, type: 3}
       propertyPath: jumpStr

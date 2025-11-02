@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,6 +18,8 @@ public static class RoomGenerator
         Object[] prefab_arr = ArrayHelper.Clone(possibleTiles);
         Stack<Object> tileStack = new Stack<Object>();
         GameObject[] placedTiles = new GameObject[4];
+        TagSearcher tagger = new TagSearcher();
+        ArrayList enemies = new ArrayList();
 
         float totalRadius = gapSize / 2 + tileRadius;
         Vector3 pos = new Vector3(totalRadius, 0, -totalRadius);
@@ -49,6 +52,22 @@ public static class RoomGenerator
         //ADD NAVMESH HERE
         surface.BuildNavMesh();
         room.layer = LayerMask.NameToLayer("Ground");
+
+        enemies = tagger.search("Enemy", room.transform, 2);
+        if (enemies == null)
+        {
+
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                GameObject tempEnemy = (GameObject)enemies[i];
+                //RunnerBehavior temp = tempEnemy.GetComponent<RunnerBehavior>();
+                tempEnemy.GetComponent<RunnerBehavior>().portalTarget = teleporterTransform;
+                tempEnemy.GetComponent<RunnerBehavior>().playerTarget = GameObject.FindWithTag("Player").transform;
+                /*temp.portalTarget = teleporterTransform;
+                temp.playerTarget = GameObject.FindWithTag("Player").transform;*/
+                enemies[i] = tempEnemy;
+            }
+        }
 
         return new Room(room, roomTeleporter, portalLink, roomCam,null);
 

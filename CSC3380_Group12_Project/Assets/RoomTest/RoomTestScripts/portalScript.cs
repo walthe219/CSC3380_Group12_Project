@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /*
@@ -21,6 +22,9 @@ public class portalScript : MonoBehaviour
     static float staticTimerStart = float.NaN;
     static float teleportCoolDownDuration = 3f;
 
+    public float portalTimerHolder;
+    public bool holderRunning = false;
+
     private void OnTriggerEnter(Collider other)
     { 
         if (other.tag.Equals("Player"))
@@ -32,7 +36,7 @@ public class portalScript : MonoBehaviour
             }
 
             //Disable controller scripts so teleport is not overwritten
-            movementScript = other.GetComponent<newMoveScript>();
+            movementScript = other.GetComponent<PlayerMovement>();
             if (movementScript == null)
             {
                 Debug.LogError("Change move script name in portalScript code GetComponent<SCRIPT NAME HERE>");
@@ -40,7 +44,7 @@ public class portalScript : MonoBehaviour
             }
             movementScript.enabled = false;
 
-            lookScript = other.GetComponent<cameraScript>();
+            lookScript = other.GetComponentInChildren<MouseView>();
             if (lookScript == null)
             {
                 Debug.LogError("Change look script name in portalScript code GetComponent<SCRIPT NAME HERE>");
@@ -54,6 +58,8 @@ public class portalScript : MonoBehaviour
 
             Debug.Log("Teleported to " + destination.position + " with Rotation " + destination.rotation+ $"\nTeleport on cooldown for {teleportCoolDownDuration} seconds".ToUpper());
             portalTimer = 0;
+            portalTimerHolder = 0;
+            holderRunning = true;
             staticTimerStart = Time.time;
 
             teleportOnCoolDown = true;
@@ -81,6 +87,7 @@ public class portalScript : MonoBehaviour
                 movementScript = null;
                 lookScript.enabled = true;
                 lookScript = null;
+                holderRunning = false;
             }
            
         }
@@ -93,6 +100,10 @@ public class portalScript : MonoBehaviour
                 teleportOnCoolDown = false;
             }
 
+        }
+        if (holderRunning)
+        {
+            portalTimerHolder += Time.deltaTime;
         }
     }
 
