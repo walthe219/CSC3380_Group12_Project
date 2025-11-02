@@ -481,7 +481,6 @@ public class NewMovement : MonoBehaviour
     // Unlocks the dash ability
     public void unlockDash()
     {
-        Debug.Log("Unlocking dash in movement system");
         dash.Enable();
     }
 

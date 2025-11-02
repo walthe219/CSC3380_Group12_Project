@@ -11,6 +11,7 @@ public class GunScript : MonoBehaviour
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
     public InputActionAsset inputActions;
+    [SerializeField] PlayerStats currPlayerStats;
     //public GameObject impactEffect;
 
     public InputAction fireAction;
@@ -18,12 +19,11 @@ public class GunScript : MonoBehaviour
     private void OnEnable()
     {
         fireAction = InputSystem.actions.FindAction("Fire");
-     
     }
 
     void Update()
     {
-        if (fireAction.WasPressedThisFrame())
+        if (fireAction.WasPressedThisFrame() && currPlayerStats.ammo > 0)
         {
 
             Shoot();
