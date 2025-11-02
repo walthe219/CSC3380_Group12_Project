@@ -1431,6 +1431,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2271634547789058458, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271634547789058458, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271634547789058458, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271634547789058458, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3102497995271984666, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
       propertyPath: playerSpeed
       value: 12

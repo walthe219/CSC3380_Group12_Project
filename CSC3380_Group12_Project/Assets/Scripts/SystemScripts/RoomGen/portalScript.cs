@@ -14,8 +14,9 @@ public class portalScript : MonoBehaviour
     [SerializeField] GameObject portalFrame;
     [SerializeField] Collider portalCollider;
 
-    static MonoBehaviour movementScript  = null;
-    static MonoBehaviour lookScript = null;
+    //static MonoBehaviour movementScript  = null;
+    //static MonoBehaviour lookScript = null;
+    static ControlScriptReference reference = null;
     static bool teleportOnCoolDown = false;
     static float staticTimerStart = float.NaN;
     static float teleportCoolDownDuration = 3f;
@@ -35,7 +36,18 @@ public class portalScript : MonoBehaviour
             }
 
             //Get control scripts so that they can be disabled
-            movementScript = other.GetComponent<newMoveScript>();
+            reference = other.GetComponent<ControlScriptReference>();
+            if (reference == null)
+            {
+                Debug.LogError("Collider object needs ControlScriptReference script attached");
+                return;
+            }
+
+            //Disable controller scripts so teleport is not overwritten by these scripts
+            reference.enabled = false;
+
+
+            /*movementScript = other.GetComponent<NewMovement>();
             if (movementScript == null)
             {
                 Debug.LogError("Change move script name in portalScript code GetComponent<SCRIPT NAME HERE>");
@@ -46,16 +58,15 @@ public class portalScript : MonoBehaviour
             {
                 Debug.LogError("Change look script name in portalScript code GetComponent<SCRIPT NAME HERE>");
                 return;
-            }
+            }*/
+            //movementScript.enabled = false;
+            //lookScript.enabled = false;
 
-
-            //Disable controller scripts so teleport is not overwritten by these scripts
-            movementScript.enabled = false;
-            lookScript.enabled = false;
 
             //Teleport player
-            other.transform.position = destination.position + destination.forward * distanceOffset + destination.up * heightOffset;
-            other.transform.rotation = destination.rotation;
+            GameObject objToTeleport = reference.ParentObject;
+            objToTeleport.transform.position = destination.position + destination.forward * distanceOffset + destination.up * heightOffset;
+            objToTeleport.transform.rotation = destination.rotation;
             Debug.Log("Teleported to " + destination.position + " with Rotation " + destination.rotation+ $"\nTeleport on cooldown for {teleportCoolDownDuration} seconds".ToUpper());
             
             //Begin timer to reenable script and until player can teleport again
@@ -66,14 +77,17 @@ public class portalScript : MonoBehaviour
 
             
         }
-        else Debug.LogError("Object needs 'Player' tag to use portal");
+        else Debug.LogWarning("Object needs 'Player' tag to use portal");
     }
 
+    [ContextMenu("ActivatePortal()")]
     public void ActivatePortal() 
     {
         portalFrame.SetActive(true);
         portalCollider.enabled = true;
     }
+
+    [ContextMenu("DeactivatePortal()")]
     public void DeactivatePortal() 
     {
         portalFrame.SetActive(false);
@@ -85,15 +99,17 @@ public class portalScript : MonoBehaviour
     {
         if(Time.time - staticTimerStart > scriptDisableDuration)
         {
-            if (movementScript != null)
+            if (reference != null)
             {
                 Debug.Log("Controls Reenabled");
-                movementScript.enabled = true;
-                movementScript = null;
-                lookScript.enabled = true;
-                lookScript = null;
+                reference.enabled = true;
+                reference = null;
+                //movementScript.enabled = true;
+                //movementScript = null;
+                //lookScript.enabled = true;
+                //lookScript = null;
             }
-           
+
         }
         
         if(Time.time - staticTimerStart> teleportCoolDownDuration)
@@ -132,14 +148,5 @@ public class portalScript : MonoBehaviour
     public void setDestination(Transform pos)
     {
         destination = pos;
-    }
-
-    private void OnDestroy()
-    {
-        if (movementScript != null || lookScript != null)
-        {
-            //movementScript.enabled = true;
-            //lookScript.enabled = true;
-        }
     }
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4902070905680346198}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,11 +95,13 @@ MonoBehaviour:
   dashForce: 50
   maxDashTime: 3
   isDashing: 0
+  dashDrag: 0
   currPlayerStats: {fileID: 0}
   curStamina: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  isGrounded: 0
   move:
     m_Name: Move
     m_Type: 0
@@ -145,8 +147,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  uManager: {fileID: 0}
-  dashData: {fileID: 0}
   test: 0
 --- !u!114 &4902070905680346198
 MonoBehaviour:
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   orientation: {fileID: 6441505164593188938}
   playerObj: {fileID: 5049115436650554024}
+  currPlayerStats: {fileID: 0}
   maxSlideTime: 0.75
   slideForce: 200
   move:
@@ -182,8 +183,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  uManager: {fileID: 0}
-  slideData: {fileID: 0}
 --- !u!1 &4644911705272029929
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,9 +226,10 @@ GameObject:
   - component: {fileID: 2784739884814516173}
   - component: {fileID: 5363814755155502619}
   - component: {fileID: 8012876029589056311}
+  - component: {fileID: 3805368142552098187}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -328,6 +328,21 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3805368142552098187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749231691063554953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1327f35b7a7711e4c9df6551f61a82f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlScriptReference
+  moveScript: {fileID: 6796624350748608610}
+  lookScript: {fileID: 0}
+  ParentObject: {fileID: 948115490480696473}
 --- !u!1 &9024034226001019150
 GameObject:
   m_ObjectHideFlags: 0
