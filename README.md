@@ -39,7 +39,7 @@ Run-n-gun game, player can move jump and shoot their weapon to deal damage to en
 - ESC - Pause menu, under option can change mouse sensitivity
 
 ### Directions
-The game opens on the start screen, press PLAY to begin. In the center of the main room, there are four doorways each with a portal inside that links to a room. Above them are screens with the rewards for each room. Move into a portal to select a room. In the room there will be enemies that need to be killed in order to leave. Once all enemies are dead, the portal will reactivate and you will recieve an  ugprade. You can press TAB to see your upgrades and your current stat values. Return to the portal to go back to the main room and select a new reward. 
+The game opens on the start screen, press PLAY to begin. In the center of the main room, there are four doorways each with a portal inside that links to a room. Above them are screens with the rewards for each room. Move into a portal to select a room. In the room there will be enemies that need to be killed in order to leave. Once all enemies are dead, the portal will reactivate and you will recieve an  ugprade. You can press TAB to see your upgrades and your current stat values. Return to the portal to go back to the main room and select a new reward. If you fall of or need to restart, just press ESC and click QUIT to head back to the start screen.
 
 Enjoy!
 
