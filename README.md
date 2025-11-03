@@ -23,7 +23,7 @@ Run-n-gun game, player can move jump and shoot their weapon to deal damage to en
  - **Advanced Movement System** -The player can crouch, run, slide, jump mulitple times in the air, and dash foward, all at the cost of stamina that regenerates over time. These abilities can be unlocked and improved with upgrades. The player can go up and slide down slopes, and speed is gained and converserved
 
 ## ACCESSING OUR PROJECT:
- - There is an Windows excutable called *NAME* in the build folder *FOLDERNAME* that allow you to run are game
+ - There is an Windows excutable called "CSC3380_Group12_Project" in the build folder "Builds" that allow you to run are game
  - Our C# scripts our contained in *CSC3380_Group12_Project/CSC3380_Group12_Project/Assets/Scripts*
  - If you wish to open our game in the Unity Editor, our project folder is the folder *CSC3380_Group12_Project* in our Repository, not the Repository folder itself. Our project uses unity editor version 6000.2.24f1. To open it in Unity, download the Unity Hub([Download](https://unity.com/download)) and the correct editor version, then click *Add/Add project* from disk and select the project folder
 
