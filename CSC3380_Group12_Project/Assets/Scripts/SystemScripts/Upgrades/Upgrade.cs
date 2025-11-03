@@ -23,4 +23,9 @@ public class Upgrade
         }
 
     }
+
+    public override string ToString()
+    {
+        return data.ToString();
+    }
 }

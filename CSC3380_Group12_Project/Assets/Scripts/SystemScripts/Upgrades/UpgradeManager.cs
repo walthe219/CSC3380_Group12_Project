@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
 {
-        
-    
+
+
     [SerializeField] PlayerStats DefaultStats; //Stats used to reset other PlayerStats at start of Game, should never change during the game
     [SerializeField] PlayerStats BaseStats; //Base value for stats, ie max values, can change in the game w upgrades or status effects
     [SerializeField] PlayerStats CurrentStats; //Current values for stats, ex. current health of speed, effected by indivual actions
 
     UpgradeSpace currentUpgradeSpace;
-    List<Upgrade> acquiredUpgrades = new List<Upgrade>();
+    public List<Upgrade> acquiredUpgrades = new List<Upgrade>();
 
     public static UpgradeManager Instance { get; private set; }
     private void Awake()
@@ -62,10 +62,10 @@ public class UpgradeManager : MonoBehaviour
     }
   
 
-    public List<Upgrade> GetAcquiredUpgrades()
+    /*public List<Upgrade> GetAcquiredUpgrades()
     {
         return acquiredUpgrades;
-    }
+    }*/
 
     [ContextMenu("addUpgrade()")]
     public void addUpgrade()

@@ -56,6 +56,7 @@ public class RoomManager : MonoBehaviour
         else
         {
             Instance = this;
+            //DontDestroyOnLoad(gameObject);
         }
     }
 
