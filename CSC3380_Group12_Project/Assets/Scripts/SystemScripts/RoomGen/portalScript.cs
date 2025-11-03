@@ -2,8 +2,9 @@ using System;
 using UnityEngine;
 
 /*
- * Teleports a object tagged player on contact with portal, 
- * disables player movement and look scripts so that position and rotatation of player can be set by this script
+ * Script for Portal prefab
+ * Teleports a object with 'Player' tag on contact with portal, 
+ * disables player movement and look scripts so that position and rotatation of player can be set by this script and not overwrittten
  */
 public class portalScript : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class portalScript : MonoBehaviour
     [SerializeField] Transform destination; //where to teleport, usally another portal
     [SerializeField] float heightOffset = 1; // distance above destination to teleport
     [SerializeField] float distanceOffset = 2f; //distance in front of destination
-    [SerializeField] GameObject portalFrame;
+    [SerializeField] GameObject portalFrame; //Game object representing the teleporter ring/frame
     [SerializeField] Collider portalCollider;
     [SerializeField] Collider portalHitboxCollider;
 
@@ -22,7 +23,7 @@ public class portalScript : MonoBehaviour
     static ControlScriptReference reference = null;
     static bool teleportOnCoolDown = false;
     static float staticTimerStart = float.NaN;
-    static float teleportCoolDownDuration = 3f;
+    static float teleportCoolDownDuration = 3f; //Teleport cooldown to prevent double teleports or loops
     static float scriptDisableDuration = 0.05f; //how long to disable move and lookscript, if too short then player position will not 
 
     public event Action<GameObject> PlayerEnterPortal;
@@ -72,7 +73,7 @@ public class portalScript : MonoBehaviour
             objToTeleport.transform.rotation = destination.rotation;
             Debug.Log("Teleported to " + destination.position + " with Rotation " + destination.rotation+ $"\nTeleport on cooldown for {teleportCoolDownDuration} seconds".ToUpper());
             
-            //Begin timer to reenable script and until player can teleport again
+            //Begin timer to reenable script and till player can teleport again
             staticTimerStart = Time.time;
             teleportOnCoolDown = true;
             PlayerEnterPortal?.Invoke(this.gameObject);
@@ -84,6 +85,8 @@ public class portalScript : MonoBehaviour
     }
 
     [ContextMenu("ActivatePortal()")]
+
+    //Turns portal ring on and enables collider, allowing player to teleport on contact
     public void ActivatePortal() 
     {
         portalFrame.SetActive(true);
@@ -91,6 +94,7 @@ public class portalScript : MonoBehaviour
         portalHitboxCollider.enabled = false;
     }
 
+    //Turns portal ring off and disables collider, preventing player from teleporting on contact
     [ContextMenu("DeactivatePortal()")]
     public void DeactivatePortal() 
     {
@@ -101,6 +105,7 @@ public class portalScript : MonoBehaviour
 
     private void Update()
     {
+        //Timer check for control script reenable
         if(Time.time - staticTimerStart > scriptDisableDuration)
         {
             if (reference != null)
@@ -116,6 +121,7 @@ public class portalScript : MonoBehaviour
 
         }
         
+        //Timer check for teleporter cooldown
         if(Time.time - staticTimerStart> teleportCoolDownDuration)
         {
             if (teleportOnCoolDown)
@@ -152,8 +158,8 @@ public class portalScript : MonoBehaviour
         otherScript.setDestination(this.transform);
         otherScript.ActivatePortal();
 
-
-        //PlayerEnterPortal += otherScript.PlayerArrivePortal;          OnArrive could possibly be useful, but this implementation is terrible idea, maybe can find a solution
+        //OnArrive could possibly be useful, but this implementation is terrible idea, maybe can find a solution
+        //PlayerEnterPortal += otherScript.PlayerArrivePortal;         
         //otherScript.PlayerEnterPortal+= PlayerArrivePortal;
     }
 

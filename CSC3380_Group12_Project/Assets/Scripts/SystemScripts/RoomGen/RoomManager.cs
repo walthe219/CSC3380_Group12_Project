@@ -137,7 +137,7 @@ public class RoomManager : MonoBehaviour
         PassEnemiesAlive?.Invoke(currentEnemiesAlive);
         Array.ForEach(currentlySelectedRoom.enemies,enemy=>enemy.GetComponent<Target>().OnDeath += decrementEnemies);
         currentlySelectedRoom.roomPortal.GetComponent<portalScript>().DeactivatePortal();
-    }
+     }
 
     void decrementEnemies()
     {

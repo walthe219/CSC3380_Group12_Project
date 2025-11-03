@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
-{
-
-
-    [SerializeField] PlayerStats DefaultStats; //Stats used to reset other PlayerStats at start of Game, should never change during the game
+{     
+    [SerializeField] PlayerStats StartingStats; //Stats used to reset other PlayerStats at start of Game, should never change during the 
     [SerializeField] PlayerStats BaseStats; //Base value for stats, ie max values, can change in the game w upgrades or status effects
     [SerializeField] PlayerStats CurrentStats; //Current values for stats, ex. current health of speed, effected by indivual actions
 
@@ -31,11 +29,13 @@ public class UpgradeManager : MonoBehaviour
     void Start()
     {
         currentUpgradeSpace = new UpgradeSpace(); //initialize the UpgradeSpace
+
+        //When player recieves rewward on room completion, call applyReward
         RoomManager.Instance.RecieveReward += applyReward;
 
         //Reset PlayerStats SOs to default values
-        BaseStats.set(DefaultStats);
-        CurrentStats.set(DefaultStats);
+        BaseStats.set(StartingStats);
+        CurrentStats.set(StartingStats);
     }
 
     void applyReward(string ID)
@@ -61,13 +61,14 @@ public class UpgradeManager : MonoBehaviour
 
     }
   
-
-    /*public List<Upgrade> GetAcquiredUpgrades()
+    //See UpgradeSpace.samplePossibleUpgrades()
+    public UpgradeData[] samplePossibleUpgrades(int num)
     {
-        return acquiredUpgrades;
-    }*/
+        return currentUpgradeSpace.samplePossibleUpgrades(num);
+    }
 
     [ContextMenu("addUpgrade()")]
+    //Test method, adds random upgrade to the player
     public void addUpgrade()
     {
         Upgrade u = new Upgrade(currentUpgradeSpace.pullUpgrade());
@@ -77,10 +78,6 @@ public class UpgradeManager : MonoBehaviour
 
     public void removeUpgrade(Upgrade upgrade){}
 
-    //See UpgradeSpace.samplePossibleUpgrades()
-    public UpgradeData[] samplePossibleUpgrades(int num)
-    {
-        return currentUpgradeSpace.samplePossibleUpgrades(num);
-    }
+   
 
 }

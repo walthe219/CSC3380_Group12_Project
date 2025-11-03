@@ -3,12 +3,12 @@ using System.Collections;
 using UnityEngine;
 
 /*
- * Defines all players stats that are upgradable, superclass of PlayerStats and UpgradeData
- * To add a new upgradable player stat, declare a new field for that stat, then add a line in the change() function
+ * Defines all players stats that are UPGRADEABLE only, superclass of PlayerStats and UpgradeData
+ * To add a new upgradable player stat, declare a new field for that stat, then add a line in the change() method
  * Ex. add gamblingLuck as field:
  *  public float gamblingLuck;
  * Then in change() add: 
- *  gamblingLuck = changeStat(gamblingLuck, other.gamblingLuck);
+ *  gamblingLuck = statChangeFunc(gamblingLuck, other.gamblingLuck);
  *  
  *  NOTE: only accepts stats that can be represented by floats
  *  Ex. int,float,double OK      String, char, array[], Object NOT
@@ -25,32 +25,33 @@ public class UpgradeableStatContainer: ScriptableObject
     public float dashPower;
 
     /*
-     * Takes in another UpgradeableStatContainer and modfies the stats of this UpgradeableStatContainer based on some function 
-     * Applies a function to each stat
+     * Changes each stat in this object by some other UpgradeAbleStat container, given some function applied to each stat
+     * statChangeFunc is a function take takes in two float values, the stat values, and returns a float representing the new stat value
      */
-    public void change(UpgradeableStatContainer other, Func<float, float, float> changeFunc)
+    void change(UpgradeableStatContainer other, Func<float, float, float> statChangeFunc)
     {
-        health = changeFunc(health, other.health);
-        stamina = changeFunc(stamina, other.stamina);
-        ammo = (int)changeFunc(ammo, other.ammo);
-        damage = changeFunc(damage, other.damage);
-        moveSpeed = changeFunc(moveSpeed, other.moveSpeed);
-        numJumps = (int)changeFunc(numJumps, other.numJumps);
-        slidePower = changeFunc(slidePower, other.slidePower);
-        dashPower = changeFunc(dashPower, other.dashPower);
+
+        health = statChangeFunc(health, other.health);
+        stamina = statChangeFunc(stamina, other.stamina);
+        ammo = (int)statChangeFunc(ammo, other.ammo);
+        damage = statChangeFunc(damage, other.damage);
+        moveSpeed = statChangeFunc(moveSpeed, other.moveSpeed);
+        numJumps = (int)statChangeFunc(numJumps, other.numJumps);
+        slidePower = statChangeFunc(slidePower, other.slidePower);
+        dashPower = statChangeFunc(dashPower, other.dashPower);
     }
 
     /*
-     * Adds the stats of another UpgradeableStatContainer to this UpgradeableStatContainer's stats
+     * Adds the stats of the other UpgradeableStatContainer to this UpgradeableStatContainer's stats
      */
     public void add(UpgradeableStatContainer other)
     {
         change(other, (a, b) => a + b);
-        //(a, b) => a + b is a lambda statement that defines a function taking in two floats a and b and returning a float a+b
+        //(a, b) => a + b is a lambda statement that defines a function taking in two floats a and b and returning the float float a+b
     }
 
     /*
-     * Set the stats of another UpgradeableStatContainer to this UpgradeableStatContainer's stats
+     * Set the stats of the other UpgradeableStatContainer to this UpgradeableStatContainer's stats
      */
     public void set(UpgradeableStatContainer other)
     {

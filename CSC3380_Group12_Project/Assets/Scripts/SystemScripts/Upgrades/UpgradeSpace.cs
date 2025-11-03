@@ -8,11 +8,15 @@ using UnityEngine.XR;
  * 
  * Still WIP
  * for now loads all upgrades and pops randomly, removes item on pop if not repeatable upgrade
+ * or can pop a specfic upgrade give ID or upgrade
+ * Can sample upgrade space, to recieve list of random possible upgrades without removing or applying them
  */
 public class UpgradeSpace
 {
-    [SerializeField] List<UpgradeData> possibleUpgrades;
+    //List of upgrades player can currently acquire
+    List<UpgradeData> possibleUpgrades;
 
+    //Initalizes UpgradeSpace from UpgradeData folder, or from given list of upgrades
     public UpgradeSpace(UpgradeData[] allUpgrades = null)
     {
         if (allUpgrades == null)
@@ -62,9 +66,11 @@ public class UpgradeSpace
     {
         return pullUpgrade(u.ID);
     }
-    
+
+    //Sample upgrade space, recieve list of random possible upgrades without removing or applying them
     // returns an array of random upgrades in possibleUpgrades that can be used by other classes without affecting the actual UpgradeSpace
     // Changes to this array will not change possibleUpgrades
+
     public UpgradeData[] samplePossibleUpgrades(int num)
     {
         UpgradeData[] temp = possibleUpgrades.ToArray();

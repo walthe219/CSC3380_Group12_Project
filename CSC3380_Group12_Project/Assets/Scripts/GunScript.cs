@@ -25,9 +25,7 @@ public class GunScript : MonoBehaviour
     {
         if (fireAction.WasPressedThisFrame() && currPlayerStats.ammo > 0)
         {
-
             Shoot();
-
         }
 
     }

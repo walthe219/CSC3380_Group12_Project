@@ -1,5 +1,7 @@
 using UnityEngine;
 
+
+// Defines array helper methods for type UnityEngine.Object
 public static class ArrayHelper
 {
     /*

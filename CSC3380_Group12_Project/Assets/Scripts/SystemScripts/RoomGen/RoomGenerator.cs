@@ -17,8 +17,9 @@ public static class RoomGenerator
         camPrefab = cam;
         portalPrefab = portal;
         enemyPrefab = enemy;
-
     }
+
+    //Returns an object of class Room, creates room GameObject made of four tiles with a portal linked to main, and a list of enemies
     public static Room CreateRoom(Vector3 roomCenterPos, Object[] possibleTiles,float tileRadius,float gapSize,float roomHeight, GameObject portalLink, UpgradeData upgrade)
     {
 
