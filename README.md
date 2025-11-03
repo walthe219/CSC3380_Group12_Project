@@ -31,10 +31,11 @@ Run-n-gun game, player can move jump and shoot their weapon to deal damage to en
 ### Controls
 - W A S D - horizontal movemment controls
 - SPACE - jump
+- SHIFT - sprint
 - CTRL - Slide, need to be moving to slide, REQUIRES UNLOCK
 - R - Reload weapon, need to manually reload when gun is empty
 - C - Crouch
-- F - Dash, REQUIRES UNLOCK
+- F - Dash in air, REQUIRES UNLOCK
 - TAB - Acquired Upgrades and Player Stats menu
 - ESC - Pause menu, under option can change mouse sensitivity
 
