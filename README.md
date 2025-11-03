@@ -39,5 +39,4 @@ Run-n-gun game, player can move jump and shoot their weapon to deal damage to en
 
 ### Current Build Quirks
 - As of right now, the build has a problem with instantiating the main scene. In order for things to work properly, we ask that after hitting play, you pause (Esc) and quit to the main menu before hitting play again in the main menu, and hitting the pause button (Esc) once more. This should load everything properly and allow the game to run as intended.
-- In the executable build, Upgrades are not applied to the player, so are not functional, but they function in the editor. We have enabled the movement abilites so that they can be used without the unlock upgrades
 
