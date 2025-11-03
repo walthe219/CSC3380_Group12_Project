@@ -34,7 +34,9 @@ public class RunnerBehavior : MonoBehaviour
         ToggleHurtboxes();
 
     }
-
+    /* 
+     * Handles checking for player to start behavior loop
+     */
     void Update()
     {
         if (!isActivated)
@@ -52,7 +54,7 @@ public class RunnerBehavior : MonoBehaviour
         }
         
     }
-
+    //Checks where the player is in relation to enemy, and determines if enemy should change targets
     void CheckTargetDistance()
     {
 
@@ -74,7 +76,7 @@ public class RunnerBehavior : MonoBehaviour
         }
         
     }
-
+    //Handles the actual navmesh agent path updates and what to do when the enemy reaches destination, also activates animation booleans
     void UpdatePath(Transform target)
     {
 
@@ -105,7 +107,7 @@ public class RunnerBehavior : MonoBehaviour
         
 
     }
-
+    //turns enemy tpwards target for attack, also stops enemy movement during attack
     void LookAndAttack(Transform target)
     {
 
@@ -129,7 +131,7 @@ public class RunnerBehavior : MonoBehaviour
         }
         ToggleHurtboxes();
     }
-
+    //turns on and off hurtboxes to not interfere with movement and collisions
     void ToggleHurtboxes()
     {
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1600110198086899078}
   - component: {fileID: 7539161881372037249}
   - component: {fileID: 4417952721639560604}
+  - component: {fileID: 3875317249011275788}
   m_Layer: 8
   m_Name: RHandHurtbox
   m_TagString: Untagged
@@ -79,6 +80,18 @@ CapsuleCollider:
   m_Height: 0.2
   m_Direction: 1
   m_Center: {x: 0.02, y: -0.075, z: 0}
+--- !u!114 &3875317249011275788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667467287823035326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cc3dc05b1458a94dac0ffbe954c1e8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttack
 --- !u!1 &2172988780645619751
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,6 +134,7 @@ GameObject:
   - component: {fileID: 8987913028520245636}
   - component: {fileID: 7695662518049249384}
   - component: {fileID: 9037270851680894505}
+  - component: {fileID: 1917700268409281728}
   m_Layer: 8
   m_Name: LHandHurtbox
   m_TagString: Untagged
@@ -189,6 +203,18 @@ CapsuleCollider:
   m_Height: 0.2
   m_Direction: 1
   m_Center: {x: -0.02, y: -0.075, z: 0}
+--- !u!114 &1917700268409281728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3281602019410271593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cc3dc05b1458a94dac0ffbe954c1e8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &4063451844223511272
 GameObject:
   m_ObjectHideFlags: 0
@@ -7141,6 +7167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunnerBehavior
   runRef: {fileID: 1405285084934166612}
+  behaviorActivator: 0
+  isActivated: 0
   playerTarget: {fileID: 0}
   portalTarget: {fileID: 0}
   playerCheck: {fileID: 2506295460840631810}

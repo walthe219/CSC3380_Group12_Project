@@ -58,6 +58,7 @@ public static class RoomGenerator
             Debug.LogError($"Tile {placedTiles[0].name} does not have child named PortalPoint.");
         }
         GameObject roomPortal = Object.Instantiate(portalPrefab, portalTransform.position, portalTransform.localRotation, room.transform);
+        roomPortal.tag = "isPortal";
 
         var roomPortalScript = roomPortal.GetComponent<portalScript>();
         roomPortalScript.LinkPortal(portalLink);

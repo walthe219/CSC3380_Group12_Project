@@ -13,6 +13,9 @@ public class portalScript : MonoBehaviour
     [SerializeField] float distanceOffset = 2f; //distance in front of destination
     [SerializeField] GameObject portalFrame;
     [SerializeField] Collider portalCollider;
+    [SerializeField] Collider portalHitboxCollider;
+
+    public float portalHealth = 50f;
 
     //static MonoBehaviour movementScript  = null;
     //static MonoBehaviour lookScript = null;
@@ -85,6 +88,7 @@ public class portalScript : MonoBehaviour
     {
         portalFrame.SetActive(true);
         portalCollider.enabled = true;
+        portalHitboxCollider.enabled = false;
     }
 
     [ContextMenu("DeactivatePortal()")]
@@ -92,7 +96,7 @@ public class portalScript : MonoBehaviour
     {
         portalFrame.SetActive(false);
         portalCollider.enabled = false;
-        
+        portalHitboxCollider.enabled = true;
     }
 
     private void Update()
@@ -120,6 +124,14 @@ public class portalScript : MonoBehaviour
                 teleportOnCoolDown = false;
             }
 
+        }
+
+        if (portalHitboxCollider.enabled == true)
+        {
+            if (portalHealth <= 0)
+            {
+                Debug.Log("The portal has been Destroyed!");
+            }
         }
     }
 

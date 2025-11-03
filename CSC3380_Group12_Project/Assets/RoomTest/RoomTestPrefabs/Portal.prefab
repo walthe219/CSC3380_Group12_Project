@@ -74,10 +74,9 @@ MonoBehaviour:
   destination: {fileID: 0}
   heightOffset: 1
   distanceOffset: 2.5
-  disableTime: 0.05
   portalFrame: {fileID: 3118087510114696396}
   portalCollider: {fileID: 2369764063617433233}
-  portalTimer: 9999
+  portalHitboxCollider: {fileID: 3126633620351493204}
 --- !u!1 &2709405727033909438
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,6 +88,7 @@ GameObject:
   - component: {fileID: 6572468428716031924}
   - component: {fileID: 5698819307926391483}
   - component: {fileID: 7134631062201349613}
+  - component: {fileID: 3126633620351493204}
   m_Layer: 0
   m_Name: Portal Plate
   m_TagString: Untagged
@@ -167,6 +167,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &3126633620351493204
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2709405727033909438}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 25
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 8, z: -0.00000008940697}
 --- !u!1 &3118087510114696396
 GameObject:
   m_ObjectHideFlags: 0

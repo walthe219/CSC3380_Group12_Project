@@ -6,8 +6,9 @@ TagManager:
   tags:
   - PortalPoint
   - EnemyPoint
-  - Enemy
   - Runner
+  - isPortal
+  - HealthBar
   layers:
   - Default
   - TransparentFX
