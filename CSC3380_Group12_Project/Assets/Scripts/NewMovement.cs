@@ -125,7 +125,7 @@ public class NewMovement : MonoBehaviour
             crouch = InputSystem.actions.FindAction("Player/Crouch");
             dash = InputSystem.actions.FindAction("Player/Dash");
             OnEnable();
-            //dash.Disable();
+            dash.Disable();
         }
 
         //For portals to disable this script, through ControlScriptReference
