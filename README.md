@@ -37,6 +37,6 @@ Run-n-gun game, player can move jump and shoot their weapon to deal damage to en
 - TAB - Acquired Upgrades and Player Stats menu
 - ESC - Pause menu, under option can change mouse sensitivity
 
-### Objective
-TExt
+### Current Build Quirks
+- As of right now, the build has a problem with instantiating the main scene. In order for things to work properly, we ask that after hitting play, you pause (Esc) and quit to the main menu before hitting play again in the main menu, and hitting the pause button (Esc) once more. This should load everything properly and allow the game to run as intended.
 
