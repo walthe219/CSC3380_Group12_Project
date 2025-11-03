@@ -24,7 +24,7 @@ public class UpgradeManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Persist across scene loads
+            //DontDestroyOnLoad(gameObject); // Persist across scene loads
         }
     }
 
