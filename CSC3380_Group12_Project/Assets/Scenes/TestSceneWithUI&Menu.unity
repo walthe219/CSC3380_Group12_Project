@@ -2347,7 +2347,6 @@ GameObject:
   - component: {fileID: 932661610}
   - component: {fileID: 932661609}
   - component: {fileID: 932661613}
-  - component: {fileID: 932661614}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2442,6 +2441,7 @@ RectTransform:
   - {fileID: 89391008}
   - {fileID: 25636468}
   - {fileID: 1308021906}
+  - {fileID: 1308723916}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2462,18 +2462,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
   pauseMenuUI: {fileID: 89391007}
---- !u!114 &932661614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932661608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30b34ff6edc088f4290cc8dbe2d3b39b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OptionsMouseReader
 --- !u!1 &1015371876
 GameObject:
   m_ObjectHideFlags: 0
@@ -3715,6 +3703,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1308021905}
   m_CullTransparentMesh: 1
+--- !u!224 &1308723916 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+  m_PrefabInstance: {fileID: 6191213493147058098}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1335106268
 GameObject:
   m_ObjectHideFlags: 0
@@ -7198,6 +7191,103 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0f0b61d7cc75d546aa9b5fa232fd215, type: 3}
+--- !u!1001 &6191213493147058098
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 932661612}
+    m_Modifications:
+    - target: {fileID: 2274050937459974927, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_Name
+      value: GameOverScreen(health)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200618091040676880, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1ed91cd799379de4c8d48f97251ad7a4, type: 3}
 --- !u!4 &6275841532661398091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 183666602732393338, guid: c0f0b61d7cc75d546aa9b5fa232fd215, type: 3}

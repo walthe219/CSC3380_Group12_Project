@@ -14,6 +14,8 @@ public class AmmoDisplay : MonoBehaviour
     private int delay_x;
     [SerializeField] PlayerStats CurrentPlayerStats;
     [SerializeField] PlayerStats DefaultStats;
+    //public PauseMenu1 pm;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -66,7 +68,7 @@ public class AmmoDisplay : MonoBehaviour
     
 
     void shoot(){
-        if(Input.GetMouseButtonDown(0) && !isFiring && CurrentPlayerStats.ammo > 0){//left click = 0
+        if(Input.GetMouseButtonDown(0) && !isFiring && CurrentPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0){//left click = 0
             isFiring = true;
             CurrentPlayerStats.ammo--;
             isFiring = false;
@@ -86,7 +88,9 @@ public class AmmoDisplay : MonoBehaviour
     void Update()
     {
         ammoToText();
+        if(!PauseMenu1.GameIsPaused){
         shoot();
+        }
         if (Input.GetKeyDown(KeyCode.R) && !isReloading) {
             StartCoroutine(reload());
         }

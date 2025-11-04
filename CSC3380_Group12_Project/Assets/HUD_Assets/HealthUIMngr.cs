@@ -91,8 +91,9 @@ public class healthUIMngr : MonoBehaviour
             //ApplyDashUpgrade(); //Tested in Michael's movement script and this ApplyDashUpgrade() communicates succesfully with tabmenu UI
             dashapplied = true;
         }
+        if(CurrentPlayerStats.health >= 0){
         healthtoText();
-        
+        }
        
     }
 }
