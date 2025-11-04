@@ -28,7 +28,7 @@ public class GameOverScreen : MonoBehaviour
     }
 
     void Update(){
-        if(CurrentPlayerStats.health == 0){
+        if(CurrentPlayerStats.health <= 0){
             Setup();
         }
     }
