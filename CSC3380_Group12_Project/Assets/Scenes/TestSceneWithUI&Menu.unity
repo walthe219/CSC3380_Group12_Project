@@ -8224,6 +8224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StaminaHUD
       objectReference: {fileID: 0}
+    - target: {fileID: 2865640161185577326, guid: 0c9cc316e7466a647b7a0995eecb14d2, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3380078730475932800, guid: 0c9cc316e7466a647b7a0995eecb14d2, type: 3}
       propertyPath: DefaultStats
       value: 

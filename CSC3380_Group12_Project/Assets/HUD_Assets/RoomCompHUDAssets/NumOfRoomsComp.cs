@@ -20,7 +20,7 @@ public class NumOfRoomsComp : MonoBehaviour
     void Start()
     {
         //playerstats = new PlayerStats();
-        playerstats.numRoomsComp = 0;
+        //playerstats.numRoomsComp = 0;
         finishedRoomsText = GameObject.Find("NumOfRooms").GetComponent<TextMeshProUGUI>();
     }
 

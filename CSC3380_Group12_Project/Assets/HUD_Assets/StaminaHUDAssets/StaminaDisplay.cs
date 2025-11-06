@@ -25,7 +25,7 @@ public class StaminaDisplay : MonoBehaviour
         }
 
         delayTimeStam(2);
-        CurrentPlayerStats.stamina = DefaultStats.stamina;
+        //CurrentPlayerStats.stamina = DefaultStats.stamina;
         staminaText = GameObject.Find("StamDisplay").GetComponent<TextMeshProUGUI>();
 
     }
