@@ -79,7 +79,7 @@ public class HoldTabMenu : MonoBehaviour
 
         List<Upgrade> acquired = UpgradeManager.Instance.acquiredUpgrades;
 
-        upgradesText.text = string.Join(",", acquired);
+        upgradesText.text = string.Join("\n", acquired);
        /* upgradesText.text = "";
 
         for (int i = 0; i < acquired.Count; i++)

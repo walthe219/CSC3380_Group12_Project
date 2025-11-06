@@ -15,6 +15,7 @@ public class BubbleStatCollision : MonoBehaviour
         if(bubble != null){//test to see if i can check the type of bubble and tested it by changing the bubble type to mana and it works as intended
             if(bubble.bubbleType == BubbleType.Type.Health){
                 Debug.Log("Health Bubble collected!");
+                gameObject.SetActive(false);
                 // Add health here
             }
         }

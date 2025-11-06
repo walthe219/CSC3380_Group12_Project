@@ -6997,9 +6997,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7182324921245075803, guid: 39b1ce4c533c17e4aa5820ceea34f980, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6796624350981878092}
-    - targetCorrespondingSourceObject: {fileID: 7182324921245075803, guid: 39b1ce4c533c17e4aa5820ceea34f980, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6796624350981878093}
   m_SourcePrefab: {fileID: 100100000, guid: 39b1ce4c533c17e4aa5820ceea34f980, type: 3}
 --- !u!1001 &3923000259532068184
 PrefabInstance:
@@ -7717,29 +7714,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8f8c63a277c454e808d32fb1d6e62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BubbleStatsInventory
---- !u!136 &6796624350981878093
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 948115490780927408}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.326827
-  m_Height: 3.029728
-  m_Direction: 1
-  m_Center: {x: -0.06721592, y: 0.72621727, z: -0.18231773}
 --- !u!224 &7425001760484208960 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 748621366731120123, guid: af428632e8994e84ab902fb6a7d76604, type: 3}

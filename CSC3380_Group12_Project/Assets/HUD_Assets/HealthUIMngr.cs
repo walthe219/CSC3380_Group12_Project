@@ -29,7 +29,7 @@ public class healthUIMngr : MonoBehaviour
             Debug.Log("CurrentPlayerStats not in inspector");
         }
         
-        CurrentPlayerStats.health = DefaultStats.health;
+        //CurrentPlayerStats.health = DefaultStats.health;
 
         //CurrentPlayerStats.health = maxHealth; IMPORTANT: do not assign currentplayerstats.blah to a variable and then use the variable it does not work as expected
         healthBar.setMaxHealth(CurrentPlayerStats.health);
