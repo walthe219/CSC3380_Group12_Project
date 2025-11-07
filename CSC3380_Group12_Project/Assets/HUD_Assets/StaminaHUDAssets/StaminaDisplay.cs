@@ -32,7 +32,7 @@ public class StaminaDisplay : MonoBehaviour
 
     void stamToText(){
          if(staminaText != null){
-            staminaText.text = CurrentPlayerStats.stamina.ToString();
+            staminaText.text = "Stamina: " + CurrentPlayerStats.stamina.ToString();
         }
         else{
             Debug.Log("StamDisplay is null");

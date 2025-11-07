@@ -26,7 +26,7 @@ public class NumOfRoomsComp : MonoBehaviour
 
     void NORToText(){
         if(finishedRoomsText != null){
-            finishedRoomsText.text = playerstats.numRoomsComp.ToString();
+            finishedRoomsText.text = "Rooms Cleared: " + playerstats.numRoomsComp.ToString();
         }
         else{
             Debug.Log("finishedRooms is null");

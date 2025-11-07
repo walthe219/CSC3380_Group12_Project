@@ -7,14 +7,12 @@ public class healthUIMngr : MonoBehaviour
 {
     [SerializeField] PlayerStats CurrentPlayerStats;
     [SerializeField] PlayerStats DefaultStats;
-    [SerializeField] UpgradeManager upgradeManager;
-    [SerializeField] UpgradeData dashUpgrade;
 
     private float currentHealth;
     private int maxHealth;
-    private int sacAmt;
     private int healAmt;
-    private bool dashapplied = false;
+    private int damage;
+    
 
     public HealthBar healthBar;
     public TextMeshProUGUI HealthDisplay;
@@ -23,7 +21,6 @@ public class healthUIMngr : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-         //test func
         HealthDisplay = GameObject.Find("HealthDisplay").GetComponent<TextMeshProUGUI>();
         if(CurrentPlayerStats == null){
             Debug.Log("CurrentPlayerStats not in inspector");
@@ -61,14 +58,6 @@ public class healthUIMngr : MonoBehaviour
         }
     }
 
-    /*void sacrifice(int sacAmt){ //sacAmt will allow us to pass in a value to divide health by
-        if(Input.GetKeyDown(KeyCode.O)){
-            currentHealth = currentHealth/sacAmt;
-            //extra dmg
-        }
-    }
-    */
-
 /* correct format ************************************* make sure you drag the upgrade into inspector of the script that wants to add upgrade, follow this format, and then set a bool at the end
 //so you can do if(bool){dash();} for example
     public void ApplyDashUpgrade(){
@@ -87,10 +76,6 @@ public class healthUIMngr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if(!dashapplied){
-            //ApplyDashUpgrade(); //Tested in Michael's movement script and this ApplyDashUpgrade() communicates succesfully with tabmenu UI
-            dashapplied = true;
-        }
         if(CurrentPlayerStats.health >= 0){
         healthtoText();
         }
