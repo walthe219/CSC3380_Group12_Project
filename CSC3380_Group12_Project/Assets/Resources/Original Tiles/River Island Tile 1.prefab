@@ -89,37 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &2524231385987661558
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6697433177896687066}
-  m_Layer: 0
-  m_Name: Portal Spot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6697433177896687066
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2524231385987661558}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -47.725494, y: -5.991667, z: 44.44667}
-  m_LocalScale: {x: 0.08333331, y: 0.083333336, z: 0.08333331}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4150780177587898168}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4472129307168301267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,9 +171,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1e791828422602641b9554b1e6d3b899, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6641315592344632613}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1e791828422602641b9554b1e6d3b899, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6697433177896687066}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1e791828422602641b9554b1e6d3b899, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3974229522622668202}

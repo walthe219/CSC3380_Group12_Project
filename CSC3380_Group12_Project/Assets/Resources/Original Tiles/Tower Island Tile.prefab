@@ -144,37 +144,6 @@ Transform:
   - {fileID: 7767834284688598949}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7175535517229131811
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7552123192724969338}
-  m_Layer: 7
-  m_Name: Portal Spot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7552123192724969338
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7175535517229131811}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -24.599998, y: 11.187965, z: 20.849998}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7767834284688598949}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7802026059323113550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262,9 +231,6 @@ PrefabInstance:
     - {fileID: -516098083770646512, guid: 825c8f8fbea22954e954fd00cd8cc8be, type: 3}
     - {fileID: -8391222552659086748, guid: 825c8f8fbea22954e954fd00cd8cc8be, type: 3}
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 825c8f8fbea22954e954fd00cd8cc8be, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7552123192724969338}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 825c8f8fbea22954e954fd00cd8cc8be, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1813855341126051850}
