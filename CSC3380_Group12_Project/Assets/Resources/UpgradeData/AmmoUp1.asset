@@ -22,5 +22,7 @@ MonoBehaviour:
   dashPower: 0
   ID: AmmoUp
   isRepeatable: 1
+  prerequisites: []
+  mutuallyExclusives: []
   unlocks: 
   description: 

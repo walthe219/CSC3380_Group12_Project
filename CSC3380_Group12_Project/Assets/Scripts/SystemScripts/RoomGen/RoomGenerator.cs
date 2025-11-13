@@ -82,7 +82,7 @@ public static class RoomGenerator
                         enemyPrefab.GetComponent<RunnerBehavior>().playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
                     }
                     enemies.Add(Object.Instantiate(enemyPrefab,child.position,child.rotation, room.transform));
-                    child.GameObject().SetActive(false);
+                    child.gameObject.SetActive(false);
                 }
             }
         }

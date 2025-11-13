@@ -16,4 +16,10 @@ public class PlayerStats : UpgradeableStatContainer
        
     }
 
+    public override string printAllStats()
+    {
+        string printout = base.printAllStats();
+        return  printout + $"\nRooms Cleared: {numRoomsComp}";
+    }
+
 }
