@@ -98,7 +98,9 @@ public class RoomManager : MonoBehaviour
 
             rooms[i] = RoomGenerator.CreateRoom(roomPos, prefab_arr, tileRadius, gapSize, roomHeight, mainRoomPortals[i], potentialRoomRewards[i]); //create new 
 
-            mainRoomTextDisplays[i].GetComponent<TextDisplay>().changeText(potentialRoomRewards[i].ID);
+            TextDisplay display = mainRoomTextDisplays[i].GetComponent<TextDisplay>();
+            UpgradeData roomReward = potentialRoomRewards[i];
+            display.changeText(roomReward.ID, roomReward.printDescription(ID:false,label:false));
         }
     }
     
