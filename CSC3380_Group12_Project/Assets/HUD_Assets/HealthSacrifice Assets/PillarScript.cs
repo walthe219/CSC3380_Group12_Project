@@ -1,8 +1,23 @@
 using UnityEngine;
+using System;
+using UnityEngine.Events;
 
 public class PillarScript : MonoBehaviour
 {
     public Interact OpenFromInteraction;
+    [SerializeField] GameObject HealthSacrificeMenu;
+    private bool PillarMenuOpened;
+    public event Action<UpgradeData> UpgradePurchased; // instead of using action use unity event, and then subscribe UpgradePurchased to UpgradeManager.addUpgrade
+
+    UpgradeSpace sacrificeSpace; //Create UpgradeSpace for Health Sacrifice
+    
+
+    public void Start(){
+        sacrificeSpace = new UpgradeSpace(null, "UpgradeData/HealthSacrifice"); //Note: should work after i merge with josh's branch but wait until further upgradespace testing
+        
+        
+        
+    }
 
     private void OnEnable(){
         if(OpenFromInteraction){
@@ -17,6 +32,46 @@ public class PillarScript : MonoBehaviour
     }
 
     public void OpenPillarMenu(){
-        Debug.Log("Opened Pillar Menu");
+        if(PillarMenuOpened == false){
+            Debug.Log("Opened Pillar Menu");
+            Time.timeScale = 0f;
+            Cursor.visible = true;            // Hide cursor during gameplay
+            Cursor.lockState = CursorLockMode.None;
+            HealthSacrificeMenu.SetActive(true);
+            PillarMenuOpened = true;
+        }
+        else{
+            Debug.Log("Closed Pillar Menu");
+            Time.timeScale = 1f;
+            Cursor.visible = false;            // Hide cursor during gameplay
+            Cursor.lockState = CursorLockMode.Locked;
+            HealthSacrificeMenu.SetActive(false);
+            PillarMenuOpened = false;
+        }
     }
+
+    public void PurchaseUpgrade(int i){
+        //upgrade = upgradechoices[i]
+        //currentstats.hp * upgrade.healthcostpercentage
+        
+
+    }
+
+    public void DisplaySacrificeUpgrades(){
+        UpgradeData[] sample = sacrificeSpace.samplePossibleUpgrades(3);
+        SacrificeUpgradeData[] upgradechoices = Array.ConvertAll(sample, element => (SacrificeUpgradeData) element);
+        //'refresh' method
+        //new sample of three upgrades and display the upgrade information in the menu
+        //subscribe to event in roomgenerator where upon room completion get a new batch of sacrifice upgrades
+        //display upgradechoices[0->2]
+        //for each tmp i can do upgradechoice[i].printDescription(parameters blah blah blah)
+         
+        //add i do not say blah blah blah feature
+        //add sex feature
+        //add rizz feature
+        //add mini minecraft feature
+        //add all of overwatch
+        //add 
+    }
+
 }
