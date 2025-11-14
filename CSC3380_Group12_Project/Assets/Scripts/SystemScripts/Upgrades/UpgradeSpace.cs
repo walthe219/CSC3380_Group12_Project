@@ -12,14 +12,15 @@ using System;
  */
 public class UpgradeSpace
 {
-    const string UpgradeFolderPath = "UpgradeData";
 
-    static Dictionary<string, UpgradeData> upgradeDict;
+    const string DEFAULTPATH = "UpgradeData";
+
+    public static Dictionary<string, UpgradeData> upgradeDict;
     List<UpgradeData> possibleUpgrades; //List of upgrades player can currently acquire
     List<UpgradeData> futureUpgrades; //List of upgrades player could acquire in future after prereqs acquired
     List<UpgradeData> unavailableUpgrades; //List of upgrades player can nolonger acquire due to mutually exclusive upgrades
 
-    public UpgradeSpace(UpgradeData[] allUpgrades = null, string FolderPath= UpgradeFolderPath)
+    public UpgradeSpace(UpgradeData[] allUpgrades = null, string FolderPath= DEFAULTPATH)
     {
         //load upgrades from resources if needed
         if (allUpgrades == null)
@@ -31,7 +32,7 @@ public class UpgradeSpace
         if(upgradeDict == null)
         {
             upgradeDict = new Dictionary<string, UpgradeData>();
-            Array.ForEach(Resources.LoadAll<UpgradeData>(FolderPath), (UD) => { upgradeDict.Add(UD.ID, UD);});
+            Array.ForEach(Resources.LoadAll<UpgradeData>(DEFAULTPATH), (UD) => { upgradeDict.Add(UD.ID, UD);});
         }
 
         //add upgrades with no prerequisites to possibleUpgrades, upgrades with prerequisite to futureUpgrades
