@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 using System;
 
@@ -13,14 +14,19 @@ using System;
 public class UpgradeSpace
 {
 
-    const string DEFAULTPATH = "UpgradeData";
+    const string DEFAULT_PATH = "UpgradeData";
 
     public static Dictionary<string, UpgradeData> upgradeDict;
     List<UpgradeData> possibleUpgrades; //List of upgrades player can currently acquire
     List<UpgradeData> futureUpgrades; //List of upgrades player could acquire in future after prereqs acquired
     List<UpgradeData> unavailableUpgrades; //List of upgrades player can nolonger acquire due to mutually exclusive upgrades
 
-    public UpgradeSpace(UpgradeData[] allUpgrades = null, string FolderPath= DEFAULTPATH)
+    //READ ONLY public versions of the upgrade lists, mainly for testing
+    public ReadOnlyCollection<UpgradeData> ROpossibleUpgrades {get { return new ReadOnlyCollection<UpgradeData>(possibleUpgrades);}}
+    public ReadOnlyCollection<UpgradeData> ROfutureUpgrades { get { return new ReadOnlyCollection<UpgradeData>(futureUpgrades); } }
+    public ReadOnlyCollection<UpgradeData> ROunavailableUpgrades { get { return new ReadOnlyCollection<UpgradeData>(unavailableUpgrades); } }
+
+    public UpgradeSpace(UpgradeData[] allUpgrades = null, string FolderPath= DEFAULT_PATH)
     {
         //load upgrades from resources if needed
         if (allUpgrades == null)
@@ -32,7 +38,7 @@ public class UpgradeSpace
         if(upgradeDict == null)
         {
             upgradeDict = new Dictionary<string, UpgradeData>();
-            Array.ForEach(Resources.LoadAll<UpgradeData>(DEFAULTPATH), (UD) => { upgradeDict.Add(UD.ID, UD);});
+            Array.ForEach(Resources.LoadAll<UpgradeData>(DEFAULT_PATH), (UD) => { upgradeDict.Add(UD.ID, UD);});
         }
 
         //add upgrades with no prerequisites to possibleUpgrades, upgrades with prerequisite to futureUpgrades

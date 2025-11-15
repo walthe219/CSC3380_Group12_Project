@@ -67,7 +67,7 @@ public class UpgradeData : UpgradeableStatContainer
     string printUnlocks()
     {
         string[] list = Array.ConvertAll(unlocks, element => element.ToString());
-        return $"Unlocks: {string.Join(",",list)}";
+        return $"Unlocks: {string.Join(", ",list)}";
     }
 
     /*
@@ -87,7 +87,7 @@ public class UpgradeData : UpgradeableStatContainer
     {
         //Name and Rarity
         StringBuilder printout = new StringBuilder();
-        if (ID) printout.Append(ID);
+        if (ID) printout.Append(this.ID);
         if(label) printout.AppendLine(printLabel());
 
         //Stat changes if they exist
