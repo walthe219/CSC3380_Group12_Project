@@ -105,7 +105,14 @@ public class HoldTabMenu : MonoBehaviour
         UpdateUpgradeText();
         //}
 
-        
-        statsText.text = currentStats.printAllStats();
+        string s = "";
+
+        string[] stats = {"Health", "Stamina", "Ammo", "Damage", "MoveSpeed", "NumJumps", "SlidePower", "DashPower" }; 
+        float[] values = {currentStats.health, currentStats.stamina, currentStats.ammo, currentStats.damage, currentStats.moveSpeed, currentStats.numJumps, currentStats.slidePower, currentStats.dashPower};
+        for(int i = 0; i < 8; i++)
+        {
+            s += stats[i] + ": " + values[i] + "\n";
+        }
+        statsText.text = s;
     }
 }

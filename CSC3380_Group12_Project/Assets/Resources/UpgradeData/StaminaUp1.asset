@@ -21,10 +21,6 @@ MonoBehaviour:
   slidePower: 0
   dashPower: 0
   ID: StaminaUp
-  rarity: 0
   isRepeatable: 1
-  prerequisites:
-  - {fileID: 11400000, guid: b8def7d75fad6a641835eba284d4f0b0, type: 2}
-  mutuallyExclusives: []
   unlocks: 
   description: 

@@ -18,13 +18,9 @@ MonoBehaviour:
   damage: 0
   moveSpeed: 0
   numJumps: 0
-  slidePower: 50
   dashPower: 0
+  slidePower: 50
   ID: SlideUp
-  rarity: 0
   isRepeatable: 1
-  prerequisites:
-  - {fileID: 11400000, guid: 3e227df9367a3004993b6c9379b8138d, type: 2}
-  mutuallyExclusives: []
   unlocks: 
   description: 

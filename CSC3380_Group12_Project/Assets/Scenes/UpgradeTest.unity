@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32fd747ec7f2f6a43bd7f943ecc3fced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.SystemScripts.UpgradeSystem.UpgradeManager
-  StartingStats: {fileID: 11400000, guid: a22e781e91329d24684d25bdd20a2a49, type: 2}
+  DefaultStats: {fileID: 11400000, guid: a22e781e91329d24684d25bdd20a2a49, type: 2}
   BaseStats: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
   CurrentStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
 --- !u!4 &1533823784
