@@ -50,7 +50,7 @@ public class AmmoDisplay : MonoBehaviour
 
     //Implememnt reload and shooting delay
     //Maybe couple seconds after relaod before you cans start shooting again
-     IEnumerator reload(){
+     /*IEnumerator reload(){
             isReloading = true;
             //Debug.Log("Reloading......");
             yield return new WaitForSeconds(delay_x);
@@ -58,22 +58,18 @@ public class AmmoDisplay : MonoBehaviour
             isReloading=false;
             //Debug.Log("Reloaded!");
         
-    }
+    } Moved to GunScript */
 
-    IEnumerator ResetFiring()
-{
-    yield return null;  // wait 1 frame
-    isFiring = false;
-}
+    
     
 
-    void shoot(){
+    /*void shoot(){
         if(Input.GetMouseButtonDown(0) && !isFiring && CurrentPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0){//left click = 0
             isFiring = true;
             CurrentPlayerStats.ammo--;
             isFiring = false;
         } 
-    }
+    } Moved top GunScript */
 
     void ammoToText(){
         if(ammoDisplay != null){
@@ -88,11 +84,11 @@ public class AmmoDisplay : MonoBehaviour
     void Update()
     {
         ammoToText();
-        if(!PauseMenu1.GameIsPaused){
+        /*if(!PauseMenu1.GameIsPaused){
         shoot();
         }
         if (Input.GetKeyDown(KeyCode.R) && !isReloading) {
             StartCoroutine(reload());
-        }
+        } Moved to GunScript */
     }
 }

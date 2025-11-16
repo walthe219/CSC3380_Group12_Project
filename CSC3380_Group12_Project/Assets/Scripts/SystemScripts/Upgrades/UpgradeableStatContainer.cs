@@ -23,6 +23,9 @@ public class UpgradeableStatContainer: ScriptableObject
     public int numJumps;
     public float slidePower;
     public float dashPower;
+    public float reloadSpeed;
+    public float gunShootingRange;
+    public float fireRate;
 
     /*
      * Takes in another UpgradeableStatContainer and modfies the stats of this UpgradeableStatContainer based on some function 
@@ -38,6 +41,9 @@ public class UpgradeableStatContainer: ScriptableObject
         numJumps = (int)changeFunc(numJumps, other.numJumps);
         slidePower = changeFunc(slidePower, other.slidePower);
         dashPower = changeFunc(dashPower, other.dashPower);
+        reloadSpeed = changeFunc(reloadSpeed, other.reloadSpeed);
+        gunShootingRange = changeFunc(gunShootingRange, other.gunShootingRange);
+        fireRate = changeFunc(fireRate, other.fireRate);
     }
 
     /*
