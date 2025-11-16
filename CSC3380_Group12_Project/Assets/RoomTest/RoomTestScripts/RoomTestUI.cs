@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 
+
+//Updates UI for RoomTest2 Scene
 public class RoomTestUI : MonoBehaviour
 {
     [SerializeField] TMP_Text rewardText;

@@ -41,6 +41,7 @@ public class GunScript : MonoBehaviour
     {
         if (fireAction.WasPressedThisFrame() && currPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0)
         {
+<<<<<<< HEAD
             if (currentFireCooldown <= 0f) //If statement checks if cooldown has reached 0
             {
                 Shoot();
@@ -48,6 +49,9 @@ public class GunScript : MonoBehaviour
                 currentFireCooldown = FireCooldown; //reset the current cooldown to the gun's cooldown
                 Debug.Log("Resetting Firerate!");
             }
+=======
+            Shoot();
+>>>>>>> origin/Josh-improved-UpgradeSpace
         }
 
         currentFireCooldown -= Time.deltaTime; //Decrements the cooldown "counter"
