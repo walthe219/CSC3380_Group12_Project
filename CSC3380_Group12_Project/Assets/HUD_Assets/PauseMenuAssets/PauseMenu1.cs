@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject optionsmenu;
     public GameObject UIContainer;
+    public GameObject HSMenu;
 
     // Update is called once per frame
     void Update()
@@ -46,7 +47,10 @@ void Pause(){
 
     //Hide UI when opening pause menu
     UIContainer.SetActive(false);
-}
+
+    HSMenu.SetActive(false);
+
+    }
 
     //load menu function is just a test function from tutorial
     public void LoadMenu(){

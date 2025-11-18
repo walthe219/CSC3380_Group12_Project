@@ -7,6 +7,7 @@ using System.Collections;
 public class PillarScript : MonoBehaviour
 {
     public Interact OpenFromInteraction;
+    public GameObject UIContainer;
     [SerializeField] public TextMeshProUGUI hsubox1;
     [SerializeField] public TextMeshProUGUI hsubox2;
     [SerializeField] public TextMeshProUGUI hsubox3;
@@ -24,7 +25,7 @@ public class PillarScript : MonoBehaviour
     
 
     public void Start(){
-        sacrificeSpace = new UpgradeSpace(null, "UpgradeData/HealthSacrifice"); //Note: should work after i merge with josh's branch but wait until further upgradespace testing
+        sacrificeSpace = new UpgradeSpace(null, "HealthSacrifice"); //Note: should work after i merge with josh's branch but wait until further upgradespace testing
         DisplaySacrificeUpgrades();
         
         
@@ -50,6 +51,7 @@ public class PillarScript : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             HealthSacrificeMenu.SetActive(true);
             PillarMenuOpened = true;
+            UIContainer.SetActive(false);
         }
         else{
             Debug.Log("Closed Pillar Menu");
@@ -58,6 +60,7 @@ public class PillarScript : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             HealthSacrificeMenu.SetActive(false);
             PillarMenuOpened = false;
+            UIContainer.SetActive(true);
         }
     }
 

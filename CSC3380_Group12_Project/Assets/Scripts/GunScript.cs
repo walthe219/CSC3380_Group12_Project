@@ -39,7 +39,7 @@ public class GunScript : MonoBehaviour
 
     void Update()
     {
-        if (fireAction.WasPressedThisFrame() && currPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0)
+        if (fireAction.WasPressedThisFrame() && currPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0 && !isReloading)
         {
             if (currentFireCooldown <= 0f) //If statement checks if cooldown has reached 0
             {
@@ -49,8 +49,10 @@ public class GunScript : MonoBehaviour
                 Debug.Log("Resetting Firerate!");
             }
         }
-
-        currentFireCooldown -= Time.deltaTime; //Decrements the cooldown "counter"
+        if (currentFireCooldown > 0f)
+        {
+            currentFireCooldown -= Time.deltaTime; //Decrements the cooldown "counter"
+        }
         
         if (Input.GetKeyDown(KeyCode.R) && !isReloading)
         {

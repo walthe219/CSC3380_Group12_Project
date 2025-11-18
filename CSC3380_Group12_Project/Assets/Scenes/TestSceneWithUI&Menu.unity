@@ -1458,6 +1458,40 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1905155128523589116, guid: 58c302b1a98cb354a92ea5cc5913667a, type: 3}
   m_PrefabInstance: {fileID: 771246245}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &473799852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473799846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 100
+  m_PreferredHeight: 100
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
+--- !u!114 &473799853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473799846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
 --- !u!114 &487862057 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3466294865102775948, guid: 58c302b1a98cb354a92ea5cc5913667a, type: 3}
@@ -2266,7 +2300,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4869726723258150649, guid: 58c302b1a98cb354a92ea5cc5913667a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 473799853}
+    - targetCorrespondingSourceObject: {fileID: 4869726723258150649, guid: 58c302b1a98cb354a92ea5cc5913667a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 473799852}
   m_SourcePrefab: {fileID: 100100000, guid: 58c302b1a98cb354a92ea5cc5913667a, type: 3}
 --- !u!1 &812676810 stripped
 GameObject:
@@ -2751,6 +2791,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 89391007}
   optionsmenu: {fileID: 1279071794}
   UIContainer: {fileID: 1131303964}
+  HSMenu: {fileID: 473799846}
 --- !u!1001 &950110113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5313,6 +5354,10 @@ PrefabInstance:
       propertyPath: MiddleID
       value: 
       objectReference: {fileID: 487862057}
+    - target: {fileID: 339501370240846795, guid: 498e8621cf213454aa958808dbbeec74, type: 3}
+      propertyPath: UIContainer
+      value: 
+      objectReference: {fileID: 1131303964}
     - target: {fileID: 339501370240846795, guid: 498e8621cf213454aa958808dbbeec74, type: 3}
       propertyPath: CurrentPlayerStats
       value: 
@@ -8650,6 +8695,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -11
       objectReference: {fileID: 0}
+    - target: {fileID: 1100482983256133669, guid: 0c9cc316e7466a647b7a0995eecb14d2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -372
+      objectReference: {fileID: 0}
+    - target: {fileID: 1100482983256133669, guid: 0c9cc316e7466a647b7a0995eecb14d2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -46
+      objectReference: {fileID: 0}
     - target: {fileID: 1128821860682379555, guid: 0c9cc316e7466a647b7a0995eecb14d2, type: 3}
       propertyPath: m_Name
       value: StaminaHUD
@@ -8739,7 +8792,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5606969325229499991, guid: 0c9cc316e7466a647b7a0995eecb14d2, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1128821860682379555, guid: 0c9cc316e7466a647b7a0995eecb14d2, type: 3}
