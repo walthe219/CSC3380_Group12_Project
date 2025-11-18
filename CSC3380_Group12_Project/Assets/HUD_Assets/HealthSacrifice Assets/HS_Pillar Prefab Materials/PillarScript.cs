@@ -11,6 +11,9 @@ public class PillarScript : MonoBehaviour
     [SerializeField] public TextMeshProUGUI hsubox1;
     [SerializeField] public TextMeshProUGUI hsubox2;
     [SerializeField] public TextMeshProUGUI hsubox3;
+    [SerializeField] public GameObject buybttn0;
+    [SerializeField] public GameObject buybttn1;
+    [SerializeField] public GameObject buybttn2;
     [SerializeField] public TextMeshProUGUI MiddleID;
     [SerializeField] public TextMeshProUGUI LeftID;
     [SerializeField] public TextMeshProUGUI RightID;
@@ -18,14 +21,14 @@ public class PillarScript : MonoBehaviour
     [SerializeField] PlayerStats CurrentPlayerStats;
     private bool PillarMenuOpened;
     SacrificeUpgradeData[] upgradechoices;
-    public event Action<UpgradeData> UpgradePurchased; // instead of using action use unity event, and then subscribe UpgradePurchased to UpgradeManager.addUpgrade
+    public event Action<Upgrade> UpgradePurchased; 
 
 
     UpgradeSpace sacrificeSpace; //Create UpgradeSpace for Health Sacrifice
     
 
     public void Start(){
-        sacrificeSpace = new UpgradeSpace(null, "HealthSacrifice"); //Note: should work after i merge with josh's branch but wait until further upgradespace testing
+        sacrificeSpace = new UpgradeSpace(null, "HealthSacrifice"); 
         DisplaySacrificeUpgrades();
         
         
@@ -70,7 +73,20 @@ public class PillarScript : MonoBehaviour
         Debug.Log("Health Cost Percentage: " + upgradechoices[i].HealthCostPercent);
         CurrentPlayerStats.health = CurrentPlayerStats.health * (1 - (upgradechoices[i].HealthCostPercent/100f)); //successfully decrements health by Health Cost Percent
         Debug.Log("Health is now: " + CurrentPlayerStats.health);
-
+        Upgrade purchasedUpgrade = new Upgrade(upgradechoices[i]);
+        UpgradePurchased?.Invoke(purchasedUpgrade);
+        if ( i == 0)
+        {
+            buybttn0.gameObject.SetActive(false);
+        }
+        else if(i == 1)
+        {
+            buybttn1.gameObject.SetActive(false);
+        }
+        else
+        {
+            buybttn2.gameObject.SetActive(false);
+        }
         //TODO: Whenever buy button is pressed, add upgrade stats to basestats double check that
         //And subscribe addUpgrade to your event in the start method of UpgradeManager if u use an action
 

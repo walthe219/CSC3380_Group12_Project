@@ -14,11 +14,10 @@ public class GunScript : MonoBehaviour
     public InputActionAsset inputActions;
     [SerializeField] PlayerStats currPlayerStats;
     [SerializeField] PlayerStats StartingStats;
+    [SerializeField] PlayerStats BasePlayerStats;
     public float FireCooldown; //gun's cooldown
     public float currentFireCooldown;
-    public float reloadCooldown;
-    public float currentReloadCooldown;
-    public bool isAutomatic;
+    //public bool isAutomatic; if we decide to add automatic weapons
     public bool isReloading;
     public int reloadDelay;
 
@@ -29,6 +28,7 @@ public class GunScript : MonoBehaviour
     private void Start()
     {
         currentFireCooldown = FireCooldown;
+        currPlayerStats.ammo = StartingStats.magSize;
         SetReloadDelayTime(3);
     }
 
@@ -65,7 +65,7 @@ public class GunScript : MonoBehaviour
         isReloading = true;
         Debug.Log("Reloading......");
         yield return new WaitForSeconds(reloadDelay);
-        currPlayerStats.ammo = StartingStats.ammo;
+        currPlayerStats.ammo = BasePlayerStats.magSize;
         isReloading = false;
         Debug.Log("Reloaded!");
 

@@ -73,7 +73,7 @@ public class AmmoDisplay : MonoBehaviour
 
     void ammoToText(){
         if(ammoDisplay != null){
-            ammoDisplay.text = CurrentPlayerStats.ammo.ToString();
+            ammoDisplay.text = CurrentPlayerStats.ammo.ToString() + "/" + CurrentPlayerStats.magSize.ToString();
         }
         else{
             Debug.Log("ammoDisplay is null");

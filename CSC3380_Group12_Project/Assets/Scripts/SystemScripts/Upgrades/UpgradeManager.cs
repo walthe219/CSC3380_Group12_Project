@@ -9,6 +9,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] PlayerStats DefaultStats; //Stats used to reset other PlayerStats at start of Game, should never change during the game
     [SerializeField] PlayerStats BaseStats; //Base value for stats, ie max values, can change in the game w upgrades or status effects
     [SerializeField] PlayerStats CurrentStats; //Current values for stats, ex. current health of speed, effected by indivual actions
+    [SerializeField] PillarScript pillarscript;
 
     UpgradeSpace currentUpgradeSpace;
     public List<Upgrade> acquiredUpgrades = new List<Upgrade>();
@@ -26,6 +27,16 @@ public class UpgradeManager : MonoBehaviour
             Instance = this;
             //DontDestroyOnLoad(gameObject); // Persist across scene loads
         }
+    }
+
+    private void OnEnable()
+    {
+        pillarscript.UpgradePurchased += addUpgrade;
+    }
+
+    private void OnDisable()
+    {
+        pillarscript.UpgradePurchased -= addUpgrade;
     }
 
     void Start()

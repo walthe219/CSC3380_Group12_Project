@@ -19,12 +19,15 @@ public class UpgradeableStatContainer: ScriptableObject
     //ADD NEW STAT FIELDS HERE
     public float health;
     public float stamina;
-    public int ammo;
+    public float ammo;
     public float damage;
     public float moveSpeed;
     public int numJumps;
     public float slidePower;
     public float dashPower;
+    public float magSize;
+    public float reloadSpeed;
+    public float FireCooldown;
 
     /*
      * HELPER FUNCTION for other methods: 
@@ -43,7 +46,9 @@ public class UpgradeableStatContainer: ScriptableObject
         moveSpeed = statChangeFunc(moveSpeed, other.moveSpeed, "Move Speed");
         numJumps = (int)statChangeFunc(numJumps, other.numJumps, "Jumps");
         slidePower = statChangeFunc(slidePower, other.slidePower,"Slide Power");
-        dashPower = statChangeFunc(dashPower, other.dashPower, "Dash Power");
+        magSize = statChangeFunc(magSize, other.magSize, "Magazine Size");
+        reloadSpeed = statChangeFunc(reloadSpeed, other.reloadSpeed, "Reload Speed");
+        FireCooldown = statChangeFunc(FireCooldown, other.FireCooldown, "Fire Cooldown");
     }
 
     /*
