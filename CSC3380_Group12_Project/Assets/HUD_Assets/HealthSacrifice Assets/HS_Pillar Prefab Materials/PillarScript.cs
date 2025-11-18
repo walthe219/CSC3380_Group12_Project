@@ -10,6 +10,9 @@ public class PillarScript : MonoBehaviour
     [SerializeField] public TextMeshProUGUI hsubox1;
     [SerializeField] public TextMeshProUGUI hsubox2;
     [SerializeField] public TextMeshProUGUI hsubox3;
+    [SerializeField] public TextMeshProUGUI MiddleID;
+    [SerializeField] public TextMeshProUGUI LeftID;
+    [SerializeField] public TextMeshProUGUI RightID;
     [SerializeField] GameObject HealthSacrificeMenu;
     [SerializeField] PlayerStats CurrentPlayerStats;
     private bool PillarMenuOpened;
@@ -62,20 +65,29 @@ public class PillarScript : MonoBehaviour
         //upgrade = upgradechoices[i]
         //currentstats.hp * upgrade.healthcostpercentage
         Debug.Log("Health Cost Percentage: " + upgradechoices[i].HealthCostPercent);
-        CurrentPlayerStats.health = CurrentPlayerStats.health * (1 - (upgradechoices[i].HealthCostPercent/100f));
+        CurrentPlayerStats.health = CurrentPlayerStats.health * (1 - (upgradechoices[i].HealthCostPercent/100f)); //successfully decrements health by Health Cost Percent
         Debug.Log("Health is now: " + CurrentPlayerStats.health);
-        
-        
+
+        //TODO: Whenever buy button is pressed, add upgrade stats to basestats double check that
+        //And subscribe addUpgrade to your event in the start method of UpgradeManager if u use an action
+
+
 
     }
 
-    public void DisplaySacrificeUpgrades(){
+    public void DisplaySacrificeUpgrades(){ //this method successfulldisplays 3 random upgrades in the menu
         UpgradeData[] sample = sacrificeSpace.samplePossibleUpgrades(3);
         upgradechoices = Array.ConvertAll(sample, element => (SacrificeUpgradeData) element);
 
-        hsubox1.text = upgradechoices[0].printDescription(ID:true, label:false, stats:true, descr:true);
-        hsubox2.text = upgradechoices[1].printDescription(ID:true, label:false, stats:true, descr:true);
-        hsubox3.text = upgradechoices[2].printDescription(ID:true, label:false, stats:true, descr:true);
+        hsubox1.text = upgradechoices[0].printDescription(ID:false, label:false, stats:true, descr:true);
+        hsubox2.text = upgradechoices[1].printDescription(ID:false, label:false, stats:true, descr:true);
+        hsubox3.text = upgradechoices[2].printDescription(ID:false, label:false, stats:true, descr:true);
+
+        LeftID.text = upgradechoices[0].ID;
+        MiddleID.text = upgradechoices[1].ID;
+        RightID.text = upgradechoices[2].ID;
+
+        //non-importatn todo: see if you can separate the name of the upgrade (ID) from the description, right now it looks pushed together
 
         //'refresh' method
         //new sample of three upgrades and display the upgrade information in the menu

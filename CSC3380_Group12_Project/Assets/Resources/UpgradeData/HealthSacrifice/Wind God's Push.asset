@@ -19,12 +19,12 @@ MonoBehaviour:
   moveSpeed: 0
   numJumps: 0
   slidePower: 0
-  dashPower: 0
-  ID: 
+  dashPower: 2
+  ID: Wind God's Push
   rarity: 0
   isRepeatable: 0
   prerequisites: []
   mutuallyExclusives: []
   unlocks: 
-  description: 
-  HealthCostPercent: 0
+  description: Lose 5% health and gain 2 additional dash power
+  HealthCostPercent: 5
