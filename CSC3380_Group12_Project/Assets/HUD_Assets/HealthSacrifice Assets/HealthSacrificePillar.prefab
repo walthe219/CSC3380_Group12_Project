@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6375556205316295523}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -67.61, y: -10.56, z: -66.59}
+  m_LocalPosition: {x: -69.08527, y: 33.47618, z: -54.091568}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -140,3 +140,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PillarScript
   OpenFromInteraction: {fileID: 8752911499231108124}
+  UIContainer: {fileID: 0}
+  HealthChange: {fileID: 0}
+  hsubox1: {fileID: 0}
+  hsubox2: {fileID: 0}
+  hsubox3: {fileID: 0}
+  rusure: {fileID: 0}
+  buybttn0: {fileID: 0}
+  buybttn1: {fileID: 0}
+  buybttn2: {fileID: 0}
+  MiddleID: {fileID: 0}
+  LeftID: {fileID: 0}
+  RightID: {fileID: 0}
+  HealthSacrificeMenu: {fileID: 0}
+  CurrentPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
+  q: 0
