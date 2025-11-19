@@ -8,16 +8,17 @@ public class PauseMenu : MonoBehaviour
     public GameObject optionsmenu;
     public GameObject UIContainer;
     public GameObject HSMenu;
+    public GameOverScreen gameoverscreen;
 
     // Update is called once per frame
     void Update()
     {
        if(Input.GetKeyDown(KeyCode.Escape)){
-            if(GameIsPaused){
-                Resume();
+            if(!GameIsPaused && !gameoverscreen.gosActive){
+                Pause();
             }
             else{
-                Pause();
+                Resume();
             }
        }
     }

@@ -18,6 +18,10 @@ MonoBehaviour:
   damage: 0
   moveSpeed: 7
   numJumps: 1
-  dashPower: 50
   slidePower: 200
-  RoomsComp: 0
+  dashPower: 50
+  magSize: 30
+  reloadSpeed: 0
+  FireCooldown: 0
+  numRoomsComp: 0
+  gunRange: 0

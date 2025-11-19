@@ -20,6 +20,7 @@ public class BubbleStatCollision : MonoBehaviour
                 gameObject.SetActive(false); //Deletes the object
                 // Add health here
                 CurrentPlayerStats.health += 10;
+                //CurrentPlayerStats.health -= 200; used to test game over screen
             }
 
             if(bubble.bubbleType == BubbleType.Type.Ammo){
