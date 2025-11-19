@@ -27,7 +27,7 @@ public class UpgradeableStatContainer: ScriptableObject
     public float dashPower;
     public float magSize;
     public float reloadSpeed;
-    public float FireCooldown;
+    public float Firerate;
 
     /*
      * HELPER FUNCTION for other methods: 
@@ -48,7 +48,7 @@ public class UpgradeableStatContainer: ScriptableObject
         slidePower = statChangeFunc(slidePower, other.slidePower,"Slide Power");
         magSize = statChangeFunc(magSize, other.magSize, "Magazine Size");
         reloadSpeed = statChangeFunc(reloadSpeed, other.reloadSpeed, "Reload Speed");
-        FireCooldown = statChangeFunc(FireCooldown, other.FireCooldown, "Fire Cooldown");
+        Firerate = statChangeFunc(Firerate, other.Firerate, "Firerate cooldown");
     }
 
     /*

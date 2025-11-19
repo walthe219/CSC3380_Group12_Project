@@ -15,11 +15,12 @@ public class GunScript : MonoBehaviour
     [SerializeField] PlayerStats currPlayerStats;
     [SerializeField] PlayerStats StartingStats;
     [SerializeField] PlayerStats BasePlayerStats;
-    public float FireCooldown; //gun's cooldown
+    public GameObject relaod_icon;
+    public float Firerate; //gun's cooldown
     public float currentFireCooldown;
     //public bool isAutomatic; if we decide to add automatic weapons
     public bool isReloading;
-    public int reloadDelay;
+    public int reloadDelay; //variable to set reload speed manully
 
     //public GameObject impactEffect;
 
@@ -27,9 +28,14 @@ public class GunScript : MonoBehaviour
 
     private void Start()
     {
-        currentFireCooldown = FireCooldown;
+        currentFireCooldown = Firerate;
         currPlayerStats.ammo = StartingStats.magSize;
-        SetReloadDelayTime(3);
+        BasePlayerStats.magSize = StartingStats.magSize;
+        BasePlayerStats.gunRange = StartingStats.gunRange;
+        BasePlayerStats.reloadSpeed = StartingStats.reloadSpeed;
+        BasePlayerStats.Firerate = StartingStats.Firerate;
+        BasePlayerStats.damage = StartingStats.damage;
+        BasePlayerStats.damage = currPlayerStats.damage;
     }
 
     private void OnEnable()
@@ -41,22 +47,25 @@ public class GunScript : MonoBehaviour
     {
         if (fireAction.WasPressedThisFrame() && currPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0 && !isReloading)
         {
-            if (currentFireCooldown <= 0f) //If statement checks if cooldown has reached 0
+            if (currPlayerStats.Firerate <= 0f) //If statement checks if cooldown has reached 0
             {
                 Shoot();
                 currPlayerStats.ammo--;
-                currentFireCooldown = FireCooldown; //reset the current cooldown to the gun's cooldown
+                currPlayerStats.Firerate = BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
                 Debug.Log("Resetting Firerate!");
             }
         }
-        if (currentFireCooldown > 0f)
+        if (currPlayerStats.Firerate > 0f)
         {
-            currentFireCooldown -= Time.deltaTime; //Decrements the cooldown "counter"
+            currPlayerStats.Firerate -= Time.deltaTime; //Decrements the cooldown "counter"
         }
         
         if (Input.GetKeyDown(KeyCode.R) && !isReloading)
         {
-            StartCoroutine(Reload());
+            if (currPlayerStats.ammo != BasePlayerStats.magSize)
+            {
+                StartCoroutine(Reload());
+            }
         }
     }
 
@@ -64,16 +73,18 @@ public class GunScript : MonoBehaviour
     {
         isReloading = true;
         Debug.Log("Reloading......");
+        relaod_icon.SetActive(true);
         yield return new WaitForSeconds(reloadDelay);
         currPlayerStats.ammo = BasePlayerStats.magSize;
         isReloading = false;
+        relaod_icon.SetActive(false);
         Debug.Log("Reloaded!");
 
     }
 
-    void SetReloadDelayTime(int reloadDelay)
+    void SetReloadDelayTime() //Set reload speed manually
     {
-        this.reloadDelay = reloadDelay;
+        BasePlayerStats.reloadSpeed = reloadDelay;
     }
     void Shoot()
     {
@@ -90,7 +101,7 @@ public class GunScript : MonoBehaviour
             if (target != null)
             {
 
-                target.TakeDamage(damage);
+                target.TakeDamage(currPlayerStats.damage);
 
             }
 

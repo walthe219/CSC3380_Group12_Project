@@ -1,16 +1,19 @@
-using UnityEngine;
 using System;
-using UnityEngine.Events;
-using TMPro;
 using System.Collections;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using static Codice.Client.Common.Servers.RecentlyUsedServers;
 
 public class PillarScript : MonoBehaviour
 {
     public Interact OpenFromInteraction;
     public GameObject UIContainer;
+    [SerializeField] public TextMeshProUGUI HealthChange;
     [SerializeField] public TextMeshProUGUI hsubox1;
     [SerializeField] public TextMeshProUGUI hsubox2;
     [SerializeField] public TextMeshProUGUI hsubox3;
+    [SerializeField] public GameObject rusure;
     [SerializeField] public GameObject buybttn0;
     [SerializeField] public GameObject buybttn1;
     [SerializeField] public GameObject buybttn2;
@@ -21,7 +24,10 @@ public class PillarScript : MonoBehaviour
     [SerializeField] PlayerStats CurrentPlayerStats;
     private bool PillarMenuOpened;
     SacrificeUpgradeData[] upgradechoices;
-    public event Action<Upgrade> UpgradePurchased; 
+    public event Action<Upgrade> UpgradePurchased;
+    public bool q;
+    private int pendingUpgradeIndex = -1;
+    
 
 
     UpgradeSpace sacrificeSpace; //Create UpgradeSpace for Health Sacrifice
@@ -30,7 +36,7 @@ public class PillarScript : MonoBehaviour
     public void Start(){
         sacrificeSpace = new UpgradeSpace(null, "HealthSacrifice"); 
         DisplaySacrificeUpgrades();
-        
+        q = false;
         
     }
 
@@ -67,30 +73,81 @@ public class PillarScript : MonoBehaviour
         }
     }
 
+    public void NoBttn()
+    {
+        Debug.Log("PUI is " + pendingUpgradeIndex);
+        rusure.SetActive(false);
+        if (pendingUpgradeIndex != -1)
+        {
+            CurrentPlayerStats.health = CurrentPlayerStats.health / (1 - (upgradechoices[pendingUpgradeIndex].HealthCostPercent / 100f));
+        }
+        if (pendingUpgradeIndex == -1)
+        {
+            Debug.Log("Make sure all buttons share the same instance of pillarscript!");
+        }
+
+    }
+
+    public void YesBttn()
+    {
+        rusure.SetActive(false);
+        Debug.Log(pendingUpgradeIndex);
+        if(pendingUpgradeIndex == -1)
+        {
+            Debug.Log("Make sure all buttons share the same instance of pillarscript!");
+        }
+        if (pendingUpgradeIndex != -1)
+        {
+            PurchaseUpgrade(pendingUpgradeIndex);
+            
+
+            
+        }
+    }
+
+    public void indexSelector(int i) {
+        pendingUpgradeIndex = i;
+        Debug.Log("index selector called with i = " + i);
+        Debug.Log("Health Cost Percentage: " + upgradechoices[pendingUpgradeIndex].HealthCostPercent);
+        CurrentPlayerStats.health = CurrentPlayerStats.health * (1 - (upgradechoices[pendingUpgradeIndex].HealthCostPercent / 100f)); //successfully decrements health by Health Cost Percent
+        Debug.Log("Health is now: " + CurrentPlayerStats.health);
+        HealthChange.text = CurrentPlayerStats.health.ToString();
+        rusure.SetActive(true);
+        
+
+        
+    }
+
     public void PurchaseUpgrade(int i){
         //upgrade = upgradechoices[i]
         //currentstats.hp * upgrade.healthcostpercentage
-        Debug.Log("Health Cost Percentage: " + upgradechoices[i].HealthCostPercent);
-        CurrentPlayerStats.health = CurrentPlayerStats.health * (1 - (upgradechoices[i].HealthCostPercent/100f)); //successfully decrements health by Health Cost Percent
-        Debug.Log("Health is now: " + CurrentPlayerStats.health);
+
+
+        /*Debug.Log("Health Cost Percentage: " + upgradechoices[i].HealthCostPercent);
+        CurrentPlayerStats.health = CurrentPlayerStats.health * (1 - (upgradechoices[i].HealthCostPercent / 100f)); //successfully decrements health by Health Cost Percent
+
+        Debug.Log("Health is now: " + CurrentPlayerStats.health);*/
         Upgrade purchasedUpgrade = new Upgrade(upgradechoices[i]);
-        UpgradePurchased?.Invoke(purchasedUpgrade);
-        if ( i == 0)
-        {
-            buybttn0.gameObject.SetActive(false);
-        }
-        else if(i == 1)
-        {
-            buybttn1.gameObject.SetActive(false);
-        }
-        else
-        {
-            buybttn2.gameObject.SetActive(false);
-        }
-        //TODO: Whenever buy button is pressed, add upgrade stats to basestats double check that
-        //And subscribe addUpgrade to your event in the start method of UpgradeManager if u use an action
+            UpgradePurchased?.Invoke(purchasedUpgrade);
+            if (i == 0)
+            {
+                buybttn0.gameObject.SetActive(false);
+            }
+            else if (i == 1)
+            {
+                buybttn1.gameObject.SetActive(false);
+            }
+            else
+            {
+                buybttn2.gameObject.SetActive(false);
+            }
+            
+        
+            //TODO: Whenever buy button is pressed, add upgrade stats to basestats double check that
+            //And subscribe addUpgrade to your event in the start method of UpgradeManager if u use an action
 
-
+        
+        
 
     }
 

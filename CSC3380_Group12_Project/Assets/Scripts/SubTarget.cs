@@ -14,7 +14,7 @@ public class SubTarget : MonoBehaviour
         {
             Debug.Log("The bitch is crippled!");
             Cripple(totalDmg);
-        } 
+        }
         else
         {
             limbHealth -= totalDmg;
@@ -25,6 +25,6 @@ public class SubTarget : MonoBehaviour
 
     void Cripple(float damage)
     {
-        target.TakeDamage(damage*0.5f, transform.name);
+        target.TakeDamage(damage * 0.5f, transform.name);
     }
 }
