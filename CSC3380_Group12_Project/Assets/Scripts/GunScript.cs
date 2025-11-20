@@ -60,7 +60,7 @@ public class GunScript : MonoBehaviour
             currPlayerStats.Firerate -= Time.deltaTime; //Decrements the cooldown "counter"
         }
         
-        if (Input.GetKeyDown(KeyCode.R) && !isReloading)
+        if (Input.GetKeyDown(KeyCode.R) && !isReloading && (currPlayerStats.ammo < BasePlayerStats.magSize))
         {
             if (currPlayerStats.ammo != BasePlayerStats.magSize)
             {

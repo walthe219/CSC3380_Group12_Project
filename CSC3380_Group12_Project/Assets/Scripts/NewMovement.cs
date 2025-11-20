@@ -57,7 +57,7 @@ public class NewMovement : MonoBehaviour
 
     [Header("Stamina")]
     public float curStamina;
-    private float maxStamina = 100f;
+    private float maxStamina;
     private float staminaRechargeDelay = 2f;
     private float staminaRechargeTimer;
     private float staminaRechargeRate = 20f;
@@ -114,7 +114,8 @@ public class NewMovement : MonoBehaviour
         body = GetComponent<Rigidbody>();
         body.freezeRotation = true;
         startYScale = transform.localScale.y;
-        curStamina = maxStamina;
+        //curStamina = maxStamina;
+        currPlayerStats.stamina = basePlayerStats.stamina;
         UnlockFunctions.UnlockDashEvent += unlockDash;
 
         if (InputSystem.actions)
@@ -170,9 +171,9 @@ public class NewMovement : MonoBehaviour
             maxJumpCount = basePlayerStats.numJumps;
         }
 
-        if (maxStamina != basePlayerStats.stamina)
+        if (currPlayerStats.stamina != basePlayerStats.stamina)
         {
-            maxStamina = basePlayerStats.stamina;
+            //maxStamina = basePlayerStats.stamina;
             staminaRechargeRate += 4;
         }
 
@@ -186,18 +187,18 @@ public class NewMovement : MonoBehaviour
         SpeedControl();
 
         // Start the recharge timer if stamina is below the max
-        if(isGrounded && curStamina != maxStamina)
+        if(isGrounded && currPlayerStats.stamina != basePlayerStats.stamina)
         {
             staminaRechargeTimer += Time.deltaTime;
         }
 
         // Start recharging stamina if stamina is below the max and the recharge timer has passed the delay
-        if(curStamina != maxStamina && staminaRechargeTimer >= staminaRechargeDelay)
+        if(currPlayerStats.stamina != basePlayerStats.stamina && staminaRechargeTimer >= staminaRechargeDelay)
         {
             StaminaRecharge();
         }
 
-        currPlayerStats.stamina = (int)curStamina;
+        //currPlayerStats.stamina = (int)curStamina;
 
         // Drag Handler
         if (isGrounded)
@@ -306,7 +307,7 @@ public class NewMovement : MonoBehaviour
         }
 
         // Can only dash if the stamina is at least 50
-        if (dash.WasPressedThisFrame() && curStamina >= 50 && (horzInput != 0 || vertInput != 0))
+        if (dash.WasPressedThisFrame() && currPlayerStats.stamina >= 50 && (horzInput != 0 || vertInput != 0))
         {
             Dash();
         }
@@ -438,7 +439,7 @@ public class NewMovement : MonoBehaviour
         moveSpeed = dashSpeed;
         isDashing = true;
         dashTime = maxDashTime;
-        curStamina -= 50;
+        currPlayerStats.stamina -= 50;
         staminaRechargeTimer = 0;
     }
 
@@ -455,8 +456,8 @@ public class NewMovement : MonoBehaviour
     // Passively recharges the player's stamina 
     private void StaminaRecharge()
     {
-        curStamina += staminaRechargeRate * Time.deltaTime;
-        curStamina = Mathf.Min(curStamina, maxStamina);
+        currPlayerStats.stamina += staminaRechargeRate * Time.deltaTime;
+        currPlayerStats.stamina = Mathf.Clamp(currPlayerStats.stamina, 0, basePlayerStats.stamina);
     }    
 
     // Checks if the player is standing on a slope
