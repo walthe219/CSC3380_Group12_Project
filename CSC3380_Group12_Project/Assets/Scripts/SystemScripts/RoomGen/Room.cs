@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -7,6 +7,7 @@ using UnityEngine;
 public class Room
 {
     public GameObject room { private set; get; } //Actual Room gameobject, contains all tiles, enemies, portal, camera
+    public (GameObject, Stack<GameObject>)[] tiles { private set; get; }
     public GameObject roomPortal { private set; get; } //Reference to room portal object in room
     public GameObject mainRoomPortal { private set; get; } //Reference to mainRoomPortal that is linked with this room's portal
     public GameObject roomCam { private set; get; } //Camera above room, can be used to display room preview
@@ -17,9 +18,10 @@ public class Room
     public int roomNum;
     public static int roomsCreated = 0;
 
-    public Room(GameObject room, GameObject roomPortal, GameObject mainRoomPortal, GameObject roomCam, UpgradeData upgradeReward, GameObject[] enemies)
+    public Room(GameObject room, (GameObject, Stack<GameObject>)[] tiles, GameObject roomPortal, GameObject mainRoomPortal, GameObject roomCam, UpgradeData upgradeReward, GameObject[] enemies)
     {
         this.room = room;
+        this.tiles = tiles;
         this.roomPortal = roomPortal;
         this.mainRoomPortal = mainRoomPortal;
         this.roomCam = roomCam;
@@ -37,6 +39,12 @@ public class Room
     //All actions that are performed to delete a room 
     public void delete()
     {
+        foreach (var tuple in tiles)
+        {
+            var tile = tuple.Item1;
+            var tileStack = tuple.Item2;
+            TilePooling.reclaimTile(tile, tileStack);
+        }
         Object.Destroy(room);
         mainRoomPortal.GetComponent<portalScript>().DeactivatePortal();
     }

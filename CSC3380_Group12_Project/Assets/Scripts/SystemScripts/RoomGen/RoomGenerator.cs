@@ -20,17 +20,15 @@ public static class RoomGenerator
     }
 
     //Returns an object of class Room, creates room GameObject made of four tiles with a portal linked to main, and a list of enemies
-    public static Room CreateRoom(Vector3 roomCenterPos, Object[] possibleTiles,float tileRadius,float gapSize,float roomHeight, GameObject portalLink, UpgradeData upgrade)
+    public static Room CreateRoom(Vector3 roomCenterPos, float tileRadius,float gapSize,float roomHeight, GameObject portalLink, UpgradeData upgrade)
     {
 
         GameObject room = new GameObject("Room");
-        Object[] prefab_arr = ArrayHelper.Clone(possibleTiles);
-        Stack<Object> tileStack = new Stack<Object>();
         GameObject[] placedTiles = new GameObject[4];
-        NavMeshSurface surface = room.AddComponent<NavMeshSurface>();
-
 
         //Place tiles down to create the room
+        (GameObject,Stack<GameObject>)[] selectedTiles = TilePooling.pullRandonTiles(4); 
+
         float totalRadius = gapSize / 2 + tileRadius;
         Vector3 pos = new Vector3(totalRadius, 0, -totalRadius);
     
@@ -45,7 +43,9 @@ public static class RoomGenerator
             }
             else pos.z *= -1;
 
-            placedTiles[i] = PlaceTile(getRandomTile(ref tileStack, prefab_arr), pos, 90 * i, room);
+            GameObject tile = selectedTiles[i].Item1;
+           
+            placedTiles[i] = PlaceTile(tile, pos, 90 * i, room);
         }
 
         //Create Camera for the room preview
@@ -66,6 +66,7 @@ public static class RoomGenerator
         room.transform.position = roomCenterPos;
 
         //ADD NAVMESH HERE
+        NavMeshSurface surface = room.AddComponent<NavMeshSurface>();
         surface.BuildNavMesh();
         room.layer = LayerMask.NameToLayer("Ground");
 
@@ -88,30 +89,21 @@ public static class RoomGenerator
             }
         }
 
-        return new Room(room, roomPortal, portalLink, roomCam,upgrade,enemies.ToArray());
+        return new Room(room,selectedTiles ,roomPortal, portalLink, null,upgrade,enemies.ToArray());
 
     }
 
-    /*
-     * Returns tile prebab from tileStack, and if empty randomly shuffles new tiles into the stack
-     */
-    private static GameObject getRandomTile(ref Stack<Object> tileStack, Object[]prefab_arr)
-    {
-        
-        if (tileStack.Count == 0)
-        {
-            tileStack = new Stack<Object>(ArrayHelper.Shuffle(ArrayHelper.Clone(prefab_arr)));
-        }
-        GameObject tile = (GameObject)tileStack.Pop();
-        return tile;
-    }
 
     /*
      * Creates a new tile child of the room at some point and rotation
      */
     private static GameObject PlaceTile(GameObject tile, Vector3 offset, float rotation, GameObject room)
     {
-        return Object.Instantiate(tile, offset, Quaternion.Euler(new Vector3(0, rotation, 0)), room.transform);
+        tile.transform.parent = room.transform;
+        tile.transform.position = offset;
+        tile.transform.rotation = Quaternion.Euler(new Vector3(0, rotation, 0));
+        tile.SetActive(true);
+        return tile;
     }
 
     /*private static GameObject createCamera()
