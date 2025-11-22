@@ -124,7 +124,7 @@ public static class RoomGenerator
                     enemies.Add(Object.Instantiate(enemyPrefab,child.position,child.rotation, room.transform));
                     child.GameObject().SetActive(false);
                 }
-                if (child.CompareTag("PortalPoint") || child.CompareTag("ConnectionPoint"))
+                if (child.CompareTag("PortalPoint") || child.CompareTag("ConnectionPoint") || child.CompareTag("LinkStartPoint") || child.CompareTag("LinkEndPoint"))
                 {
                     child.GameObject().SetActive(false);
                 }
