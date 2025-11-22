@@ -128,19 +128,6 @@ public class NewMovement : MonoBehaviour
             dash.Disable();
         }
 
-        //For portals to disable this script, through ControlScriptReference
-        ControlScriptReference.ScriptsEnabled += Enable;
-        ControlScriptReference.ScriptsDisabled += Disable;
-    }
-
-    private void Enable()
-    {
-        this.enabled = true;
-    }
-
-    private void Disable()
-    {
-        this.enabled = false;
     }
 
     private void Update()

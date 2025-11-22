@@ -15,18 +15,16 @@ public class ControlScriptReference : MonoBehaviour
     [SerializeField] MonoBehaviour lookScript;
     public GameObject ParentObject;
 
-    //Move and Look scripts need to subscribe to these events so they know when to disable and enable themselves
-    public static event Action ScriptsDisabled;
-    public static event Action ScriptsEnabled;
-
 
     //When this script is disabled or enabled by portalScript, call event for Control scripts to do the same
     private void OnDisable()
     {
-        ScriptsDisabled?.Invoke();
+        moveScript.enabled = false;
+        lookScript.enabled = false;
     }
     private void OnEnable()
     {
-        ScriptsEnabled?.Invoke();
+        moveScript.enabled = true;
+        lookScript.enabled = true;
     }
 }

@@ -12,6 +12,7 @@ public static class RoomGenerator
     static GameObject camPrefab;
     static GameObject portalPrefab;
     static GameObject enemyPrefab;
+
     public static void initializePrefabs(GameObject cam, GameObject portal,GameObject enemy)
     {
         camPrefab = cam;
@@ -20,7 +21,7 @@ public static class RoomGenerator
     }
 
     //Returns an object of class Room, creates room GameObject made of four tiles with a portal linked to main, and a list of enemies
-    public static Room CreateRoom(Vector3 roomCenterPos, Object[] possibleTiles,float tileRadius,float gapSize,float roomHeight, GameObject portalLink, UpgradeData upgrade)
+    public static Room CreateRoom(Vector3 roomCenterPos, Object[] possibleTiles,float tileRadius,float gapSize,float roomHeight, GameObject portalLink, UpgradeData upgrade, List<GameObject> enemies)
     {
 
         GameObject room = new GameObject("Room");
@@ -28,6 +29,8 @@ public static class RoomGenerator
         Stack<Object> tileStack = new Stack<Object>();
         GameObject[] placedTiles = new GameObject[4];
         NavMeshSurface surface = room.AddComponent<NavMeshSurface>();
+        BoxCollider teleportCollider = room.AddComponent<BoxCollider>();
+        TagSearcher search = new TagSearcher();
 
 
         //Place tiles down to create the room
@@ -65,12 +68,48 @@ public static class RoomGenerator
         roomPortalScript.LinkPortal(portalLink);
         room.transform.position = roomCenterPos;
 
+        teleportCollider.center = new Vector3(0, -30f, 0);
+        teleportCollider.size = new Vector3(100f, 0, 100f);
+
+        /*GameObject[] linkStartPoints = search.search("LinkStartPoint", room.transform, 1);
+        GameObject[] linkEndPoints = search.search("LinkEndPoint", room.transform, 1);*/
+
+        GameObject[] linkStartPoints = GameObject.FindGameObjectsWithTag("LinkStartPoint");
+        GameObject[] linkEndPoints = GameObject.FindGameObjectsWithTag("LinkEndPoint");
+
+        NavMeshLink link;
+        float nearest;
+        float dist;
+        GameObject nearestPoint;
+        foreach (GameObject sPoint in linkStartPoints)
+        {
+            nearest = 10000;
+            nearestPoint = null;
+            foreach (GameObject ePoint in linkEndPoints)
+            {
+                dist = Vector3.Distance(sPoint.transform.position, ePoint.transform.position);
+
+                if (dist < nearest)
+                {
+                    nearest = dist;
+                    nearestPoint = ePoint;
+                }
+            }
+            link = room.AddComponent<NavMeshLink>();
+            if (link != null && nearestPoint != null)
+            {
+                link.startTransform = sPoint.transform;
+                link.endTransform = nearestPoint.transform;
+            }
+            
+        }
+
         //ADD NAVMESH HERE
         surface.BuildNavMesh();
         room.layer = LayerMask.NameToLayer("Ground");
 
         //Spawn enemies, set NavMesh target destination
-        List<GameObject> enemies = new List<GameObject>();
+        enemies = new List<GameObject>();
         foreach(GameObject tile in placedTiles)
         {
             foreach(Transform child in tile.transform)
@@ -83,6 +122,10 @@ public static class RoomGenerator
                         enemyPrefab.GetComponent<RunnerBehavior>().playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
                     }
                     enemies.Add(Object.Instantiate(enemyPrefab,child.position,child.rotation, room.transform));
+                    child.GameObject().SetActive(false);
+                }
+                if (child.CompareTag("PortalPoint") || child.CompareTag("ConnectionPoint"))
+                {
                     child.GameObject().SetActive(false);
                 }
             }

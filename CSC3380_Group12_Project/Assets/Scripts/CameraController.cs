@@ -41,21 +41,7 @@ public class CameraController : MonoBehaviour
             OnEnable();
         }
 
-        //For portals to disable this script, through ControlScriptReference
-        ControlScriptReference.ScriptsEnabled += Enable;
-        ControlScriptReference.ScriptsDisabled += Disable;
-
     }
-    private void Enable()
-    {
-        this.enabled = true;
-    }
-
-    private void Disable()
-    {
-        this.enabled = false;
-    }
-
     // Update is called once per frame
     void Update()
     {

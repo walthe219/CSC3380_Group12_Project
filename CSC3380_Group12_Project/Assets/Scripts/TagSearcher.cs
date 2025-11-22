@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class TagSearcher
 {
-    private ArrayList objs = new ArrayList();
+    private List<GameObject> objs = new List<GameObject>();
     private int depth;
 
     void FindTaggedObject(string tag, Transform parent, int deep)
@@ -26,10 +28,10 @@ public class TagSearcher
 
     }
 
-    public ArrayList search(string tag, Transform parent, int depth)
+    public GameObject[] search(string tag, Transform parent, int depth)
     {
         this.depth = depth;
-        FindTaggedObject(tag, parent, depth);
-        return objs;
+        FindTaggedObject(tag, parent, 0);
+        return objs.ToArray();
     }
 }

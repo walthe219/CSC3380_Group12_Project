@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 /*
  * Manages the creation of rooms, assignment of rooms to portals, assigment of upgrades to rooms, and deletion of rooms
@@ -34,6 +35,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] Room currentlySelectedRoom;
     [SerializeField] int currentEnemiesAlive;
     [SerializeField] PlayerStats currPlayerStats;
+    [SerializeField] List<GameObject> enemies;
     //[SerializeField] string[] roomNames;
     //------------------------------------------
 
@@ -96,7 +98,7 @@ public class RoomManager : MonoBehaviour
             Vector3 roomPos = new Vector3(xDir*roomGenDistance,roomGenHeight,zDir*roomGenDistance);
 
 
-            rooms[i] = RoomGenerator.CreateRoom(roomPos, prefab_arr, tileRadius, gapSize, roomHeight, mainRoomPortals[i], potentialRoomRewards[i]); //create new 
+            rooms[i] = RoomGenerator.CreateRoom(roomPos, prefab_arr, tileRadius, gapSize, roomHeight, mainRoomPortals[i], potentialRoomRewards[i], enemies); //create new 
 
             mainRoomTextDisplays[i].GetComponent<TextDisplay>().changeText(potentialRoomRewards[i].ID);
         }

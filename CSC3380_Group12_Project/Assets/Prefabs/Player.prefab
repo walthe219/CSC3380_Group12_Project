@@ -87,6 +87,8 @@ MonoBehaviour:
   orientation: {fileID: 6441505164593188938}
   state: 0
   isSliding: 0
+  currPlayerStats: {fileID: 0}
+  basePlayerStats: {fileID: 0}
   jumpPower: 12
   maxJumpCount: 4
   airMultiplier: 0.4
@@ -96,7 +98,6 @@ MonoBehaviour:
   maxDashTime: 3
   isDashing: 0
   dashDrag: 0
-  currPlayerStats: {fileID: 0}
   curStamina: 0
   groundMask:
     serializedVersion: 2
@@ -162,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   orientation: {fileID: 6441505164593188938}
   playerObj: {fileID: 5049115436650554024}
-  currPlayerStats: {fileID: 0}
+  basePlayerStats: {fileID: 0}
   maxSlideTime: 0.75
   slideForce: 200
   move:

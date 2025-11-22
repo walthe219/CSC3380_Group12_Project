@@ -11,6 +11,7 @@ TagManager:
   - HealthBar
   - LinkStartPoint
   - LinkEndPoint
+  - ConnectionPoint
   layers:
   - Default
   - TransparentFX
