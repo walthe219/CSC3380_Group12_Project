@@ -7,7 +7,7 @@ using System.Collections;
 public class GunScript : MonoBehaviour
 {
     public float damage = 10f;
-    //public float range = 100f;
+    public float range = 100f;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
@@ -92,7 +92,7 @@ public class GunScript : MonoBehaviour
         muzzleFlash.Play();
 
         RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, currPlayerStats.gunRange)) 
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) //chasnge to currplayter stats gunrange
         {
 
             //Debug.Log(hit.transform.name);
@@ -101,7 +101,7 @@ public class GunScript : MonoBehaviour
             if (target != null)
             {
 
-                target.TakeDamage(currPlayerStats.damage);
+                target.TakeDamage(damage);
 
             }
 

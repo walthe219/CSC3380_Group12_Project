@@ -187,13 +187,13 @@ public class NewMovement : MonoBehaviour
         SpeedControl();
 
         // Start the recharge timer if stamina is below the max
-        if(isGrounded && currPlayerStats.stamina != basePlayerStats.stamina)
+        if(isGrounded && currPlayerStats.stamina < basePlayerStats.stamina)
         {
             staminaRechargeTimer += Time.deltaTime;
         }
 
         // Start recharging stamina if stamina is below the max and the recharge timer has passed the delay
-        if(currPlayerStats.stamina != basePlayerStats.stamina && staminaRechargeTimer >= staminaRechargeDelay)
+        if(currPlayerStats.stamina < basePlayerStats.stamina && staminaRechargeTimer >= staminaRechargeDelay)
         {
             StaminaRecharge();
         }
