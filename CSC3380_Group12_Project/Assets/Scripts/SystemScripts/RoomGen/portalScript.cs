@@ -15,11 +15,8 @@ public class portalScript : MonoBehaviour
     [SerializeField] GameObject portalFrame; //Game object representing the teleporter ring/frame
     [SerializeField] Collider portalCollider;
     [SerializeField] Collider portalHitboxCollider;
-
     public float portalHealth = 50f;
 
-    //static MonoBehaviour movementScript  = null;
-    //static MonoBehaviour lookScript = null;
     static ControlScriptReference reference = null;
     static bool teleportOnCoolDown = false;
     static float staticTimerStart = float.NaN;
@@ -29,6 +26,13 @@ public class portalScript : MonoBehaviour
     public event Action<GameObject> PlayerEnterPortal;
     //public event Action<GameObject> PlayerArrivePortal;
 
+    private void Awake()
+    {
+        if (destination == null)
+        {
+            DeactivatePortal();
+        }
+    }
     private void OnTriggerEnter(Collider other)
     { 
         if (other.tag.Equals("Player"))
@@ -49,23 +53,6 @@ public class portalScript : MonoBehaviour
 
             //Disable controller scripts so teleport is not overwritten by these scripts
             reference.enabled = false;
-
-
-            /*movementScript = other.GetComponent<NewMovement>();
-            if (movementScript == null)
-            {
-                Debug.LogError("Change move script name in portalScript code GetComponent<SCRIPT NAME HERE>");
-                return;
-            }
-            lookScript = other.GetComponent<cameraScript>();
-            if (lookScript == null)
-            {
-                Debug.LogError("Change look script name in portalScript code GetComponent<SCRIPT NAME HERE>");
-                return;
-            }*/
-            //movementScript.enabled = false;
-            //lookScript.enabled = false;
-
 
             //Teleport player
             GameObject objToTeleport = reference.ParentObject;
@@ -153,18 +140,15 @@ public class portalScript : MonoBehaviour
         }
 
         setDestination(other.transform);
-        ActivatePortal();
-        
         otherScript.setDestination(this.transform);
-        otherScript.ActivatePortal();
 
-        //OnArrive could possibly be useful, but this implementation is terrible idea, maybe can find a solution
-        //PlayerEnterPortal += otherScript.PlayerArrivePortal;         
+        //PlayerEnterPortal += otherScript.PlayerArrivePortal;  //OnArrive could possibly be useful, but this implementation is terrible idea, maybe can find a solution
         //otherScript.PlayerEnterPortal+= PlayerArrivePortal;
     }
 
     public void setDestination(Transform pos)
     {
         destination = pos;
+        ActivatePortal();
     }
 }

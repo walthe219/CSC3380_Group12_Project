@@ -25,7 +25,19 @@ public class newMoveScript : MonoBehaviour
         controller = GetComponent<CharacterController>();
         move = InputSystem.actions.FindAction("Move");
         jump = InputSystem.actions.FindAction("Jump");
+        ControlScriptReference.ScriptsDisabled += Disable;
+        ControlScriptReference.ScriptsEnabled += Enable;
     }
+
+    void Enable()
+    {
+        this.enabled = true;
+    }
+    void Disable()
+    {
+        this.enabled = false;
+    }
+
 
     private void Update()
     {

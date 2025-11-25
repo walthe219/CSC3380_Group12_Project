@@ -9,7 +9,8 @@ public class RoomManager : MonoBehaviour
 {
     [Header("Tile Prefabs")]
     [SerializeField] string prefabFolderPath = "Tiles";
-    [SerializeField] UnityEngine.Object[] prefab_arr;
+    [SerializeField] Vector3 poolingLocation = Vector3.zero;
+    //[SerializeField] UnityEngine.Object[] prefab_arr;
 
     [Header("RoomGen")]
     [SerializeField] float roomGenDistance = 500;
@@ -64,7 +65,7 @@ public class RoomManager : MonoBehaviour
 
     private void Start()
     {
-        prefab_arr = Resources.LoadAll(prefabFolderPath, typeof(GameObject));
+        TilePooling.initialize(prefabFolderPath, poolingLocation);
         RoomGenerator.initializePrefabs(cameraPrefab, portalPrefab,enemyPrefab);
         Array.ForEach(mainRoomPortals, obj => obj.GetComponent<portalScript>().PlayerEnterPortal += selectLinkedRoom);
         generateRoomTest();
@@ -80,9 +81,9 @@ public class RoomManager : MonoBehaviour
         if (rooms != null)
         {
             Debug.Log("Destroying leftover rooms");
-            Array.ForEach(rooms, room => { if (room == null) deleteRoom(room);});
+            Array.ForEach(rooms, room => { if (room != null) deleteRoom(room);});
         }
-        rooms = new Room[4];
+            rooms = new Room[numRooms];
 
         //Direct Reference to Singleton UpgradeManager, UpgradeManager needed in scene for RoomManager to run, should try to use observer design pattern instead
         UpgradeData[] potentialRoomRewards = UpgradeManager.Instance.samplePossibleUpgrades(4);
@@ -97,9 +98,7 @@ public class RoomManager : MonoBehaviour
 
             Vector3 roomPos = new Vector3(xDir*roomGenDistance,roomGenHeight,zDir*roomGenDistance);
 
-
-            rooms[i] = RoomGenerator.CreateRoom(roomPos, prefab_arr, tileRadius, gapSize, roomHeight, mainRoomPortals[i], potentialRoomRewards[i], enemies); //create new 
-
+            rooms[i] = RoomGenerator.CreateRoom(roomPos, tileRadius, gapSize, roomHeight, mainRoomPortals[i], potentialRoomRewards[i], enemies); //create new 
             mainRoomTextDisplays[i].GetComponent<TextDisplay>().changeText(potentialRoomRewards[i].ID);
         }
     }
