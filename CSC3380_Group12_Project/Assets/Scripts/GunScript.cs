@@ -20,7 +20,7 @@ public class GunScript : MonoBehaviour
     public float currentFireCooldown;
     //public bool isAutomatic; if we decide to add automatic weapons
     public bool isReloading;
-    public int reloadDelay; //variable to set reload speed manully
+    public float reloadDelay; //variable to set reload speed manully
 
     //public GameObject impactEffect;
 
@@ -29,13 +29,13 @@ public class GunScript : MonoBehaviour
     private void Start()
     {
         currentFireCooldown = Firerate;
-        currPlayerStats.ammo = StartingStats.magSize;
-        BasePlayerStats.magSize = StartingStats.magSize;
-        BasePlayerStats.gunRange = StartingStats.gunRange;
-        BasePlayerStats.reloadSpeed = StartingStats.reloadSpeed;
-        BasePlayerStats.Firerate = StartingStats.Firerate;
-        BasePlayerStats.damage = StartingStats.damage;
-        BasePlayerStats.damage = currPlayerStats.damage;
+        currPlayerStats.ammo = currPlayerStats.magSize;
+        currPlayerStats.magSize = BasePlayerStats.magSize;
+        currPlayerStats.gunRange = BasePlayerStats.gunRange;
+        currPlayerStats.reloadSpeed = BasePlayerStats.reloadSpeed;
+        currPlayerStats.Firerate = BasePlayerStats.Firerate;
+        currPlayerStats.damage = BasePlayerStats.damage;
+
     }
 
     private void OnEnable()
@@ -74,6 +74,7 @@ public class GunScript : MonoBehaviour
         isReloading = true;
         Debug.Log("Reloading......");
         relaod_icon.SetActive(true);
+        reloadDelay = currPlayerStats.reloadSpeed;
         yield return new WaitForSeconds(reloadDelay);
         currPlayerStats.ammo = BasePlayerStats.magSize;
         isReloading = false;
