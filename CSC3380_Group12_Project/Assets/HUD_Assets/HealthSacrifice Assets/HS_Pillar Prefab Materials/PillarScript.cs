@@ -73,6 +73,16 @@ public class PillarScript : MonoBehaviour
         }
     }
 
+    public void BackBttn() {
+        Debug.Log("Closed Pillar Menu");
+        Time.timeScale = 1f;
+        Cursor.visible = false;            // Hide cursor during gameplay
+        Cursor.lockState = CursorLockMode.Locked;
+        HealthSacrificeMenu.SetActive(false);
+        PillarMenuOpened = false;
+        UIContainer.SetActive(true);
+    }
+
     public void NoBttn()
     {
         Debug.Log("PUI is " + pendingUpgradeIndex);
