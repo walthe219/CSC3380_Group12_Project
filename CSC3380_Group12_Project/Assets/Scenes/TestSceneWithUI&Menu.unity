@@ -720,7 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0113fd7058a604e936e273047b0437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  sensitivity: 2
+  sensitivity: 0
   orientation: {fileID: 1434335827}
   look:
     m_Name: Look
@@ -1523,7 +1523,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 120
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4657,27 +4657,27 @@ MonoBehaviour:
   m_HandleRect: {fileID: 878914768}
   m_Direction: 0
   m_MinValue: 5
-  m_MaxValue: 300
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 120
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240687983}
-        m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-        m_MethodName: SetMouseSensitivity
+      - m_Target: {fileID: 623915524}
+        m_TargetAssemblyTypeName: MouseSensDisplay, Scripts
+        m_MethodName: SetSensitivity
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 20
+          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 623915524}
-        m_TargetAssemblyTypeName: MouseSensDisplay, Assembly-CSharp
-        m_MethodName: SetSensitivity
+      - m_Target: {fileID: 240687983}
+        m_TargetAssemblyTypeName: CameraController, Scripts
+        m_MethodName: SetMouseSensitivity
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

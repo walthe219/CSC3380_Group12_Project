@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        sensitivity = 60f;
+        sensitivity = 10f;
         // Hides + Locks Cursor to center of screen
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
