@@ -21,6 +21,7 @@ public class PillarScript : MonoBehaviour
     [SerializeField] public TextMeshProUGUI LeftID;
     [SerializeField] public TextMeshProUGUI RightID;
     [SerializeField] GameObject HealthSacrificeMenu;
+    [SerializeField] RoomManager RoomManager;
     [SerializeField] PlayerStats CurrentPlayerStats;
     private bool PillarMenuOpened;
     SacrificeUpgradeData[] upgradechoices;
@@ -44,12 +45,16 @@ public class PillarScript : MonoBehaviour
         if(OpenFromInteraction){
             OpenFromInteraction.GetinteractEvent.HasInteracted += OpenPillarMenu;
         }
+
+        RoomManager.RoomCleared += DisplaySacrificeUpgrades;
     }
 
     private void OnDisable(){
         if(OpenFromInteraction){
             OpenFromInteraction.GetinteractEvent.HasInteracted -= OpenPillarMenu;
         }
+
+        RoomManager.RoomCleared += DisplaySacrificeUpgrades;
     }
 
     public void OpenPillarMenu(){
