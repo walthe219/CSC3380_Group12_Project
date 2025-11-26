@@ -80,6 +80,10 @@ public class GunScript : MonoBehaviour
             }
         }
 
+        if (currPlayerStats.ammo == 0 && !isReloading) {
+            StartCoroutine(Reload());
+        }
+
         //Stat Updater Section
         //Since parameters dont like to take in "currplayerstats.blah" I am updating these values every frame
         
