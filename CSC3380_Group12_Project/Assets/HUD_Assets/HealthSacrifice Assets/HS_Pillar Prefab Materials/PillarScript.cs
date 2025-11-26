@@ -121,7 +121,7 @@ public class PillarScript : MonoBehaviour
         Debug.Log("Health Cost Percentage: " + upgradechoices[pendingUpgradeIndex].HealthCostPercent);
         CurrentPlayerStats.health = CurrentPlayerStats.health * (1 - (upgradechoices[pendingUpgradeIndex].HealthCostPercent / 100f)); //successfully decrements health by Health Cost Percent
         Debug.Log("Health is now: " + CurrentPlayerStats.health);
-        HealthChange.text = CurrentPlayerStats.health.ToString();
+        HealthChange.text = "Health after purchase: " + CurrentPlayerStats.health.ToString();
         rusure.SetActive(true);
         
 
@@ -184,3 +184,9 @@ public class PillarScript : MonoBehaviour
     }
 
 }
+
+//*******NOTE************: If it looks like the upgrades are being applied via index[i+1] make sure you are using the scene cthulhu idol instance for the indexSelector methods
+//in the inspector of th ebuttons instead of the TEST healthsacrificepillar
+
+//ALSO! if the buttons seem to work and health isbeing decremented and health change is working but the upgrades seem like they are not applying at all? Go to UpgradeManager and make
+//sure it is using the same instance as teh rest

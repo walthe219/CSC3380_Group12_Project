@@ -31,12 +31,10 @@ public class GunScript : MonoBehaviour
         currentFireCooldown = Firerate;
         currPlayerStats.ammo = currPlayerStats.magSize;
         currPlayerStats.magSize = BasePlayerStats.magSize;
-        currPlayerStats.gunRange = BasePlayerStats.gunRange;
         currPlayerStats.reloadSpeed = BasePlayerStats.reloadSpeed;
         currPlayerStats.Firerate = BasePlayerStats.Firerate;
-        currPlayerStats.damage = BasePlayerStats.damage;
-        damage = currPlayerStats.damage; //Damage for takedamage function since weird behavior is encountered when just currplayerstats.blah is inpuit as parameter
-        range = currPlayerStats.gunRange; //^^ same here
+        currPlayerStats.damage = BasePlayerStats.damage; //Damage for takedamage function since weird behavior is encountered when just currplayerstats.blah is inpuit as parameter
+        currPlayerStats.gunRange = BasePlayerStats.gunRange; //^^ same here
     }
 
     private void OnEnable()

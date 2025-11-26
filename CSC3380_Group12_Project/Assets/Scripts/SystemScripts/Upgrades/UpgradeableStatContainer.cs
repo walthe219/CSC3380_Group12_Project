@@ -28,6 +28,7 @@ public class UpgradeableStatContainer: ScriptableObject
     public float magSize;
     public float reloadSpeed;
     public float Firerate;
+    public float gunRange;
 
     /*
      * HELPER FUNCTION for other methods: 
@@ -46,9 +47,11 @@ public class UpgradeableStatContainer: ScriptableObject
         moveSpeed = statChangeFunc(moveSpeed, other.moveSpeed, "Move Speed");
         numJumps = (int)statChangeFunc(numJumps, other.numJumps, "Jumps");
         slidePower = statChangeFunc(slidePower, other.slidePower,"Slide Power");
+        dashPower = statChangeFunc(dashPower, other.dashPower, "Dash Power");
         magSize = statChangeFunc(magSize, other.magSize, "Magazine Size");
         reloadSpeed = statChangeFunc(reloadSpeed, other.reloadSpeed, "Reload Speed");
         Firerate = statChangeFunc(Firerate, other.Firerate, "Firerate cooldown");
+        gunRange = statChangeFunc(gunRange, other.gunRange, "Gun Range");
     }
 
     /*

@@ -51,7 +51,7 @@ public class healthUIMngr : MonoBehaviour
 
     void healthtoText(){
          if(HealthDisplay != null){
-            HealthDisplay.text = CurrentPlayerStats.health.ToString();
+            HealthDisplay.text = (Mathf.Ceil((int)CurrentPlayerStats.health)).ToString() + "/" + (Mathf.Ceil((int)DefaultStats.health)).ToString();
         }
         else{
             Debug.Log("Health is null");

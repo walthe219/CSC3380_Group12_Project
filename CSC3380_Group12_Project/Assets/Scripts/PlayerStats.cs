@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerStats : UpgradeableStatContainer
 {
     public int numRoomsComp;
-    public int gunRange;
+    
     private void OnEnable(){
         
     }

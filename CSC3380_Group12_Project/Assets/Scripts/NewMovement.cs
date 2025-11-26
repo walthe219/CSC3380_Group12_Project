@@ -171,7 +171,7 @@ public class NewMovement : MonoBehaviour
             maxJumpCount = basePlayerStats.numJumps;
         }
 
-        if (currPlayerStats.stamina != basePlayerStats.stamina)
+        if (currPlayerStats.stamina < basePlayerStats.stamina)
         {
             //maxStamina = basePlayerStats.stamina;
             staminaRechargeRate += 4;

@@ -22,6 +22,6 @@ MonoBehaviour:
   dashPower: 50
   magSize: 30
   reloadSpeed: 5
-  Firerate: 0
+  Firerate: 1
+  gunRange: 50
   numRoomsComp: 0
-  gunRange: 0

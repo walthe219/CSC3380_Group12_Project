@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: CurrentPlayerStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   health: 100
-  stamina: 100
-  ammo: 37
+  stamina: 110
+  ammo: 39
   damage: 999
   moveSpeed: 7
   numJumps: 1
   slidePower: 200
-  dashPower: 0
+  dashPower: 50
   magSize: 30
   reloadSpeed: 5
-  Firerate: 0
-  numRoomsComp: 0
-  gunRange: 0
+  Firerate: -0.09289436
+  gunRange: 50
+  numRoomsComp: 1
