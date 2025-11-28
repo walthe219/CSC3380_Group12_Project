@@ -13,6 +13,8 @@ public class GunScript : MonoBehaviour
     public GameObject relaod_icon;
     public bool isReloading;
     public float reloadDelay; //variable to set reload speed manully
+    public bool isAuto;
+    public bool AutoUnlocked;
 
     //public GameObject impactEffect;
 
@@ -21,13 +23,32 @@ public class GunScript : MonoBehaviour
     private void OnEnable()
     {
         fireAction = InputSystem.actions.FindAction("Fire");
+        UnlockFunctions.UnlockAutoFireEvent += unlockAutoFire;
+    }
+
+
+    public void unlockAutoFire() {
+        AutoUnlocked = true;
+    }
+
+    public void toggleAutoFire() { 
+        isAuto = !isAuto;
+        if (isAuto)
+        {
+            Debug.Log("Automatic was toggled on");
+        }
+        if (!isAuto)
+        {
+            Debug.Log("Automatic was toggled off");
+        }
+
     }
 
     void Update()
     {
         //NOTE: gunrange and damage work as intended as of 11/25/25
 
-        if (fireAction.WasPressedThisFrame() && currPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0 && !isReloading)
+        if (fireAction.WasPressedThisFrame() && currPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0 && !isReloading && !isAuto)
         {
 
             if (currPlayerStats.Firerate <= 0f) //If statement checks if cooldown has reached 0
@@ -39,6 +60,18 @@ public class GunScript : MonoBehaviour
                 Debug.Log("Resetting Firerate!");
             }
         }
+
+        if (fireAction.IsPressed() && currPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0 && !isReloading && AutoUnlocked && isAuto) { //AutoShoot
+            if (currPlayerStats.Firerate <= 0f) //If statement checks if cooldown has reached 0
+            {
+
+                Shoot();
+                currPlayerStats.ammo--;
+                currPlayerStats.Firerate = BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
+                Debug.Log("Resetting Firerate!");
+            }
+        }
+
         if (currPlayerStats.Firerate > 0f)
         {
             currPlayerStats.Firerate -= Time.deltaTime; //Decrements the cooldown "counter"
@@ -56,9 +89,23 @@ public class GunScript : MonoBehaviour
             StartCoroutine(Reload());
         }
 
-        //Stat Updater Section
-        //Since parameters dont like to take in "currplayerstats.blah" I am updating these values every frame
-        
+        if (Input.GetKeyDown(KeyCode.T) && AutoUnlocked)
+        {
+            toggleAutoFire();
+        }
+
+    }
+
+    private void Start()
+    {
+        /*
+        AutoUnlocked = true;
+        isAuto = true;
+        Automatic firing and togglign works as intended when both are true
+        */
+
+        AutoUnlocked = false; //Only turns truew when player completes room with unlockfireauto upgrade, then the event triggers, and the subscriber function in this script sets 
+        //AutoUnlocked to true
     }
 
     IEnumerator Reload()
