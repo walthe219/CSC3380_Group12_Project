@@ -11,10 +11,13 @@ public class GunScript : MonoBehaviour
     [SerializeField] PlayerStats currPlayerStats;
     [SerializeField] PlayerStats BasePlayerStats;
     public GameObject relaod_icon;
+    public GameObject SemiToggle_icon;
+    public GameObject AutoToggle_icon;
     public bool isReloading;
     public float reloadDelay; //variable to set reload speed manully
     public bool isAuto;
     public bool AutoUnlocked;
+    public bool LifeStealUnlocked;
 
     //public GameObject impactEffect;
 
@@ -24,6 +27,7 @@ public class GunScript : MonoBehaviour
     {
         fireAction = InputSystem.actions.FindAction("Fire");
         UnlockFunctions.UnlockAutoFireEvent += unlockAutoFire;
+        UnlockFunctions.UnlockLifeStealEvent += unlockLifeSteal;
     }
 
 
@@ -31,15 +35,25 @@ public class GunScript : MonoBehaviour
         AutoUnlocked = true;
     }
 
+    public void unlockLifeSteal()
+    {
+        LifeStealUnlocked = true;
+        SemiToggle_icon.SetActive(true);
+    }
+
     public void toggleAutoFire() { 
         isAuto = !isAuto;
         if (isAuto)
         {
             Debug.Log("Automatic was toggled on");
+            SemiToggle_icon.SetActive(false);
+            AutoToggle_icon.SetActive(true);
         }
         if (!isAuto)
         {
             Debug.Log("Automatic was toggled off");
+            SemiToggle_icon.SetActive(true);
+            AutoToggle_icon.SetActive(false);
         }
 
     }
@@ -106,6 +120,7 @@ public class GunScript : MonoBehaviour
 
         AutoUnlocked = false; //Only turns truew when player completes room with unlockfireauto upgrade, then the event triggers, and the subscriber function in this script sets 
         //AutoUnlocked to true
+        LifeStealUnlocked = false; //Remember to set to false
     }
 
     IEnumerator Reload()
@@ -142,11 +157,30 @@ public class GunScript : MonoBehaviour
             {
 
                 target.TakeDamage(currPlayerStats.damage);
+                if (LifeStealUnlocked) {
+                    currPlayerStats.health = (float)(currPlayerStats.health + (currPlayerStats.damage * 0.10)); //If LifeSteal Upgrade is unlocked, then whena player successfully
+                    //hits an enemy they gain a percentage of the damage they deal to their health
+                    //Otherwise, if they miss they lose that percentage of health
+                }
 
+            }
+            else
+            {
+                Debug.Log("You hit something other than the target!");
+                if (LifeStealUnlocked)
+                {
+                    currPlayerStats.health = (float)(currPlayerStats.health - (currPlayerStats.damage * 0.10)); //Where the player loses the percentage of health if they miss
+                }
             }
 
             //Instantiate(impactEffect, hit.point, Quaternion.LookRotation(-hit.normal));
 
+        }
+        else {
+            Debug.Log("You completely missed lmao");
+            if (LifeStealUnlocked) {
+                currPlayerStats.health = (float)(currPlayerStats.health - (currPlayerStats.damage * 0.10)); //Where the player loses the percentage of health if they miss
+            }
         }
 
     }
