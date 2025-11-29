@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae0260b369258842b9c1383fe8d6186, type: 3}
-  m_Name: Parasitic Bullets
-  m_EditorClassIdentifier: Scripts::SacrificeUpgradeData
+  m_Script: {fileID: 11500000, guid: 91c814496a69e754db46ecded53c7d8c, type: 3}
+  m_Name: More Gun Range
+  m_EditorClassIdentifier: Scripts::UpgradeData
   health: 0
   stamina: 0
   ammo: 0
@@ -22,13 +22,11 @@ MonoBehaviour:
   dashPower: 0
   reloadSpeed: 0
   Firerate: 0
-  gunRange: 0
-  ID: Parasitic Bullets
+  gunRange: 0.5
+  ID: More Gun Range
   rarity: 0
-  isRepeatable: 0
+  isRepeatable: 1
   prerequisites: []
   mutuallyExclusives: []
-  unlocks: 05000000
-  description: Steal a percentage of the damage you deal to an enemy, but lose health
-    every missed shot
-  HealthCostPercent: 0
+  unlocks: 
+  description: 

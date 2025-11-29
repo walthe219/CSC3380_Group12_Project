@@ -15,13 +15,12 @@ MonoBehaviour:
   health: 100
   stamina: 100
   ammo: 30
-  damage: 999
+  damage: 20
   moveSpeed: 7
   numJumps: 1
   slidePower: 200
   dashPower: 50
-  magSize: 30
   reloadSpeed: 5
-  Firerate: 1
+  Firerate: 0
   gunRange: 50
   numRoomsComp: 0

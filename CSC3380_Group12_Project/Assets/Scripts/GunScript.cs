@@ -18,6 +18,7 @@ public class GunScript : MonoBehaviour
     public bool isAuto;
     public bool AutoUnlocked;
     public bool LifeStealUnlocked;
+    public bool isNotAutoReload;
 
     //public GameObject impactEffect;
 
@@ -55,6 +56,12 @@ public class GunScript : MonoBehaviour
             SemiToggle_icon.SetActive(true);
             AutoToggle_icon.SetActive(false);
         }
+
+    }
+
+    public void ToggleAutoReload()
+    {
+        isNotAutoReload = !isNotAutoReload;
 
     }
 
@@ -99,7 +106,7 @@ public class GunScript : MonoBehaviour
             }
         }
 
-        if (currPlayerStats.ammo == 0 && !isReloading) {
+        if (currPlayerStats.ammo == 0 && !isReloading && !isNotAutoReload) { 
             StartCoroutine(Reload());
         }
 
