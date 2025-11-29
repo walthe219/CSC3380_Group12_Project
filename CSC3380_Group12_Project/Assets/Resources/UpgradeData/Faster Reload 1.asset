@@ -20,12 +20,12 @@ MonoBehaviour:
   numJumps: 0
   slidePower: 0
   dashPower: 0
-  reloadSpeed: 0
+  reloadSpeed: -0.2
   Firerate: 0
   gunRange: 0
-  ID: 
+  ID: Better Reload Speed
   rarity: 0
-  isRepeatable: 0
+  isRepeatable: 1
   prerequisites: []
   mutuallyExclusives: []
   unlocks: 

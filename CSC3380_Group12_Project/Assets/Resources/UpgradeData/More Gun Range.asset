@@ -22,10 +22,10 @@ MonoBehaviour:
   dashPower: 0
   reloadSpeed: 0
   Firerate: 0
-  gunRange: 0
-  ID: 
+  gunRange: 0.5
+  ID: More Gun Range
   rarity: 0
-  isRepeatable: 0
+  isRepeatable: 1
   prerequisites: []
   mutuallyExclusives: []
   unlocks: 
