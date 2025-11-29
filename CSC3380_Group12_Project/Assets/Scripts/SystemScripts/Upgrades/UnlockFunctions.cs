@@ -34,7 +34,7 @@ public static class UnlockFunctions
 
     public enum Unlockable
     {
-        DASH, SLIDE, GRAPPLE, WALLRUN, AUTOFIRE, LIFESTEAL
+        DASH, SLIDE, GRAPPLE, WALLRUN, AUTOFIRE, LIFESTEAL, BETTERFIRERATE
     }
 
     public static Action getAction(Unlockable u)
