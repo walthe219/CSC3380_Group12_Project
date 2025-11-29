@@ -9,6 +9,7 @@ TagManager:
   - Runner
   - isPortal
   - HealthBar
+  - HealthBubble
   layers:
   - Default
   - TransparentFX

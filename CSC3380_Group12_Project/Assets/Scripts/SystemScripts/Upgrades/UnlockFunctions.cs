@@ -29,10 +29,12 @@ public static class UnlockFunctions
     public static event Action UnlockSlideEvent;
     public static event Action UnlockGrappleEvent;
     public static event Action UnlockWallRunEvent;
+    public static event Action UnlockAutoFireEvent;
+    public static event Action UnlockLifeStealEvent;
 
     public enum Unlockable
     {
-        DASH, SLIDE, GRAPPLE, WALLRUN
+        DASH, SLIDE, GRAPPLE, WALLRUN, AUTOFIRE, LIFESTEAL
     }
 
     public static Action getAction(Unlockable u)
@@ -47,6 +49,10 @@ public static class UnlockFunctions
                 return UnlockGrappleEvent;
             case Unlockable.WALLRUN:
                 return UnlockWallRunEvent;
+            case Unlockable.AUTOFIRE:
+                return UnlockAutoFireEvent;
+            case Unlockable.LIFESTEAL:
+                return UnlockLifeStealEvent;
             default:
                 Debug.LogError($"Unlockable case {u} not defined");
                 return null;

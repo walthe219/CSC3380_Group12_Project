@@ -20,13 +20,14 @@ public class NumOfRoomsComp : MonoBehaviour
     void Start()
     {
         //playerstats = new PlayerStats();
-        playerstats.numRoomsComp = 0;
+        //playerstats.numRoomsComp = 0;
         finishedRoomsText = GameObject.Find("NumOfRooms").GetComponent<TextMeshProUGUI>();
+        playerstats.numRoomsComp = 0;
     }
 
     void NORToText(){
         if(finishedRoomsText != null){
-            finishedRoomsText.text = playerstats.numRoomsComp.ToString();
+            finishedRoomsText.text = "Rooms Cleared: " + playerstats.numRoomsComp.ToString();
         }
         else{
             Debug.Log("finishedRooms is null");

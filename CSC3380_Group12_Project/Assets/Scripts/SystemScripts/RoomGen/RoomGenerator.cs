@@ -17,9 +17,8 @@ public static class RoomGenerator
         camPrefab = cam;
         portalPrefab = portal;
         enemyPrefab = enemy;
-    }
 
-    //Returns an object of class Room, creates room GameObject made of four tiles with a portal linked to main, and a list of enemies
+    }
     public static Room CreateRoom(Vector3 roomCenterPos, Object[] possibleTiles,float tileRadius,float gapSize,float roomHeight, GameObject portalLink, UpgradeData upgrade)
     {
 
@@ -83,7 +82,7 @@ public static class RoomGenerator
                         enemyPrefab.GetComponent<RunnerBehavior>().playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
                     }
                     enemies.Add(Object.Instantiate(enemyPrefab,child.position,child.rotation, room.transform));
-                    child.GameObject().SetActive(false);
+                    child.gameObject.SetActive(false);
                 }
             }
         }

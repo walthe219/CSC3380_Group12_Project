@@ -25,14 +25,14 @@ public class StaminaDisplay : MonoBehaviour
         }
 
         delayTimeStam(2);
-        CurrentPlayerStats.stamina = DefaultStats.stamina;
+        //CurrentPlayerStats.stamina = DefaultStats.stamina;
         staminaText = GameObject.Find("StamDisplay").GetComponent<TextMeshProUGUI>();
 
     }
 
     void stamToText(){
          if(staminaText != null){
-            staminaText.text = CurrentPlayerStats.stamina.ToString();
+            staminaText.text = "Stamina: " + CurrentPlayerStats.stamina.ToString();
         }
         else{
             Debug.Log("StamDisplay is null");

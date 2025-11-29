@@ -5,7 +5,9 @@ using UnityEngine;
 public class MouseSensDisplay : MonoBehaviour
 {
     public TextMeshProUGUI sensDisplay;
-    private float sens = 120f;
+    private float sens = 10f;
+
+ 
 
     // Update is called once per frame
     void Update()

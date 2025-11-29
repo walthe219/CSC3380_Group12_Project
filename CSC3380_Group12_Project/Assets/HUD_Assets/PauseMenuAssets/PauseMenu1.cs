@@ -5,16 +5,20 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject optionsmenu;
+    public GameObject UIContainer;
+    public GameObject HSMenu;
+    public GameOverScreen gameoverscreen;
 
     // Update is called once per frame
     void Update()
     {
        if(Input.GetKeyDown(KeyCode.Escape)){
-            if(GameIsPaused){
-                Resume();
+            if(!GameIsPaused && !gameoverscreen.gosActive){
+                Pause();
             }
             else{
-                Pause();
+                Resume();
             }
        }
     }
@@ -25,6 +29,14 @@ public void Resume(){
     GameIsPaused = false;
     Cursor.visible = false;            // Hide cursor during gameplay
     Cursor.lockState = CursorLockMode.Locked;
+
+    //Make sure options menu is closed when pressing escape
+    if(optionsmenu.activeSelf){
+        optionsmenu.SetActive(false);
+    }
+
+    //redisplay UI when pause menu is closed
+    UIContainer.SetActive(true);
 }
 
 void Pause(){
@@ -33,16 +45,26 @@ void Pause(){
     GameIsPaused = true;
     Cursor.visible = true;             // Show cursor to interact with buttons
     Cursor.lockState = CursorLockMode.None;
-}
 
-//load menu function is just a test function from tutorial
-public void LoadMenu(){
+    //Hide UI when opening pause menu
+    UIContainer.SetActive(false);
+
+    HSMenu.SetActive(false);
+
+    }
+
+    //load menu function is just a test function from tutorial
+    public void LoadMenu(){
     Debug.Log("Loading Menu");
-}
+    }
 
     public void QuitGame(){
         Debug.Log("Quiting Game");
         SceneManager.LoadScene("Menu1", LoadSceneMode.Single);
+    }
+
+    public void LoadUpgradeMenu(){
+        Debug.Log("Loading Upgrade Menu");
     }
 
 }
