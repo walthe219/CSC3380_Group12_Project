@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6023465239680005670}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.4000001, y: -0.35000002, z: 0.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -133,11 +133,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1fb4b71ccd966b458b0edef709870d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunScript
-  damage: 10
-  range: 100
   fpsCam: {fileID: 0}
   muzzleFlash: {fileID: 3135115147400841653}
-  inputActions: {fileID: 0}
+  currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
+  BasePlayerStats: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
+  relaod_icon: {fileID: 0}
+  SemiToggle_icon: {fileID: 0}
+  AutoToggle_icon: {fileID: 0}
+  isReloading: 0
+  reloadDelay: 3
+  isAuto: 0
+  AutoUnlocked: 0
+  LifeStealUnlocked: 0
   fireAction:
     m_Name: Fire
     m_Type: 0
