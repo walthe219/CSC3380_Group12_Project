@@ -24,6 +24,7 @@ public class newMoveScript : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         move = InputSystem.actions.FindAction("Move");
+
         jump = InputSystem.actions.FindAction("Jump");
     }
 
