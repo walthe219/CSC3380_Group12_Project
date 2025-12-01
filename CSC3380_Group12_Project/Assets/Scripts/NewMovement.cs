@@ -169,6 +169,7 @@ public class NewMovement : MonoBehaviour
         staminaRechargeRate = maxStamina / 5;
 
         maxJumpCount = basePlayerStats.numJumps;
+        jumpPower = basePlayerStats.jumpPower;
 
         dashForce = basePlayerStats.dashPower;
     }
@@ -194,6 +195,7 @@ public class NewMovement : MonoBehaviour
         // Updates movement values if an upgrade has been obtained
         if (walkSpeed != basePlayerStats.moveSpeed ||
             maxJumpCount != basePlayerStats.numJumps ||
+            jumpPower != basePlayerStats.jumpPower ||
             maxStamina != basePlayerStats.stamina ||
             dashForce != basePlayerStats.dashPower)
         {

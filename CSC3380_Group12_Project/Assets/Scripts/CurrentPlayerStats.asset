@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   health: 100
   stamina: 100
-  ammo: 17
+  ammo: 30
   damage: 0
   moveSpeed: 7
   numJumps: 1
+  jumpPower: 12
   slidePower: 100
   dashPower: 50
   numRoomsComp: 1

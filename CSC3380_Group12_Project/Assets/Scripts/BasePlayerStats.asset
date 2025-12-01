@@ -18,6 +18,7 @@ MonoBehaviour:
   damage: 50
   moveSpeed: 8
   numJumps: 1
+  jumpPower: 12
   slidePower: 150
   dashPower: 30
   numRoomsComp: 0
