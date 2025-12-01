@@ -994,6 +994,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4902070905680346198, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 628531411}
+    - target: {fileID: 4902070905680346198, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: orientation
+      value: 
+      objectReference: {fileID: 1434335827}
+    - target: {fileID: 4902070905680346198, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: basePlayerStats
       value: 
       objectReference: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
@@ -1042,6 +1050,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 240687986}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: dashData
       value: 
       objectReference: {fileID: 11400000, guid: 4f89d145e4424134ba4036b61b6cd7e1, type: 2}
@@ -1056,6 +1068,10 @@ PrefabInstance:
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: maxDashTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: fovChangeTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: maxSlopeAngle
@@ -1542,6 +1558,11 @@ RectTransform:
   m_AnchoredPosition: {x: 302, y: 55}
   m_SizeDelta: {x: 505.56, y: 81.7615}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &628531411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7074113671927264504, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+  m_PrefabInstance: {fileID: 305101097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &652309762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5143244368867761553, guid: 26f9de8dcaba26f49bc1b1ca8879a6f8, type: 3}
@@ -7378,6 +7399,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 848014505062690925, guid: d5daacdf53e4fca43b1f5aa2cbdcff14, type: 3}
+      propertyPath: StartingStats
+      value: 
+      objectReference: {fileID: 11400000, guid: a22e781e91329d24684d25bdd20a2a49, type: 2}
     - target: {fileID: 2918127440204082631, guid: d5daacdf53e4fca43b1f5aa2cbdcff14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 444.202

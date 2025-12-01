@@ -18,8 +18,8 @@ MonoBehaviour:
   damage: 0
   moveSpeed: 0
   numJumps: 0
-  dashPower: 10
   slidePower: 0
+  dashPower: 5
   ID: DashUp
   isRepeatable: 1
   unlocks: 

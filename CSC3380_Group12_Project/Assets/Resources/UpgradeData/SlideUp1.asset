@@ -18,8 +18,8 @@ MonoBehaviour:
   damage: 0
   moveSpeed: 0
   numJumps: 0
+  slidePower: 20
   dashPower: 0
-  slidePower: 50
   ID: SlideUp
   isRepeatable: 1
   unlocks: 
