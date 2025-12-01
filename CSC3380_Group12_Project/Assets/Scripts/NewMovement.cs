@@ -509,31 +509,31 @@ public class NewMovement : MonoBehaviour
         {
             float t = timeElapsed / fovChangeTime;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, desiredFov, t);
-            float newPosX = Mathf.Lerp(moveDir.normalized.x, cam.transform.position.x + (moveDir.normalized.x * desiredPos), t);
-            float newPosZ = Mathf.Lerp(moveDir.normalized.z, cam.transform.position.z + (moveDir.normalized.z * desiredPos), t);
-            cam.transform.position = new Vector3(newPosX, cam.transform.position.y, newPosZ);
+            //float newPosX = Mathf.Lerp(moveDir.normalized.x, cam.transform.position.x + (moveDir.normalized.x * desiredPos), t);
+            //float newPosZ = Mathf.Lerp(moveDir.normalized.z, cam.transform.position.z + (moveDir.normalized.z * desiredPos), t);
+            //cam.transform.position = new Vector3(newPosX, cam.transform.position.y, newPosZ);
             timeElapsed += Time.deltaTime;
 
             yield return null;
         }
         cam.fieldOfView = desiredFov;
-        cam.transform.position = new Vector3(desiredPos, cam.transform.position.y, cam.transform.position.z);
+        //cam.transform.position = new Vector3(desiredPos, cam.transform.position.y, cam.transform.position.z);
         timeElapsed = 0;
         desiredFov = 60;
-        desiredPos = 0;
+        //desiredPos = 0;
         while (timeElapsed < fovChangeTime)
         {
             float t = timeElapsed / fovChangeTime / 4;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, desiredFov, t);
-            float newPosX = Mathf.Lerp(moveDir.normalized.x, cam.transform.position.x + (moveDir.normalized.x * desiredPos), t);
-            float newPosZ = Mathf.Lerp(moveDir.normalized.z, cam.transform.position.z + (moveDir.normalized.z * desiredPos), t);
-            cam.transform.position = new Vector3(newPosX, cam.transform.position.y, newPosZ);
+            //float newPosX = Mathf.Lerp(moveDir.normalized.x, cam.transform.position.x + (moveDir.normalized.x * desiredPos), t);
+            //float newPosZ = Mathf.Lerp(moveDir.normalized.z, cam.transform.position.z + (moveDir.normalized.z * desiredPos), t);
+            //cam.transform.position = new Vector3(newPosX, cam.transform.position.y, newPosZ);
             timeElapsed += Time.deltaTime;
 
             yield return null;
         }
         cam.fieldOfView = 60;
-        cam.transform.position = new Vector3(body.transform.position.x, body.transform.position.y + 1.35f, body.transform.position.z);
+        //cam.transform.position = new Vector3(body.transform.position.x, body.transform.position.y + 1.35f, body.transform.position.z);
 
     }
 
