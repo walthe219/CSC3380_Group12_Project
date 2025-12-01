@@ -12,6 +12,7 @@ TagManager:
   - LinkStartPoint
   - LinkEndPoint
   - ConnectionPoint
+  - ManagerParent
   layers:
   - Default
   - TransparentFX

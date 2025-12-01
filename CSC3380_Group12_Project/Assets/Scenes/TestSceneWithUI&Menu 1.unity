@@ -1369,6 +1369,54 @@ Transform:
   - {fileID: 1887045441}
   m_Father: {fileID: 375653121}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1364041430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1364041431}
+  - component: {fileID: 1364041432}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1364041431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364041430}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2001555316}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1364041432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364041430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b4dbbf282b7e246b024de40ffe8794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  pools:
+  - tag: Runner
+    prefab: {fileID: 7901366144787319798, guid: f2e03fd1cffea284890ee861660f8b1d, type: 3}
+    size: 20
 --- !u!1 &1409872247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,7 +2254,7 @@ GameObject:
   - component: {fileID: 2001555316}
   m_Layer: 0
   m_Name: Managers
-  m_TagString: Untagged
+  m_TagString: ManagerParent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2227,6 +2275,7 @@ Transform:
   - {fileID: 1071691112}
   - {fileID: 2124508580}
   - {fileID: 6787824873632339718}
+  - {fileID: 1364041431}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2124508578
@@ -2281,6 +2330,7 @@ MonoBehaviour:
   currentEnemiesAlive: 0
   currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
   enemies: []
+  pooler: {fileID: 0}
 --- !u!4 &2124508580
 Transform:
   m_ObjectHideFlags: 0
