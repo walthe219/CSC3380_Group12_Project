@@ -1,6 +1,9 @@
 using System;
-using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.AI.Navigation;
+using Unity.VisualScripting;
+using UnityEngine;
 
 /*
  * Manages the creation of rooms, assignment of rooms to portals, assigment of upgrades to rooms, and deletion of rooms
@@ -37,6 +40,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] int currentEnemiesAlive;
     [SerializeField] PlayerStats currPlayerStats;
     [SerializeField] List<GameObject> enemies;
+    [SerializeField] ObjectPooler pooler;
     //[SerializeField] string[] roomNames;
     //------------------------------------------
 
@@ -52,6 +56,7 @@ public class RoomManager : MonoBehaviour
     public static RoomManager Instance { get; private set; }
     private void Awake()
     {
+        pooler = ObjectPooler.Reference;
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject); // Destroy duplicate instances
@@ -61,16 +66,19 @@ public class RoomManager : MonoBehaviour
             Instance = this;
             //DontDestroyOnLoad(gameObject);
         }
+        GameObject manage = GameObject.FindGameObjectWithTag("ManagerParent");
+        NavMeshSurface initSurf = manage.AddComponent<NavMeshSurface>();
+        initSurf.BuildNavMesh();
     }
 
     private void Start()
     {
         TilePooling.initialize(prefabFolderPath, poolingLocation);
-        RoomGenerator.initializePrefabs(cameraPrefab, portalPrefab,enemyPrefab);
+        RoomGenerator.initializePrefabs(cameraPrefab, portalPrefab, enemyPrefab);
         Array.ForEach(mainRoomPortals, obj => obj.GetComponent<portalScript>().PlayerEnterPortal += selectLinkedRoom);
         generateRoomTest();
     }
-    void generateNewRooms(int numRooms,float tileRadius, float gapSize, float roomHeight)
+    void generateNewRooms(int numRooms, float tileRadius, float gapSize, float roomHeight)
     {
         if (numRooms > 4)
         {
@@ -81,9 +89,9 @@ public class RoomManager : MonoBehaviour
         if (rooms != null)
         {
             Debug.Log("Destroying leftover rooms");
-            Array.ForEach(rooms, room => { if (room != null) deleteRoom(room);});
+            Array.ForEach(rooms, room => { if (room != null) deleteRoom(room); });
         }
-            rooms = new Room[numRooms];
+        rooms = new Room[numRooms];
 
         //Direct Reference to Singleton UpgradeManager, UpgradeManager needed in scene for RoomManager to run, should try to use observer design pattern instead
         UpgradeData[] potentialRoomRewards = UpgradeManager.Instance.samplePossibleUpgrades(4);
@@ -96,49 +104,75 @@ public class RoomManager : MonoBehaviour
             float xDir = (float)Mathf.Sin(Mathf.PI / 2 * i);
             float zDir = (float)Mathf.Cos(Mathf.PI / 2 * i);
 
-            Vector3 roomPos = new Vector3(xDir*roomGenDistance,roomGenHeight,zDir*roomGenDistance);
+            Vector3 roomPos = new Vector3(xDir * roomGenDistance, roomGenHeight, zDir * roomGenDistance);
 
             rooms[i] = RoomGenerator.CreateRoom(roomPos, tileRadius, gapSize, roomHeight, mainRoomPortals[i], potentialRoomRewards[i], enemies); //create new 
             mainRoomTextDisplays[i].GetComponent<TextDisplay>().changeText(potentialRoomRewards[i].ID);
         }
     }
-    
+
     void deleteRoom(Room room)
     {
-        if(room!=null) room.delete();
+        if (room != null) room.delete();
     }
 
     void deleteExcept(Room room)
     {
         foreach (Room other in rooms)
         {
-            if(other!=room) other.delete();
+            if (other != room) other.delete();
         }
         rooms = new Room[1];
         rooms[0] = room;
     }
 
-     void selectLinkedRoom(GameObject mainRoomPortal)
-     {
+    void selectLinkedRoom(GameObject mainRoomPortal)
+    {
         Debug.Log("Selecting Room");
         foreach (Room room in rooms)
         {
             if (room.portalIsLinked(mainRoomPortal))
             {
-                
+
                 currentlySelectedRoom = room;
                 break;
             }
         }
 
         deleteExcept(currentlySelectedRoom);
-        currentEnemiesAlive = currentlySelectedRoom.enemies.Length;
+        currentlySelectedRoom.surface.BuildNavMesh();
 
+        enemies = new List<GameObject>();
+        foreach (Transform tile in currentlySelectedRoom.room.transform)
+        {
+            foreach (Transform child in tile.GetComponentsInChildren<Transform>())
+            {
+                if (child.CompareTag("EnemyPoint"))
+                {
+                    GameObject spawned = pooler.SpawnFromPool(enemyPrefab.tag, child.position, child.rotation, currentlySelectedRoom.room);
+
+                    if (spawned.tag == "Runner")
+                    {
+                        spawned.GetComponent<RunnerBehavior>().portalTarget = currentlySelectedRoom.roomPortal.transform;
+                        spawned.GetComponent<RunnerBehavior>().playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
+                    }
+                    enemies.Add(spawned);
+                    child.GameObject().SetActive(false);
+                }
+                if (child.CompareTag("PortalPoint") || child.CompareTag("ConnectionPoint") || child.CompareTag("LinkStartPoint") || child.CompareTag("LinkEndPoint"))
+                {
+                    child.GameObject().SetActive(false);
+                }
+            }
+        }
+        currentlySelectedRoom.reassignEnemies(enemies);
+
+        currentEnemiesAlive = currentlySelectedRoom.enemies.Length;
         PassUpgradeId?.Invoke(currentlySelectedRoom.upgradeReward.ID);
         PassEnemiesAlive?.Invoke(currentEnemiesAlive);
-        Array.ForEach(currentlySelectedRoom.enemies,enemy=>enemy.GetComponent<Target>().OnDeath += decrementEnemies);
+        Array.ForEach(currentlySelectedRoom.enemies, enemy => enemy.GetComponent<Target>().OnDeath += decrementEnemies);
         currentlySelectedRoom.roomPortal.GetComponent<portalScript>().DeactivatePortal();
-     }
+    }
 
     void decrementEnemies()
     {
@@ -151,8 +185,8 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-     void OnRoomClear()
-     {
+    void OnRoomClear()
+    {
         Debug.Log("Room Cleared! Go back to the portal and return to the main room for your reward");
         RoomCleared?.Invoke();
         currentlySelectedRoom.roomPortal.GetComponent<portalScript>().ActivatePortal();
@@ -162,7 +196,7 @@ public class RoomManager : MonoBehaviour
 
         currentlySelectedRoom.roomPortal.GetComponent<portalScript>().PlayerEnterPortal += ResetFields;
         currPlayerStats.numRoomsComp++;
-     }
+    }
 
     //called when enter main room
     void ResetFields(GameObject NOTUSED)

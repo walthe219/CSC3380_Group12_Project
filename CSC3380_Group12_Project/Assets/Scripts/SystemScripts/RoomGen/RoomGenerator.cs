@@ -3,7 +3,7 @@ using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public static class RoomGenerator 
+public static class RoomGenerator
 {
     /*
      * Creates a new Room using the paramters given in RoomManager
@@ -13,7 +13,7 @@ public static class RoomGenerator
     static GameObject portalPrefab;
     static GameObject enemyPrefab;
 
-    public static void initializePrefabs(GameObject cam, GameObject portal,GameObject enemy)
+    public static void initializePrefabs(GameObject cam, GameObject portal, GameObject enemy)
     {
         camPrefab = cam;
         portalPrefab = portal;
@@ -21,21 +21,21 @@ public static class RoomGenerator
     }
 
     //Returns an object of class Room, creates room GameObject made of four tiles with a portal linked to main, and a list of enemies
-    public static Room CreateRoom(Vector3 roomCenterPos, float tileRadius,float gapSize,float roomHeight, GameObject portalLink, UpgradeData upgrade, List<GameObject> enemies)
+    public static Room CreateRoom(Vector3 roomCenterPos, float tileRadius, float gapSize, float roomHeight, GameObject portalLink, UpgradeData upgrade, List<GameObject> enemies)
     {
 
         GameObject room = new GameObject("Room");
         GameObject[] placedTiles = new GameObject[4];
-        
+
         BoxCollider teleportCollider = room.AddComponent<BoxCollider>();
         TagSearcher search = new TagSearcher();
 
         //Place tiles down to create the room
-        (GameObject,Stack<GameObject>)[] selectedTiles = TilePooling.pullRandonTiles(4); 
+        (GameObject, Stack<GameObject>)[] selectedTiles = TilePooling.pullRandonTiles(4);
 
         float totalRadius = gapSize / 2 + tileRadius;
         Vector3 pos = new Vector3(totalRadius, 0, -totalRadius);
-    
+
         //Starting at the bottome left, add and rotate each tile
         // even => flip z  odd => flip x:
         // i = 0 => (-x, -z), i = 1 => (-x, z), i = 2 => (x, z), i = 3 => (x, -z)
@@ -48,7 +48,7 @@ public static class RoomGenerator
             else pos.z *= -1;
 
             GameObject tile = selectedTiles[i].Item1;
-           
+
             placedTiles[i] = PlaceTile(tile, pos, 90 * i, room);
         }
 
@@ -59,7 +59,8 @@ public static class RoomGenerator
 
         //Create room portals and link to portals in main room
         Transform portalTransform = placedTiles[0].transform.Find("PortalPoint");
-        if (portalTransform == null) {
+        if (portalTransform == null)
+        {
             Debug.LogError($"Tile {placedTiles[0].name} does not have child named PortalPoint.");
         }
         GameObject roomPortal = Object.Instantiate(portalPrefab, portalTransform.position, portalTransform.localRotation, room.transform);
@@ -102,16 +103,16 @@ public static class RoomGenerator
                 link.startTransform = sPoint.transform;
                 link.endTransform = nearestPoint.transform;
             }
-            
+
         }
 
         //ADD NAVMESH HERE
         NavMeshSurface surface = room.AddComponent<NavMeshSurface>();
-        surface.BuildNavMesh();
+        //surface.BuildNavMesh();
         room.layer = LayerMask.NameToLayer("Ground");
 
         //Spawn enemies, set NavMesh target destination
-        enemies = new List<GameObject>();
+        /*enemies = new List<GameObject>();
         foreach(GameObject tile in placedTiles)
         {
             foreach(Transform child in tile.transform)
@@ -131,9 +132,9 @@ public static class RoomGenerator
                     child.GameObject().SetActive(false);
                 }
             }
-        }
+        }*/
 
-        return new Room(room,selectedTiles ,roomPortal, portalLink, null,upgrade,enemies.ToArray());
+        return new Room(room, selectedTiles, roomPortal, portalLink, null, upgrade, enemies.ToArray(), surface);
 
     }
 
@@ -160,5 +161,5 @@ public static class RoomGenerator
         return cameraObj;
     }*/
 
-    
+
 }

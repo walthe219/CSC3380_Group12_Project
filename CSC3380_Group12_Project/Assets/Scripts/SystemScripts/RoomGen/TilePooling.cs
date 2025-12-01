@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using System;
 
 
-public static class TilePooling 
+public static class TilePooling
 {
-  
+
     static UnityEngine.Object[] prefab_arr;
 
     static List<Stack<GameObject>> tilePool = new List<Stack<GameObject>>();
@@ -26,17 +27,17 @@ public static class TilePooling
         foreach (GameObject tilePrefab in prefab_arr)
         {
             Stack<GameObject> tileStack = new Stack<GameObject>();
-            for(int i = 0; i < TilesPerPool; i++)
+            for (int i = 0; i < TilesPerPool; i++)
             {
                 GameObject tile = GameObject.Instantiate(tilePrefab, reset, Quaternion.identity, TilePoolObj.transform);
-                //tile.SetActive(false);
+                tile.SetActive(false);
                 tileStack.Push(tile);
             }
             tilePool.Add(tileStack);
         }
         print();
     }
-    public static (GameObject,Stack<GameObject>) pullTile(int i)
+    public static (GameObject, Stack<GameObject>) pullTile(int i)
     {
         var tileStack = tilePool[i];
         var tile = tileStack.Pop();
@@ -52,36 +53,45 @@ public static class TilePooling
         {
             ints.Add(i);
         }
-        for(int i = 0; i < num; i++)
+        for (int i = 0; i < num; i++)
         {
             int r = UnityEngine.Random.Range(0, ints.Count);
             tiles[i] = pullTile(ints[r]);
             ints.RemoveAt(r);
         }
 
-        Debug.Log($"RandTiles:[{string.Join(",",tiles)}] ");
+        Debug.Log($"RandTiles:[{string.Join(",", tiles)}] ");
         return tiles;
     }
 
     public static void reclaimTile(GameObject tile, Stack<GameObject> tileStack)
     {
+
+        foreach (Transform child in tile.GetComponentInChildren<Transform>())
+        {
+            if (child.CompareTag("PortalPoint") || child.CompareTag("ConnectionPoint") || child.CompareTag("LinkStartPoint") || child.CompareTag("LinkEndPoint") || child.CompareTag("EnemyPoint"))
+            {
+                child.GameObject().SetActive(true);
+            }
+        }
+
         tile.transform.parent = TilePoolObj.transform;
         tile.transform.position = resetPosition;
         tile.transform.rotation = Quaternion.identity;
         tile.transform.localScale = Vector3.one;
-        //tile.SetActive(false);
-        
+        tile.SetActive(false);
+
         tileStack.Push(tile);
     }
 
     static void print()
     {
         int i = 0;
-        foreach(var stack in tilePool)
+        foreach (var stack in tilePool)
         {
 
             List<String> names = new List<String>();
-            foreach(var tile in stack)
+            foreach (var tile in stack)
             {
                 names.Add(tile.name);
             }
