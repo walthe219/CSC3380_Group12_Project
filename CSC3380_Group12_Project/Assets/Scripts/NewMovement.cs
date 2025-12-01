@@ -56,7 +56,7 @@ public class NewMovement : MonoBehaviour
     public bool isDashing = false;
     public float dashDrag;
     private bool dashUnlocked;
-    private bool omniDashUnlocked = false;
+    private bool omniDashUnlocked;
 
     [Header("Stamina")]
     public float curStamina;
@@ -68,6 +68,7 @@ public class NewMovement : MonoBehaviour
     [Header("Ground Check")]
     public LayerMask groundMask;
     private float playerHeight = 2;
+    private float playerCrouchHeight = 1;
     public bool isGrounded;
 
     [Header("Inputs")]
@@ -83,7 +84,10 @@ public class NewMovement : MonoBehaviour
     [Header("Testing")]
     public float test;
     public Camera cam;
-    public float fovChangeTime = 1;
+    public float fovChangeTime = 0.5f;
+    public float camFollowTime = 0.5f;
+    public bool slope;
+    public float slopeValue;
 
     private void OnEnable()
     {
@@ -157,7 +161,7 @@ public class NewMovement : MonoBehaviour
     // Updates all of the max movement values in the this script to the max values in basePlayerStats
     private void UpdateMovementValues()
     {
-        walkSpeed = basePlayerStats.moveSpeed;
+        //walkSpeed = basePlayerStats.moveSpeed;
         sprintSpeed = walkSpeed + 3;
         crouchSpeed = walkSpeed - 2;
 
@@ -232,6 +236,7 @@ public class NewMovement : MonoBehaviour
             DashTimer();
         }
         MovePlayer();
+        slope = OnSlope();
     }
 
     // Handles all the movement inputs and changes the movement states
@@ -267,7 +272,7 @@ public class NewMovement : MonoBehaviour
         else if (dash.IsPressed())
         {
             state = MovementState.dashing;
-            //desiredSpeed = dashSpeed;
+            desiredSpeed = dashSpeed;
         }
 
         // Sprinting
@@ -376,7 +381,7 @@ public class NewMovement : MonoBehaviour
         moveDir = orientation.forward * vertInput + orientation.right * horzInput;
 
         // on a slope
-        if (OnSlope() && !leavingSlope)
+        if (OnSlope() && !leavingSlope && !isSliding)
         {
             body.AddForce(20f * moveSpeed * GetSlopeMoveDirection(moveDir), ForceMode.Force);
 
@@ -484,9 +489,11 @@ public class NewMovement : MonoBehaviour
     // Checks if the player is standing on a slope
     public bool OnSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeDetect, playerHeight * 0.5f + 0.3f))
+        float height = isSliding ? playerCrouchHeight : playerHeight;
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeDetect, height * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeDetect.normal);
+            slopeValue = angle;
             return angle < maxSlopeAngle && angle != 0;
         }
 
@@ -504,36 +511,42 @@ public class NewMovement : MonoBehaviour
     {
         float timeElapsed = 0;
         float desiredFov = 75;
-        float desiredPos = horzInput > 0 ? 0.01f : horzInput < 0 ? -0.01f : 0;
+        float desiredPos = horzInput;
         while (timeElapsed < fovChangeTime)
         {
             float t = timeElapsed / fovChangeTime;
+            float t2 = timeElapsed / camFollowTime;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, desiredFov, t);
-            //float newPosX = Mathf.Lerp(moveDir.normalized.x, cam.transform.position.x + (moveDir.normalized.x * desiredPos), t);
-            //float newPosZ = Mathf.Lerp(moveDir.normalized.z, cam.transform.position.z + (moveDir.normalized.z * desiredPos), t);
-            //cam.transform.position = new Vector3(newPosX, cam.transform.position.y, newPosZ);
+            //if(horzInput != 0)
+            //{
+                //float newPosX = Mathf.Lerp(cam.transform.position.x, cam.transform.position.x + (moveDir.normalized.x * desiredPos), t2);
+                //float newPosZ = Mathf.Lerp(cam.transform.position.z, cam.transform.position.z + (moveDir.normalized.z * desiredPos), t2);
+                //cam.transform.position = Mathf.Lerp(cam.transform.position, cam.transform.position + (moveDir * desiredPos), t2);
+                //cam.transform.position = new Vector3(newPosX, cam.transform.position.y, newPosZ);
+            //}
             timeElapsed += Time.deltaTime;
 
             yield return null;
         }
         cam.fieldOfView = desiredFov;
-        //cam.transform.position = new Vector3(desiredPos, cam.transform.position.y, cam.transform.position.z);
+        //cam.transform.position = new Vector3(body.transform.position.x, body.transform.position.y + 1.35f, body.transform.position.z);
         timeElapsed = 0;
         desiredFov = 60;
         //desiredPos = 0;
+        //float currX = cam.transform.position.x;
+        //float currZ = cam.transform.position.z;
         while (timeElapsed < fovChangeTime)
         {
             float t = timeElapsed / fovChangeTime / 4;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, desiredFov, t);
-            //float newPosX = Mathf.Lerp(moveDir.normalized.x, cam.transform.position.x + (moveDir.normalized.x * desiredPos), t);
-            //float newPosZ = Mathf.Lerp(moveDir.normalized.z, cam.transform.position.z + (moveDir.normalized.z * desiredPos), t);
+            //float newPosX = Mathf.Lerp(currX, currX + (moveDir.normalized.x * desiredPos), t);
+            //float newPosZ = Mathf.Lerp(currZ, currZ + (moveDir.normalized.z * desiredPos), t);
             //cam.transform.position = new Vector3(newPosX, cam.transform.position.y, newPosZ);
             timeElapsed += Time.deltaTime;
 
             yield return null;
         }
         cam.fieldOfView = 60;
-        //cam.transform.position = new Vector3(body.transform.position.x, body.transform.position.y + 1.35f, body.transform.position.z);
 
     }
 

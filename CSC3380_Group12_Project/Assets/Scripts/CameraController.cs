@@ -79,4 +79,5 @@ public class CameraController : MonoBehaviour
         Debug.Log("Sensitivity set to: " + sensitivity);
 
     }
+
 }

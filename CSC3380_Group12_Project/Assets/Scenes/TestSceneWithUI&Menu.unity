@@ -877,6 +877,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8110102497815357465, guid: 26f9de8dcaba26f49bc1b1ca8879a6f8, type: 3}
   m_PrefabInstance: {fileID: 5105586098249963533}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &257935402 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5049115436650554024, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+  m_PrefabInstance: {fileID: 305101097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &278491328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -996,7 +1001,7 @@ PrefabInstance:
     - target: {fileID: 4902070905680346198, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: playerObj
       value: 
-      objectReference: {fileID: 628531411}
+      objectReference: {fileID: 257935402}
     - target: {fileID: 4902070905680346198, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: orientation
       value: 
@@ -1066,6 +1071,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1206234263}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: dashSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: slideSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: maxDashTime
       value: 1
       objectReference: {fileID: 0}
@@ -1075,7 +1088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: maxSlopeAngle
-      value: 60
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: basePlayerStats
@@ -1558,11 +1571,6 @@ RectTransform:
   m_AnchoredPosition: {x: 302, y: 55}
   m_SizeDelta: {x: 505.56, y: 81.7615}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!4 &628531411 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7074113671927264504, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
-  m_PrefabInstance: {fileID: 305101097}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &652309762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5143244368867761553, guid: 26f9de8dcaba26f49bc1b1ca8879a6f8, type: 3}
