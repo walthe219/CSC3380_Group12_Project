@@ -7,6 +7,7 @@ public class NewMovement : MonoBehaviour
 
     [Header("Movement")]
     private Rigidbody body;
+    public int actualSpeed;
     public float moveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
@@ -54,6 +55,8 @@ public class NewMovement : MonoBehaviour
     public float maxDashTime;
     public bool isDashing = false;
     public float dashDrag;
+    private bool dashUnlocked;
+    private bool omniDashUnlocked = false;
 
     [Header("Stamina")]
     public float curStamina;
@@ -65,6 +68,7 @@ public class NewMovement : MonoBehaviour
     [Header("Ground Check")]
     public LayerMask groundMask;
     private float playerHeight = 2;
+    private float playerCrouchHeight = 1;
     public bool isGrounded;
 
     [Header("Inputs")]
@@ -79,6 +83,11 @@ public class NewMovement : MonoBehaviour
 
     [Header("Testing")]
     public float test;
+    public Camera cam;
+    public float fovChangeTime = 0.5f;
+    public float camFollowTime = 0.5f;
+    public bool slope;
+    public float slopeValue;
 
     private void OnEnable()
     {
@@ -86,7 +95,10 @@ public class NewMovement : MonoBehaviour
         jump.Enable();
         sprint.Enable();
         crouch.Enable();
-        dash.Enable();
+        if(dashUnlocked)
+        {
+            dash.Enable();
+        }   
     }
 
     private void OnDisable()
@@ -116,7 +128,9 @@ public class NewMovement : MonoBehaviour
         startYScale = transform.localScale.y;
         //curStamina = maxStamina;
         currPlayerStats.stamina = basePlayerStats.stamina;
-        UnlockFunctions.UnlockDashEvent += unlockDash;
+        curStamina = maxStamina;
+        UnlockFunctions.UnlockDashEvent += UnlockDash;
+        UnlockFunctions.UnlockOmniDashEvent += UnlockOmniDash;
 
         if (InputSystem.actions)
         {
@@ -132,6 +146,8 @@ public class NewMovement : MonoBehaviour
         //For portals to disable this script, through ControlScriptReference
         ControlScriptReference.ScriptsEnabled += Enable;
         ControlScriptReference.ScriptsDisabled += Disable;
+
+        UpdateMovementValues();
     }
 
     private void Enable()
@@ -144,8 +160,25 @@ public class NewMovement : MonoBehaviour
         this.enabled = false;
     }
 
+    // Updates all of the max movement values in the this script to the max values in basePlayerStats
+    private void UpdateMovementValues()
+    {
+        //walkSpeed = basePlayerStats.moveSpeed;
+        sprintSpeed = walkSpeed + 3;
+        crouchSpeed = walkSpeed - 2;
+
+        maxStamina = basePlayerStats.stamina;
+        staminaRechargeRate = maxStamina / 5;
+
+        maxJumpCount = basePlayerStats.numJumps;
+        jumpPower = basePlayerStats.jumpPower;
+
+        dashForce = basePlayerStats.dashPower;
+    }
+
     private void Update()
     {
+        actualSpeed = (int)body.linearVelocity.magnitude;
         // Ground Check
         //isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);
         isGrounded = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y + 0.35f, transform.position.z), 0.4f, groundMask);
@@ -158,33 +191,18 @@ public class NewMovement : MonoBehaviour
             leavingSlope = false;
         }
 
-        // Upgrades
-        if (walkSpeed != basePlayerStats.moveSpeed)
-        {
-            walkSpeed = basePlayerStats.moveSpeed;
-            sprintSpeed = basePlayerStats.moveSpeed + 5;
-            crouchSpeed = basePlayerStats.moveSpeed - 2;
-        }
-
-        if (maxJumpCount != basePlayerStats.numJumps)
-        {
-            maxJumpCount = basePlayerStats.numJumps;
-        }
-
-        if (currPlayerStats.stamina < basePlayerStats.stamina)
-        {
-            //maxStamina = basePlayerStats.stamina;
-            staminaRechargeRate += 4;
-        }
-
-        if (dashForce != basePlayerStats.dashPower)
-        {
-            dashForce = basePlayerStats.dashPower;
-        }
-        
-
         InputHandle();
         SpeedControl();
+
+        // Updates movement values if an upgrade has been obtained
+        if (walkSpeed != basePlayerStats.moveSpeed ||
+            maxJumpCount != basePlayerStats.numJumps ||
+            jumpPower != basePlayerStats.jumpPower ||
+            maxStamina != basePlayerStats.stamina ||
+            dashForce != basePlayerStats.dashPower)
+        {
+            UpdateMovementValues();
+        }
 
         // Start the recharge timer if stamina is below the max
         if(isGrounded && currPlayerStats.stamina < basePlayerStats.stamina)
@@ -217,8 +235,12 @@ public class NewMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        DashTimer();
+        if(isDashing)
+        {
+            DashTimer();
+        }
         MovePlayer();
+        slope = OnSlope();
     }
 
     // Handles all the movement inputs and changes the movement states
@@ -254,7 +276,7 @@ public class NewMovement : MonoBehaviour
         else if (dash.IsPressed())
         {
             state = MovementState.dashing;
-            //desiredSpeed = dashSpeed;
+            desiredSpeed = dashSpeed;
         }
 
         // Sprinting
@@ -307,7 +329,7 @@ public class NewMovement : MonoBehaviour
         }
 
         // Can only dash if the stamina is at least 50
-        if (dash.WasPressedThisFrame() && currPlayerStats.stamina >= 50 && (horzInput != 0 || vertInput != 0))
+        if (dash.WasPressedThisFrame() && curStamina >= 50 && ((horzInput != 0 || vertInput != 0) || omniDashUnlocked))
         {
             Dash();
         }
@@ -315,7 +337,7 @@ public class NewMovement : MonoBehaviour
         // Checks for drastic change in desiredSpeed
         if (Mathf.Abs(desiredSpeed - prevDesiredSpeed) > 4f && moveSpeed != 0)
         {
-            StopAllCoroutines();
+            StopCoroutine(SmoothlyLerpMoveSpeed());
             StartCoroutine(SmoothlyLerpMoveSpeed());
         }
         else
@@ -363,7 +385,7 @@ public class NewMovement : MonoBehaviour
         moveDir = orientation.forward * vertInput + orientation.right * horzInput;
 
         // on a slope
-        if (OnSlope() && !leavingSlope)
+        if (OnSlope() && !leavingSlope && !isSliding)
         {
             body.AddForce(20f * moveSpeed * GetSlopeMoveDirection(moveDir), ForceMode.Force);
 
@@ -400,7 +422,7 @@ public class NewMovement : MonoBehaviour
             }
         }
         
-        else if (moveSpeed > 10 || isDashing)
+        else if (moveSpeed > moveSpeed + 3 || isDashing)
         {
             // No speed limiting
         }
@@ -435,12 +457,20 @@ public class NewMovement : MonoBehaviour
     // Dashes
     private void Dash()
     {
-        body.AddForce(moveDir.normalized * dashForce, ForceMode.Impulse);
+        if(omniDashUnlocked && vertInput > 0)
+        {
+            body.AddForce(cam.transform.forward.normalized * dashForce, ForceMode.Impulse);
+        }
+        else
+        {
+            body.AddForce(moveDir.normalized * dashForce, ForceMode.Impulse);
+        }
         moveSpeed = dashSpeed;
         isDashing = true;
         dashTime = maxDashTime;
         currPlayerStats.stamina -= 50;
         staminaRechargeTimer = 0;
+        StartCoroutine(ChangeDashFOV());
     }
 
     // Makes isDashing false if the player has been dashing for the max dash time
@@ -463,10 +493,11 @@ public class NewMovement : MonoBehaviour
     // Checks if the player is standing on a slope
     public bool OnSlope()
     {
-        
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeDetect, playerHeight * 0.5f + 0.3f))
+        float height = isSliding ? playerCrouchHeight : playerHeight;
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeDetect, height * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeDetect.normal);
+            slopeValue = angle;
             return angle < maxSlopeAngle && angle != 0;
         }
 
@@ -478,11 +509,61 @@ public class NewMovement : MonoBehaviour
     {
         return Vector3.ProjectOnPlane(direction, slopeDetect.normal).normalized;
     }
+    
+    //WIP
+    private IEnumerator ChangeDashFOV()
+    {
+        float timeElapsed = 0;
+        float desiredFov = 75;
+        float desiredPos = horzInput;
+        while (timeElapsed < fovChangeTime)
+        {
+            float t = timeElapsed / fovChangeTime;
+            float t2 = timeElapsed / camFollowTime;
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, desiredFov, t);
+            //if(horzInput != 0)
+            //{
+                //float newPosX = Mathf.Lerp(cam.transform.position.x, cam.transform.position.x + (moveDir.normalized.x * desiredPos), t2);
+                //float newPosZ = Mathf.Lerp(cam.transform.position.z, cam.transform.position.z + (moveDir.normalized.z * desiredPos), t2);
+                //cam.transform.position = Mathf.Lerp(cam.transform.position, cam.transform.position + (moveDir * desiredPos), t2);
+                //cam.transform.position = new Vector3(newPosX, cam.transform.position.y, newPosZ);
+            //}
+            timeElapsed += Time.deltaTime;
+
+            yield return null;
+        }
+        cam.fieldOfView = desiredFov;
+        //cam.transform.position = new Vector3(body.transform.position.x, body.transform.position.y + 1.35f, body.transform.position.z);
+        timeElapsed = 0;
+        desiredFov = 60;
+        //desiredPos = 0;
+        //float currX = cam.transform.position.x;
+        //float currZ = cam.transform.position.z;
+        while (timeElapsed < fovChangeTime)
+        {
+            float t = timeElapsed / fovChangeTime / 4;
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, desiredFov, t);
+            //float newPosX = Mathf.Lerp(currX, currX + (moveDir.normalized.x * desiredPos), t);
+            //float newPosZ = Mathf.Lerp(currZ, currZ + (moveDir.normalized.z * desiredPos), t);
+            //cam.transform.position = new Vector3(newPosX, cam.transform.position.y, newPosZ);
+            timeElapsed += Time.deltaTime;
+
+            yield return null;
+        }
+        cam.fieldOfView = 60;
+
+    }
 
     // Unlocks the dash ability
-    public void unlockDash()
+    public void UnlockDash()
     {
+        dashUnlocked = true;
         dash.Enable();
+    }
+
+    public void UnlockOmniDash()
+    {
+        omniDashUnlocked = true;
     }
 
 }

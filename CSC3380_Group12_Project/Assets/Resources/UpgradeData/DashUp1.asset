@@ -23,6 +23,7 @@ MonoBehaviour:
   reloadSpeed: 0
   Firerate: 0
   gunRange: 0
+  dashPower: 5
   ID: DashUp
   rarity: 0
   isRepeatable: 1

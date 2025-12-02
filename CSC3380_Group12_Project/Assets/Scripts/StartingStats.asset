@@ -23,4 +23,5 @@ MonoBehaviour:
   reloadSpeed: 0.2
   Firerate: 1
   gunRange: 50
+  jumpPower: 12
   numRoomsComp: 0

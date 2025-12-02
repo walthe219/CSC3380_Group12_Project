@@ -946,6 +946,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4902070905680346198, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 257935402}
+    - target: {fileID: 4902070905680346198, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: orientation
+      value: 
+      objectReference: {fileID: 1434335827}
+    - target: {fileID: 4902070905680346198, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: basePlayerStats
       value: 
       objectReference: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
@@ -994,6 +1002,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 240687986}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: dashData
       value: 
       objectReference: {fileID: 11400000, guid: 4f89d145e4424134ba4036b61b6cd7e1, type: 2}
@@ -1006,12 +1018,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1206234263}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: dashSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: slideSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: maxDashTime
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: fovChangeTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: maxSlopeAngle
-      value: 60
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: basePlayerStats

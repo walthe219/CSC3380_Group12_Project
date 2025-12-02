@@ -7,6 +7,7 @@ using System.Collections;
 public class GunScript : MonoBehaviour
 {
     public Camera fpsCam;
+    public MeshRenderer gun;
     public ParticleSystem muzzleFlash;
     [SerializeField] PlayerStats currPlayerStats;
     [SerializeField] PlayerStats BasePlayerStats;
@@ -19,6 +20,9 @@ public class GunScript : MonoBehaviour
     public bool AutoUnlocked;
     public bool LifeStealUnlocked;
     public bool isNotAutoReload;
+
+    private ParticleSystem impactParticleSystem;
+    private TrailRenderer bulletTrail;
 
     //public GameObject impactEffect;
 
@@ -158,6 +162,10 @@ public class GunScript : MonoBehaviour
 
             //Debug.Log(hit.transform.name);
 
+            //TrailRenderer trail = Instantiate(bulletTrail, fpsCam.transform.position, Quaternion.identity);
+
+            //StartCoroutine(SpawnTrail(trail, hit));
+
             SubTarget target = hit.transform.GetComponent<SubTarget>();
             if (target != null)
             {
@@ -191,5 +199,21 @@ public class GunScript : MonoBehaviour
 
     }
 
-    
+    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    {
+        float elapsedTime = 0;
+        Vector3 start = trail.transform.position;
+
+        while (elapsedTime < 1)
+        {
+            trail.transform.position = Vector3.Lerp(start, hit.point, elapsedTime);
+            elapsedTime += Time.deltaTime / trail.time;
+            yield return null;
+        }
+
+        trail.transform.position = hit.point;
+        Instantiate(impactParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
+
+        Destroy(trail.gameObject, trail.time);
+    }
 }

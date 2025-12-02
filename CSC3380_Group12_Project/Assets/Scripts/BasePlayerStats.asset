@@ -18,6 +18,7 @@ MonoBehaviour:
   damage: 20
   moveSpeed: 7
   numJumps: 2
+  jumpPower: 12
   slidePower: 200
   dashPower: 50
   reloadSpeed: 0.4

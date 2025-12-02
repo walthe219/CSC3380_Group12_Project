@@ -8,7 +8,7 @@ public class AmmoDisplay : MonoBehaviour
 
     
     private bool isFiring;
-    private bool isReloading;
+    public bool isReloading;
     public TextMeshProUGUI ammoDisplay;
     private int magSize;
     private int delay_x;
