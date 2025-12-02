@@ -77,7 +77,7 @@ public class GunScript : MonoBehaviour
                 
                 Shoot();
                 currPlayerStats.ammo--;
-                currPlayerStats.Firerate = BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
+                currPlayerStats.Firerate = 1/BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
                 Debug.Log("Resetting Firerate!");
             }
         }
@@ -88,7 +88,7 @@ public class GunScript : MonoBehaviour
 
                 Shoot();
                 currPlayerStats.ammo--;
-                currPlayerStats.Firerate = BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
+                currPlayerStats.Firerate = 1/BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
                 Debug.Log("Resetting Firerate!");
             }
         }
@@ -135,7 +135,7 @@ public class GunScript : MonoBehaviour
         isReloading = true;
         Debug.Log("Reloading......");
         relaod_icon.SetActive(true);
-        reloadDelay = currPlayerStats.reloadSpeed;
+        reloadDelay = 1/currPlayerStats.reloadSpeed;
         yield return new WaitForSeconds(reloadDelay);
         currPlayerStats.ammo = BasePlayerStats.ammo;
         isReloading = false;

@@ -13,6 +13,7 @@ public class AmmoDisplay : MonoBehaviour
     private int magSize;
     private int delay_x;
     [SerializeField] PlayerStats CurrentPlayerStats;
+    [SerializeField] PlayerStats BasePlayerStats;
     [SerializeField] PlayerStats DefaultStats;
     //public PauseMenu1 pm;
     
@@ -73,7 +74,7 @@ public class AmmoDisplay : MonoBehaviour
 
     void ammoToText(){
         if(ammoDisplay != null){
-            ammoDisplay.text = CurrentPlayerStats.ammo.ToString() + "/" + DefaultStats.ammo.ToString();
+            ammoDisplay.text = CurrentPlayerStats.ammo.ToString() + "/" + BasePlayerStats.ammo.ToString();
         }
         else{
             Debug.Log("ammoDisplay is null");

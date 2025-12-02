@@ -379,6 +379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AmmoDisplay
   ammoDisplay: {fileID: 928549435836719993}
   CurrentPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
+  BasePlayerStats: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
   DefaultStats: {fileID: 11400000, guid: a22e781e91329d24684d25bdd20a2a49, type: 2}
 --- !u!1 &6995868066441061367
 GameObject:
