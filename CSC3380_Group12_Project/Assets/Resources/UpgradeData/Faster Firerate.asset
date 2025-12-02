@@ -24,7 +24,7 @@ MonoBehaviour:
   reloadSpeed: 0
   Firerate: 0.2
   gunRange: 0
-  ID: FirerateUp
+  ID: Firerate Speed Up
   rarity: 0
   isRepeatable: 1
   prerequisites: []
