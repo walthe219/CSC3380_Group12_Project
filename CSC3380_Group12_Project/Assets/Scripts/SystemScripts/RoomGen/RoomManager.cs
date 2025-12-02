@@ -14,7 +14,6 @@ public class RoomManager : MonoBehaviour
     [SerializeField] float roomGenDistance = 500;
     [SerializeField] float roomGenHeight = 0;
     [SerializeField] float maxTileRadius = 100;
-    [SerializeField] int numRoomsToCreate = 4;
 
     [Header("Main Room")]
     [SerializeField] Transform mainRoomPostion;
@@ -66,7 +65,7 @@ public class RoomManager : MonoBehaviour
         prefab_arr = Resources.LoadAll(prefabFolderPath, typeof(GameObject));
         RoomGenerator.initializePrefabs(cameraPrefab, portalPrefab,enemyPrefab);
         Array.ForEach(mainRoomPortals, obj => obj.GetComponent<portalScript>().PlayerEnterPortal += selectLinkedRoom);
-        generateNewRooms(numRooms: numRoomsToCreate, tileRadius: maxTileRadius, gapSize: 0, roomHeight: 40);
+        generateRoomTest();
     }
     void generateNewRooms(int numRooms,float tileRadius, float gapSize, float roomHeight)
     {
@@ -180,6 +179,6 @@ public class RoomManager : MonoBehaviour
     [ContextMenu("generateRoomTest()")]
     public void generateRoomTest()
     {
-        generateNewRooms(numRooms: numRoomsToCreate, tileRadius: maxTileRadius, gapSize: 0, roomHeight: 40);
+        generateNewRooms(numRooms: 4, tileRadius: maxTileRadius, gapSize: 0, roomHeight: 40);
     }
 }

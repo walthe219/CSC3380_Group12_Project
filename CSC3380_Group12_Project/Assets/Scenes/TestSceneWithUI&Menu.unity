@@ -692,10 +692,11 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &240687983
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1024971988184287111, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
-  m_PrefabInstance: {fileID: 3790328017012845321}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 240687981}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b0113fd7058a604e936e273047b0437, type: 3}
@@ -7241,7 +7242,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 932661612}
-  - {fileID: 3790328017012845321}
+  - {fileID: 589055624}
+  - {fileID: 305101097}
   - {fileID: 375653121}
   - {fileID: 1968907140}
   - {fileID: 1071691112}

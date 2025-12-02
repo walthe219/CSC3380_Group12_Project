@@ -87,8 +87,6 @@ MonoBehaviour:
   orientation: {fileID: 6441505164593188938}
   state: 0
   isSliding: 0
-  currPlayerStats: {fileID: 0}
-  basePlayerStats: {fileID: 0}
   jumpPower: 12
   maxJumpCount: 4
   airMultiplier: 0.4
@@ -98,6 +96,7 @@ MonoBehaviour:
   maxDashTime: 3
   isDashing: 0
   dashDrag: 0
+  currPlayerStats: {fileID: 0}
   curStamina: 0
   groundMask:
     serializedVersion: 2
@@ -163,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   orientation: {fileID: 6441505164593188938}
   playerObj: {fileID: 5049115436650554024}
-  basePlayerStats: {fileID: 0}
+  currPlayerStats: {fileID: 0}
   maxSlideTime: 0.75
   slideForce: 200
   move:
@@ -283,7 +282,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b46bf394fe6b14646b19e8b1beb73e6a, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
