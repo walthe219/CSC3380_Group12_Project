@@ -56,7 +56,7 @@ public class NewMovement : MonoBehaviour
     public bool isDashing = false;
     public float dashDrag;
     private bool dashUnlocked;
-    private bool omniDashUnlocked = true;
+    private bool omniDashUnlocked = false;
 
     [Header("Stamina")]
     public float curStamina;
@@ -138,7 +138,7 @@ public class NewMovement : MonoBehaviour
             crouch = InputSystem.actions.FindAction("Player/Crouch");
             dash = InputSystem.actions.FindAction("Player/Dash");
             OnEnable();
-            //dash.Disable();
+            dash.Disable();
         }
 
         //For portals to disable this script, through ControlScriptReference
