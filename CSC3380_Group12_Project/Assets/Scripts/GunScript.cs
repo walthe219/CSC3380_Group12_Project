@@ -141,7 +141,6 @@ public class GunScript : MonoBehaviour
         isReloading = false;
         relaod_icon.SetActive(false);
         Debug.Log("Reloaded!");
-
     }
 
     /*void SetReloadDelayTime() //Set reload speed manually
