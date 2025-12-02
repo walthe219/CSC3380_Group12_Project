@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2016371680006377146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6162329669209922789}
+  m_Layer: 0
+  m_Name: Village Island Tile 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6162329669209922789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016371680006377146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -130.86093, y: 135.3505, z: -44.46457}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2696930523997219298}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4196672835176483153
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6162329669209922789}
+    m_Modifications:
+    - target: {fileID: 276565008362204443, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 456143587086809200, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_VersionIndex
+      value: 3150
+      objectReference: {fileID: 0}
+    - target: {fileID: 693558841010953677, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 846890476430794230, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_VersionIndex
+      value: 3135
+      objectReference: {fileID: 0}
+    - target: {fileID: 1212913951312110668, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_VersionIndex
+      value: 2085
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355197475901647007, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463201807793528310, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850383220297396449, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256584547409518771, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -51.93907
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256584547409518771, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -39.0503
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256584547409518771, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 423.7646
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256584547409518771, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7723978
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256584547409518771, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256584547409518771, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.63513917
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256584547409518771, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256584547409518771, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256584547409518771, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256584547409518771, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541933656426725503, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330317096174074705, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625827152968660157, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_VersionIndex
+      value: 2064
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718116137427794478, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978250775521736260, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005628181622940653, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_VersionIndex
+      value: 3135
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670211144624252395, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5222758304488768191, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6178249301943865185, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447099222555115172, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519369318290670178, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7305863724958838363, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403744816919687900, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_VersionIndex
+      value: 2064
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013507304666223570, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326773593641699223, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8590162737522674487, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8857764515245915591, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Name
+      value: Village Island Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 8857764515245915591, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888930092942260631, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087082902251475929, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9095500459147881978, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+      propertyPath: m_VersionIndex
+      value: 4471
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+--- !u!4 &2696930523997219298 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2256584547409518771, guid: e4d7abf08e3c56a44a47ffe3cbf754ab, type: 3}
+  m_PrefabInstance: {fileID: 4196672835176483153}
+  m_PrefabAsset: {fileID: 0}

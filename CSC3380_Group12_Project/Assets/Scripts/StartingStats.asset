@@ -20,8 +20,4 @@ MonoBehaviour:
   numJumps: 1
   slidePower: 200
   dashPower: 50
-  reloadSpeed: 0.2
-  Firerate: 1
-  gunRange: 50
-  jumpPower: 12
   numRoomsComp: 0
