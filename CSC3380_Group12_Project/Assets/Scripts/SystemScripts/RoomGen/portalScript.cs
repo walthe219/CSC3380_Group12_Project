@@ -10,15 +10,12 @@ public class portalScript : MonoBehaviour
     [Header("Portal Settings")]
     [SerializeField] Transform destination; //where to teleport, usally another portal
     [SerializeField] float heightOffset = 1; // distance above destination to teleport
-    [SerializeField] float distanceOffset = 2f; //distance in front of destination
-    [SerializeField] GameObject portalFrame;
+    [SerializeField] float distanceOffset = 2.5f; //distance in front of destination
+    [SerializeField] GameObject portalFrame; //Game object representing the teleporter ring/frame
     [SerializeField] Collider portalCollider;
     [SerializeField] Collider portalHitboxCollider;
-
     public float portalHealth = 50f;
 
-    //static MonoBehaviour movementScript  = null;
-    //static MonoBehaviour lookScript = null;
     static ControlScriptReference reference = null;
     static bool teleportOnCoolDown = false;
     static float staticTimerStart = float.NaN;
@@ -27,7 +24,19 @@ public class portalScript : MonoBehaviour
 
     public event Action<GameObject> PlayerEnterPortal;
     //public event Action<GameObject> PlayerArrivePortal;
-
+    public void setColliders(GameObject frame, Collider teleportCollider, Collider healthCollider)
+    {
+        portalFrame = frame;
+        portalCollider = teleportCollider;
+        portalHitboxCollider = healthCollider;
+    }
+    private void Awake()
+    {
+        if (destination == null)
+        {
+            DeactivatePortal();
+        }
+    }
     private void OnTriggerEnter(Collider other)
     { 
         if (other.tag.Equals("Player"))
@@ -48,23 +57,6 @@ public class portalScript : MonoBehaviour
 
             //Disable controller scripts so teleport is not overwritten by these scripts
             reference.enabled = false;
-
-
-            /*movementScript = other.GetComponent<NewMovement>();
-            if (movementScript == null)
-            {
-                Debug.LogError("Change move script name in portalScript code GetComponent<SCRIPT NAME HERE>");
-                return;
-            }
-            lookScript = other.GetComponent<cameraScript>();
-            if (lookScript == null)
-            {
-                Debug.LogError("Change look script name in portalScript code GetComponent<SCRIPT NAME HERE>");
-                return;
-            }*/
-            //movementScript.enabled = false;
-            //lookScript.enabled = false;
-
 
             //Teleport player
             GameObject objToTeleport = reference.ParentObject;
@@ -147,18 +139,15 @@ public class portalScript : MonoBehaviour
         }
 
         setDestination(other.transform);
-        ActivatePortal();
-        
         otherScript.setDestination(this.transform);
-        otherScript.ActivatePortal();
 
-
-        //PlayerEnterPortal += otherScript.PlayerArrivePortal;          OnArrive could possibly be useful, but this implementation is terrible idea, maybe can find a solution
+        //PlayerEnterPortal += otherScript.PlayerArrivePortal;  //OnArrive could possibly be useful, but this implementation is terrible idea, maybe can find a solution
         //otherScript.PlayerEnterPortal+= PlayerArrivePortal;
     }
 
     public void setDestination(Transform pos)
     {
         destination = pos;
+        ActivatePortal();
     }
 }

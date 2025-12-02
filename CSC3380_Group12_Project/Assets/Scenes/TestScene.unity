@@ -4434,6 +4434,8 @@ MonoBehaviour:
   cameraPrefab: {fileID: 0}
   enemyPrefab: {fileID: 0}
   currentEnemiesAlive: 0
+  currPlayerStats: {fileID: 0}
+  enemies: []
 --- !u!4 &1519627988
 Transform:
   m_ObjectHideFlags: 0
