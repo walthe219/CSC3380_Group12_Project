@@ -18,6 +18,6 @@ MonoBehaviour:
   damage: 0
   moveSpeed: 7
   numJumps: 1
-  dashPower: 50
   slidePower: 200
-  RoomsComp: 0
+  dashPower: 50
+  numRoomsComp: 0
