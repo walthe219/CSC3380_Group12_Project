@@ -20,7 +20,11 @@ MonoBehaviour:
   numJumps: 0
   slidePower: 0
   dashPower: 0
-  ID: AmmoUp
+  reloadSpeed: 0
+  Firerate: 0
+  gunRange: 0
+  ID: Ammo Up
+  rarity: 0
   isRepeatable: 1
   prerequisites: []
   mutuallyExclusives: []

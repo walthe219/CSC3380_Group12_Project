@@ -20,6 +20,9 @@ MonoBehaviour:
   numJumps: 0
   slidePower: 0
   dashPower: 10
+  reloadSpeed: 0
+  Firerate: 0
+  gunRange: 0
   ID: DashUp
   rarity: 0
   isRepeatable: 1

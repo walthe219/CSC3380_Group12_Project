@@ -23,7 +23,7 @@ MonoBehaviour:
   reloadSpeed: 0
   Firerate: 0
   gunRange: 0.5
-  ID: More Gun Range
+  ID: Gun Range Up
   rarity: 0
   isRepeatable: 1
   prerequisites: []
