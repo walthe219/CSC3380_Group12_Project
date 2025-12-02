@@ -2408,10 +2408,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 240687982}
     m_Modifications:
     - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
-      propertyPath: gun
-      value: 
-      objectReference: {fileID: 1933920452}
-    - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
       propertyPath: fpsCam
       value: 
       objectReference: {fileID: 240687986}
@@ -2427,10 +2423,6 @@ PrefabInstance:
       propertyPath: SemiToggle_icon
       value: 
       objectReference: {fileID: 399207374}
-    - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
-      propertyPath: bulletTrailPrefab
-      value: 
-      objectReference: {fileID: 4512427035763013490, guid: 0d9eead7569da68428a1f94a83115b11, type: 3}
     - target: {fileID: 6023465239680005670, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
       propertyPath: m_Name
       value: Pistol
@@ -2694,11 +2686,6 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3455740737966381336, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
   m_PrefabInstance: {fileID: 305101097}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1933920452 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1595893872248343817, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
-  m_PrefabInstance: {fileID: 1539098818}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1950508744 stripped
 MonoBehaviour:

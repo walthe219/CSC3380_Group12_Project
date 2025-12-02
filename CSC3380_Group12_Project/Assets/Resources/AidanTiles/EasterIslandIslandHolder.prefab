@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4759460220559233195}
   - component: {fileID: 6380197371592235696}
   - component: {fileID: 1149845147822380812}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Easter Island Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
