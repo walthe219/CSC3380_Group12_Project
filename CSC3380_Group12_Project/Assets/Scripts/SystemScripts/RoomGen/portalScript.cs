@@ -11,7 +11,7 @@ public class portalScript : MonoBehaviour
     [Header("Portal Settings")]
     [SerializeField] Transform destination; //where to teleport, usally another portal
     [SerializeField] float heightOffset = 1; // distance above destination to teleport
-    [SerializeField] float distanceOffset = 2f; //distance in front of destination
+    [SerializeField] float distanceOffset = 2.5f; //distance in front of destination
     [SerializeField] GameObject portalFrame; //Game object representing the teleporter ring/frame
     [SerializeField] Collider portalCollider;
     [SerializeField] Collider portalHitboxCollider;
@@ -25,7 +25,12 @@ public class portalScript : MonoBehaviour
 
     public event Action<GameObject> PlayerEnterPortal;
     //public event Action<GameObject> PlayerArrivePortal;
-
+    public void setColliders(GameObject frame, Collider teleportCollider, Collider healthCollider)
+    {
+        portalFrame = frame;
+        portalCollider = teleportCollider;
+        portalHitboxCollider = healthCollider;
+    }
     private void Awake()
     {
         if (destination == null)

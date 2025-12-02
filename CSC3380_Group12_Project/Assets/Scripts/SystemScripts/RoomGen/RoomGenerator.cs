@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Unity.AI.Navigation;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 public static class RoomGenerator
@@ -12,12 +12,16 @@ public static class RoomGenerator
     static GameObject camPrefab;
     static GameObject portalPrefab;
     static GameObject enemyPrefab;
+    static GameObject fallPlanePrefab;
 
-    public static void initializePrefabs(GameObject cam, GameObject portal, GameObject enemy)
+    public static event Action<GameObject> TouchedFallPlane;
+
+    public static void initializePrefabs(GameObject cam, GameObject portal, GameObject enemy, GameObject fallplane)
     {
         camPrefab = cam;
         portalPrefab = portal;
         enemyPrefab = enemy;
+        fallPlanePrefab = fallplane;
     }
 
     //Returns an object of class Room, creates room GameObject made of four tiles with a portal linked to main, and a list of enemies
@@ -26,8 +30,6 @@ public static class RoomGenerator
 
         GameObject room = new GameObject("Room");
         GameObject[] placedTiles = new GameObject[4];
-
-        BoxCollider teleportCollider = room.AddComponent<BoxCollider>();
         TagSearcher search = new TagSearcher();
 
         //Place tiles down to create the room
@@ -53,7 +55,7 @@ public static class RoomGenerator
         }
 
         //Create Camera for the room preview
-        GameObject roomCam = Object.Instantiate(camPrefab, Vector3.up * roomHeight, Quaternion.Euler(90, 0, 0), room.transform);
+        GameObject roomCam = GameObject.Instantiate(camPrefab, Vector3.up * roomHeight, Quaternion.Euler(90, 0, 0), room.transform);
         //createCamera();
 
 
@@ -63,15 +65,27 @@ public static class RoomGenerator
         {
             Debug.LogError($"Tile {placedTiles[0].name} does not have child named PortalPoint.");
         }
-        GameObject roomPortal = Object.Instantiate(portalPrefab, portalTransform.position, portalTransform.localRotation, room.transform);
+        GameObject roomPortal = GameObject.Instantiate(portalPrefab, portalTransform.position, portalTransform.localRotation, room.transform);
         roomPortal.tag = "isPortal";
 
         var roomPortalScript = roomPortal.GetComponent<portalScript>();
         roomPortalScript.LinkPortal(portalLink);
-        room.transform.position = roomCenterPos;
 
-        teleportCollider.center = new Vector3(0, -30f, 0);
-        teleportCollider.size = new Vector3(100f, 0, 100f);
+
+        //create fall plane
+        GameObject fallPlane = GameObject.Instantiate(fallPlanePrefab, Vector3.down * roomHeight, Quaternion.identity, room.transform);
+        float planeSize = tileRadius * 20 + gapSize;
+        fallPlane.GetComponent<BoxCollider>().size = new Vector3(planeSize, 0, planeSize);
+
+        //link fall plane to room portal
+        portalScript fallPortalScript = fallPlane.GetComponent<portalScript>();
+        fallPortalScript.setDestination(roomPortal.transform);
+        fallPortalScript.PlayerEnterPortal += (PARAMETER_NOT_NEEDED) => { Debug.Log("Player fell off tiles");};
+        fallPortalScript.PlayerEnterPortal += TouchedFallPlane;
+
+
+        //Move room to correct position
+        room.transform.position = roomCenterPos;
 
         /*GameObject[] linkStartPoints = search.search("LinkStartPoint", room.transform, 1);
         GameObject[] linkEndPoints = search.search("LinkEndPoint", room.transform, 1);*/
@@ -108,32 +122,7 @@ public static class RoomGenerator
 
         //ADD NAVMESH HERE
         NavMeshSurface surface = room.AddComponent<NavMeshSurface>();
-        //surface.BuildNavMesh();
         room.layer = LayerMask.NameToLayer("Ground");
-
-        //Spawn enemies, set NavMesh target destination
-        /*enemies = new List<GameObject>();
-        foreach(GameObject tile in placedTiles)
-        {
-            foreach(Transform child in tile.transform)
-            {
-                if (child.CompareTag("EnemyPoint"))
-                {
-                    if (enemyPrefab.tag == "Runner")
-                    {
-                        enemyPrefab.GetComponent<RunnerBehavior>().portalTarget = portalTransform;
-                        enemyPrefab.GetComponent<RunnerBehavior>().playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
-                    }
-                    enemies.Add(Object.Instantiate(enemyPrefab,child.position,child.rotation, room.transform));
-                    child.GameObject().SetActive(false);
-                }
-                if (child.CompareTag("PortalPoint") || child.CompareTag("ConnectionPoint") || child.CompareTag("LinkStartPoint") || child.CompareTag("LinkEndPoint"))
-                {
-                    child.GameObject().SetActive(false);
-                }
-            }
-        }*/
-
         return new Room(room, selectedTiles, roomPortal, portalLink, null, upgrade, enemies.ToArray(), surface);
 
     }
@@ -151,6 +140,7 @@ public static class RoomGenerator
         return tile;
     }
 
+
     /*private static GameObject createCamera()
     {
         GameObject cameraObj = new GameObject("Room Camera");
@@ -161,5 +151,6 @@ public static class RoomGenerator
         return cameraObj;
     }*/
 
+    
 
 }

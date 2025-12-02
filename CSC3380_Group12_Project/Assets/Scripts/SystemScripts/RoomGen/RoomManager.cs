@@ -30,6 +30,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] GameObject portalPrefab;
     [SerializeField] GameObject cameraPrefab;
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject fallPlanePrefab;
 
 
     //maybe in refactor put these into new class
@@ -74,7 +75,7 @@ public class RoomManager : MonoBehaviour
     private void Start()
     {
         TilePooling.initialize(prefabFolderPath, poolingLocation);
-        RoomGenerator.initializePrefabs(cameraPrefab, portalPrefab, enemyPrefab);
+        RoomGenerator.initializePrefabs(cameraPrefab, portalPrefab, enemyPrefab, fallPlanePrefab);
         Array.ForEach(mainRoomPortals, obj => obj.GetComponent<portalScript>().PlayerEnterPortal += selectLinkedRoom);
         generateRoomTest();
     }
