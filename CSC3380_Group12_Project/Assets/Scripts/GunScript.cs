@@ -9,6 +9,7 @@ public class GunScript : MonoBehaviour
     public float range = 100f;
 
     public Camera fpsCam;
+    public MeshRenderer gun;
     public ParticleSystem muzzleFlash;
     public InputActionAsset inputActions;
     [SerializeField] PlayerStats currPlayerStats;
