@@ -18,9 +18,17 @@ MonoBehaviour:
   damage: 0
   moveSpeed: 0
   numJumps: 0
+  jumpPower: 0
   slidePower: 0
   dashPower: 0
+  reloadSpeed: 0
+  Firerate: 0
+  gunRange: 0
   ID: UnlockOmniDash
+  rarity: 0
   isRepeatable: 0
+  prerequisites:
+  - {fileID: 11400000, guid: b8def7d75fad6a641835eba284d4f0b0, type: 2}
+  mutuallyExclusives: []
   unlocks: 01000000
   description: 

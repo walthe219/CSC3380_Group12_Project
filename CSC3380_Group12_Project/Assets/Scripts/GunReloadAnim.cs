@@ -3,14 +3,14 @@ using System.Collections;
 
 public class GunReloadAnim : MonoBehaviour
 {
-    public AmmoDisplay ammoScript;
+    public GunScript gunScript;
     public Transform camRot;
     public float rate;
     private bool midReload;
     // Update is called once per frame
     void Update()
     {
-        if(ammoScript.isReloading)
+        if(gunScript.isReloading)
         {
             if(!midReload)
             {

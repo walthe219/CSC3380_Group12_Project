@@ -948,7 +948,7 @@ PrefabInstance:
     - target: {fileID: 4902070905680346198, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: playerObj
       value: 
-      objectReference: {fileID: 257935402}
+      objectReference: {fileID: 432800998}
     - target: {fileID: 4902070905680346198, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: orientation
       value: 
@@ -1326,6 +1326,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::Player
   CthulhuUnlocked: 0
   DialogueBox: {fileID: 1060011240}
+--- !u!4 &432800998 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5049115436650554024, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+  m_PrefabInstance: {fileID: 305101097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &455486700 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1128821860682379555, guid: 0c9cc316e7466a647b7a0995eecb14d2, type: 3}
@@ -3940,6 +3945,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &1512551853 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6023465239680005670, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+  m_PrefabInstance: {fileID: 1539098818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1512551854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512551853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da846af1ae0689409645e0cffcb4d22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::GunReloadAnim
+  gunScript: {fileID: 172956701}
+  camRot: {fileID: 1230955628}
+  rate: 1
 --- !u!1001 &1539098818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3948,6 +3973,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 240687982}
     m_Modifications:
+    - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1933920452}
     - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
       propertyPath: fpsCam
       value: 
@@ -4011,7 +4040,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6023465239680005670, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1512551854}
   m_SourcePrefab: {fileID: 100100000, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
 --- !u!1001 &1610521809
 PrefabInstance:
@@ -5066,6 +5098,11 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!23 &1933920452 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1595893872248343817, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+  m_PrefabInstance: {fileID: 1539098818}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1944367058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5143244368867761553, guid: 26f9de8dcaba26f49bc1b1ca8879a6f8, type: 3}
@@ -6751,6 +6788,10 @@ PrefabInstance:
     - target: {fileID: 7517680699780824856, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560821230673191010, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
+      propertyPath: m_text
+      value: None
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2829979625939867312, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}

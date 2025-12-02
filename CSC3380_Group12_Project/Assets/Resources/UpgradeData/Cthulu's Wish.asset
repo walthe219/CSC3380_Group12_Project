@@ -18,6 +18,7 @@ MonoBehaviour:
   damage: 0
   moveSpeed: 0
   numJumps: 0
+  jumpPower: 0
   slidePower: 0
   dashPower: 0
   reloadSpeed: 0
@@ -28,5 +29,5 @@ MonoBehaviour:
   isRepeatable: 0
   prerequisites: []
   mutuallyExclusives: []
-  unlocks: 07000000
+  unlocks: 08000000
   description: Cthulhu wishes to speak with you

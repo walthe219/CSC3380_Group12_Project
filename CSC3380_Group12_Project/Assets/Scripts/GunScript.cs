@@ -162,9 +162,9 @@ public class GunScript : MonoBehaviour
 
             //Debug.Log(hit.transform.name);
 
-            //TrailRenderer trail = Instantiate(bulletTrail, fpsCam.transform.position, Quaternion.identity);
+            TrailRenderer trail = Instantiate(bulletTrail, fpsCam.transform.position, Quaternion.identity);
 
-            //StartCoroutine(SpawnTrail(trail, hit));
+            StartCoroutine(SpawnTrail(trail, hit));
 
             SubTarget target = hit.transform.GetComponent<SubTarget>();
             if (target != null)
