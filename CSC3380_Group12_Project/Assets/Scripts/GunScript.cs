@@ -11,10 +11,9 @@ public class GunScript : MonoBehaviour
     public ParticleSystem muzzleFlash;
     [SerializeField] PlayerStats currPlayerStats;
     [SerializeField] PlayerStats BasePlayerStats;
-    public GameObject reload_icon;
+    public GameObject relaod_icon;
     public GameObject SemiToggle_icon;
     public GameObject AutoToggle_icon;
-    public Transform gunLocation;
     public bool isReloading;
     public float reloadDelay; //variable to set reload speed manully
     public bool isAuto;
@@ -22,10 +21,8 @@ public class GunScript : MonoBehaviour
     public bool LifeStealUnlocked;
     public bool isNotAutoReload;
 
-    public ParticleSystem impactEnemyParticleSystem;
-    public ParticleSystem impactGenericParticleSystem;
-
-    public TrailRenderer bulletTrail;
+    private ParticleSystem impactParticleSystem;
+    private TrailRenderer bulletTrail;
 
     //public GameObject impactEffect;
 
@@ -141,12 +138,12 @@ public class GunScript : MonoBehaviour
     {
         isReloading = true;
         Debug.Log("Reloading......");
-        reload_icon.SetActive(true);
+        relaod_icon.SetActive(true);
         reloadDelay = 1/currPlayerStats.reloadSpeed;
         yield return new WaitForSeconds(reloadDelay);
         currPlayerStats.ammo = BasePlayerStats.ammo;
         isReloading = false;
-        reload_icon.SetActive(false);
+        relaod_icon.SetActive(false);
         Debug.Log("Reloaded!");
     }
 
@@ -160,17 +157,18 @@ public class GunScript : MonoBehaviour
         muzzleFlash.Play();
 
         RaycastHit hit;
-        TrailRenderer trail;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, currPlayerStats.gunRange)) //chasnge to currplayter stats gunrange
         {
 
             //Debug.Log(hit.transform.name);
 
+            TrailRenderer trail = Instantiate(bulletTrail, fpsCam.transform.position, Quaternion.identity);
+
+            StartCoroutine(SpawnTrail(trail, hit));
+
             SubTarget target = hit.transform.GetComponent<SubTarget>();
             if (target != null)
             {
-                trail = Instantiate(bulletTrail, gunLocation.position, Quaternion.identity);
-                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true, true));
 
                 target.TakeDamage(currPlayerStats.damage);
                 if (LifeStealUnlocked && currPlayerStats.health < BasePlayerStats.health) {
@@ -183,9 +181,6 @@ public class GunScript : MonoBehaviour
             else
             {
                 Debug.Log("You hit something other than the target!");
-                trail = Instantiate(bulletTrail, gunLocation.position, Quaternion.identity);
-                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true, false));
-
                 if (LifeStealUnlocked && currPlayerStats.health < BasePlayerStats.health)
                 {
                     currPlayerStats.health = (float)(currPlayerStats.health - (currPlayerStats.damage * 0.10)); //Where the player loses the percentage of health if they miss
@@ -200,36 +195,24 @@ public class GunScript : MonoBehaviour
             if (LifeStealUnlocked && currPlayerStats.health < BasePlayerStats.health) {
                 currPlayerStats.health = (float)(currPlayerStats.health - (currPlayerStats.damage * 0.10)); //Where the player loses the percentage of health if they miss
             }
-            trail = Instantiate(bulletTrail, gunLocation.position, Quaternion.identity);
-            StartCoroutine(SpawnTrail(trail, gunLocation.position + transform.forward * currPlayerStats.gunRange, Vector3.zero, false, false));
         }
 
     }
 
-    private IEnumerator SpawnTrail(TrailRenderer trail, Vector3 hit, Vector3 hitNormal, bool madeImpact, bool enemyHit)
+    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
     {
         float elapsedTime = 0;
         Vector3 start = trail.transform.position;
 
         while (elapsedTime < 1)
         {
-            trail.transform.position = Vector3.Lerp(start, hit, elapsedTime);
+            trail.transform.position = Vector3.Lerp(start, hit.point, elapsedTime);
             elapsedTime += Time.deltaTime / trail.time;
             yield return null;
         }
 
-        trail.transform.position = hit;
-        if (madeImpact)
-        {
-            if (enemyHit)
-            {
-                Instantiate(impactEnemyParticleSystem, hit, Quaternion.LookRotation(hitNormal));
-            }
-            else
-            {
-                Instantiate(impactGenericParticleSystem, hit, Quaternion.LookRotation(hitNormal));
-            } 
-        }     
+        trail.transform.position = hit.point;
+        Instantiate(impactParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
 
         Destroy(trail.gameObject, trail.time);
     }
