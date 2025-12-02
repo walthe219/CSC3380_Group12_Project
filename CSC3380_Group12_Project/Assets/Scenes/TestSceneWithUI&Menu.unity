@@ -4085,6 +4085,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Stats
       objectReference: {fileID: 0}
+    - target: {fileID: 1601121267881595976, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
+      propertyPath: m_margin.w
+      value: -192.70966
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601121267881595976, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
+      propertyPath: m_margin.z
+      value: -29.0971
+      objectReference: {fileID: 0}
     - target: {fileID: 2829979625939867312, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
       propertyPath: menuPanel
       value: 
@@ -4223,11 +4231,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6021110460104840881, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6311086518466952060, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
       propertyPath: m_Name
       value: StatsText
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077632118553279352, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7517680699780824856, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
       propertyPath: m_Name
