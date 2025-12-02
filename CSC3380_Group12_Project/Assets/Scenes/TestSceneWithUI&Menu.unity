@@ -2427,6 +2427,10 @@ PrefabInstance:
       propertyPath: SemiToggle_icon
       value: 
       objectReference: {fileID: 399207374}
+    - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+      propertyPath: bulletTrailPrefab
+      value: 
+      objectReference: {fileID: 4512427035763013490, guid: 0d9eead7569da68428a1f94a83115b11, type: 3}
     - target: {fileID: 6023465239680005670, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
       propertyPath: m_Name
       value: Pistol

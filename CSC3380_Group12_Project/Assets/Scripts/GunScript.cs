@@ -22,7 +22,7 @@ public class GunScript : MonoBehaviour
     public bool isNotAutoReload;
 
     private ParticleSystem impactParticleSystem;
-    private TrailRenderer bulletTrail;
+    public GameObject bulletTrailPrefab;
 
     //public GameObject impactEffect;
 
@@ -162,7 +162,7 @@ public class GunScript : MonoBehaviour
 
             //Debug.Log(hit.transform.name);
 
-            TrailRenderer trail = Instantiate(bulletTrail, fpsCam.transform.position, Quaternion.identity);
+            TrailRenderer trail = Instantiate(bulletTrailPrefab, fpsCam.transform.position, Quaternion.identity).GetComponent<TrailRenderer>();
 
             StartCoroutine(SpawnTrail(trail, hit));
 
@@ -212,7 +212,7 @@ public class GunScript : MonoBehaviour
         }
 
         trail.transform.position = hit.point;
-        Instantiate(impactParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
+        //Instantiate(impactParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
 
         Destroy(trail.gameObject, trail.time);
     }
