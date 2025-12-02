@@ -23,7 +23,8 @@ MonoBehaviour:
   ID: Test3
   rarity: 0
   isRepeatable: 0
-  prerequisites: []
+  prerequisites:
+  - {fileID: 11400000, guid: abb4660e479363f4183c18d09c7648c6, type: 2}
   mutuallyExclusives: []
   unlocks: 
   description: 

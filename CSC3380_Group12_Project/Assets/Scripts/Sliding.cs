@@ -40,6 +40,7 @@ public class Sliding : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
         moveScript = GetComponent<NewMovement>();
+        UnlockFunctions.UnlockSlideEvent += unlockSliding;
         if (InputSystem.actions)
         {
             move = InputSystem.actions.FindAction("Player/Move");
@@ -67,8 +68,6 @@ public class Sliding : MonoBehaviour
         {
             StopSlide();
         }
-
-        UnlockFunctions.UnlockSlideEvent += unlockSliding;
 
         if (slideForce != basePlayerStats.slidePower)
         {
@@ -117,7 +116,7 @@ public class Sliding : MonoBehaviour
         slideTimer = maxSlideTime;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
-        body.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        body.AddForce(Vector3.down * 20f, ForceMode.Impulse);
     }
 
     // Enlarges the player

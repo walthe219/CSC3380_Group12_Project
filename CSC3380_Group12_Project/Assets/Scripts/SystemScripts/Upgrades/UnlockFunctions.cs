@@ -27,6 +27,7 @@ public static class UnlockFunctions
 
     public static event Action UnlockDashEvent;
     public static event Action UnlockSlideEvent;
+    public static event Action UnlockOmniDashEvent;
     public static event Action UnlockGrappleEvent;
     public static event Action UnlockWallRunEvent;
     public static event Action UnlockAutoFireEvent;
@@ -35,7 +36,7 @@ public static class UnlockFunctions
 
     public enum Unlockable
     {
-        DASH, SLIDE, GRAPPLE, WALLRUN, AUTOFIRE, LIFESTEAL, BETTERFIRERATE, CTHULHU
+        DASH, OMNIDASH, SLIDE, GRAPPLE, WALLRUN, AUTOFIRE, LIFESTEAL, BETTERFIRERATE, CTHULHU
     }
 
     public static Action getAction(Unlockable u)
@@ -44,6 +45,8 @@ public static class UnlockFunctions
         {
             case Unlockable.DASH:
                 return UnlockDashEvent;
+            case Unlockable.OMNIDASH:
+                return UnlockOmniDashEvent;
             case Unlockable.SLIDE:
                 return UnlockSlideEvent;
             case Unlockable.GRAPPLE:

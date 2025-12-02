@@ -18,7 +18,7 @@ MonoBehaviour:
   damage: 0
   moveSpeed: 0
   numJumps: 0
-  slidePower: 50
+  slidePower: 20
   dashPower: 0
   ID: SlideUp
   rarity: 0

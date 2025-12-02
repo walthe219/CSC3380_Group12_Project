@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunScript
   fpsCam: {fileID: 0}
+  gun: {fileID: 1595893872248343817}
   muzzleFlash: {fileID: 3135115147400841653}
   currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
   BasePlayerStats: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
@@ -145,6 +146,8 @@ MonoBehaviour:
   isAuto: 0
   AutoUnlocked: 0
   LifeStealUnlocked: 0
+  isNotAutoReload: 0
+  bulletTrailPrefab: {fileID: 4512427035763013490, guid: 0d9eead7569da68428a1f94a83115b11, type: 3}
   fireAction:
     m_Name: Fire
     m_Type: 0
@@ -154,6 +157,11 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+--- !u!23 &1595893872248343817 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 4df3ce82db8e66645afd54ab1d5b0262, type: 3}
+  m_PrefabInstance: {fileID: 136326954901524877}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2077538864090540068
 PrefabInstance:
   m_ObjectHideFlags: 0

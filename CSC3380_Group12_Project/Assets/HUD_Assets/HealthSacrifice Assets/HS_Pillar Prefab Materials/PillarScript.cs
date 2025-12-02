@@ -25,7 +25,7 @@ public class PillarScript : MonoBehaviour
     [SerializeField] PlayerStats CurrentPlayerStats;
     private bool PillarMenuOpened;
     SacrificeUpgradeData[] upgradechoices;
-    public event Action<Upgrade> UpgradePurchased;
+    public static event Action<Upgrade> UpgradePurchased;
     public bool q;
     private int pendingUpgradeIndex = -1;
     

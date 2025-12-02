@@ -23,6 +23,7 @@ public class UpgradeableStatContainer: ScriptableObject
     public float damage;
     public float moveSpeed;
     public int numJumps;
+    public float jumpPower;
     public float slidePower;
     public float dashPower;
     public float reloadSpeed;
@@ -45,6 +46,7 @@ public class UpgradeableStatContainer: ScriptableObject
         damage = statChangeFunc(damage, other.damage, "Damage");
         moveSpeed = statChangeFunc(moveSpeed, other.moveSpeed, "Move Speed");
         numJumps = (int)statChangeFunc(numJumps, other.numJumps, "Jumps");
+        jumpPower = statChangeFunc(jumpPower, other.jumpPower, "Jump Power");
         slidePower = statChangeFunc(slidePower, other.slidePower,"Slide Power");
         dashPower = statChangeFunc(dashPower, other.dashPower, "Dash Power");
         reloadSpeed = statChangeFunc(reloadSpeed, other.reloadSpeed, "Reload Speed");
