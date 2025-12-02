@@ -6,11 +6,43 @@ public class Player : MonoBehaviour
 {
 
     //tutorial: https://youtu.be/MdOi9ymb07s?si=BoIQ8mIhSsAbsHEb
-   
+
+    public bool CthulhuUnlocked;
+    public GameObject DialogueBox;
+
+    void OnEnable()
+    {
+        UnlockFunctions.UnlockCthulhuEvent += unlockCthulhu;
+    }
+
+    void unlockCthulhu()
+    {
+        CthulhuUnlocked = true;
+    }
+
+    void Start() { 
+        CthulhuUnlocked = true;
+    }
+
+    private IEnumerator ShowDialogueForSeconds(float duration)
+    {
+        DialogueBox.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        DialogueBox.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E)) PlayerInteract();
+        if (Input.GetKeyDown(KeyCode.E) && CthulhuUnlocked)
+        { 
+            PlayerInteract();
+        }
+        if(Input.GetKeyDown(KeyCode.E) && !CthulhuUnlocked)
+        {
+            Debug.Log("The statue whispers through the thunder");
+            StartCoroutine(ShowDialogueForSeconds(3f));
+        }
     }
 
     public void PlayerInteract(){

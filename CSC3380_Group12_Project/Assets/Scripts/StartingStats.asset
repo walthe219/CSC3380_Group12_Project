@@ -21,6 +21,6 @@ MonoBehaviour:
   slidePower: 200
   dashPower: 50
   reloadSpeed: 5
-  Firerate: 0
+  Firerate: 1
   gunRange: 50
   numRoomsComp: 0
