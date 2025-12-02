@@ -56,7 +56,7 @@ public class NewMovement : MonoBehaviour
     public bool isDashing = false;
     public float dashDrag;
     private bool dashUnlocked;
-    private bool omniDashUnlocked;
+    private bool omniDashUnlocked = true;
 
     [Header("Stamina")]
     public float curStamina;
@@ -455,7 +455,7 @@ public class NewMovement : MonoBehaviour
     // Dashes
     private void Dash()
     {
-        if(omniDashUnlocked)
+        if(omniDashUnlocked && vertInput > 0)
         {
             body.AddForce(cam.transform.forward.normalized * dashForce, ForceMode.Impulse);
         }
