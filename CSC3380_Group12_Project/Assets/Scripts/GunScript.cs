@@ -34,12 +34,12 @@ public class GunScript : MonoBehaviour
 
     public void unlockAutoFire() {
         AutoUnlocked = true;
+        SemiToggle_icon.SetActive(true);
     }
 
     public void unlockLifeSteal()
     {
         LifeStealUnlocked = true;
-        SemiToggle_icon.SetActive(true);
     }
 
     public void toggleAutoFire() { 
@@ -164,7 +164,7 @@ public class GunScript : MonoBehaviour
             {
 
                 target.TakeDamage(currPlayerStats.damage);
-                if (LifeStealUnlocked) {
+                if (LifeStealUnlocked && currPlayerStats.health < BasePlayerStats.health) {
                     currPlayerStats.health = (float)(currPlayerStats.health + (currPlayerStats.damage * 0.10)); //If LifeSteal Upgrade is unlocked, then whena player successfully
                     //hits an enemy they gain a percentage of the damage they deal to their health
                     //Otherwise, if they miss they lose that percentage of health
@@ -174,7 +174,7 @@ public class GunScript : MonoBehaviour
             else
             {
                 Debug.Log("You hit something other than the target!");
-                if (LifeStealUnlocked)
+                if (LifeStealUnlocked && currPlayerStats.health < BasePlayerStats.health)
                 {
                     currPlayerStats.health = (float)(currPlayerStats.health - (currPlayerStats.damage * 0.10)); //Where the player loses the percentage of health if they miss
                 }
@@ -185,7 +185,7 @@ public class GunScript : MonoBehaviour
         }
         else {
             Debug.Log("You completely missed lmao");
-            if (LifeStealUnlocked) {
+            if (LifeStealUnlocked && currPlayerStats.health < BasePlayerStats.health) {
                 currPlayerStats.health = (float)(currPlayerStats.health - (currPlayerStats.damage * 0.10)); //Where the player loses the percentage of health if they miss
             }
         }
