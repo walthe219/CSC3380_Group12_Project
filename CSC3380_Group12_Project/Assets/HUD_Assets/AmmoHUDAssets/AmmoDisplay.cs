@@ -15,7 +15,6 @@ public class AmmoDisplay : MonoBehaviour
     [SerializeField] PlayerStats CurrentPlayerStats;
     [SerializeField] PlayerStats BasePlayerStats;
     [SerializeField] PlayerStats DefaultStats;
-    [SerializeField] PlayerStats BasePlayerStats;
     //public PauseMenu1 pm;
 
 
