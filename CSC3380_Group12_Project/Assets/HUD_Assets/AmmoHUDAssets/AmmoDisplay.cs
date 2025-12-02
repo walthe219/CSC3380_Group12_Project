@@ -14,8 +14,9 @@ public class AmmoDisplay : MonoBehaviour
     private int delay_x;
     [SerializeField] PlayerStats CurrentPlayerStats;
     [SerializeField] PlayerStats DefaultStats;
+    [SerializeField] PlayerStats BasePlayerStats;
     //public PauseMenu1 pm;
-    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -73,7 +74,7 @@ public class AmmoDisplay : MonoBehaviour
 
     void ammoToText(){
         if(ammoDisplay != null){
-            ammoDisplay.text = CurrentPlayerStats.ammo.ToString() + "/" + DefaultStats.ammo.ToString();
+            ammoDisplay.text = CurrentPlayerStats.ammo.ToString() + "/" + BasePlayerStats.ammo.ToString();
         }
         else{
             Debug.Log("ammoDisplay is null");
