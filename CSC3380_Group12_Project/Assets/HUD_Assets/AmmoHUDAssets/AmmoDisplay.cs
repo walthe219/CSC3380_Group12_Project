@@ -15,8 +15,9 @@ public class AmmoDisplay : MonoBehaviour
     [SerializeField] PlayerStats CurrentPlayerStats;
     [SerializeField] PlayerStats BasePlayerStats;
     [SerializeField] PlayerStats DefaultStats;
+    [SerializeField] PlayerStats BasePlayerStats;
     //public PauseMenu1 pm;
-    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
