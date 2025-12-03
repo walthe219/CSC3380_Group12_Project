@@ -6,7 +6,6 @@ public class NodeFieldProcessor : MonoBehaviour
     public List<GameObject> fieldNodes = new List<GameObject>();
 
     public List<GameObject> visibleNodes = new List<GameObject>();
-    public List<GameObject> invisibleNodes = new List<GameObject>();
 
     public GameObject optimalNode = null;
     public float updateTimer = 0;
@@ -46,14 +45,21 @@ public class NodeFieldProcessor : MonoBehaviour
             foreach (GameObject node in fieldNodes)
             {
                 Debug.Log("in 1");
-                if (node.GetComponent<VisInfo>().visScore > 0)
+                var info = node.GetComponent<VisInfo>();
+                if (info.visScore > 0 && !info.visible)
                 {
                     Debug.Log("in 2");
                     visibleNodes.Add(node);
+                    info.visible = true;
+                }
+                else if (!(info.visScore > 0) && info.visible)
+                {
+                    visibleNodes.Remove(node);
+                    info.visible = false;
                 }
             }
 
-            int index = Random.Range(0, visibleNodes.Count);
+            int index = Random.Range(0, visibleNodes.Count-1);
 
             optimalNode = visibleNodes[index];
         }

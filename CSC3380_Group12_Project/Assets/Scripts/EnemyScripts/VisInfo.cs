@@ -5,10 +5,11 @@ public class VisInfo : MonoBehaviour
 {
     public int visScore;
     public float updateTimer = 0;
+    public bool visible = false;
 
     public Transform player;
 
-    void FixedUpdate()
+    void Update()
     {
         if (updateTimer < 2f)
         {
@@ -25,11 +26,17 @@ public class VisInfo : MonoBehaviour
     {
         visScore = 0;
         RaycastHit hit;
-        Physics.Raycast(transform.position, (player.position - transform.position).normalized, out hit);
-
-        if (hit.transform.gameObject.CompareTag("Player"))
+        if (Physics.Raycast(transform.position, (player.position - transform.position).normalized, out hit))
         {
-            visScore = 1;
+
+            Debug.Log(hit.transform.name);
+            
+            if (hit.transform.CompareTag("Player"))
+            {
+                Debug.Log("kill yourself");
+                visScore = 1;
+            }
         }
+
     }
 }
