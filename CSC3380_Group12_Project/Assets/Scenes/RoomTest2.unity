@@ -1619,6 +1619,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player&Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 6039100129116526259, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: jumpPower
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6039100129116526259, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: moveSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6039100129116526259, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: walkSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6039100129116526259, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: actualSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6039100129116526259, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: sprintSpeed
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
