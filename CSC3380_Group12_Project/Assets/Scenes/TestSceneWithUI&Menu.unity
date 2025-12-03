@@ -706,7 +706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5049115436650554024, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32.36
+      value: 33.209
       objectReference: {fileID: 0}
     - target: {fileID: 5049115436650554024, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: m_LocalPosition.z
@@ -758,7 +758,7 @@ PrefabInstance:
       objectReference: {fileID: 1206234263}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: dashSpeed
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: slideSpeed
@@ -3588,11 +3588,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de912e925059c604ab68b3850bef2326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
-  prefabFolderPath: Tiles
+  prefabFolderPath: AidanTiles
   poolingLocation: {x: 0, y: 0, z: 0}
-  roomGenDistance: 500
-  roomGenHeight: 0
-  maxTileRadius: 10
+  roomGenDistance: 1000
+  roomGenHeight: 40
+  maxTileRadius: 35
   numRoomsToCreate: 4
   mainRoomPostion: {fileID: 375653121}
   mainRoomPortals:
