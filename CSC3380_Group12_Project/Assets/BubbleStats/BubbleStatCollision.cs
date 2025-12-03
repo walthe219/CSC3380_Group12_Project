@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class BubbleStatCollision : MonoBehaviour
 {
     [SerializeField] PlayerStats CurrentPlayerStats;
+    public AudioClip bubbleSound;
     
 
     private void OnTriggerEnter(Collider other){
@@ -36,6 +37,8 @@ public class BubbleStatCollision : MonoBehaviour
                 // Add stamina here
                 CurrentPlayerStats.stamina += 10;
             }
+
+            SoundFXManager.instance.PlaySoundFXClip(bubbleSound, transform, 1f);
 
         }
 

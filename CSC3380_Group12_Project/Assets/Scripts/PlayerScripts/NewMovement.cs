@@ -71,6 +71,9 @@ public class NewMovement : MonoBehaviour
     private float playerCrouchHeight = 1;
     public bool isGrounded;
 
+    [Header("Sound Effects")]
+    public AudioClip dashSound;
+
     [Header("Inputs")]
     public InputAction move;
     public InputAction jump;
@@ -441,7 +444,8 @@ public class NewMovement : MonoBehaviour
     // Dashes
     private void Dash()
     {
-        if(omniDashUnlocked && vertInput > 0)
+        SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
+        if (omniDashUnlocked && vertInput > 0)
         {
             body.AddForce(cam.transform.forward.normalized * dashForce, ForceMode.Impulse);
         }

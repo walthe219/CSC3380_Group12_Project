@@ -273,6 +273,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3236921221025766410, guid: 3191159188342514ab4a429d3dcc873f, type: 3}
+      propertyPath: bubbleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9c3cb5ded3a6e6340b09c6e4327e5210, type: 3}
     - target: {fileID: 6971965606506152250, guid: 3191159188342514ab4a429d3dcc873f, type: 3}
       propertyPath: m_Name
       value: StaminaBubble
@@ -757,6 +761,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1206234263}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: dashSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bcccd4ff9ad1794fb16f3f6cbeec8b9, type: 3}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: dashSpeed
       value: 30
       objectReference: {fileID: 0}
@@ -961,6 +969,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &547854876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 547854877}
+  - component: {fileID: 547854878}
+  m_Layer: 0
+  m_Name: SoundFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &547854877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547854876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1913206515}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &547854878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547854876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17275ffca80be774c9d15eb2103e71d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::SoundFXManager
+  soundFXObject: {fileID: 9017903347257775596, guid: fb5b094247792ec448b6f9cf4f793f72, type: 3}
 --- !u!1 &589055622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,6 +2474,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2872389157183541106, guid: 63343d9e8b2b3c34b8e0fd062f758578, type: 3}
+      propertyPath: bubbleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9c3cb5ded3a6e6340b09c6e4327e5210, type: 3}
     - target: {fileID: 5821355359484847712, guid: 63343d9e8b2b3c34b8e0fd062f758578, type: 3}
       propertyPath: m_Name
       value: HealthBubble
@@ -2528,6 +2585,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4870276983735315605, guid: 2a51c3baacc4e6a47ae8fb0430ccc5e9, type: 3}
+      propertyPath: bubbleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9c3cb5ded3a6e6340b09c6e4327e5210, type: 3}
     - target: {fileID: 9096256916345315668, guid: 2a51c3baacc4e6a47ae8fb0430ccc5e9, type: 3}
       propertyPath: m_Name
       value: AmmoBubble
@@ -2712,6 +2773,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 240687986}
     - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+      propertyPath: gunSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
+    - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
       propertyPath: gunLocation
       value: 
       objectReference: {fileID: 655621988}
@@ -2723,6 +2788,10 @@ PrefabInstance:
       propertyPath: relaod_icon
       value: 
       objectReference: {fileID: 1391447651}
+    - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e5198250a6a57408bb36e14bc4a322c4, type: 3}
     - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
       propertyPath: reload_icon
       value: 
@@ -2747,6 +2816,26 @@ PrefabInstance:
       propertyPath: impactGenericParticleSystem
       value: 
       objectReference: {fileID: 6997786896759421704}
+    - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+      propertyPath: gunHitEnemySounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+      propertyPath: 'gunHitEnemySounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f53a5fc6bd934e46a5d8cfa8fd27b64, type: 3}
+    - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+      propertyPath: 'gunHitEnemySounds.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: e82879725b40ce444bca27d19a75f42c, type: 3}
+    - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+      propertyPath: 'gunHitEnemySounds.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2b019c6187fca1e48b47e28c891dc66c, type: 3}
+    - target: {fileID: 2132220798528774087, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
+      propertyPath: 'gunHitEnemySounds.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b883c27c88428884fb3a10dcc42b8b47, type: 3}
     - target: {fileID: 2973605071602857249, guid: de027c13d1df0244b837b1913cf30a8f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3105,6 +3194,7 @@ Transform:
   - {fileID: 2124508580}
   - {fileID: 6787824873632339718}
   - {fileID: 1864091564}
+  - {fileID: 547854877}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1950508744 stripped

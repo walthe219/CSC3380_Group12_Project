@@ -26,6 +26,11 @@ public class GunScript : MonoBehaviour
     public ParticleSystem impactGenericParticleSystem;
     public TrailRenderer bulletTrailPrefab;
 
+    public AudioClip gunSound;
+    public AudioClip[] gunHitEnemySounds;
+    public AudioClip[] gunHitEnemyHeadSounds;
+    public AudioClip reloadSound;
+
     public InputAction fireAction;
 
     private void OnEnable()
@@ -138,6 +143,7 @@ public class GunScript : MonoBehaviour
     {
         isReloading = true;
         Debug.Log("Reloading......");
+        SoundFXManager.instance.PlaySoundFXClip(reloadSound, transform, 1f);
         reload_icon.SetActive(true);
         reloadDelay = 1/currPlayerStats.reloadSpeed;
         yield return new WaitForSeconds(reloadDelay);
@@ -155,6 +161,7 @@ public class GunScript : MonoBehaviour
     {
 
         muzzleFlash.Play();
+        SoundFXManager.instance.PlaySoundFXClip(gunSound, transform, 1f);
 
         RaycastHit hit;
         TrailRenderer trail;
@@ -222,6 +229,7 @@ public class GunScript : MonoBehaviour
             if (enemyHit)
             {
                 Instantiate(impactEnemyParticleSystem, hit, Quaternion.LookRotation(hitNormal));
+                SoundFXManager.instance.PlayRandomSoundFXClip(gunHitEnemySounds, transform, 1f);
             }
             else
             {
