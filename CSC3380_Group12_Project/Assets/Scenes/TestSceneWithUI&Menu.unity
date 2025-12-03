@@ -3588,11 +3588,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de912e925059c604ab68b3850bef2326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
-  prefabFolderPath: Tiles
+  prefabFolderPath: AidanTiles
   poolingLocation: {x: 0, y: 0, z: 0}
-  roomGenDistance: 500
-  roomGenHeight: 0
-  maxTileRadius: 10
+  roomGenDistance: 1000
+  roomGenHeight: 40
+  maxTileRadius: 35
   numRoomsToCreate: 4
   mainRoomPostion: {fileID: 375653121}
   mainRoomPortals:
