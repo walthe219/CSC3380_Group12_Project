@@ -18,6 +18,7 @@ MonoBehaviour:
   damage: 0
   moveSpeed: 0
   numJumps: 0
+  jumpPower: 0
   slidePower: 0
   dashPower: 0
   reloadSpeed: 0
@@ -28,7 +29,7 @@ MonoBehaviour:
   isRepeatable: 0
   prerequisites: []
   mutuallyExclusives: []
-  unlocks: 05000000
+  unlocks: 06000000
   description: Steal a percentage of the damage you deal to an enemy, but lose health
     every missed shot
   HealthCostPercent: 10

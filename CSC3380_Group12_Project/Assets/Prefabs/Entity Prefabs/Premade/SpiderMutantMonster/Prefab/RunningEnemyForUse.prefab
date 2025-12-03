@@ -7048,6 +7048,7 @@ GameObject:
   - component: {fileID: 1405285084934166612}
   - component: {fileID: 8613965700729481620}
   - component: {fileID: 8296296311111667559}
+  - component: {fileID: 1679529264620079458}
   m_Layer: 8
   m_Name: RunningEnemyForUse
   m_TagString: Runner
@@ -7176,6 +7177,27 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   detectRadius: 10
+--- !u!114 &1679529264620079458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7901366144787319798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03bc8063c9e95401f9a8a38bc716750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation.Samples::Unity.AI.Navigation.Samples.AgentLinkMover
+  m_Method: 2
+  m_Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  anim: {fileID: 7901366144794753078}
+  agent: {fileID: 8592305013503075500}
 --- !u!1 &7901366144787319800
 GameObject:
   m_ObjectHideFlags: 0

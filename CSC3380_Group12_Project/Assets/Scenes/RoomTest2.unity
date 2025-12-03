@@ -391,11 +391,93 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8037523677747632039, guid: 479fc39730885d24faee58056ee23882, type: 3}
   m_PrefabInstance: {fileID: 1790119793}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &585571902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 585571903}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: ManagerParent
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &585571903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585571902}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 321.17, y: 238.55171, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1668990689}
+  - {fileID: 1393405600}
+  - {fileID: 677982209}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &587271207 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 761377956544908820, guid: 479fc39730885d24faee58056ee23882, type: 3}
   m_PrefabInstance: {fileID: 1029043408}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &677982208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 677982209}
+  - component: {fileID: 677982210}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &677982209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677982208}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 585571903}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &677982210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677982208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b4dbbf282b7e246b024de40ffe8794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::ObjectPooler
+  pools:
+  - tag: Runner
+    prefab: {fileID: 7901366144787319798, guid: f2e03fd1cffea284890ee861660f8b1d, type: 3}
+    size: 20
 --- !u!1001 &687229606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1179,12 +1261,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393405598}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 321.17, y: 238.55171, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 585571903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1532716650
 GameObject:
@@ -1367,7 +1449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
   prefabFolderPath: AidanTiles
-  prefab_arr: []
+  poolingLocation: {x: 0, y: 0, z: 0}
   roomGenDistance: 1000
   roomGenHeight: -1000
   maxTileRadius: 35
@@ -1391,8 +1473,13 @@ MonoBehaviour:
   portalPrefab: {fileID: 1901507051140553368, guid: 6437ce4dd46c346489046ad5c08b3b8a, type: 3}
   cameraPrefab: {fileID: 1168578827609935081, guid: 8b612f97d1d62664f9503d1ac06edef0, type: 3}
   enemyPrefab: {fileID: 7901366144787319798, guid: f2e03fd1cffea284890ee861660f8b1d, type: 3}
+  fallPlanePrefab: {fileID: 6253938836234063647, guid: 9f4c40124352a244a9b2dd1ebca8a3e1, type: 3}
+  rooms: []
+  currentlySelectedRoom:
+    roomNum: 0
   currentEnemiesAlive: 0
   currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
+  enemies: []
 --- !u!4 &1668990689
 Transform:
   m_ObjectHideFlags: 0
@@ -1401,12 +1488,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668990687}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -321.17, y: -238.55171, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 585571903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1790119793
 PrefabInstance:
@@ -1768,8 +1855,7 @@ SceneRoots:
   - {fileID: 738377382}
   - {fileID: 1929093406}
   - {fileID: 8968889118671009284}
-  - {fileID: 1668990689}
-  - {fileID: 1393405600}
+  - {fileID: 585571903}
   - {fileID: 1303719747}
   - {fileID: 1224682987}
   - {fileID: 687229606}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3569453719282851058}
   - component: {fileID: 6796624350748608610}
   - component: {fileID: 4902070905680346198}
+  - component: {fileID: 1063107170240995694}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -184,6 +185,22 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+--- !u!114 &1063107170240995694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948115490480696473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c3f689257906647804bb246f3b45c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDamageManager
+  baseStats: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
+  currentStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
+  flatFallDamage: 10
+  fallDamagePercentage: 0
 --- !u!1 &4644911705272029929
 GameObject:
   m_ObjectHideFlags: 0
