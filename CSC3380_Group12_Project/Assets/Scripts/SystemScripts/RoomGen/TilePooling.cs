@@ -78,7 +78,7 @@ public static class TilePooling
         tile.transform.parent = TilePoolObj.transform;
         tile.transform.position = resetPosition;
         tile.transform.rotation = Quaternion.identity;
-        tile.transform.localScale = Vector3.one;
+        //tile.transform.localScale = Vector3.one;
         tile.SetActive(false);
 
         tileStack.Push(tile);
