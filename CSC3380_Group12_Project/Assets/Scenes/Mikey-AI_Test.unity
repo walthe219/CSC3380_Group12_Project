@@ -380,6 +380,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4992074993160026627, guid: 5bba62d8b65dae44898012275d24ba9e, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 1799303085}
+    - target: {fileID: 4992074993160026627, guid: 5bba62d8b65dae44898012275d24ba9e, type: 3}
+      propertyPath: playerTarget
+      value: 
+      objectReference: {fileID: 370688576}
     - target: {fileID: 6334826068141619221, guid: 5bba62d8b65dae44898012275d24ba9e, type: 3}
       propertyPath: m_Name
       value: Demon_default
@@ -841,6 +849,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 14362408457972754, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271634547789058458, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271634547789058458, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271634547789058458, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271634547789058458, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3102497995271984666, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
       propertyPath: groundMask.m_Bits
       value: 8
@@ -895,6 +923,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8861729697446566761, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8861729697446566761, guid: bc1d64b5704b6be41931659e0aceec03, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1770,6 +1802,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   detectRadius: 10
+--- !u!195 &1799303085 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 1554758542443892338, guid: 5bba62d8b65dae44898012275d24ba9e, type: 3}
+  m_PrefabInstance: {fileID: 264278951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1807549692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2185,6 +2222,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 370688576}
+    - target: {fileID: 6344855512815302775, guid: 44b693ef88f0f044d832afcb7a57c1e1, type: 3}
+      propertyPath: playerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 6562830333293190425, guid: 44b693ef88f0f044d832afcb7a57c1e1, type: 3}
       propertyPath: player
       value: 

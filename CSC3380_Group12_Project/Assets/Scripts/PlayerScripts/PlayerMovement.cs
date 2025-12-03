@@ -51,15 +51,6 @@ public class PlayerMovement : MonoBehaviour
             GetInput();
         }
 
-        if (updateTimer < 2f)
-        {
-            updateTimer += Time.deltaTime;
-        } 
-        else
-        {
-            updateTimer = 0f;
-
-        }
     }
 
     void GetInput()
@@ -114,13 +105,6 @@ public class PlayerMovement : MonoBehaviour
             playerSpeed = currentPlayerSpeed;
 
         }
-
-    }
-    
-    void activateNodeFields()
-    {
-
-        
 
     }
 

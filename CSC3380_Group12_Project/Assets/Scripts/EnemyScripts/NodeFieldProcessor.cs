@@ -9,10 +9,47 @@ public class NodeFieldProcessor : MonoBehaviour
 
     public GameObject optimalNode = null;
     public float updateTimer = 0;
+    public bool activator = false;
+    bool hasBeenActive = false;
+    public bool isOccupied = false;
 
+    public LayerMask playerMask;
 
-    
     void FixedUpdate()
+    {
+        activator = Physics.CheckSphere(transform.position, 100f, playerMask);
+
+        if (activator)
+        {
+            if (!hasBeenActive)
+            {
+                foreach (Transform node in transform)
+                {
+                    if (node.gameObject.CompareTag("VisNode"))
+                    {
+                        node.gameObject.SetActive(true);
+                    }
+                }
+                hasBeenActive = true;
+            }
+            
+            updaterFunc();
+        }
+        if (!activator)
+        {
+            foreach (Transform node in transform)
+            {
+                if (node.gameObject.CompareTag("VisNode"))
+                {
+                    node.gameObject.SetActive(false);
+                }
+            }
+            hasBeenActive = false;
+            isOccupied = false;
+        }
+    }
+    
+    void updaterFunc()
     {
         
         if (updateTimer < 2f)
@@ -44,11 +81,9 @@ public class NodeFieldProcessor : MonoBehaviour
         {
             foreach (GameObject node in fieldNodes)
             {
-                Debug.Log("in 1");
                 var info = node.GetComponent<VisInfo>();
                 if (info.visScore > 0 && !info.visible)
                 {
-                    Debug.Log("in 2");
                     visibleNodes.Add(node);
                     info.visible = true;
                 }
