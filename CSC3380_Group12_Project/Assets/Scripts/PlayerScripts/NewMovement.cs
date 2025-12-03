@@ -55,7 +55,7 @@ public class NewMovement : MonoBehaviour
     public float maxDashTime;
     public bool isDashing = false;
     public float dashDrag;
-    private bool dashUnlocked = false;
+    public bool dashUnlocked = false;
     private bool omniDashUnlocked = false;
 
     [Header("Stamina")]
@@ -95,10 +95,7 @@ public class NewMovement : MonoBehaviour
         jump.Enable();
         sprint.Enable();
         crouch.Enable();
-        if(dashUnlocked)
-        {
-            dash.Enable();
-        }   
+        dash.Enable();
     }
 
     private void OnDisable()
@@ -259,7 +256,7 @@ public class NewMovement : MonoBehaviour
         }
 
         // Dashing
-        else if (dash.IsPressed())
+        else if (dash.IsPressed() && dashUnlocked)
         {
             state = MovementState.dashing;
             //desiredSpeed = dashSpeed;
@@ -315,7 +312,7 @@ public class NewMovement : MonoBehaviour
         }
 
         // Can only dash if the stamina is at least 50
-        if (dash.WasPressedThisFrame() && currPlayerStats.stamina >= 50 && ((horzInput != 0 || vertInput != 0) || omniDashUnlocked))
+        if (dash.WasPressedThisFrame() && currPlayerStats.stamina >= 50 && ((horzInput != 0 || vertInput != 0) || omniDashUnlocked) && dashUnlocked)
         {
             Dash();
         }
@@ -544,7 +541,6 @@ public class NewMovement : MonoBehaviour
     public void UnlockDash()
     {
         dashUnlocked = true;
-        dash.Enable();
     }
 
     public void UnlockOmniDash()
