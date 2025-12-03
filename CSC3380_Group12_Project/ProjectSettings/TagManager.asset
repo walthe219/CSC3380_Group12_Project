@@ -13,6 +13,7 @@ TagManager:
   - LinkEndPoint
   - ConnectionPoint
   - ManagerParent
+  - VisNode
   layers:
   - Default
   - TransparentFX
