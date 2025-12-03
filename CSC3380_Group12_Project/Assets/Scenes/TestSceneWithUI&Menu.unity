@@ -38211,20 +38211,36 @@ PrefabInstance:
     m_TransformParent: {fileID: 1131303965}
     m_Modifications:
     - target: {fileID: 592526303677213031, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 325.1104
+      objectReference: {fileID: 0}
+    - target: {fileID: 592526303677213031, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 242.4305
+      objectReference: {fileID: 0}
+    - target: {fileID: 592526303677213031, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 151
+      value: 213.55516
       objectReference: {fileID: 0}
     - target: {fileID: 592526303677213031, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000006102
+      value: -96.21529
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208233410795848389, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 193.8971
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208233410795848389, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 54.7954
       objectReference: {fileID: 0}
     - target: {fileID: 1208233410795848389, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -252
+      value: -255.05132
       objectReference: {fileID: 0}
     - target: {fileID: 1208233410795848389, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 100
+      value: 97.60234
       objectReference: {fileID: 0}
     - target: {fileID: 1601121267881595976, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
       propertyPath: m_text
@@ -38266,6 +38282,10 @@ PrefabInstance:
       propertyPath: upgradeManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3358871089713375105, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
+      propertyPath: baseStats
+      value: 
+      objectReference: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
     - target: {fileID: 3358871089713375105, guid: 31b55cc87ada513429ada84e05c0b4f5, type: 3}
       propertyPath: statsText
       value: 
