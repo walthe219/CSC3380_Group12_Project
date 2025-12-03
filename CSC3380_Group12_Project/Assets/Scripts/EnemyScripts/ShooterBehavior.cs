@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class ShooterBehavior : MonoBehaviour
 {
+
+/*
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,4 +16,9 @@ public class ShooterBehavior : MonoBehaviour
     {
         
     }
+
+    void findNearestField()
+    {
+        GameObject.FindObjectsWithTag("NodeField");
+    }*/
 }

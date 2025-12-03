@@ -31,11 +31,11 @@ public class NodeFieldProcessor : MonoBehaviour
     void getOptimalNode()
     {
         
-        if (fieldNodes.Count == 0)
+        if (!(fieldNodes.Count > 0))
         {
             foreach (Transform node in transform)
             {
-                if (node.parent.CompareTag("VisNode"))
+                if (node.gameObject.CompareTag("VisNode"))
                 {
                     fieldNodes.Add(node.gameObject);
                 }
@@ -45,8 +45,10 @@ public class NodeFieldProcessor : MonoBehaviour
         {
             foreach (GameObject node in fieldNodes)
             {
+                Debug.Log("in 1");
                 if (node.GetComponent<VisInfo>().visScore > 0)
                 {
+                    Debug.Log("in 2");
                     visibleNodes.Add(node);
                 }
             }

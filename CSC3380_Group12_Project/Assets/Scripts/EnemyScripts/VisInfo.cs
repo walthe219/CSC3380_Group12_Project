@@ -4,7 +4,7 @@ using UnityEngine;
 public class VisInfo : MonoBehaviour
 {
     public int visScore;
-    private float updateTimer = 0;
+    public float updateTimer = 0;
 
     public Transform player;
 
@@ -27,7 +27,7 @@ public class VisInfo : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(transform.position, (player.position - transform.position).normalized, out hit);
 
-        if (hit.transform.tag == "Player")
+        if (hit.transform.gameObject.CompareTag("Player"))
         {
             visScore = 1;
         }

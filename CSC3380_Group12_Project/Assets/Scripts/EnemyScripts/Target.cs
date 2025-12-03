@@ -18,12 +18,16 @@ public class Target : MonoBehaviour
         }
 
     }
+    void OnEnable()
+    {
+        totalHealth = 100f;
+    }
 
     void Die()
     {
         OnDeath?.Invoke();
         OnDeath = null;
-        Destroy(gameObject);
+        gameObject.SetActive(false);
 
     }
 }
