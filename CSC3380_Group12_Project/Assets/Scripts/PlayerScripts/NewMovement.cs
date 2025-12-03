@@ -343,7 +343,7 @@ public class NewMovement : MonoBehaviour
             moveSpeed = Mathf.Lerp(start, desiredSpeed, time / diff);
 
             // Increases speed on slope depending on time spent on slope and slope angle
-            if (OnSlope())
+            if (OnSlope() && isSliding)
             {
                 float slopeAngle = Vector3.Angle(Vector3.up, slopeDetect.normal);
                 float slopeAngleIncrease = 1 + (slopeAngle / 90f);
@@ -387,6 +387,7 @@ public class NewMovement : MonoBehaviour
         else
         {
             body.AddForce(10f * airMultiplier * moveSpeed * moveDir.normalized, ForceMode.Force);
+            body.AddForce(Vector3.down * 1, ForceMode.Force);
         }
 
         body.useGravity = !OnSlope();
