@@ -32,7 +32,7 @@ Run-n-gun game, player can move jump and shoot their weapon to deal damage to en
  - Bug Fixes
 
 ## ACCESSING OUR PROJECT:
- - There is an Windows excutable called "CSC3380_Group12_Project" in the build folder "Builds" that allow you to run are game
+ - [Download are build here, run the executable inside to play the game](https://drive.google.com/drive/folders/1Z4keBxXlTL_z4IAEdXN9ap6R7ULgdkWZ?usp=drive_link)
  - Our C# scripts our contained in *CSC3380_Group12_Project/CSC3380_Group12_Project/Assets/Scripts*
  - If you wish to open our game in the Unity Editor, our project folder is the folder *CSC3380_Group12_Project* in our Repository, not the Repository folder itself. Our project uses unity editor version 6000.2.24f1. To open it in Unity, download the Unity Hub([Download](https://unity.com/download)) and the correct editor version, then click *Add/Add project* from disk and select the project folder
 
