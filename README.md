@@ -1,4 +1,4 @@
-#  __***Group 12 Project MVP***__ - LSU CSC 3380 Object Oriented Design Fall 2025
+#  __***Group 12 Project Final***__ - LSU CSC 3380 Object Oriented Design Fall 2025
 
 Group Members
 - Aidan Penton
@@ -7,7 +7,7 @@ Group Members
 - Joshua Walther
 - Corbin Brescher
 
-## PROJECT MVP OUTLINE:
+## PROJECT Final OUTLINE:
 
 First Person Shooter, rouge-like game created in the Unity Engine. In our game, the player clears randomly generated rooms of enemies to unlock rewards that make them stronger and give them new abilites
 
@@ -17,10 +17,19 @@ Run-n-gun game, player can move jump and shoot their weapon to deal damage to en
 
 ### Supplemental Features:
  - **Random Room Generation** - Four rooms are generated each round, and each is created from four randomly chosen tiles placed together, allowing for a large variety of unique room combinations. These tiles have set spawn points for enemies, and the room has a portal that connects it to a portal in the main room. From the main room, the player can see upgrades assigned to each room on a screen, and enter the portal for their desired upgrade, clear the room of enemies, then return to the main room. At that point four new rooms are created
-   
+  
  - **Upgrade and Unlock System** - When all of the enemies are defeated in a room, the player receives an upgrade reward that can increase their base stats, or unlock a movement ability. Some upgrades are repeatable while others can only be acquired once. These upgrades are randomly assigned to each room when they are created. Stats include things like the players health, stamina, speed, damage, number of jumps etc. These upgrades and stats can be seen in a menu while playing the game
    
  - **Advanced Movement System** -The player can crouch, run, slide, jump mulitple times in the air, and dash foward, all at the cost of stamina that regenerates over time. These abilities can be unlocked and improved with upgrades. The player can go up and slide down slopes, and speed is gained and converserved
+
+### NEW IN FINAL:
+ - Sacrifice Upgrades - there is a mysterious statue in the main room, use E to interact with it and gain powerful upgrades at the cost of your own health
+ - New Tiles - added new tiles
+ - Imporved Gun - gun now has several new stats and upgrades
+ - Optimize Room Generation
+ - New Upgrades - new stats and unlocks, unlocks have dependencies
+ - Sound affects and animations
+ - Bug Fixes
 
 ## ACCESSING OUR PROJECT:
  - There is an Windows excutable called "CSC3380_Group12_Project" in the build folder "Builds" that allow you to run are game
@@ -34,7 +43,9 @@ Run-n-gun game, player can move jump and shoot their weapon to deal damage to en
 - SHIFT - sprint
 - CTRL - Slide, need to be moving to slide, REQUIRES UNLOCK
 - R - Reload weapon, need to manually reload when gun is empty
+- E - interact with mysterious statue
 - C - Crouch
+- T - Toggle between automatic and semiautomatic
 - F - Dash in air, REQUIRES UNLOCK
 - TAB - Acquired Upgrades and Player Stats menu
 - ESC - Pause menu, under option can change mouse sensitivity
