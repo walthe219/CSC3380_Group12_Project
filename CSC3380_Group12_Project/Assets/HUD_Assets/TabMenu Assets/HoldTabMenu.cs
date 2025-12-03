@@ -9,7 +9,8 @@ public class HoldTabMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI upgradesText;
     [SerializeField] TMP_Text statsText;
     [SerializeField] PlayerStats currentStats;
-    
+    [SerializeField] PlayerStats baseStats;
+
 
     private InputAction holdTab;
 
@@ -106,6 +107,6 @@ public class HoldTabMenu : MonoBehaviour
         //}
 
         
-        statsText.text = currentStats.printAllStats();
+        statsText.text = baseStats.printAllStats();
     }
 }

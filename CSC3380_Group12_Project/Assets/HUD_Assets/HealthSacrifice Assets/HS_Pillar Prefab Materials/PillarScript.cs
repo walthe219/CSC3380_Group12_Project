@@ -94,7 +94,7 @@ public class PillarScript : MonoBehaviour
         rusure.SetActive(false);
         if (pendingUpgradeIndex != -1)
         {
-            CurrentPlayerStats.health = CurrentPlayerStats.health / (1 - (upgradechoices[pendingUpgradeIndex].HealthCostPercent / 100f));
+            CurrentPlayerStats.health = (int)(CurrentPlayerStats.health / (1 - (upgradechoices[pendingUpgradeIndex].HealthCostPercent / 100f)));
         }
         if (pendingUpgradeIndex == -1)
         {
