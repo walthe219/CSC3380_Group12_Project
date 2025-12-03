@@ -42,7 +42,6 @@ public class RoomManager : MonoBehaviour
     [SerializeField] int currentEnemiesAlive;
     [SerializeField] PlayerStats currPlayerStats;
     [SerializeField] List<GameObject> enemies;
-    [SerializeField] ObjectPooler pooler;
     //[SerializeField] string[] roomNames;
     //------------------------------------------
 
@@ -58,7 +57,6 @@ public class RoomManager : MonoBehaviour
     public static RoomManager Instance { get; private set; }
     private void Awake()
     {
-        pooler = ObjectPooler.Reference;
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject); // Destroy duplicate instances
@@ -68,6 +66,7 @@ public class RoomManager : MonoBehaviour
             Instance = this;
             //DontDestroyOnLoad(gameObject);
         }
+
         GameObject manage = GameObject.FindGameObjectWithTag("ManagerParent");
         NavMeshSurface initSurf = manage.AddComponent<NavMeshSurface>();
         initSurf.BuildNavMesh();
@@ -153,7 +152,8 @@ public class RoomManager : MonoBehaviour
             {
                 if (child.CompareTag("EnemyPoint"))
                 {
-                    GameObject spawned = pooler.SpawnFromPool(enemyPrefab.tag, child.position, child.rotation, currentlySelectedRoom.room);
+                    //GameObject spawned = ObjectPooler.Reference.SpawnFromPool(enemyPrefab.tag, child.position, child.rotation, currentlySelectedRoom.room);
+                    GameObject spawned = GameObject.Instantiate(enemyPrefab, child.position, child.rotation, currentlySelectedRoom.room.transform);
 
                     if (spawned.tag == "Runner")
                     {
@@ -161,11 +161,11 @@ public class RoomManager : MonoBehaviour
                         spawned.GetComponent<RunnerBehavior>().playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
                     }
                     enemies.Add(spawned);
-                    child.GameObject().SetActive(false);
+                    child.gameObject.SetActive(false);
                 }
                 if (child.CompareTag("PortalPoint") || child.CompareTag("ConnectionPoint") || child.CompareTag("LinkStartPoint") || child.CompareTag("LinkEndPoint"))
                 {
-                    child.GameObject().SetActive(false);
+                    child.gameObject.SetActive(false);
                 }
             }
         }

@@ -2,19 +2,19 @@
 using Unity.AI.Navigation;
 using UnityEngine;
 
+[System.Serializable]
 public class Room
 {
-    public GameObject room { private set; get; } //Actual Room gameobject, contains all tiles, enemies, portal, camera
-    public (GameObject, Stack<GameObject>)[] tiles { private set; get; }
-    public GameObject roomPortal { private set; get; } //Reference to room portal object in room
-    public GameObject mainRoomPortal { private set; get; } //Reference to mainRoomPortal that is linked with this room's portal
-    public GameObject roomCam { private set; get; } //Camera above room, can be used to display room preview
-    public UpgradeData upgradeReward { private set; get; } //Reward Assigned to this room
-    public GameObject[] enemies { private set; get; } //List of enemies spawned in this room
-    public NavMeshSurface surface { private set; get; }
+    [SerializeField] public  GameObject room { private set; get; } //Actual Room gameobject, contains all tiles, enemies, portal, camera
+    [SerializeField] public (GameObject, Stack<GameObject>)[] tiles { private set; get; }
+    [SerializeField] public GameObject roomPortal { private set; get; } //Reference to room portal object in room
+    [SerializeField] public GameObject mainRoomPortal { private set; get; } //Reference to mainRoomPortal that is linked with this room's portal
+    [SerializeField] public GameObject roomCam { private set; get; } //Camera above room, can be used to display room preview
+    [SerializeField] public UpgradeData upgradeReward { private set; get; } //Reward Assigned to this room
+    [SerializeField] public GameObject[] enemies { private set; get; } //List of enemies spawned in this room
+    [SerializeField] public NavMeshSurface surface { private set; get; }
 
-
-    public int roomNum;
+    [SerializeField] public int roomNum;
 
     public static int roomsCreated = 0;
 
@@ -29,8 +29,8 @@ public class Room
         this.enemies = enemies;
         this.surface = surface;
 
-        room.gameObject.name = "Room " + roomNum;
         roomNum = roomsCreated;
+        room.gameObject.name = "Room " + roomNum;
         roomsCreated += 1;
 
         mainRoomPortal.GetComponent<portalScript>().ActivatePortal();

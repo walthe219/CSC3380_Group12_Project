@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class ObjectPooler : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class ObjectPooler : MonoBehaviour
             for (int i = 0; i < pool.size; i++)
             {
 
-                GameObject obj = Instantiate(pool.prefab, new Vector3(0, 16, 0), Quaternion.identity);
+                GameObject obj = Instantiate(pool.prefab, new Vector3(0, 16, 0), Quaternion.identity,this.gameObject.transform);
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
 
@@ -65,6 +66,27 @@ public class ObjectPooler : MonoBehaviour
         PoolDict[tag].Enqueue(spawnedObj);
 
         return spawnedObj;
+    }
+
+    public void resetPooledObject(string tag, GameObject pooledObject)
+    {
+        if (!PoolDict.ContainsKey(tag))
+        {
+            Debug.Log("Pool of tag " + tag + "doesn't exist, check your inputs bozo");
+            return;
+        }
+        if (!PoolDict[tag].Contains(pooledObject)) 
+        {
+            Debug.Log($"Object {pooledObject} does not exist in the {tag} pool");
+            return;
+        }
+
+        pooledObject.transform.parent = this.gameObject.transform;
+        pooledObject.transform.position = new Vector3(0, 16, 0);
+        pooledObject.transform.rotation = Quaternion.identity;
+        pooledObject.SetActive(false);
+
+
     }
 
 }

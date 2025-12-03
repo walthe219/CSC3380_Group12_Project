@@ -71,7 +71,7 @@ public static class TilePooling
         {
             if (child.CompareTag("PortalPoint") || child.CompareTag("ConnectionPoint") || child.CompareTag("LinkStartPoint") || child.CompareTag("LinkEndPoint") || child.CompareTag("EnemyPoint"))
             {
-                child.GameObject().SetActive(true);
+                child.gameObject.SetActive(true);
             }
         }
 
