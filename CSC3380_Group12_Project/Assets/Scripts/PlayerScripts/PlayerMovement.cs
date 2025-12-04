@@ -1,5 +1,6 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 movementVector;
     private Vector3 myVelocity;
+
+    public float updateTimer = 0f;
 
     //Input System
     public InputAction playerMove, playerCrouch, playerJump;
@@ -47,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         {
             GetInput();
         }
+
     }
 
     void GetInput()
