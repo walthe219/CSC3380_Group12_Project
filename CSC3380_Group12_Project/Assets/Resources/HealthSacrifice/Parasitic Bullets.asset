@@ -30,6 +30,6 @@ MonoBehaviour:
   prerequisites: []
   mutuallyExclusives: []
   unlocks: 06000000
-  description: Steal a percentage of the damage you deal to an enemy, but lose health
-    every missed shot
+  description: Lose 10% health. Steal a percentage of the damage you deal to an enemy,
+    but lose health every missed shot
   HealthCostPercent: 10

@@ -18,13 +18,17 @@ MonoBehaviour:
   damage: 0
   moveSpeed: 5
   numJumps: 0
+  jumpPower: 0
   slidePower: 0
   dashPower: 0
+  reloadSpeed: 0
+  Firerate: 0
+  gunRange: 0
   ID: Hermes' Blood
   rarity: 0
   isRepeatable: 0
   prerequisites: []
   mutuallyExclusives: []
   unlocks: 
-  description: Loose 10% health and gain 5 movement speed
+  description: Lose 10% health and gain 5 movement speed
   HealthCostPercent: 10

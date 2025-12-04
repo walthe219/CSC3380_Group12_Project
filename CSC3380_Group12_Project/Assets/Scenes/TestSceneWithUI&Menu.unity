@@ -897,7 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d526c1c2d2446c4fa88b26ce306f4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::Player
-  CthulhuUnlocked: 0
+  CthulhuUnlocked: 1
   DialogueBox: {fileID: 1060011240}
 --- !u!4 &432800998 stripped
 Transform:

@@ -27,8 +27,7 @@ MonoBehaviour:
   ID: UnlockOmniDash
   rarity: 0
   isRepeatable: 0
-  prerequisites:
-  - {fileID: 11400000, guid: b8def7d75fad6a641835eba284d4f0b0, type: 2}
+  prerequisites: []
   mutuallyExclusives: []
   unlocks: 01000000
   description: 
