@@ -3364,6 +3364,9 @@ MonoBehaviour:
   - tag: Runner
     prefab: {fileID: 7901366144787319798, guid: f2e03fd1cffea284890ee861660f8b1d, type: 3}
     size: 20
+  - tag: Shooter
+    prefab: {fileID: 6334826068141619221, guid: 5bba62d8b65dae44898012275d24ba9e, type: 3}
+    size: 12
 --- !u!1 &1875089568 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3518537200339642447, guid: ae34490b04c7ee34998ef79bb01bc02a, type: 3}
@@ -4940,7 +4943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 748621366731120123, guid: af428632e8994e84ab902fb6a7d76604, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -444.9
+      value: -428.8
       objectReference: {fileID: 0}
     - target: {fileID: 748621366731120123, guid: af428632e8994e84ab902fb6a7d76604, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5539,7 +5542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7985699477791165972, guid: 0b995f4ef0d8d69488a9b6ff5fdca84a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -182.7
+      value: -163.7
       objectReference: {fileID: 0}
     - target: {fileID: 7985699477791165972, guid: 0b995f4ef0d8d69488a9b6ff5fdca84a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5793,7 +5796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7539735459731419443, guid: 0c9cc316e7466a647b7a0995eecb14d2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 392.9
+      value: 413.99
       objectReference: {fileID: 0}
     - target: {fileID: 7539735459731419443, guid: 0c9cc316e7466a647b7a0995eecb14d2, type: 3}
       propertyPath: m_AnchoredPosition.y
