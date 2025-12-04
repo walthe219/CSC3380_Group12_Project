@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     }
 
     void Start() { 
-        //CthulhuUnlocked = false;
+        CthulhuUnlocked = false;
     }
 
     private IEnumerator ShowDialogueForSeconds(float duration)

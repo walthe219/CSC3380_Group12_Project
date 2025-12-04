@@ -27,7 +27,8 @@ MonoBehaviour:
   ID: UnlockOmniDash
   rarity: 0
   isRepeatable: 0
-  prerequisites: []
+  prerequisites:
+  - {fileID: 11400000, guid: b05938ff7290e174bbf3cc890c90c130, type: 2}
   mutuallyExclusives: []
   unlocks: 01000000
-  description: 
+  description: Dash vertically in direction of camera when moving forward

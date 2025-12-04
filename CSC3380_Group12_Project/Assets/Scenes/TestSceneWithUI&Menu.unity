@@ -777,6 +777,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: dashUnlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: fovChangeTime
       value: 0.5
       objectReference: {fileID: 0}
