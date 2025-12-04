@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class SubTarget : MonoBehaviour
+public class ShooterSubTarget : MonoBehaviour
 {
-    public Target target;
+    public ShooterTarget target;
     public float dmgMult = 1f;
     public float limbHealth = 50f;
 

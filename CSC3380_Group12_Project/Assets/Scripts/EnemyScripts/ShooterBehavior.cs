@@ -5,8 +5,7 @@ public class ShooterBehavior : MonoBehaviour
 {
 
     public GameObject nearest;
-    public NavMeshAgent agent;
-    public Animator anim;
+    public ShooterReferences shootRef;
 
     public float agentVelocity;
 
@@ -20,7 +19,7 @@ public class ShooterBehavior : MonoBehaviour
     void Start()
     {
         playerTarget = GameObject.FindWithTag("Player").transform;
-        attackDistance = agent.stoppingDistance;
+        attackDistance = shootRef.agent.stoppingDistance;
     }
 
     // Update is called once per frame
@@ -61,27 +60,18 @@ public class ShooterBehavior : MonoBehaviour
 
     void UpdatePath(Transform target)
     {
-        agentVelocity = agent.desiredVelocity.sqrMagnitude;
+        agentVelocity = shootRef.agent.desiredVelocity.sqrMagnitude;
         if (target != null)
         {
             LookAndAttack(playerTarget);
-            /*bool canAttack = Vector3.Distance(transform.position, target.position) <= attackDistance;
-            if (canAttack)
-            {
 
-            }
-            else
-            {
-                runRef.anim.SetFloat("runSpeed", 1, dampTime, Time.deltaTime);
-                runRef.anim.SetBool("isAttacking", false);
-            }*/
-            Mathf.Lerp(anim.GetFloat("speed"), agent.desiredVelocity.sqrMagnitude, Time.deltaTime * 100);
+            Mathf.Lerp(shootRef.anim.GetFloat("speed"), shootRef.agent.desiredVelocity.sqrMagnitude, Time.deltaTime * 100);
 
             if (Time.time >= pathUpdateDeadline)
             {
 
                 pathUpdateDeadline = Time.time + 0.2f;
-                agent.SetDestination(target.position);
+                shootRef.agent.SetDestination(target.position);
 
             }
             //runRef.anim.SetBool("isAttacking", canAttack);
@@ -103,11 +93,21 @@ public class ShooterBehavior : MonoBehaviour
                 shootTimer = 0;
                 Shoot();
             }
+            if (shootRef.anim.GetCurrentAnimatorStateInfo(0).IsName("Demon|Shoot1 0"))
+            {
+                shootTimer = 0;
+            }
+            else
+            {
+                shootTimer = 0;
+                shootRef.anim.SetBool("isAttacking", false);
+            }
+            
         }
 
         void Shoot()
         {
-
+            shootRef.anim.SetBool("isAttacking", true);
         }
     }
 }

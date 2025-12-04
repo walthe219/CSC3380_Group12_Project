@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.33111, y: 0, z: 5.65862}
-  m_LocalScale: {x: 3, y: 0.1, z: 3}
+  m_LocalScale: {x: 8, y: 0.1, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7107907014283804813}
@@ -115,6 +115,11 @@ MonoBehaviour:
   visibleNodes: []
   optimalNode: {fileID: 0}
   updateTimer: 0
+  activator: 0
+  isOccupied: 0
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &44257770254345115
 PrefabInstance:
   m_ObjectHideFlags: 0

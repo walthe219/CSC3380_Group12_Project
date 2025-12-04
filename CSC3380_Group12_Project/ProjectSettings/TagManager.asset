@@ -16,6 +16,7 @@ TagManager:
   - ManagerParent
   - VisNode
   - NodeField
+  - ShooterPoint
   layers:
   - Default
   - TransparentFX
