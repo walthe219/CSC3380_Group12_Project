@@ -6,6 +6,9 @@ public class ShooterBehavior : MonoBehaviour
 
     public GameObject nearest;
     public NavMeshAgent agent;
+    public Animator anim;
+
+    public float agentVelocity;
 
     private float pathUpdateDeadline;
     private float attackDistance;
@@ -46,27 +49,33 @@ public class ShooterBehavior : MonoBehaviour
             }
         }
         var node = nearest.GetComponent<NodeFieldProcessor>();
-        nearest = node.optimalNode;
-        node.isOccupied = true;
+
+        if (node.optimalNode != null)
+        {
+            nearest = node.optimalNode;
+            node.isOccupied = true;
+        }
+        
 
     }
 
     void UpdatePath(Transform target)
     {
-
+        agentVelocity = agent.desiredVelocity.sqrMagnitude;
         if (target != null)
         {
-            bool canAttack = Vector3.Distance(transform.position, target.position) <= attackDistance;
+            LookAndAttack(playerTarget);
+            /*bool canAttack = Vector3.Distance(transform.position, target.position) <= attackDistance;
             if (canAttack)
             {
-                LookAndAttack(playerTarget);
+
             }
             else
             {
-                /*runRef.anim.SetFloat("runSpeed", 1, dampTime, Time.deltaTime);
-                runRef.anim.SetBool("isAttacking", false);*/
-            }
-            //Mathf.Lerp(runRef.anim.GetFloat("speed"), runRef.agent.desiredVelocity.sqrMagnitude, Time.deltaTime*100)
+                runRef.anim.SetFloat("runSpeed", 1, dampTime, Time.deltaTime);
+                runRef.anim.SetBool("isAttacking", false);
+            }*/
+            Mathf.Lerp(anim.GetFloat("speed"), agent.desiredVelocity.sqrMagnitude, Time.deltaTime * 100);
 
             if (Time.time >= pathUpdateDeadline)
             {

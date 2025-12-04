@@ -25,9 +25,22 @@ public class Target : MonoBehaviour
 
     void Die()
     {
+        runRef.agent.isStopped = true;
         OnDeath?.Invoke();
         OnDeath = null;
-        gameObject.SetActive(false);
+        
+        float deathTimer = 0f;
+        runRef.anim.SetBool("isDead", true);
+        if (deathTimer < 3f)
+        {
+            deathTimer += Time.deltaTime;
+        }
+        else
+        {
+            
+            gameObject.SetActive(false);
+        }
+        
 
     }
 }
