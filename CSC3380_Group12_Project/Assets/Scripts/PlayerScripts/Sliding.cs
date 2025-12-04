@@ -46,7 +46,7 @@ public class Sliding : MonoBehaviour
             move = InputSystem.actions.FindAction("Player/Move");
             slide = InputSystem.actions.FindAction("Player/Slide");
             OnEnable();
-            slide.Disable();
+            //slide.Disable();
         }
 
 

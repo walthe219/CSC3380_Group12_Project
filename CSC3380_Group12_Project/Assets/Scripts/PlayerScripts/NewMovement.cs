@@ -55,7 +55,7 @@ public class NewMovement : MonoBehaviour
     public float maxDashTime;
     public bool isDashing = false;
     public float dashDrag;
-    public bool dashUnlocked = false;
+    public bool dashUnlocked = true;
     private bool omniDashUnlocked = false;
 
     [Header("Stamina")]
@@ -131,6 +131,7 @@ public class NewMovement : MonoBehaviour
         curStamina = maxStamina;
         UnlockFunctions.UnlockDashEvent += UnlockDash;
         UnlockFunctions.UnlockOmniDashEvent += UnlockOmniDash;
+        UnlockDash();
 
         if (InputSystem.actions)
         {
