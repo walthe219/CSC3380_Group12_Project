@@ -163,7 +163,7 @@ public class RoomManager : MonoBehaviour
                     enemies.Add(spawned);
                     child.gameObject.SetActive(false);
                 }
-                if (child.CompareTag("PortalPoint") || child.CompareTag("ConnectionPoint") || child.CompareTag("LinkStartPoint") || child.CompareTag("LinkEndPoint"))
+                if (child.CompareTag("PortalPoint") || child.CompareTag("ConnectionPoint") || child.CompareTag("LinkStartPoint") || child.CompareTag("LinkEndPoint") || child.CompareTag("ShooterPoint"))
                 {
                     child.gameObject.SetActive(false);
                 }
