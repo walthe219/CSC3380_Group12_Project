@@ -7176,7 +7176,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 64
-  detectRadius: 10
+  detectRadius: 35
 --- !u!114 &1679529264620079458
 MonoBehaviour:
   m_ObjectHideFlags: 0
