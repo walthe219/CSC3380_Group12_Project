@@ -3,7 +3,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using static Codice.Client.Common.Servers.RecentlyUsedServers;
 
 public class PillarScript : MonoBehaviour
 {

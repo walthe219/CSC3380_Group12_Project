@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-public class Target : MonoBehaviour
+public class ShooterTarget : MonoBehaviour
 {
 
     public float totalHealth = 100f;
-    public RunnerReferences runRef;
-    
+    public ShooterReferences runRef;
+
     public event Action OnDeath;
     public void TakeDamage(float damage, string location)
     {
@@ -29,7 +29,7 @@ public class Target : MonoBehaviour
         runRef.agent.isStopped = true;
         OnDeath?.Invoke();
         OnDeath = null;
-        
+
         float deathTimer = 0f;
         runRef.anim.SetBool("isDead", true);
         if (deathTimer < 3f)
@@ -38,10 +38,10 @@ public class Target : MonoBehaviour
         }
         else
         {
-            
+
             gameObject.SetActive(false);
         }
-        
+
 
     }
 }
