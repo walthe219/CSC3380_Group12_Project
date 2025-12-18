@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5605081565901735925}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -67.11719, y: 32.36, z: -66.932495}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -185,6 +185,10 @@ PrefabInstance:
       propertyPath: cameraPosition
       value: 
       objectReference: {fileID: 2479237780550485961}
+    - target: {fileID: 7180267797214375073, guid: 26268126826805949aa440a37378cbf3, type: 3}
+      propertyPath: fpsCam
+      value: 
+      objectReference: {fileID: 6946381793249861424}
     - target: {fileID: 7930478340514507419, guid: 26268126826805949aa440a37378cbf3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.1239624
@@ -245,6 +249,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f89beb5f280bb49be2cccf64784b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraPosition
+--- !u!20 &6946381793249861424 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8709180880346606740, guid: 26268126826805949aa440a37378cbf3, type: 3}
+  m_PrefabInstance: {fileID: 1782221151884866468}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8553743863641217343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7930478340514507419, guid: 26268126826805949aa440a37378cbf3, type: 3}

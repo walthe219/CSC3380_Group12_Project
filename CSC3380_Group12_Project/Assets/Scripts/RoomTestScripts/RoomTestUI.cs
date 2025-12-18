@@ -10,8 +10,8 @@ public class RoomTestUI : MonoBehaviour
     {
         changeReward("None");
         updateEnemies(0);
-        RoomManager.Instance.PassUpgradeId += changeReward;
-        RoomManager.Instance.PassEnemiesAlive += updateEnemies;
+        RoomManager.PassUpgradeId += changeReward;
+        RoomManager.PassEnemiesAlive += updateEnemies;
 
     }
     public void changeReward(string ID)

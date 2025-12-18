@@ -13,6 +13,9 @@ public class UpgradeManager : MonoBehaviour
     UpgradeSpace currentUpgradeSpace;
     public List<Upgrade> acquiredUpgrades = new List<Upgrade>();
 
+    //Events
+    public static event Action OnRewardApplyed;
+
     public static UpgradeManager Instance { get; private set; }
     private void Awake()
     {
@@ -41,7 +44,7 @@ public class UpgradeManager : MonoBehaviour
     void Start()
     {
         currentUpgradeSpace = new UpgradeSpace(); //initialize the UpgradeSpace
-        RoomManager.Instance.RecieveReward += applyReward;
+        RoomManager.RecieveReward += applyReward;
 
         //Reset PlayerStats SOs to default values
         BaseStats.set(DefaultStats);
@@ -52,7 +55,7 @@ public class UpgradeManager : MonoBehaviour
     {
         Upgrade u = new Upgrade(currentUpgradeSpace.pullUpgrade(ID));
         addUpgrade(u);
-
+        OnRewardApplyed?.Invoke();
     }
 
     void addUpgrade(Upgrade upgrade)

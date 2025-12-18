@@ -40,6 +40,7 @@ public class HoldTabMenu : MonoBehaviour
         // Update TMP
         UpdateUpgradeText();
         */
+        UpgradeManager.OnRewardApplyed += UpdateUpgradeText;
     }
 
     private void OnEnable()
@@ -103,7 +104,7 @@ public class HoldTabMenu : MonoBehaviour
 
         //if (menuPanel.activeSelf && upgradesText != null)
         //{
-        UpdateUpgradeText();
+        //UpdateUpgradeText();
         //}
 
         

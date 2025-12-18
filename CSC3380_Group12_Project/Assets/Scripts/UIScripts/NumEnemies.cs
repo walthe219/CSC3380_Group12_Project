@@ -8,7 +8,7 @@ public class NumEnemies : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        RoomManager.Instance.PassEnemiesAlive += updateEnemies;
+        RoomManager.PassEnemiesAlive += updateEnemies;
     }
 
     public void updateEnemies(int num)

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &841668771480883335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5760963678482518214}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5760963678482518214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841668771480883335}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4236321204810843802}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3908052746375864177
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,9 +43,10 @@ GameObject:
   - component: {fileID: 4706678757212391135}
   - component: {fileID: 5759231324749660562}
   - component: {fileID: 7122388264772681485}
-  - component: {fileID: 4128798854717871648}
+  - component: {fileID: 8759916818459295835}
   - component: {fileID: 1661225685349580740}
   - component: {fileID: 1786289697823608687}
+  - component: {fileID: 4375144724296226349}
   m_Layer: 0
   m_Name: RoomTestPlayer
   m_TagString: Player
@@ -36,6 +68,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 854126938857073533}
+  - {fileID: 5760963678482518214}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4706678757212391135
@@ -117,7 +150,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4128798854717871648
+--- !u!114 &8759916818459295835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,12 +159,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 3908052746375864177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39e01d4d87f76ce478f1042990a12fe4, type: 3}
+  m_Script: {fileID: 11500000, guid: c2fcdffae5870bf46bb74b80c49c1190, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::newMoveScript
-  moveSpeed: 12
-  jumpStr: 25
-  gravity: 0.25
+  m_EditorClassIdentifier: Scripts::PlayerMovement
+  charCont: {fileID: 1661225685349580740}
+  currentPlayerSpeed: 0
+  playerSpeed: 15
+  airDrag: 0.5
+  jumpH: 2
+  groundCheck: {fileID: 5760963678482518214}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  canMove: 1
+  updateTimer: 0
+  playerMove:
+    m_Name: Player Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c16c8d85-c27a-4e60-a875-bd553c70431f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  playerCrouch:
+    m_Name: Player Crouch
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 579e7daf-3fe2-4581-939a-c314570b8d39
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  playerJump:
+    m_Name: Player Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d753f88b-2eaa-4c6a-9a96-494369623e77
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!143 &1661225685349580740
 CharacterController:
   m_ObjectHideFlags: 0
@@ -172,15 +240,21 @@ MonoBehaviour:
   mouseSens: 20
   yLimit: 89
   cam: {fileID: 7388401265738681257}
-  lookMove:
-    m_Name: Look Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 4b48ab2a-4c91-4443-b05b-9d2db599e0fd
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+--- !u!114 &4375144724296226349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3908052746375864177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1327f35b7a7711e4c9df6551f61a82f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::ControlScriptReference
+  moveScript: {fileID: 8759916818459295835}
+  lookScript: {fileID: 1786289697823608687}
+  ParentObject: {fileID: 3908052746375864177}
 --- !u!1 &7388401265738681257
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +444,26 @@ PrefabInstance:
     - target: {fileID: 3300758202109451091, guid: 1753129619c14ee4d8a3674e5183a116, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168031162542002313, guid: 1753129619c14ee4d8a3674e5183a116, type: 3}
+      propertyPath: fpsCam
+      value: 
+      objectReference: {fileID: 5763534304084086396}
+    - target: {fileID: 7168031162542002313, guid: 1753129619c14ee4d8a3674e5183a116, type: 3}
+      propertyPath: BasePlayerStats
+      value: 
+      objectReference: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
+    - target: {fileID: 7168031162542002313, guid: 1753129619c14ee4d8a3674e5183a116, type: 3}
+      propertyPath: currPlayerStats
+      value: 
+      objectReference: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
+    - target: {fileID: 7168031162542002313, guid: 1753129619c14ee4d8a3674e5183a116, type: 3}
+      propertyPath: reloadAction.m_Name
+      value: Reload
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168031162542002313, guid: 1753129619c14ee4d8a3674e5183a116, type: 3}
+      propertyPath: toggleAutoFireAction.m_Name
+      value: Toggle Auto Fire
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

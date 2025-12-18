@@ -32,6 +32,7 @@ Transform:
   m_Children:
   - {fileID: 5148148303402522397}
   - {fileID: 5875449896820154097}
+  - {fileID: 8852949426864153173}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7168031162542002313
@@ -46,16 +47,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1fb4b71ccd966b458b0edef709870d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunScript
-  damage: 10
-  range: 100
   fpsCam: {fileID: 0}
   muzzleFlash: {fileID: 3987598868839227793, guid: ac3bcff0f1e399845811be95837190cf, type: 3}
-  inputActions: {fileID: -944628639613478452, guid: 5ed8d681290318b4185183a4ed4b6f6c, type: 3}
+  currPlayerStats: {fileID: 0}
+  BasePlayerStats: {fileID: 0}
+  gunLocation: {fileID: 8852949426864153173}
+  isReloading: 0
+  reloadDelay: 0
+  isAuto: 0
+  AutoUnlocked: 0
+  isNotAutoReload: 0
   fireAction:
     m_Name: Fire
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 7457f9c4-26a1-4683-83fa-2f85b69aff26
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  reloadAction:
+    m_Name: Reload
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: cd2bb36b-3fa3-4dd8-8d49-6fb6dc0591b7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  toggleAutoFireAction:
+    m_Name: Toggle Auto Fire
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b495e1d1-b9b3-4f30-a435-c881e44a6293
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -171,6 +195,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &6999929427916013850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8852949426864153173}
+  m_Layer: 0
+  m_Name: BarrelPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8852949426864153173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6999929427916013850}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.003, z: 0.375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3300758202109451091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7843906151487382327
 GameObject:
   m_ObjectHideFlags: 0

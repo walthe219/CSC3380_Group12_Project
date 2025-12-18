@@ -1,71 +1,71 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 using UnityEngine.InputSystem;
-using static UnityEngine.Timeline.AnimationPlayableAsset;
 using System.Collections;
+using System;
 
 public class GunScript : MonoBehaviour
 {
     public Camera fpsCam;
-    public MeshRenderer gun;
     public ParticleSystem muzzleFlash;
     [SerializeField] PlayerStats currPlayerStats;
     [SerializeField] PlayerStats BasePlayerStats;
-    public GameObject reload_icon;
-    public GameObject SemiToggle_icon;
-    public GameObject AutoToggle_icon;
     public Transform gunLocation;
+
     public bool isReloading;
     public float reloadDelay; //variable to set reload speed manully
     public bool isAuto;
+
     public bool AutoUnlocked;
-    public bool LifeStealUnlocked;
     public bool isNotAutoReload;
 
-    public ParticleSystem impactEnemyParticleSystem;
-    public ParticleSystem impactGenericParticleSystem;
-    public TrailRenderer bulletTrailPrefab;
-
-    public AudioClip gunSound;
-    public AudioClip[] gunHitEnemySounds;
-    public AudioClip[] gunHitEnemyHeadSounds;
-    public AudioClip reloadSound;
-
     public InputAction fireAction;
+    public InputAction reloadAction;
+    public InputAction toggleAutoFireAction;
+
+    //Gun Events
+    public static event Action OnTriggerPull;
+    public static event Action OnBulletFired;
+
+    public static event Action<RaycastHit> OnMiss;
+    public static event Action<RaycastHit> OnAnythingHit;
+    public static event Action<RaycastHit> OnTargetHit;
+    public static event Action<float> OnDamageDelt;
+    public static event Action<RaycastHit> OnNonTargetHit;
+
+    public static event Action OnMagazineEmpty;
+    public static event Action OnStartReload;
+    public static event Action OnFinishReload;
+    public static event Action<bool> OnToggleAutoFire;
+
 
     private void OnEnable()
     {
         fireAction = InputSystem.actions.FindAction("Fire");
+        reloadAction = InputSystem.actions.FindAction("Reload");
+        toggleAutoFireAction = InputSystem.actions.FindAction("Toggle Automatic Fire");
+
         UnlockFunctions.UnlockAutoFireEvent += unlockAutoFire;
-        UnlockFunctions.UnlockLifeStealEvent += unlockLifeSteal;
+        
     }
 
-
+    [ContextMenu("unlockAutoFire")]
     public void unlockAutoFire() {
         AutoUnlocked = true;
-        SemiToggle_icon.SetActive(true);
+        toggleAutoFire();
     }
 
-    public void unlockLifeSteal()
-    {
-        LifeStealUnlocked = true;
-    }
-
+    [ContextMenu("toggleAutoFire")]
     public void toggleAutoFire() { 
         isAuto = !isAuto;
+        OnToggleAutoFire?.Invoke(isAuto);
         if (isAuto)
         {
             Debug.Log("Automatic was toggled on");
-            SemiToggle_icon.SetActive(false);
-            AutoToggle_icon.SetActive(true);
         }
         if (!isAuto)
         {
             Debug.Log("Automatic was toggled off");
-            SemiToggle_icon.SetActive(true);
-            AutoToggle_icon.SetActive(false);
         }
-
     }
 
     public void ToggleAutoReload()
@@ -77,28 +77,18 @@ public class GunScript : MonoBehaviour
     void Update()
     {
         //NOTE: gunrange and damage work as intended as of 11/25/25
-
-        if (fireAction.WasPressedThisFrame() && currPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0 && !isReloading && !isAuto)
+        if((fireAction.WasPressedThisFrame() && !isAuto) || (fireAction.IsPressed() && isAuto))
         {
-
-            if (currPlayerStats.Firerate <= 0f) //If statement checks if cooldown has reached 0
+            if (currPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0 && !isReloading )
             {
-                
-                Shoot();
-                currPlayerStats.ammo--;
-                currPlayerStats.Firerate = 1/BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
-                Debug.Log("Resetting Firerate!");
-            }
-        }
+                if (currPlayerStats.Firerate <= 0f) //If statement checks if cooldown has reached 0
+                {
 
-        if (fireAction.IsPressed() && currPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0 && !isReloading && AutoUnlocked && isAuto) { //AutoShoot
-            if (currPlayerStats.Firerate <= 0f) //If statement checks if cooldown has reached 0
-            {
-
-                Shoot();
-                currPlayerStats.ammo--;
-                currPlayerStats.Firerate = 1/BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
-                Debug.Log("Resetting Firerate!");
+                    Shoot();
+                    currPlayerStats.ammo--;
+                    currPlayerStats.Firerate = 1 / BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
+                    Debug.Log("Resetting Firerate!");
+                }
             }
         }
 
@@ -107,7 +97,7 @@ public class GunScript : MonoBehaviour
             currPlayerStats.Firerate -= Time.deltaTime; //Decrements the cooldown "counter"
         }
         
-        if (Input.GetKeyDown(KeyCode.R) && !isReloading && (currPlayerStats.ammo < BasePlayerStats.ammo))
+        if (reloadAction.WasPressedThisFrame() && !isReloading && (currPlayerStats.ammo < BasePlayerStats.ammo))
         {
             if (currPlayerStats.ammo != BasePlayerStats.ammo)
             {
@@ -119,7 +109,7 @@ public class GunScript : MonoBehaviour
             StartCoroutine(Reload());
         }
 
-        if (Input.GetKeyDown(KeyCode.T) && AutoUnlocked)
+        if (toggleAutoFireAction.WasPressedThisFrame() && AutoUnlocked)
         {
             toggleAutoFire();
         }
@@ -136,20 +126,18 @@ public class GunScript : MonoBehaviour
 
         AutoUnlocked = false; //Only turns truew when player completes room with unlockfireauto upgrade, then the event triggers, and the subscriber function in this script sets 
         //AutoUnlocked to true
-        LifeStealUnlocked = false; //Remember to set to false
     }
 
     IEnumerator Reload()
     {
         isReloading = true;
         Debug.Log("Reloading......");
-        SoundFXManager.instance.PlaySoundFXClip(reloadSound, transform, 1f);
-        reload_icon.SetActive(true);
+        OnStartReload?.Invoke();
         reloadDelay = 1/currPlayerStats.reloadSpeed;
         yield return new WaitForSeconds(reloadDelay);
         currPlayerStats.ammo = BasePlayerStats.ammo;
         isReloading = false;
-        reload_icon.SetActive(false);
+        OnFinishReload?.Invoke();
         Debug.Log("Reloaded!");
     }
 
@@ -161,82 +149,35 @@ public class GunScript : MonoBehaviour
     {
 
         muzzleFlash.Play();
-        SoundFXManager.instance.PlaySoundFXClip(gunSound, transform, 1f);
+        OnBulletFired?.Invoke();
 
         RaycastHit hit;
-        TrailRenderer trail;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, currPlayerStats.gunRange)) //chasnge to currplayter stats gunrange
+
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, currPlayerStats.gunRange)) //if bullet hits anything
         {
-
             //Debug.Log(hit.transform.name);
-
-            //TrailRenderer trail = Instantiate(bulletTrailPrefab, fpsCam.transform.position, Quaternion.identity).GetComponent<TrailRenderer>();
+            OnAnythingHit?.Invoke(hit);
 
             SubTarget target = hit.transform.GetComponent<SubTarget>();
-            if (target != null)
+
+            if (target != null) //target hit
             {
-                trail = Instantiate(bulletTrailPrefab, gunLocation.position, Quaternion.identity);
-                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true, true));
-
+                OnTargetHit?.Invoke(hit);
                 target.TakeDamage(currPlayerStats.damage);
-                if (LifeStealUnlocked && currPlayerStats.health < BasePlayerStats.health) {
-                    currPlayerStats.health = (float)(currPlayerStats.health + (currPlayerStats.damage * 0.10)); //If LifeSteal Upgrade is unlocked, then whena player successfully
-                    //hits an enemy they gain a percentage of the damage they deal to their health
-                    //Otherwise, if they miss they lose that percentage of health
-                }
-
             }
-            else
+            else //non target hit
             {
                 Debug.Log("You hit something other than the target!");
-                if (LifeStealUnlocked && currPlayerStats.health < BasePlayerStats.health)
-                {
-                    currPlayerStats.health = (float)(currPlayerStats.health - (currPlayerStats.damage * 0.10)); //Where the player loses the percentage of health if they miss
-                }
-                trail = Instantiate(bulletTrailPrefab, gunLocation.position, Quaternion.identity);
-                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true, false));
+                OnNonTargetHit?.Invoke(hit);
             }
 
             //Instantiate(impactEffect, hit.point, Quaternion.LookRotation(-hit.normal));
 
         }
-        else {
+        else { //If nothing hit
             Debug.Log("You completely missed lmao");
-            if (LifeStealUnlocked && currPlayerStats.health < BasePlayerStats.health) {
-                currPlayerStats.health = (float)(currPlayerStats.health - (currPlayerStats.damage * 0.10)); //Where the player loses the percentage of health if they miss
-            }
-            trail = Instantiate(bulletTrailPrefab, gunLocation.position, Quaternion.identity);
-            StartCoroutine(SpawnTrail(trail, gunLocation.position + transform.forward * currPlayerStats.gunRange, Vector3.zero, false, false));
+            OnMiss?.Invoke(hit);
         }
 
-    }
-
-    private IEnumerator SpawnTrail(TrailRenderer trail, Vector3 hit, Vector3 hitNormal, bool madeImpact, bool enemyHit)
-    {
-        float elapsedTime = 0;
-        Vector3 start = trail.transform.position;
-
-        while (elapsedTime < 1)
-        {
-            trail.transform.position = Vector3.Lerp(start, hit, elapsedTime);
-            elapsedTime += Time.deltaTime / trail.time;
-            yield return null;
-        }
-
-        trail.transform.position = hit;
-        if (madeImpact)
-        {
-            if (enemyHit)
-            {
-                Instantiate(impactEnemyParticleSystem, hit, Quaternion.LookRotation(hitNormal));
-                SoundFXManager.instance.PlayRandomSoundFXClip(gunHitEnemySounds, transform, 1f);
-            }
-            else
-            {
-                Instantiate(impactGenericParticleSystem, hit, Quaternion.LookRotation(hitNormal));
-            }
-        }
-
-        Destroy(trail.gameObject, trail.time);
     }
 }

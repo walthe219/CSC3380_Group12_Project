@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6796624350748608610}
   - component: {fileID: 4902070905680346198}
   - component: {fileID: 1063107170240995694}
+  - component: {fileID: 3440109439584066399}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 948115490480696473}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.95192, y: -1.68, z: 24.62565}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -77,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73bd54b13e633d94caf34ffe55acf848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  actualSpeed: 0
   moveSpeed: 0
   walkSpeed: 7
   sprintSpeed: 10
@@ -88,8 +90,8 @@ MonoBehaviour:
   orientation: {fileID: 6441505164593188938}
   state: 0
   isSliding: 0
-  currPlayerStats: {fileID: 0}
-  basePlayerStats: {fileID: 0}
+  currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
+  basePlayerStats: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
   jumpPower: 12
   maxJumpCount: 4
   airMultiplier: 0.4
@@ -99,11 +101,13 @@ MonoBehaviour:
   maxDashTime: 3
   isDashing: 0
   dashDrag: 0
+  dashUnlocked: 0
   curStamina: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 8
   isGrounded: 0
+  dashSound: {fileID: 0}
   move:
     m_Name: Move
     m_Type: 0
@@ -150,6 +154,11 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   test: 0
+  cam: {fileID: 0}
+  fovChangeTime: 0.5
+  camFollowTime: 0.5
+  slope: 0
+  slopeValue: 0
 --- !u!114 &4902070905680346198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   orientation: {fileID: 6441505164593188938}
   playerObj: {fileID: 5049115436650554024}
-  basePlayerStats: {fileID: 0}
+  basePlayerStats: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
   maxSlideTime: 0.75
   slideForce: 200
   move:
@@ -201,6 +210,20 @@ MonoBehaviour:
   currentStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
   flatFallDamage: 10
   fallDamagePercentage: 0
+--- !u!114 &3440109439584066399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948115490480696473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d526c1c2d2446c4fa88b26ce306f4e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::Player
+  CthulhuUnlocked: 0
+  DialogueBox: {fileID: 0}
 --- !u!1 &4644911705272029929
 GameObject:
   m_ObjectHideFlags: 0

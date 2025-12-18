@@ -48,10 +48,10 @@ public class RoomManager : MonoBehaviour
 
 
     //Events, names are not intutive should change these maybe
-    public event Action<string> PassUpgradeId;
-    public event Action<int> PassEnemiesAlive;
-    public event Action RoomCleared;
-    public event Action<string> RecieveReward;
+    public static event Action<string> PassUpgradeId;
+    public static event Action<int> PassEnemiesAlive;
+    public static event Action RoomCleared;
+    public static event Action<string> RecieveReward;
 
     //makes RoomManager a singelton class, a static MonoBehaviour
     public static RoomManager Instance { get; private set; }

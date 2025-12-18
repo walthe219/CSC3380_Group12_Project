@@ -663,17 +663,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a204d590746adbc46a7cef3d484f5113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cameraScript
---- !u!114 &951521143 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4128798854717871648, guid: 125aaf8cecb70234f937af103e069e14, type: 3}
-  m_PrefabInstance: {fileID: 8968889118671009284}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 951521140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39e01d4d87f76ce478f1042990a12fe4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::newMoveScript
 --- !u!114 &951521148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,7 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1327f35b7a7711e4c9df6551f61a82f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlScriptReference
-  moveScript: {fileID: 951521143}
+  moveScript: {fileID: 0}
   lookScript: {fileID: 951521141}
   ParentObject: {fileID: 951521140}
 --- !u!1 &984057000 stripped

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8702292255817038515
+--- !u!1001 &1397723464310676063
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,10 +11,18 @@ PrefabInstance:
     - target: {fileID: 987670029305482936, guid: 14126803ce5cffb4f820d47d5cdc63d2, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -6756428543458009084, guid: 4fb1a0ccf8c8571438b503faefc080ed, type: 3}
+      objectReference: {fileID: 3313670672648098118, guid: c3b4e91ec3973124b8f57d9243afaeef, type: 3}
+    - target: {fileID: 2872389157183541106, guid: 14126803ce5cffb4f820d47d5cdc63d2, type: 3}
+      propertyPath: type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872389157183541106, guid: 14126803ce5cffb4f820d47d5cdc63d2, type: 3}
+      propertyPath: statChange
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5821355359484847712, guid: 14126803ce5cffb4f820d47d5cdc63d2, type: 3}
       propertyPath: m_Name
-      value: HealthBubble
+      value: UpgradeBubble
       objectReference: {fileID: 0}
     - target: {fileID: 6017420374689617686, guid: 14126803ce5cffb4f820d47d5cdc63d2, type: 3}
       propertyPath: m_LocalPosition.x

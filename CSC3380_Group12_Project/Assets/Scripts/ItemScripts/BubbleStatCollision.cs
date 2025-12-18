@@ -4,41 +4,45 @@ using System.Collections.Generic;
 
 public class BubbleStatCollision : MonoBehaviour
 {
+    public enum BubbleType { Health, Mana, Ammo, Stamina, Upgrade }
+    public BubbleType type;
+
     [SerializeField] PlayerStats CurrentPlayerStats;
+    [SerializeField] float statChange;
+    [SerializeField] UpgradeData upgrade;
     public AudioClip bubbleSound;
     
 
     private void OnTriggerEnter(Collider other){
         BubbleStatsInventory bubbleinv = other.GetComponent<BubbleStatsInventory>();//other refers to the player
 
-        //find bubbletype component
-        BubbleType bubble = GetComponent<BubbleType>();
+        //find bubbletype 
 
         // if found check type
-        if(bubble != null){//test to see if i can check the type of bubble and tested it by changing the bubble type to mana and it works as intended
-            if(bubble.bubbleType == BubbleType.Type.Health){
-                Debug.Log("Health Bubble collected!");
-                gameObject.SetActive(false); //Deletes the object
-                // Add health here
-                CurrentPlayerStats.health += 10;
-                //CurrentPlayerStats.health -= 200; used to test game over screen
-            }
-
-            if(bubble.bubbleType == BubbleType.Type.Ammo){
-                Debug.Log("Ammo Bubble collected!");
-                gameObject.SetActive(false); //Deletes the object
-                // Add ammo here
-                CurrentPlayerStats.ammo += 10;
-            }
-
-            if(bubble.bubbleType == BubbleType.Type.Stamina){
-                Debug.Log("Stamina Bubble collected!");
-                gameObject.SetActive(false); //Deletes the object
-                // Add stamina here
-                CurrentPlayerStats.stamina += 10;
-            }
-
+        if(type != null){//test to see if i can check the type of bubble and tested it by changing the bubble type to mana and it works as intended
+            gameObject.SetActive(false); //Deletes the object
             SoundFXManager.instance.PlaySoundFXClip(bubbleSound, transform, 1f);
+
+            switch (type)
+            {
+                case BubbleType.Health:
+                    Debug.Log("Health Bubble collected!");
+                    CurrentPlayerStats.health += statChange;
+                    break;
+
+                case BubbleType.Ammo:
+                    Debug.Log("Ammo Bubble collected!");
+                    CurrentPlayerStats.ammo += statChange;
+                    break;
+                case BubbleType.Stamina:
+                    Debug.Log("Stamina Bubble collected!");
+                    CurrentPlayerStats.stamina += statChange;
+                    break;
+                case BubbleType.Upgrade:
+                    break;
+            }
+
+            
 
         }
 

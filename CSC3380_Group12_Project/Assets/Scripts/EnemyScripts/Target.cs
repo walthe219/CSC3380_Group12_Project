@@ -6,7 +6,9 @@ public class Target : MonoBehaviour
 
     public float totalHealth = 100f;
     public RunnerReferences runRef;
-    
+
+    public AudioClip hitSFX;
+
     public event Action OnDeath;
     public void TakeDamage(float damage, string location)
     {
@@ -32,7 +34,7 @@ public class Target : MonoBehaviour
         
         float deathTimer = 0f;
         runRef.anim.SetBool("isDead", true);
-        if (deathTimer < 3f)
+        /*if (deathTimer < 3f)
         {
             deathTimer += Time.deltaTime;
         }
@@ -40,8 +42,8 @@ public class Target : MonoBehaviour
         {
             
             gameObject.SetActive(false);
-        }
-        
+        }*/
+        gameObject.SetActive(false);
 
     }
 }

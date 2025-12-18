@@ -5,6 +5,7 @@ public class SubTarget : MonoBehaviour
     public Target target;
     public float dmgMult = 1f;
     public float limbHealth = 50f;
+    public AudioClip hitSFX;
 
 
 

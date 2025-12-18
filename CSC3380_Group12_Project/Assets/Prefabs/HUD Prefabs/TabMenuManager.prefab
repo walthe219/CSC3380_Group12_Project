@@ -171,7 +171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 155.7, y: 0.1}
+  m_AnchoredPosition: {x: 82.9, y: -117.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7547216859589498243
@@ -232,9 +232,9 @@ MonoBehaviour:
   m_fontSize: 18
   m_fontSizeBase: 18
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2
+  m_fontSizeMax: 18
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -637,6 +637,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoldTabMenu
   menuPanel: {fileID: 0}
+  upgradesText: {fileID: 0}
+  statsText: {fileID: 0}
+  currentStats: {fileID: 0}
+  baseStats: {fileID: 0}
 --- !u!1 &7517680699780824856
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,3 +691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoldTabMenu
   menuPanel: {fileID: 7077632118553279352}
+  upgradesText: {fileID: 0}
+  statsText: {fileID: 0}
+  currentStats: {fileID: 0}
+  baseStats: {fileID: 0}
