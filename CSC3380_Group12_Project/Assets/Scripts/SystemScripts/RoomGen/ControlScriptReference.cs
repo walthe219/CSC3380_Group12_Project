@@ -13,13 +13,13 @@ public class ControlScriptReference : MonoBehaviour
     //When this script is disabled or enabled by portalScript, call event for Control scripts to do the same
     private void OnDisable()
     {
-        moveScript.enabled = false;
-        lookScript.enabled = false;
+        if (moveScript != null )moveScript.enabled = false;
+        if (lookScript != null) lookScript.enabled = false;
     }
 
     private void OnEnable()
     {
-        moveScript.enabled = true;
-        lookScript.enabled = true;
+        if (moveScript != null) moveScript.enabled = true;
+        if (lookScript != null) lookScript.enabled = true;
     }
 }

@@ -9,7 +9,7 @@ public static class TilePooling
 
     static UnityEngine.Object[] prefab_arr;
 
-    static List<Stack<GameObject>> tilePool = new List<Stack<GameObject>>();
+    static List<Stack<GameObject>> tilePool;
     static int TilesPerPool = 4;
 
     static GameObject TilePoolObj;
@@ -24,6 +24,7 @@ public static class TilePooling
 
         prefab_arr = Resources.LoadAll(prefabFolderPath, typeof(GameObject));
 
+        tilePool = new List<Stack<GameObject>>();
         foreach (GameObject tilePrefab in prefab_arr)
         {
             Stack<GameObject> tileStack = new Stack<GameObject>();

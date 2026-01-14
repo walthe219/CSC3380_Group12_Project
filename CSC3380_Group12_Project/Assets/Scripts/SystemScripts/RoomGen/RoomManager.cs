@@ -69,6 +69,7 @@ public class RoomManager : MonoBehaviour
 
         GameObject manage = GameObject.FindGameObjectWithTag("ManagerParent");
         NavMeshSurface initSurf = manage.AddComponent<NavMeshSurface>();
+        initSurf.useGeometry = UnityEngine.AI.NavMeshCollectGeometry.PhysicsColliders;
         initSurf.BuildNavMesh();
     }
 
