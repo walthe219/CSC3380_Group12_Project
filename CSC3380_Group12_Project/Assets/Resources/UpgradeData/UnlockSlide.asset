@@ -28,7 +28,6 @@ MonoBehaviour:
   rarity: 0
   isRepeatable: 0
   prerequisites: []
-  mutuallyExclusives:
-  - {fileID: 11400000, guid: b8def7d75fad6a641835eba284d4f0b0, type: 2}
+  mutuallyExclusives: []
   unlocks: 02000000
-  description: 
+  description: Presss CTRL to slide in the direction of movement

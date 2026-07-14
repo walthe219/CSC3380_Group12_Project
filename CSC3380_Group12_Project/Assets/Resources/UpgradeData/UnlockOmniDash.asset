@@ -31,4 +31,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b8def7d75fad6a641835eba284d4f0b0, type: 2}
   mutuallyExclusives: []
   unlocks: 01000000
-  description: 
+  description: When moving forward, dash toward any direction you look, including
+    up or down

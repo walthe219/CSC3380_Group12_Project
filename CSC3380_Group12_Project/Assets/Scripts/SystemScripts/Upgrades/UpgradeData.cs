@@ -35,6 +35,7 @@ public class UpgradeData : UpgradeableStatContainer
     [Tooltip("List of unlocks acquired from this upgrade")]
     public UnlockFunctions.Unlockable[] unlocks;
 
+    [TextArea]
     [Tooltip("Description of upgrades affects")]
     public string description;
 
