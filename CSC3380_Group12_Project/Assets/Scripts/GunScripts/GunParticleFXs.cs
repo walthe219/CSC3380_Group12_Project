@@ -6,6 +6,7 @@ public class GunParticleFXs : MonoBehaviour
     [SerializeField] Transform gunLocation;
     [SerializeField] ParticleSystem impactEnemyParticleSystem;
     [SerializeField] ParticleSystem impactGenericParticleSystem;
+    [SerializeField] ParticleSystem muzzleFlashParticleSystem;
     [SerializeField] TrailRenderer bulletTrailPrefab;
 
     [SerializeField] float projectileDuration = 0.1f;
@@ -13,9 +14,22 @@ public class GunParticleFXs : MonoBehaviour
 
     private void Start()
     {
+        GunScript.OnBulletFired += muzzleFlash;
         GunScript.OnTargetHit += targetHit;
         GunScript.OnNonTargetHit += nonTargetHit;
         GunScript.OnMiss += onMiss;
+    }
+
+    void muzzleFlash()
+    {
+        //Debug.Log("Muzzle Flash");
+        ParticleSystem muzzleFlash = Instantiate(muzzleFlashParticleSystem, gunLocation.position, gunLocation.rotation);
+        muzzleFlash.transform.parent = gunLocation;
+        muzzleFlash.transform.localScale = Vector3.one;
+
+        muzzleFlash.Play();
+        Destroy(muzzleFlash.gameObject, muzzleFlash.main.duration);
+
     }
 
     void targetHit(RaycastHit hit)

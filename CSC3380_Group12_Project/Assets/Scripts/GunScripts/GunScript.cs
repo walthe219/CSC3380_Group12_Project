@@ -6,23 +6,25 @@ using System;
 public class GunScript : MonoBehaviour
 {
     public Camera fpsCam;
-    public ParticleSystem muzzleFlash;
     [SerializeField] PlayerStats currPlayerStats;
     [SerializeField] PlayerStats BasePlayerStats;
     public Transform gunLocation;
 
+    [Header("State")]
     public bool isReloading;
     public float reloadDelay; //variable to set reload speed manully
     public bool isAuto;
 
+    [Header("Unlocks")]
     public bool AutoUnlocked;
     public bool isNotAutoReload;
 
+    [Header("Inputs")]
     public InputAction fireAction;
     public InputAction reloadAction;
     public InputAction toggleAutoFireAction;
 
-    //Gun Events
+    //Static Gun Events
     public static event Action OnTriggerPull;
     public static event Action OnBulletFired;
 
@@ -45,7 +47,6 @@ public class GunScript : MonoBehaviour
         toggleAutoFireAction = InputSystem.actions.FindAction("Toggle Automatic Fire");
 
         UnlockFunctions.UnlockAutoFireEvent += unlockAutoFire;
-        
     }
 
     [ContextMenu("unlockAutoFire")]
@@ -71,23 +72,29 @@ public class GunScript : MonoBehaviour
     public void ToggleAutoReload()
     {
         isNotAutoReload = !isNotAutoReload;
+    }
 
+    private void Start()
+    {
+        AutoUnlocked = false;
     }
 
     void Update()
     {
-        //NOTE: gunrange and damage work as intended as of 11/25/25
         if((fireAction.WasPressedThisFrame() && !isAuto) || (fireAction.IsPressed() && isAuto))
         {
             if (currPlayerStats.ammo > 0 && !PauseMenu1.GameIsPaused && Time.timeScale > 0 && !isReloading )
             {
-                if (currPlayerStats.Firerate <= 0f) //If statement checks if cooldown has reached 0
+                if (currPlayerStats.Firerate <= 0f) //checks if cooldown has reached 0
                 {
-
                     Shoot();
+
                     currPlayerStats.ammo--;
+                    if (currPlayerStats.ammo <= 0)
+                        OnMagazineEmpty?.Invoke();
+
                     currPlayerStats.Firerate = 1 / BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
-                    Debug.Log("Resetting Firerate!");
+                    //Debug.Log("Resetting Firerate!");
                 }
             }
         }
@@ -116,18 +123,6 @@ public class GunScript : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        /*
-        AutoUnlocked = true;
-        isAuto = true;
-        Automatic firing and togglign works as intended when both are true
-        */
-
-        AutoUnlocked = false; //Only turns truew when player completes room with unlockfireauto upgrade, then the event triggers, and the subscriber function in this script sets 
-        //AutoUnlocked to true
-    }
-
     IEnumerator Reload()
     {
         isReloading = true;
@@ -147,8 +142,6 @@ public class GunScript : MonoBehaviour
     }*/
     void Shoot()
     {
-
-        muzzleFlash.Play();
         OnBulletFired?.Invoke();
 
         RaycastHit hit;
@@ -162,6 +155,7 @@ public class GunScript : MonoBehaviour
 
             if (target != null) //target hit
             {
+                Debug.Log("You hit the target " + target.gameObject.name);
                 OnTargetHit?.Invoke(hit);
                 target.TakeDamage(currPlayerStats.damage);
             }

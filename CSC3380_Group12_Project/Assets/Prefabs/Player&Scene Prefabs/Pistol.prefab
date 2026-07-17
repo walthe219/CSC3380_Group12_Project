@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8117871886532061807}
   - component: {fileID: 3630855792837933023}
   - component: {fileID: 8148952666665887193}
-  - component: {fileID: 6196203205952993363}
   m_Layer: 0
   m_Name: BarrelLocation
   m_TagString: Untagged
@@ -90,27 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6196203205952993363
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272528050859659416}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6023465239680005670
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +103,7 @@ GameObject:
   - component: {fileID: 6241077092623401212}
   - component: {fileID: 6008197144356563754}
   - component: {fileID: 4580510012139868810}
+  - component: {fileID: 4193678930060794970}
   m_Layer: 6
   m_Name: Pistol
   m_TagString: Untagged
@@ -176,7 +155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunScript
   fpsCam: {fileID: 0}
-  muzzleFlash: {fileID: 6337335309591514798}
   currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
   BasePlayerStats: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
   gunLocation: {fileID: 8117871886532061807}
@@ -227,6 +205,7 @@ MonoBehaviour:
   gunLocation: {fileID: 8117871886532061807}
   impactEnemyParticleSystem: {fileID: 4895166133591052890}
   impactGenericParticleSystem: {fileID: 7053651460844227809}
+  muzzleFlashParticleSystem: {fileID: 0}
   bulletTrailPrefab: {fileID: 9037001468008576588, guid: 0d9eead7569da68428a1f94a83115b11, type: 3}
   projectileDuration: 0.05
   currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
@@ -265,6 +244,22 @@ MonoBehaviour:
   LifeStealUnlocked: 0
   currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
   BasePlayerStats: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
+--- !u!114 &4193678930060794970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023465239680005670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c78778e8755cf64ea990f8153f77921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::ExplosiveRouds
+  ExplosiveRoundsUnlocked: 0
+  explosionRadius: 0.5
+  explosionDamageModifier: 1
+  currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
 --- !u!1 &6956941151349001659
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,10 +731,5 @@ PrefabInstance:
 --- !u!4 &1554076228304036137 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7541750129371384559, guid: 4f5fc4bbd01b03a4499a6ed77f175fc7, type: 3}
-  m_PrefabInstance: {fileID: 9023135371726220230}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &6337335309591514798 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: -6140058637718067864, guid: 4f5fc4bbd01b03a4499a6ed77f175fc7, type: 3}
   m_PrefabInstance: {fileID: 9023135371726220230}
   m_PrefabAsset: {fileID: 0}
