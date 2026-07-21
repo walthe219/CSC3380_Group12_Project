@@ -64,6 +64,7 @@ public class NewMovement : MonoBehaviour
     private float staminaRechargeDelay = 2f;
     private float staminaRechargeTimer;
     private float staminaRechargeRate = 20f;
+    private bool touchedGroundSinceLastDash = true;
 
     [Header("Ground Check")]
     public LayerMask groundMask;
@@ -173,6 +174,7 @@ public class NewMovement : MonoBehaviour
         if (isGrounded && (Time.time - lastJumpTime > 0.25))
         {
             jumpCount = maxJumpCount;
+            touchedGroundSinceLastDash = true;
             canJump = true;
             leavingSlope = false;
         }
@@ -191,7 +193,7 @@ public class NewMovement : MonoBehaviour
         }
 
         // Start the recharge timer if stamina is below the max
-        if(isGrounded && currPlayerStats.stamina < basePlayerStats.stamina)
+        if(touchedGroundSinceLastDash && currPlayerStats.stamina < basePlayerStats.stamina)
         {
             staminaRechargeTimer += Time.deltaTime;
         }
@@ -444,6 +446,7 @@ public class NewMovement : MonoBehaviour
     // Dashes
     private void Dash()
     {
+        touchedGroundSinceLastDash = false;
         SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
         if (omniDashUnlocked && vertInput > 0)
         {
