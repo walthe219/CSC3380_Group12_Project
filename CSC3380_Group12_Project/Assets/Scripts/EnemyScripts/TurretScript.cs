@@ -9,6 +9,7 @@ public class TurretScript : MonoBehaviour
     [SerializeField] float detectionRadius;
 
     [Header("Projectile")]
+    [SerializeField] GameObject ProjectilePrefab;
     [SerializeField] float fireRate;
     [SerializeField] float projSpeed;
     [SerializeField] float projRadius;
@@ -18,40 +19,47 @@ public class TurretScript : MonoBehaviour
 
     void Update()
     {
-        Color headColor = head.gameObject.GetComponent<Renderer>().material.color;
+        Material headMaterial = head.gameObject.GetComponent<Renderer>().material;
 
-        Vector3 targetDirection = head.position - Camera.main.transform.position;
+        Vector3 targetDirection = Camera.main.transform.position - head.position;
+
+        //need to do LoS check aswell
         if(targetDirection.magnitude <= detectionRadius)
         {
-            headColor = Color.red;
+            headMaterial.SetColor("_BaseColor", Color.yellow);
 
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
             head.rotation = Quaternion.RotateTowards(head.rotation, targetRotation, turningSpeed * Time.deltaTime);
+
+            if (fireCooldown <= 0f)
+            {
+                CreateProjectile(barrelEnd, projRadius, projSpeed);
+                fireCooldown = 1f / fireRate;
+            }
+
+            fireCooldown -= Time.deltaTime;
         }
         else
         {
-            headColor = Color.gray;
+            headMaterial.SetColor("_BaseColor", Color.gray);
         }
 
-        if (fireCooldown <= 0f)
-        {
-            CreateProjectile(barrelEnd.position, projRadius,projSpeed);
-            fireCooldown = 1f / fireRate;
-        }
-
-        fireCooldown -= Time.deltaTime;
+        
 
     }
     
-    GameObject CreateProjectile(Vector3 point, float radius, float speed)
+    GameObject CreateProjectile(Transform spawnPoint, float radius, float speed)
     {
+        //GameObject projectile =  Instantiate(ProjectilePrefab, transform);
         GameObject projectile = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         var script = projectile.AddComponent<Projectile>();
         script.projSpeed = this.projSpeed;
         script.projDamage = this.projDamage;
 
         projectile.name = "Turret Projectile";
-        projectile.transform.position = point;
+        projectile.transform.position = spawnPoint.position;
+        projectile.transform.rotation = spawnPoint.rotation;
+
         projectile.transform.localScale *= radius;
         projectile.GetComponent<Renderer>().material.color = Color.red;
 
@@ -68,7 +76,7 @@ public class TurretScript : MonoBehaviour
         private void Update()
         {
             Transform transform = this.gameObject.transform;
-            transform.Translate(transform.forward * projSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * projSpeed * Time.deltaTime);
             timer += Time.deltaTime;
             if (timer > lifetime)
             {
