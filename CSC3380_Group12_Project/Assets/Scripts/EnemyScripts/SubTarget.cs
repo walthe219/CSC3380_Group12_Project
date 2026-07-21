@@ -9,25 +9,26 @@ public class SubTarget : MonoBehaviour
 
 
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float baseDamage,Vector3 pos)
     {
-        float totalDmg = damage * dmgMult;
+        float currTotalMult = dmgMult;
+        float limbDamage = baseDamage * currTotalMult;
 
         if (limbHealth <= 0f)
         {
             Debug.Log("The bitch is crippled!");
-            Cripple(totalDmg);
+            Cripple(currTotalMult);
         }
         else
         {
-            limbHealth -= totalDmg;
-            target.TakeDamage(totalDmg, transform.name);
+            limbHealth -= currTotalMult;
+            target.TakeDamage(baseDamage, transform.name, pos);
         }
 
     }
 
     void Cripple(float damage)
     {
-        target.TakeDamage(damage * 0.5f, transform.name);
+        target.TakeDamage(damage * 0.5f, transform.name, transform.position);
     }
 }

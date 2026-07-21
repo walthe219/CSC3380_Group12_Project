@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91c814496a69e754db46ecded53c7d8c, type: 3}
-  m_Name: UnlockExplosiveRounds
+  m_Name: MultishotUp1
   m_EditorClassIdentifier: Scripts::UpgradeData
   health: 0
   ammo: 0
   damage: 0
   critChance: 0
   critMult: 0
-  multishot: 0
+  multishot: 0.1
   reloadSpeed: 0
   Firerate: 0
   gunRange: 0
@@ -27,11 +27,10 @@ MonoBehaviour:
   jumpPower: 0
   slidePower: 0
   dashPower: 0
-  ID: UnlockExposiveRounds
+  ID: MultishotUp
   rarity: 0
-  isRepeatable: 0
+  isRepeatable: 1
   prerequisites: []
   mutuallyExclusives: []
-  unlocks: 09000000
-  description: Bullets create an explosion around their impact, dealing 25% of your
-    weapons damage
+  unlocks: 
+  description: 

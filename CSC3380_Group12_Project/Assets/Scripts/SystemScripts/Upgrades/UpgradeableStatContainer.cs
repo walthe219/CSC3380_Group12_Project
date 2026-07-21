@@ -18,17 +18,24 @@ public class UpgradeableStatContainer: ScriptableObject
 {
     //ADD NEW STAT FIELDS HERE
     public float health;
-    public float stamina;
+
+    [Header("Weapon")]
     public float ammo;
     public float damage;
+    public float critChance;
+    public float critMult;
+    public float multishot;
+    public float reloadSpeed;
+    public float Firerate;
+    public float gunRange;
+
+    [Header("Movement")]
+    public float stamina;
     public float moveSpeed;
     public int numJumps;
     public float jumpPower;
     public float slidePower;
     public float dashPower;
-    public float reloadSpeed;
-    public float Firerate;
-    public float gunRange;
 
     /*
      * HELPER FUNCTION for other methods: 
@@ -44,6 +51,9 @@ public class UpgradeableStatContainer: ScriptableObject
         stamina = statChangeFunc(stamina, other.stamina,"Stamina");
         ammo = (int)statChangeFunc(ammo, other.ammo,"Ammo");
         damage = statChangeFunc(damage, other.damage, "Damage");
+        critChance = statChangeFunc(critChance, other.critChance, "Critical Chance");
+        critMult = statChangeFunc(critMult, other.critMult, "Critical Multiply");
+        multishot = statChangeFunc(multishot, other.multishot, "Multishot Chance");
         moveSpeed = statChangeFunc(moveSpeed, other.moveSpeed, "Move Speed");
         numJumps = (int)statChangeFunc(numJumps, other.numJumps, "Jumps");
         jumpPower = statChangeFunc(jumpPower, other.jumpPower, "Jump Power");
@@ -75,7 +85,6 @@ public class UpgradeableStatContainer: ScriptableObject
     /*
      * Printout of all stats in this container, each line StatName: statValue 
      */
-
     public virtual string printStats()
     {
         List<string> lines = new List<string>();
@@ -87,9 +96,8 @@ public class UpgradeableStatContainer: ScriptableObject
             return value;
         });
         return string.Join("\n", lines);
-
-
     }
+
     public virtual string printAllStats()
     {
         List<string> lines = new List<string>();
@@ -98,8 +106,6 @@ public class UpgradeableStatContainer: ScriptableObject
             return value;
         });
         return string.Join("\n", lines);
-        
-
     }
 
 }

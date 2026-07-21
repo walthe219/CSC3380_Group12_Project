@@ -284,8 +284,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubTarget
   target: {fileID: 8613965700729481620}
-  dmgMult: 5
+  dmgMult: 3
   limbHealth: 20
+  hitSFX: {fileID: 0}
 --- !u!1 &6275808194330270549
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,6 +358,7 @@ MonoBehaviour:
   target: {fileID: 8613965700729481620}
   dmgMult: 0.75
   limbHealth: 30
+  hitSFX: {fileID: 0}
 --- !u!1 &7191563455432292259
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +485,7 @@ MonoBehaviour:
   target: {fileID: 8613965700729481620}
   dmgMult: 1
   limbHealth: 50
+  hitSFX: {fileID: 0}
 --- !u!1 &7901366144787318080
 GameObject:
   m_ObjectHideFlags: 0
@@ -7107,7 +7110,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 1000
@@ -7155,6 +7158,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   totalHealth: 100
   runRef: {fileID: 1405285084934166612}
+  hitSFX: {fileID: 0}
+  damageNumberPrefab: {fileID: 7130386328553184214, guid: 1557d9372fe76584697b0252ba4989a8, type: 3}
 --- !u!114 &8296296311111667559
 MonoBehaviour:
   m_ObjectHideFlags: 0

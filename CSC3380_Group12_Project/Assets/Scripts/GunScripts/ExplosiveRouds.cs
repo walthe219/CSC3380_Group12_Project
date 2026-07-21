@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 
 // This class is a MonoBehaviour attached to the gun that spawns an AoE explosion on hit that damages enemies within its radius
@@ -38,16 +39,25 @@ public class ExplosiveRouds : MonoBehaviour
 
         GameObject explosionEffect = Instantiate(explosionPrefab, hit.point, Quaternion.identity);
         
+        HashSet<Target> targets =  new HashSet<Target>();
         foreach (Collider obj in hits)
         {
-            SubTarget target = obj.transform.GetComponent<SubTarget>();
+            SubTarget sub = obj.transform.GetComponent<SubTarget>();
 
-            if (target != null) //target hit
+            if (sub != null) //target hit
             {
-                //Debug.Log("Explosion hit " + target.ToString());
-                target.target.TakeDamage(currPlayerStats.damage * explosionDamageModifier, obj.name);
+                Target target = sub.target;
+                if (targets.Contains(target))
+                {
+                    continue;
+                }
+                target.TakeDamage(currPlayerStats.damage * explosionDamageModifier, obj.name, target.transform.position);
+                targets.Add(sub.target);
+                //Debug.Log("Explosion hit " + target.ToString
+
             }
         }
+
 
         
         

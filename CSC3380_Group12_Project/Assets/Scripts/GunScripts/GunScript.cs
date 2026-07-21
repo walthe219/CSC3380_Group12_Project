@@ -5,24 +5,24 @@ using System;
 
 public class GunScript : MonoBehaviour
 {
-    public Camera fpsCam;
+    [SerializeField] Camera fpsCam;
     [SerializeField] PlayerStats currPlayerStats;
     [SerializeField] PlayerStats BasePlayerStats;
-    public Transform gunLocation;
+    [SerializeField] Transform gunLocation;
 
     [Header("State")]
-    public bool isReloading;
-    public float reloadDelay; //variable to set reload speed manully
-    public bool isAuto;
+    [SerializeField] bool isReloading;
+    [SerializeField] float reloadDelay;
+    [SerializeField] bool isAuto;
 
     [Header("Unlocks")]
-    public bool AutoUnlocked;
-    public bool isNotAutoReload;
+    [SerializeField] bool AutoUnlocked;
+    [SerializeField] bool isNotAutoReload;
 
     [Header("Inputs")]
-    public InputAction fireAction;
-    public InputAction reloadAction;
-    public InputAction toggleAutoFireAction;
+    [SerializeField] InputAction fireAction;
+    [SerializeField] InputAction reloadAction;
+    [SerializeField] InputAction toggleAutoFireAction;
 
     //Static Gun Events
     public static event Action OnTriggerPull;
@@ -136,10 +136,6 @@ public class GunScript : MonoBehaviour
         Debug.Log("Reloaded!");
     }
 
-    /*void SetReloadDelayTime() //Set reload speed manually
-    {
-        BasePlayerStats.reloadSpeed = reloadDelay;
-    }*/
     void Shoot()
     {
         OnBulletFired?.Invoke();
@@ -157,15 +153,32 @@ public class GunScript : MonoBehaviour
             {
                 Debug.Log("You hit the target " + target.gameObject.name);
                 OnTargetHit?.Invoke(hit);
-                target.TakeDamage(currPlayerStats.damage);
+
+                //every 100% multishot chance guarentes an extra shot
+                int multihits = (int)(currPlayerStats.multishot);
+                if (UnityEngine.Random.value < currPlayerStats.multishot % 1)
+                    multihits++;
+
+                for(int i = 0; i< multihits; i++)
+                {
+                    float baseDamage = currPlayerStats.damage;
+
+                    //every 100% crit chance guarentes a crit
+                    int numCrits = (int)(currPlayerStats.critChance);
+                    if (UnityEngine.Random.value < currPlayerStats.critChance % 1)
+                        numCrits++;
+
+                    float dmgMult = 1 + numCrits * (currPlayerStats.critMult - 1);
+
+                    Debug.Log("You did damage with " + numCrits + " num crits");
+                    target.TakeDamage(baseDamage * dmgMult, hit.point);
+                }
             }
             else //non target hit
             {
                 Debug.Log("You hit something other than the target!");
                 OnNonTargetHit?.Invoke(hit);
             }
-
-            //Instantiate(impactEffect, hit.point, Quaternion.LookRotation(-hit.normal));
 
         }
         else { //If nothing hit
