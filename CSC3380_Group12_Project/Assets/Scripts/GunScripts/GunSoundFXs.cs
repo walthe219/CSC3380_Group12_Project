@@ -35,6 +35,7 @@ public class GunSoundFXs : MonoBehaviour
 
     void playEnemyHit(RaycastHit NOTUSED)
     {
-        SoundFXManager.instance.PlayRandomSoundFXClip(gunHitEnemySounds, transform, 1f);
+        int random = Random.Range(0, gunHitEnemySounds.Length);
+        SoundFXManager.instance.PlaySoundFXClip(gunHitEnemySounds[random], transform, 1f);
     }
 }
