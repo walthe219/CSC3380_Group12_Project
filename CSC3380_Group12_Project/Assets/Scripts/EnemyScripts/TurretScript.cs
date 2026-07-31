@@ -50,8 +50,9 @@ public class TurretScript : MonoBehaviour
     
     GameObject CreateProjectile(Transform spawnPoint, float radius, float speed)
     {
-        //GameObject projectile =  Instantiate(ProjectilePrefab, transform);
-        GameObject projectile = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        GameObject projectile =  Instantiate(ProjectilePrefab, transform);
+        //GameObject projectile = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //projectile.layer = LayerMask.NameToLayer("Projectile");
         var script = projectile.AddComponent<Projectile>();
         script.projSpeed = this.projSpeed;
         script.projDamage = this.projDamage;
@@ -84,11 +85,11 @@ public class TurretScript : MonoBehaviour
             }
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Projectile hit " + collision.gameObject.name, collision.gameObject);
-            var Player = collision.gameObject.GetComponent<ControlScriptReference>();
-            var PlayerHealth = collision.gameObject.GetComponent<PlayerDamageManager>();
+            Debug.Log("Projectile hit " + other.gameObject.name, other.gameObject);
+            var Player = other.gameObject.GetComponent<ControlScriptReference>();
+            var PlayerHealth = other.gameObject.GetComponent<PlayerDamageManager>();
             if (PlayerHealth != null)
             {
                 

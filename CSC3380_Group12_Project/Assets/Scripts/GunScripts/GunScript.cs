@@ -10,6 +10,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] PlayerStats currPlayerStats;
     [SerializeField] PlayerStats BasePlayerStats;
     [SerializeField] Transform gunLocation;
+    [SerializeField] LayerMask hitableLayers;
 
     [Header("State")]
     [SerializeField] bool isReloading;
@@ -138,7 +139,7 @@ public class GunScript : MonoBehaviour
         OnBulletFired?.Invoke();
 
         RaycastHit hit;
-        bool hitSomething = Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, currPlayerStats.gunRange);
+        bool hitSomething = Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, currPlayerStats.gunRange, hitableLayers);
 
         if (!hitSomething)
         {

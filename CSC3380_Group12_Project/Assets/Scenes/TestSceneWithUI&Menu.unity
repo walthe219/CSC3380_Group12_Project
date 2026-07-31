@@ -681,6 +681,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player&Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 6039100129116526259, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: dashSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bcccd4ff9ad1794fb16f3f6cbeec8b9, type: 3}
+    - target: {fileID: 8871764939546255109, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: isAutoFire
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8871764939546255109, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: isAutoReload
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -160,9 +160,12 @@ MonoBehaviour:
   currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
   BasePlayerStats: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
   gunLocation: {fileID: 8117871886532061807}
+  hitableLayers:
+    serializedVersion: 2
+    m_Bits: 265
   isReloading: 0
-  isAutoFire: 0
-  isAutoReload: 0
+  isAutoFire: 1
+  isAutoReload: 1
   autoReloadDelay: 0.5
   AutoFireUnlocked: 0
   fireAction:

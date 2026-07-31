@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class SubTarget : MonoBehaviour
 {
@@ -7,7 +8,8 @@ public class SubTarget : MonoBehaviour
     public float limbHealth = 50f;
     public AudioClip hitSFX;
 
-
+    public event Action OnDamageTaken;
+    public event Action OnDestoryed;
 
     public void TakeDamage(float baseDamage,Vector3 pos)
     {
@@ -22,13 +24,16 @@ public class SubTarget : MonoBehaviour
         else
         {
             limbHealth -= currTotalMult;
-            target.TakeDamage(baseDamage, transform.name, pos);
+            target.TakeDamage(baseDamage * currTotalMult, transform.name, pos);
+            OnDamageTaken?.Invoke();
         }
 
     }
 
     void Cripple(float damage)
-    {
+    {   
         target.TakeDamage(damage * 0.5f, transform.name, transform.position);
+        OnDamageTaken?.Invoke();
+        OnDestoryed?.Invoke();
     }
 }
