@@ -88,7 +88,6 @@ public class TurretScript : MonoBehaviour
         private void OnTriggerEnter(Collider other)
         {
             Debug.Log("Projectile hit " + other.gameObject.name, other.gameObject);
-            var Player = other.gameObject.GetComponent<ControlScriptReference>();
             var PlayerHealth = other.gameObject.GetComponent<PlayerDamageManager>();
             if (PlayerHealth != null)
             {

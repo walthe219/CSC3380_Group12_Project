@@ -249,6 +249,7 @@ MonoBehaviour:
   LifeStealUnlocked: 0
   currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
   BasePlayerStats: {fileID: 11400000, guid: f4f6401648452a44ea3914d6c322ad4f, type: 2}
+  lifeStealPercent: 0
 --- !u!114 &4193678930060794970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,9 +263,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts::ExplosiveRouds
   ExplosiveRoundsUnlocked: 0
-  explosionDamageModifier: 1
+  explosionDamageModifier: 0.25
   explosionRadius: 0.5
-  explosionPrefab: {fileID: 0}
+  explosionPrefab: {fileID: 7233474374439594377, guid: 2278e3fca2e5f264aa422f158517b4e3, type: 3}
   currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
 --- !u!114 &5135688383140860647
 MonoBehaviour:
