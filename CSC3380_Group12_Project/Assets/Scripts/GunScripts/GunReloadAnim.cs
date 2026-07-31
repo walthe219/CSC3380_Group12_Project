@@ -3,14 +3,19 @@ using System.Collections;
 
 public class GunReloadAnim : MonoBehaviour
 {
-    public GunScript gunScript;
-    public Transform camRot;
     public float rate;
     private bool midReload;
-    // Update is called once per frame
+    private bool isReloading;
+
+    private void OnEnable()
+    {
+        GunScript.OnStartReload += () => isReloading = true;
+        GunScript.OnFinishReload += () => isReloading = false;
+    }
+
     void Update()
     {
-        if(gunScript.isReloading)
+        if(isReloading)
         {
             if(!midReload)
             {
@@ -28,7 +33,7 @@ public class GunReloadAnim : MonoBehaviour
         {
             float t = timeElapsed / rate;
             float rot = Mathf.Lerp(0, 360, t);
-            transform.localRotation =  Quaternion.Euler(rot, 0, 0);
+            transform.localRotation =  Quaternion.Euler(-rot, 0, 0);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
