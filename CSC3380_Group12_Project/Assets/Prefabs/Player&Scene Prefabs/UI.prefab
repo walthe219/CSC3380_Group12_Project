@@ -594,8 +594,8 @@ GameObject:
   - component: {fileID: 6500299452996118294}
   - component: {fileID: 8846975999295550541}
   - component: {fileID: 4122953730487921653}
-  - component: {fileID: 2251515035995057097}
   - component: {fileID: 196122887017169435}
+  - component: {fileID: 308201167205184411}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -687,23 +687,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2251515035995057097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6762474667276419683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5550890801b6e014a814eed414bc5c87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
-  pauseMenuUI: {fileID: 6415987089931508478}
-  optionsmenu: {fileID: 6454916625874383763}
-  UIContainer: {fileID: 7839183102990618828}
-  HSMenu: {fileID: 224674674590909586}
-  gameoverscreen: {fileID: 196122887017169435}
 --- !u!114 &196122887017169435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,6 +703,24 @@ MonoBehaviour:
   gameoverscreen: {fileID: 9124201351684217688}
   UIContainer: {fileID: 7839183102990618828}
   gosActive: 0
+--- !u!114 &308201167205184411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762474667276419683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a0d317776e09f4c8a25cf262de8b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::PauseMenu
+  InputAsset: {fileID: 0}
+  pauseMenuUI: {fileID: 6415987089931508478}
+  optionsmenu: {fileID: 6454916625874383763}
+  UIContainer: {fileID: 7839183102990618828}
+  HSMenu: {fileID: 224674674590909586}
+  gameoverscreen: {fileID: 196122887017169435}
 --- !u!1 &7210439012793375873
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,11 +1022,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 748621366731120123, guid: af428632e8994e84ab902fb6a7d76604, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 748621366731120123, guid: af428632e8994e84ab902fb6a7d76604, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 748621366731120123, guid: af428632e8994e84ab902fb6a7d76604, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1086,6 +1087,10 @@ PrefabInstance:
     - target: {fileID: 2444689673273524438, guid: af428632e8994e84ab902fb6a7d76604, type: 3}
       propertyPath: m_Name
       value: AmmoHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 2444689673273524438, guid: af428632e8994e84ab902fb6a7d76604, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1907,14 +1912,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6895744777792142821, guid: 365c336a5ce7b494b9513a075ce7b352, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2251515035995057097}
-    - target: {fileID: 7320224212486180256, guid: 365c336a5ce7b494b9513a075ce7b352, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2251515035995057097}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
