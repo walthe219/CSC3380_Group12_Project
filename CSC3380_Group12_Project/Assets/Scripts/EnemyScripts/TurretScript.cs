@@ -51,9 +51,7 @@ public class TurretScript : MonoBehaviour
     GameObject CreateProjectile(Transform spawnPoint, float radius, float speed)
     {
         GameObject projectile =  Instantiate(ProjectilePrefab, transform);
-        //GameObject projectile = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //projectile.layer = LayerMask.NameToLayer("Projectile");
-        var script = projectile.AddComponent<Projectile>();
+        var script = projectile.AddComponent<EnemyProjectile>();
         script.projSpeed = this.projSpeed;
         script.projDamage = this.projDamage;
 
@@ -65,36 +63,5 @@ public class TurretScript : MonoBehaviour
         projectile.GetComponent<Renderer>().material.color = Color.red;
 
         return projectile;
-    }
-    
-    private class Projectile : MonoBehaviour
-    {
-        public float timer = 0;
-        public float lifetime = 3f;
-
-        public float projSpeed;
-        public float projDamage;
-        private void Update()
-        {
-            Transform transform = this.gameObject.transform;
-            transform.Translate(Vector3.forward * projSpeed * Time.deltaTime);
-            timer += Time.deltaTime;
-            if (timer > lifetime)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log("Projectile hit " + other.gameObject.name, other.gameObject);
-            var PlayerHealth = other.gameObject.GetComponent<PlayerDamageManager>();
-            if (PlayerHealth != null)
-            {
-                
-                PlayerHealth.dealDamage(projDamage);
-            }
-            Destroy(this.gameObject);
-        }
-    }
+    }   
 }
