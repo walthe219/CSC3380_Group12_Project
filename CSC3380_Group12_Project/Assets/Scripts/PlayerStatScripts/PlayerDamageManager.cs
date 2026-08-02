@@ -8,11 +8,17 @@ using System;
 //Allows for more complex player damage calculations in the future 
 class PlayerDamageManager : MonoBehaviour
 {
+    [Header("Stats")]
     [SerializeField] PlayerStats baseStats;
     [SerializeField] PlayerStats currentStats;
 
+    [Header("Fall Damage")]
     [SerializeField] float flatFallDamage = 0;
     [SerializeField] float fallDamagePercentage = 0.10f;
+
+    [Header("Immunity Frames")]
+    [SerializeField] float immunityTime = 0.25f;
+    [SerializeField] bool hasImmunityFrames = false;
 
     public static event Action<float> PlayerTakesDamage;
 
@@ -39,6 +45,11 @@ class PlayerDamageManager : MonoBehaviour
     // if dealTrueDamage ignores any resitances or other stats affect the damage the player takes
     public void dealDamage(float incomingDamage, bool dealTrueDamage = false)
     {
+        Debug.Log("Player taking damage");
+
+        if (hasImmunityFrames) return;
+        hasImmunityFrames = true;
+
         float actualDamageTaken = incomingDamage;
         if (!dealTrueDamage)
         {
@@ -46,6 +57,7 @@ class PlayerDamageManager : MonoBehaviour
         }
         currentStats.health -= actualDamageTaken;
         PlayerTakesDamage?.Invoke(actualDamageTaken);
+        StartCoroutine(StartImmunityFrames(immunityTime));
     }
 
 
@@ -66,5 +78,17 @@ class PlayerDamageManager : MonoBehaviour
     {
         dealDamage(flatFallDamage, dealTrueDamage: true);
         dealPercentageOfHealth(fallDamagePercentage, dealTrueDamage: true, useMaxPlayerHealth: true);
+    }
+
+    IEnumerator StartImmunityFrames(float immuneTime)
+    {
+        float elapsed = 0;
+        while(elapsed < immuneTime)
+        {
+            elapsed += Time.deltaTime;
+            yield return  null; 
+        }
+
+        hasImmunityFrames = false;
     }
 }

@@ -51,7 +51,7 @@ public class TurretScript : MonoBehaviour
     GameObject CreateProjectile(Transform spawnPoint, float radius, float speed)
     {
         GameObject projectile =  Instantiate(ProjectilePrefab, transform);
-        var script = projectile.AddComponent<EnemyProjectile>();
+        var script = projectile.GetComponent<EnemyProjectile>();
         script.projSpeed = this.projSpeed;
         script.projDamage = this.projDamage;
 

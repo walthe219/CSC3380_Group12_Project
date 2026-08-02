@@ -26,10 +26,9 @@ public class EnemyProjectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Projectile hit " + other.gameObject.name, other.gameObject);
-        var PlayerHealth = other.transform.parent.gameObject.GetComponent<PlayerDamageManager>();
+        var PlayerHealth = other.GetComponentInParent<PlayerDamageManager>();
         if (PlayerHealth != null)
         {
-
             PlayerHealth.dealDamage(projDamage);
         }
         Destroy(this.gameObject);
