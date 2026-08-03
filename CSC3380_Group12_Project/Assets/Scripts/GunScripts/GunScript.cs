@@ -18,6 +18,10 @@ public class GunScript : MonoBehaviour
     [SerializeField] bool isAutoReload;
     [SerializeField] float autoReloadDelay = 0.5f;
 
+    [Header("Damage Falloff")]
+    [SerializeField] float maxFalloffRangeMult = 1.25f;
+    [SerializeField] float falloffDMGFloorMult = 0.0f;
+
     [Header("Unlocks")]
     [SerializeField] bool AutoFireUnlocked;
 
@@ -139,7 +143,7 @@ public class GunScript : MonoBehaviour
         OnBulletFired?.Invoke();
 
         RaycastHit hit;
-        bool hitSomething = Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, currPlayerStats.gunRange, hitableLayers);
+        bool hitSomething = Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, currPlayerStats.gunRange * maxFalloffRangeMult, hitableLayers);
 
         if (!hitSomething)
         {
@@ -176,11 +180,30 @@ public class GunScript : MonoBehaviour
             if (UnityEngine.Random.value < currPlayerStats.critChance % 1)
                 numCrits++;
 
-            // total critMult is base critMult times number of crits
-            float dmgMult = 1 + numCrits * (currPlayerStats.critMult - 1);
+            float falloffMult = calculateFallOffMult(Vector3.Distance(hit.point,transform.position));
+            float totalCritMult = numCrits * (currPlayerStats.critMult - 1);
+
+            float totalDmgMult = (1 + totalCritMult) * falloffMult;
 
             Debug.Log("You did damage with " + numCrits + " num crits");
-            target.TakeDamage(baseDamage * dmgMult, hit.point);
+            target.TakeDamage(baseDamage * totalDmgMult, hit.point);
         }
+    }
+
+    float calculateFallOffMult(float hitDist)
+    {
+        float cutoffDist = currPlayerStats.gunRange;
+        float maxDist = currPlayerStats.gunRange * maxFalloffRangeMult;
+
+        float multiplier = 1.0f;
+
+        if (hitDist > cutoffDist)
+        {
+            multiplier = (maxDist - hitDist) / (maxDist - cutoffDist);
+        }
+
+        Debug.Log("Falloff: " + multiplier);
+        return multiplier;
+
     }
 }
