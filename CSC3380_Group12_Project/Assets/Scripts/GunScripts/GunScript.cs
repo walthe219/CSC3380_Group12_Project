@@ -100,7 +100,6 @@ public class GunScript : MonoBehaviour
                 OnMagazineEmpty?.Invoke();
 
             fireDelay = 1 / BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
-            //Debug.Log("Resetting Firerate!");
         }
         
         // decrement firerate timer
@@ -196,10 +195,19 @@ public class GunScript : MonoBehaviour
         float maxDist = currPlayerStats.gunRange * maxFalloffRangeMult;
 
         float multiplier = 1.0f;
-
-        if (hitDist > cutoffDist)
+        if(hitDist < cutoffDist)
         {
-            multiplier = (maxDist - hitDist) / (maxDist - cutoffDist);
+            multiplier = 1.0f;
+        }
+        else if(hitDist > maxDist)
+        {
+            multiplier = falloffDMGFloorMult;
+        }
+        //between base range and max falloff range
+        else
+        {
+            // linear interpolation between falloff point and max falloff range
+            multiplier = falloffDMGFloorMult + (hitDist - maxDist) * (falloffDMGFloorMult - 1) / (maxDist - cutoffDist);
         }
 
         Debug.Log("Falloff: " + multiplier);
