@@ -706,6 +706,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+--- !u!114 &1040378743 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1024971988184287111, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+  m_PrefabInstance: {fileID: 1040378742}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0113fd7058a604e936e273047b0437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
 --- !u!1 &1071691109
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,6 +1164,10 @@ PrefabInstance:
     - target: {fileID: 5558090767288735085, guid: 6bfa640831472f54d8323d8b5828f68b, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1040378743}
+    - target: {fileID: 5558090767288735085, guid: 6bfa640831472f54d8323d8b5828f68b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetMouseSensitivity
       objectReference: {fileID: 0}
     - target: {fileID: 6756061314871004405, guid: 6bfa640831472f54d8323d8b5828f68b, type: 3}
       propertyPath: m_SizeDelta.x

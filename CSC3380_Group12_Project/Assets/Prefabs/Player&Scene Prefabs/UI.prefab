@@ -715,7 +715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a0d317776e09f4c8a25cf262de8b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::PauseMenu
-  InputAsset: {fileID: 0}
+  InputAsset: {fileID: -944628639613478452, guid: 5ed8d681290318b4185183a4ed4b6f6c, type: 3}
   pauseMenuUI: {fileID: 6415987089931508478}
   optionsmenu: {fileID: 6454916625874383763}
   UIContainer: {fileID: 7839183102990618828}
@@ -1022,11 +1022,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 748621366731120123, guid: af428632e8994e84ab902fb6a7d76604, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 748621366731120123, guid: af428632e8994e84ab902fb6a7d76604, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 748621366731120123, guid: af428632e8994e84ab902fb6a7d76604, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1912,6 +1912,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6895744777792142821, guid: 365c336a5ce7b494b9513a075ce7b352, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 308201167205184411}
+    - target: {fileID: 6895744777792142821, guid: 365c336a5ce7b494b9513a075ce7b352, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895744777792142821, guid: 365c336a5ce7b494b9513a075ce7b352, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Scripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320224212486180256, guid: 365c336a5ce7b494b9513a075ce7b352, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 308201167205184411}
+    - target: {fileID: 7320224212486180256, guid: 365c336a5ce7b494b9513a075ce7b352, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320224212486180256, guid: 365c336a5ce7b494b9513a075ce7b352, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Scripts
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2513,6 +2537,14 @@ PrefabInstance:
     - target: {fileID: 2542385429401797440, guid: 63f84e1e34cf5254f9318d415da2758e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827730334550634468, guid: 63f84e1e34cf5254f9318d415da2758e, type: 3}
+      propertyPath: m_MinValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827730334550634468, guid: 63f84e1e34cf5254f9318d415da2758e, type: 3}
+      propertyPath: m_WholeNumbers
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3429345956160390050, guid: 63f84e1e34cf5254f9318d415da2758e, type: 3}
       propertyPath: m_AnchorMax.x

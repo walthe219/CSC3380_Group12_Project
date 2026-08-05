@@ -38,7 +38,7 @@ public class PauseMenu : MonoBehaviour
        }
     }
 
-    void Resume(){
+    public void Resume(){
         OnResume?.Invoke();
 
         pauseMenuUI.SetActive(false);
@@ -58,7 +58,7 @@ public class PauseMenu : MonoBehaviour
         UIContainer.SetActive(true);
     }
 
-    void Pause(){
+    public void Pause(){
         OnPause?.Invoke();
 
         pauseMenuUI.SetActive(true);
@@ -75,7 +75,7 @@ public class PauseMenu : MonoBehaviour
         HSMenu.SetActive(false);
     }
 
-    void QuitGame(){
+    public void QuitGame(){
         Debug.Log("Quiting Game");
         SceneManager.LoadScene("Menu1", LoadSceneMode.Single);
     }
