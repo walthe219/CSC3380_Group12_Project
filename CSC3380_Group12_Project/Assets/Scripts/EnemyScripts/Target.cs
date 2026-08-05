@@ -1,4 +1,4 @@
-  using System;
+using System;
 using UnityEngine;
 
 public class Target : MonoBehaviour
@@ -14,12 +14,12 @@ public class Target : MonoBehaviour
 
     [SerializeField] GameObject damageNumberPrefab;
 
-    public void TakeDamage(float damage, string location, Vector3 pos)
+    public void TakeDamage(DamageValue damage)
     {
-        totalHealth -= damage;
+        totalHealth -= damage.getFinalDmg();
         OnDamageTaken?.Invoke();
 
-        spawnDamageNumber((int)damage, 0, pos);
+        spawnDamageNumber(damage);
 
         if (totalHealth <= 0f)
         {
@@ -50,12 +50,12 @@ public class Target : MonoBehaviour
 
     }
 
-   void spawnDamageNumber(int damageTaken, int numCrits, Vector3 pos)
+   void spawnDamageNumber(DamageValue damageTaken)
     {
         if(damageNumberPrefab != null)
         {
-            var dmgNum = Instantiate(damageNumberPrefab, pos, Quaternion.identity).GetComponent<DamageNumberScript>();
-            dmgNum.Initialize(damageTaken, numCrits);
+            var dmgNum = Instantiate(damageNumberPrefab, damageTaken.hitPos, Quaternion.identity).GetComponent<DamageNumberScript>();
+            dmgNum.Initialize(damageTaken);
         }
     }
 }

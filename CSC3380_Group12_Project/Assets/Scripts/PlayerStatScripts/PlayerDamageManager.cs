@@ -13,7 +13,7 @@ class PlayerDamageManager : MonoBehaviour
     [SerializeField] PlayerStats currentStats;
 
     [Header("Fall Damage")]
-    [SerializeField] float flatFallDamage = 0;
+    //[SerializeField] float flatFallDamage = 0;
     [SerializeField] float fallDamagePercentage = 0.10f;
 
     [Header("Immunity Frames")]
@@ -76,7 +76,7 @@ class PlayerDamageManager : MonoBehaviour
     //called when player touches fall plane
     void dealFallPlaneDamage(GameObject NOT_USED)
     {
-        dealDamage(flatFallDamage, dealTrueDamage: true);
+        //dealDamage(flatFallDamage, dealTrueDamage: true);
         dealPercentageOfHealth(fallDamagePercentage, dealTrueDamage: true, useMaxPlayerHealth: true);
     }
 

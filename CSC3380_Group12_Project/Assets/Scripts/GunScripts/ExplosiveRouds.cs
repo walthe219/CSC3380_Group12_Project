@@ -51,15 +51,14 @@ public class ExplosiveRouds : MonoBehaviour
                 {
                     continue;
                 }
-                target.TakeDamage(currPlayerStats.damage * explosionDamageModifier, obj.name, target.transform.position);
+                var damage = new DamageValue(currPlayerStats.damage, gameObject, target.transform.position);
+                damage.addDmgMult(explosionDamageModifier);
+                target.TakeDamage(damage);
                 targets.Add(sub.target);
                 //Debug.Log("Explosion hit " + target.ToString
 
             }
-        }
-
-
-        
-        
+        } 
+  
     }
 }

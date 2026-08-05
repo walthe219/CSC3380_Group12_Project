@@ -118,6 +118,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 6946381793249861424}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: dashData
       value: 
       objectReference: {fileID: 11400000, guid: 4f89d145e4424134ba4036b61b6cd7e1, type: 2}
@@ -125,6 +129,10 @@ PrefabInstance:
       propertyPath: dashDrag
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
+      propertyPath: dashSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bcccd4ff9ad1794fb16f3f6cbeec8b9, type: 3}
     - target: {fileID: 6796624350748608610, guid: 80217e526d6ed3445b2c29554c073f00, type: 3}
       propertyPath: maxDashTime
       value: 1

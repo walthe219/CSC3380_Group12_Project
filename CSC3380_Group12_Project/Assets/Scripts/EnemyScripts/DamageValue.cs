@@ -7,59 +7,74 @@ using System.Linq;
 // all affect end result of damage numbers
 // build up over many sources, gun, sub target, target
 // An instance of a DamageValue is created at the soucre and passed to each script that affects or use that damage
+
 public class DamageValue
 {
-    public float baseDamage;
-    public List<float> damageMultipliers;
-    public float criticalChance;
-    public List<float> criticalMultipliers;
+    public GameObject origin;
+    public Vector3 originPos;
+    public Vector3 hitPos;
 
-    public DamageValue(int baseDMG)
+    float baseDamage = 0;
+    float damageMultipliers = 1;
+    float criticalChance = 0;
+    float criticalMultipliers = 0;
+
+    public bool isCriticalPoint;
+
+    int numCrits = -1;
+
+    public DamageValue(float baseDMG, GameObject ori, Vector3 hit)
     {
         baseDamage = baseDMG;
-    }
-    public void applyDamageMultiplier(float multiplier)
-    {
-        damageMultipliers.Add(multiplier);
-    }
-
-    public void applyDamageMultiplier(List<float> multipliers)
-    {
-        damageMultipliers.AddRange(multipliers);
+        origin = ori;
+        originPos = ori.transform.position;
+        hitPos = hit;
     }
 
-    public void applycriticalMultiplier(float critMultiplier)
+    public void addDmgMult(float multiplier)
     {
-        criticalMultipliers.Add(critMultiplier);
+        damageMultipliers *= multiplier;
     }
 
-    public void applycriticalMultiplier(List<float> critMultipliers)
+    public void addCritMult(float critMultiplier)
     {
-        criticalMultipliers.AddRange(critMultipliers);
+        criticalMultipliers += critMultiplier;
     }
 
-    public float calculateFinalDmg()
+    public void addCritChance(float critChance)
     {
-        return baseDamage * calculateFinalDamagetMultiplier();
+        criticalChance += critChance;
     }
 
-    public float calculateFinalDamagetMultiplier()
+    public float getFinalDmg()
     {
-        return calculateFinalCritMultiplier() + damageMultipliers.Sum();
+        Debug.Log($"Base: {baseDamage}, Mult: {damageMultipliers}, CritMul: {criticalMultipliers}, CritChance {criticalChance}, NumCrits: {numCrits}");
+        return baseDamage * getTotalDmgMult();
     }
 
-    public float calculateFinalCritMultiplier()
+    public float getTotalDmgMult()
     {
-        return calculateNumCrits() * criticalMultipliers.Sum();
+        return getTotalCritMult() + damageMultipliers;
     }
 
-    public float calculateNumCrits()
+    public float getTotalCritMult()
     {
-        int numCrits = (int)(criticalChance);
+        return getNumCrits() * criticalMultipliers;
+    }
+
+    public int getNumCrits()
+    {
+        // If has already been calculated
+        if(numCrits > -1)
+            return numCrits;
+
+        numCrits = (int)(criticalChance);
         if (UnityEngine.Random.value < criticalChance % 1)
             numCrits++;
 
         return numCrits;
     }
+
+
 
 }

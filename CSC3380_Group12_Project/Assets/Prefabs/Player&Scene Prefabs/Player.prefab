@@ -107,7 +107,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   isGrounded: 0
-  dashSound: {fileID: 0}
+  dashSound: {fileID: 8300000, guid: 7bcccd4ff9ad1794fb16f3f6cbeec8b9, type: 3}
   move:
     m_Name: Move
     m_Type: 0
@@ -210,6 +210,8 @@ MonoBehaviour:
   currentStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
   flatFallDamage: 10
   fallDamagePercentage: 0
+  immunityTime: 0.25
+  hasImmunityFrames: 0
 --- !u!114 &3440109439584066399
 MonoBehaviour:
   m_ObjectHideFlags: 0

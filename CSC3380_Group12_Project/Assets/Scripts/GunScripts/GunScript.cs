@@ -1,7 +1,8 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
-using System;
+
 
 public class GunScript : MonoBehaviour
 {
@@ -165,6 +166,13 @@ public class GunScript : MonoBehaviour
         Debug.Log("You hit the target " + target.gameObject.name);
         OnTargetHit?.Invoke(hit);
 
+        dealDamage(target,hit);
+
+        
+    }
+
+    void dealDamage(SubTarget target, RaycastHit hit)
+    {
         //every 100% multishot chance creates an extra shot
         int multihits = (int)(currPlayerStats.multishot);
         if (UnityEngine.Random.value < currPlayerStats.multishot % 1)
@@ -172,24 +180,18 @@ public class GunScript : MonoBehaviour
 
         for (int i = 0; i < multihits; i++)
         {
-            float baseDamage = currPlayerStats.damage;
+            DamageValue damage = new DamageValue(currPlayerStats.damage, gameObject, hit.point);
+            damage.addCritMult(currPlayerStats.critMult);
+            damage.addCritChance(currPlayerStats.critChance);
 
-            //every 100% crit chance guarentes a crit
-            int numCrits = (int)(currPlayerStats.critChance);
-            if (UnityEngine.Random.value < currPlayerStats.critChance % 1)
-                numCrits++;
+            float falloffMult = calcFallOffMult(Vector3.Distance(hit.point, transform.position));
+            damage.addDmgMult(falloffMult);
 
-            float falloffMult = calculateFallOffMult(Vector3.Distance(hit.point,transform.position));
-            float totalCritMult = numCrits * (currPlayerStats.critMult - 1);
-
-            float totalDmgMult = (1 + totalCritMult) * falloffMult;
-
-            Debug.Log("You did damage with " + numCrits + " num crits");
-            target.TakeDamage(baseDamage * totalDmgMult, hit.point);
+            target.TakeDamage(damage);
         }
     }
 
-    float calculateFallOffMult(float hitDist)
+    float calcFallOffMult(float hitDist)
     {
         float cutoffDist = currPlayerStats.gunRange;
         float maxDist = currPlayerStats.gunRange * maxFalloffRangeMult;
