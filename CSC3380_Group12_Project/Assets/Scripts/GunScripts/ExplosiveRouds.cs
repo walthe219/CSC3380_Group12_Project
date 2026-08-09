@@ -29,36 +29,9 @@ public class ExplosiveRouds : MonoBehaviour
 
     void spawnExplosion(RaycastHit hit)
     {
-        if (!ExplosiveRoundsUnlocked)
-        {
-            return;
-        }
+        if (!ExplosiveRoundsUnlocked) return;
 
-        Collider[] hits = Physics.OverlapSphere(hit.point, explosionRadius, LayerMask.GetMask("Enemy"));
-        //Debug.Log(ArrayHelper.print(hits));
-
-        GameObject explosionEffect = Instantiate(explosionPrefab, hit.point, Quaternion.identity);
-        
-        HashSet<Target> targets =  new HashSet<Target>();
-        foreach (Collider obj in hits)
-        {
-            SubTarget sub = obj.transform.GetComponent<SubTarget>();
-
-            if (sub != null) //target hit
-            {
-                Target target = sub.target;
-                if (targets.Contains(target))
-                {
-                    continue;
-                }
-                var damage = new DamageValue(currPlayerStats.damage, gameObject, target.transform.position);
-                damage.addDmgMult(explosionDamageModifier);
-                target.TakeDamage(damage);
-                targets.Add(sub.target);
-                //Debug.Log("Explosion hit " + target.ToString
-
-            }
-        } 
-  
+        float explosionDamage = currPlayerStats.damage * explosionDamageModifier;
+        GameObject explosion = Explosion.spawn(explosionPrefab, hit.point, explosionDamage, explosionRadius);
     }
 }

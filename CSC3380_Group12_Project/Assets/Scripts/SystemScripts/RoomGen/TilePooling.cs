@@ -61,7 +61,7 @@ public static class TilePooling
             ints.RemoveAt(r);
         }
 
-        Debug.Log($"RandTiles:[{string.Join(",", tiles)}] ");
+        //Debug.Log($"RandTiles:[{string.Join(",", tiles)}] ");
         return tiles;
     }
 
@@ -96,7 +96,7 @@ public static class TilePooling
             {
                 names.Add(tile.name);
             }
-            Debug.Log($"TileStack {i++}: [{String.Join(", ", names)}]");
+            //Debug.Log($"TileStack {i++}: [{String.Join(", ", names)}]");
         }
 
     }

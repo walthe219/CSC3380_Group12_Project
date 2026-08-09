@@ -111,11 +111,11 @@ public class UpgradeSpace
     //Sees if any future upgrades are now possible to acquire, or are now unavailable
     private void updateUpgrades()
     {
-        Debug.Log($"Checking for available upgrades in futureUpgrade({futureUpgrades.Count})...");
+        //Debug.Log($"Checking for available upgrades in futureUpgrade({futureUpgrades.Count})...");
         for(int i = futureUpgrades.Count-1; i >= 0; i--) 
         {
             UpgradeData u = futureUpgrades[i];
-            Debug.Log($"Looking at upgrade {u}");
+            //Debug.Log($"Looking at upgrade {u}");
 
             //NEEDS TO BE MOVED TO SEPERATE METHOD
             //removes from future if mutaully exclusive not in future or unavaialbe upgrades(meaning its been acquired)
@@ -126,7 +126,7 @@ public class UpgradeSpace
                 {
                     removeMutallyExclusiveUpgrade(e);
                     removed = true;
-                    Debug.Log($"Upgrade {u} is nolonger available because its exlusive with upgrade {e}");
+                    //Debug.Log($"Upgrade {u} is nolonger available because its exlusive with upgrade {e}");
                     break;
                 }
             }
@@ -140,7 +140,7 @@ public class UpgradeSpace
                 if (possibleUpgrades.Contains(p) || futureUpgrades.Contains(p) || unavailableUpgrades.Contains(p)) //means upgrade has not been acquired
                 {
                     hasPreq = true;
-                    Debug.Log($"Upgrade {u} still needs prereq {p}");
+                    //Debug.Log($"Upgrade {u} still needs prereq {p}");
                     break;
                 }
             }
@@ -148,7 +148,7 @@ public class UpgradeSpace
             {
                 possibleUpgrades.Add(u);
                 futureUpgrades.Remove(u);
-                Debug.Log($"Upgrade {u} has all prereqs, adding to possibleUpgrades");
+                //Debug.Log($"Upgrade {u} has all prereqs, adding to possibleUpgrades");
             }
         }
     }
