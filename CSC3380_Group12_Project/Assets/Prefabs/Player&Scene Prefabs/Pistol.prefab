@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 5135688383140860647}
   - component: {fileID: 4138871188701078465}
   - component: {fileID: 6922646916478304148}
+  - component: {fileID: 8752749788462847263}
   m_Layer: 9
   m_Name: Pistol
   m_TagString: Untagged
@@ -228,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4307bb96e22294b9166e8d2793c079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::GunSoundFXs
-  gunSound: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
+  gunSounds: []
   gunHitEnemySounds:
   - {fileID: 8300000, guid: 1f53a5fc6bd934e46a5d8cfa8fd27b64, type: 3}
   - {fileID: 8300000, guid: e82879725b40ce444bca27d19a75f42c, type: 3}
@@ -319,6 +320,31 @@ MonoBehaviour:
   bobAmount: 0.04
   lerpSpeed: 10
   speedThreshold: 0.1
+--- !u!114 &8752749788462847263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023465239680005670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99da3012eec017c41b62db7863f224c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::GrenadeSpawner
+  grenadeUnlocked: 0
+  grenadePrefab: {fileID: 6035504550959578084, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
+  throwButton:
+    m_Name: Throw Button
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4935e043-125d-4e1d-a28c-77faf4eda09c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  throwStrength: 15
+  grenadeCooldown: 10
 --- !u!1 &6956941151349001659
 GameObject:
   m_ObjectHideFlags: 0

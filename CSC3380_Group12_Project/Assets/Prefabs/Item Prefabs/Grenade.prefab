@@ -71,7 +71,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b7fe68b918e616a4688e4407535d7224, type: 2}
+  - {fileID: 2100000, guid: cd5d3368cf4179f41904b64fba2db9ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,10 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6458edc5dd5af564f890a1edb4d92afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::GrenadeScript
-  gravityMultiplier: 0.2
+  gravityMultiplier: 0.33
   explosionPrefab: {fileID: 7233474374439594377, guid: 2278e3fca2e5f264aa422f158517b4e3, type: 3}
   explosionDamage: 100
   explosionRadius: 8
+  fuseDuration: 3
 --- !u!114 &9007968202925647291
 MonoBehaviour:
   m_ObjectHideFlags: 0

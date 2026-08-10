@@ -102,4 +102,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffe564c45b95b440ac5d38d3e5ea178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::SelfDestroy
-  lifetime: 0.05
+  lifetime: 0.1

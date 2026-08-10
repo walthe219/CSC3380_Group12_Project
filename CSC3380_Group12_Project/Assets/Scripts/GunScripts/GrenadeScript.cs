@@ -1,6 +1,5 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.HID;
+using System.Collections;
 
 public class GrenadeScript : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class GrenadeScript : MonoBehaviour
     [SerializeField] GameObject explosionPrefab;
     [SerializeField][Min(0)] float explosionDamage;
     [SerializeField][Min(0)] float explosionRadius;
+    [SerializeField] [Min(0)] float fuseDuration;
 
     private Rigidbody rb;
     private bool disabled;
@@ -32,6 +32,7 @@ public class GrenadeScript : MonoBehaviour
         if (disabled) return;
 
         disablePhysics();
+        StartCoroutine(StartFuse(fuseDuration));
     }
 
     void applyVelocity(Vector3 velocity)
@@ -42,6 +43,13 @@ public class GrenadeScript : MonoBehaviour
     void explode()
     {
         Explosion.spawn(explosionPrefab, transform.position, explosionDamage, explosionRadius);
+        Destroy(gameObject);
+    }
+
+    IEnumerator StartFuse(float fuseDuration)
+    {
+        yield return new WaitForSeconds(fuseDuration);
+        explode();
     }
 
     void disablePhysics()

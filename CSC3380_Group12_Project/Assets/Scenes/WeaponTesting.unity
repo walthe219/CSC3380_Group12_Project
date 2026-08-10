@@ -343,12 +343,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3150933546377378746, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
       propertyPath: ExplosiveRoundsUnlocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3608659741726866073, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4821607945791638730, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: gunSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821607945791638730, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: 'gunSounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
     - target: {fileID: 4851181454501308948, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -397,9 +405,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player&Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 6039100129116526259, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: dashUnlocked
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6254669506271589639, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
       propertyPath: verticalRecoilAngle
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561735191850070783, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: grenadeUnlocked
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8871764939546255109, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
       propertyPath: isAutoFire
@@ -675,7 +691,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1194200033}
-  - component: {fileID: 1194200032}
   m_Layer: 0
   m_Name: GrenadeSpawner
   m_TagString: Untagged
@@ -683,30 +698,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1194200032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194200031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99da3012eec017c41b62db7863f224c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Scripts::GrenadeSpawner
-  grenadePrefab: {fileID: 6035504550959578084, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-  throwButton:
-    m_Name: Throw Button
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: d38edc74-418f-4b3f-948a-0cd54d316d3e
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  throwStrength: 15
-  grenadeCooldown: 0
 --- !u!4 &1194200033
 Transform:
   m_ObjectHideFlags: 0
@@ -915,67 +906,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!1001 &354155277648149282
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2698262360091236947, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: explosionRadius
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3836874766136125931, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.59
-      objectReference: {fileID: 0}
-    - target: {fileID: 3836874766136125931, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 3836874766136125931, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.74
-      objectReference: {fileID: 0}
-    - target: {fileID: 3836874766136125931, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3836874766136125931, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3836874766136125931, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3836874766136125931, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3836874766136125931, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3836874766136125931, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3836874766136125931, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6035504550959578084, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
-      propertyPath: m_Name
-      value: Grenade
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cef384012d277f54eb1d44c36bf476cf, type: 3}
 --- !u!1001 &562448373731931430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1878,5 +1808,4 @@ SceneRoots:
   - {fileID: 7142594637839902701}
   - {fileID: 1445047028}
   - {fileID: 1860546326}
-  - {fileID: 354155277648149282}
   - {fileID: 1194200033}

@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class GrenadeSpawner : MonoBehaviour
 {
+    [SerializeField] bool grenadeUnlocked;
+
     [Header("Grendade")]
     [SerializeField] GameObject grenadePrefab;
     [SerializeField] InputAction throwButton;
@@ -18,6 +20,9 @@ public class GrenadeSpawner : MonoBehaviour
     {
         cam = Camera.main;
         throwButton = InputSystem.actions.FindAction("Throw");
+        elapsed = grenadeCooldown;
+
+        UnlockFunctions.UnlockGrenade += () => grenadeUnlocked = true;
     }
 
     private void Update()
@@ -37,6 +42,8 @@ public class GrenadeSpawner : MonoBehaviour
 
     private void SpawnGrenade()
     {
+        if (!grenadeUnlocked) return;
+
         GameObject grenade = Instantiate(grenadePrefab);
         var rb = grenade.GetComponent<Rigidbody>();
         var script = grenade.GetComponent<GrenadeScript>();

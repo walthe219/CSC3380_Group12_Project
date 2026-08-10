@@ -17,7 +17,9 @@ public class Explosion : MonoBehaviour
 
         script.explosionDamage = damage;
         script.explosionRadius = radius;
-        explosion.transform.localScale = Vector3.one * radius;
+
+        // object scale = diameter so set it to twice the radius
+        explosion.transform.localScale = Vector3.one * radius * 2;
 
         return explosion;
     }

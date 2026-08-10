@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GunSoundFXs : MonoBehaviour
 {
-    [SerializeField] AudioClip gunSound;
+    [SerializeField] AudioClip[] gunSounds;
     [SerializeField] AudioClip[] gunHitEnemySounds;
     [SerializeField] AudioClip[] gunHitEnemyHeadSounds;
     [SerializeField] AudioClip reloadSound;
@@ -30,7 +30,8 @@ public class GunSoundFXs : MonoBehaviour
 
     void playGunFireSFX()
     {
-        SoundFXManager.instance.PlaySoundFXClip(gunSound, transform, 1f);
+        int random = Random.Range(0, gunSounds.Length);
+        SoundFXManager.instance.PlaySoundFXClip(gunSounds[random], transform, 1f);
     }
 
     void playEnemyHit(RaycastHit NOTUSED)
