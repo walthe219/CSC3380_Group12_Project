@@ -28,6 +28,10 @@ public class StaminaDisplay : MonoBehaviour
         //CurrentPlayerStats.stamina = DefaultStats.stamina;
         staminaText = GameObject.Find("StamDisplay").GetComponent<TextMeshProUGUI>();
 
+        // Stamina bar only appears when dash unlocked
+        gameObject.SetActive(false);
+        UnlockFunctions.UnlockDashEvent += () => gameObject.SetActive(true);
+
     }
 
     void stamToText(){
