@@ -17,6 +17,8 @@ using UnityEngine;
 public class UpgradeableStatContainer: ScriptableObject
 {
     //ADD NEW STAT FIELDS HERE
+
+    [Header("Player")]
     public float health;
 
     [Header("Weapon")]

@@ -27,10 +27,11 @@ MonoBehaviour:
   jumpPower: 0
   slidePower: 0
   dashPower: 0
-  ID: 
+  ID: UnlockGrenade
   rarity: 0
   isRepeatable: 0
   prerequisites: []
   mutuallyExclusives: []
   unlocks: 0a000000
-  description: 
+  description: Press G to throw a sticky grenade that will ignite after contact .
+    Shoot it out the air to detonate early and increase its damage.

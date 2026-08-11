@@ -16,7 +16,7 @@ public class UpgradeData : UpgradeableStatContainer
     {
         COMMON, RARE, EPIC
     }
-
+    [Header("Upgrade Info")]
     [Tooltip("Name used to represent the upgade in game and Console")]
     public string ID;
 

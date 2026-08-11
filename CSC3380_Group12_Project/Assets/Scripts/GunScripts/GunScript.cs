@@ -91,8 +91,8 @@ public class GunScript : MonoBehaviour
             return;
 
         // check if fire pressed or held based on curret fire mode
-        bool fireActuvated = !isAutoFire ? fireAction.WasPressedThisFrame() : fireAction.IsPressed();
-        if (fireActuvated && currPlayerStats.ammo > 0 && fireDelay <= 0f)
+        bool fireActivated = !isAutoFire ? fireAction.WasPressedThisFrame() : fireAction.IsPressed();
+        if (fireActivated && currPlayerStats.ammo > 0 && fireDelay <= 0f)
         {
             Shoot();
 
@@ -100,7 +100,7 @@ public class GunScript : MonoBehaviour
             if (currPlayerStats.ammo <= 0)
                 OnMagazineEmpty?.Invoke();
 
-            fireDelay = 1 / BasePlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
+            fireDelay = 1 / currPlayerStats.Firerate; //reset the current cooldown to the gun's cooldown
         }
         
         // decrement firerate timer
@@ -126,7 +126,7 @@ public class GunScript : MonoBehaviour
     {
         isReloading = true;
         OnStartReload?.Invoke();
-        Debug.Log("Reloading......");
+        //Debug.Log("Reloading......");
        
         float reloadDelay = 1/currPlayerStats.reloadSpeed;
         yield return new WaitForSeconds(reloadDelay);
@@ -134,7 +134,7 @@ public class GunScript : MonoBehaviour
         currPlayerStats.ammo = BasePlayerStats.ammo;
         isReloading = false;
         OnFinishReload?.Invoke();
-        Debug.Log("Reloaded!");
+        //Debug.Log("Reloaded!");
         fireDelay = 0;
     }
 
@@ -212,7 +212,7 @@ public class GunScript : MonoBehaviour
             multiplier = falloffDMGFloorMult + (hitDist - maxDist) * (falloffDMGFloorMult - 1) / (maxDist - cutoffDist);
         }
 
-        Debug.Log("Falloff: " + multiplier);
+        //Debug.Log("Falloff: " + multiplier);
         return multiplier;
 
     }

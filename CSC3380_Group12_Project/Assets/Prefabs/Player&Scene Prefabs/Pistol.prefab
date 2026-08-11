@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 4138871188701078465}
   - component: {fileID: 6922646916478304148}
   - component: {fileID: 8752749788462847263}
+  - component: {fileID: 5590445263613265628}
   m_Layer: 9
   m_Name: Pistol
   m_TagString: Untagged
@@ -229,7 +230,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4307bb96e22294b9166e8d2793c079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::GunSoundFXs
-  gunSounds: []
+  gunSounds:
+  - {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
+  - {fileID: 8300000, guid: 4d6281aa604094f04839cffa502096c0, type: 3}
+  - {fileID: 8300000, guid: 0dbe91efb8ee94e6695ef0f552d202ce, type: 3}
+  - {fileID: 8300000, guid: b33e2cff5225f4437a43a11d35763d46, type: 3}
+  - {fileID: 8300000, guid: b2d159f7e00d44d9bbc2d50a0c4fef59, type: 3}
   gunHitEnemySounds:
   - {fileID: 8300000, guid: 1f53a5fc6bd934e46a5d8cfa8fd27b64, type: 3}
   - {fileID: 8300000, guid: e82879725b40ce444bca27d19a75f42c, type: 3}
@@ -345,6 +351,30 @@ MonoBehaviour:
     m_Flags: 0
   throwStrength: 15
   grenadeCooldown: 10
+--- !u!114 &5590445263613265628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023465239680005670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce36f24513cf9d0429c8cb350492c406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::BulletChaining
+  currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
+  bulletTrailPrefab: {fileID: 9037001468008576588, guid: 0d9eead7569da68428a1f94a83115b11, type: 3}
+  chainingUnlocked: 1
+  chainingRadius: 10
+  chainingDamageMult: 1
+  chainChance: 0.2
+  maxChains: 1
+  riocochetSounds: []
+  enforceChance: 1
+  enforceLOS: 1
+  enforceEnemy: 1
+  enforceMaxChains: 1
 --- !u!1 &6956941151349001659
 GameObject:
   m_ObjectHideFlags: 0
