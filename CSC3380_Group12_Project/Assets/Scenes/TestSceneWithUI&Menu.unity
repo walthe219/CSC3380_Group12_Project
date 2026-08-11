@@ -511,6 +511,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2459243622038881678, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: DialogueBox
+      value: 
+      objectReference: {fileID: 2070930314}
     - target: {fileID: 3150933546377378746, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
       propertyPath: explosionDamageModifier
       value: 0.15
@@ -563,6 +567,10 @@ PrefabInstance:
       propertyPath: dashSound
       value: 
       objectReference: {fileID: 8300000, guid: 7bcccd4ff9ad1794fb16f3f6cbeec8b9, type: 3}
+    - target: {fileID: 6637722835493069116, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
+      propertyPath: chainChance
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8553743863641217343, guid: 2946b0030bba610459e5ecc08bfee85b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -778,6 +786,11 @@ GameObject:
 --- !u!1 &2067270632 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2127888467988337756, guid: 6bfa640831472f54d8323d8b5828f68b, type: 3}
+  m_PrefabInstance: {fileID: 4442522582205202488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2070930314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4181944195703372842, guid: 6bfa640831472f54d8323d8b5828f68b, type: 3}
   m_PrefabInstance: {fileID: 4442522582205202488}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2124508579 stripped

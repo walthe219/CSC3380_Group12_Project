@@ -35,10 +35,11 @@ public static class UnlockFunctions
     public static event Action UnlockCthulhuEvent;
     public static event Action UnlockExplosiveRounds;
     public static event Action UnlockGrenade;
+    public static event Action UnlockBulletChaining;
 
     public enum Unlockable
     {
-        DASH, OMNIDASH, SLIDE, GRAPPLE, WALLRUN, AUTOFIRE, LIFESTEAL, BETTERFIRERATE, CTHULHU, EXPLOSIVEROUNDS, GRENADE
+        DASH, OMNIDASH, SLIDE, GRAPPLE, WALLRUN, AUTOFIRE, LIFESTEAL, BETTERFIRERATE, CTHULHU, EXPLOSIVEROUNDS, GRENADE, BULLETCHAINING
     }
 
     public static Action getAction(Unlockable u)
@@ -65,6 +66,8 @@ public static class UnlockFunctions
                 return UnlockExplosiveRounds;
             case Unlockable.GRENADE:
                 return UnlockGrenade;
+            case Unlockable.BULLETCHAINING:
+                return UnlockBulletChaining;
             default:
                 Debug.LogError($"Unlockable case {u} not defined");
                 return null;

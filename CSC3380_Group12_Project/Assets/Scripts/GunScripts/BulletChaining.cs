@@ -26,6 +26,7 @@ public class BulletChaining : MonoBehaviour
     public void Start()
     {
         GunScript.OnTargetHit += StartBulletChain;
+        UnlockFunctions.UnlockBulletChaining += () => chainingUnlocked = true;
     }
 
     void StartBulletChain(RaycastHit hit)
@@ -94,9 +95,10 @@ public class BulletChaining : MonoBehaviour
             examinedTargets.Add(potentialTarget);
         }
 
+
         if (closestEnemy == null)
         {
-            Debug.Log("No chain target in range");
+            //Debug.Log("No chain target in range");
             return;
         }
 

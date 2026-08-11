@@ -365,12 +365,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::BulletChaining
   currPlayerStats: {fileID: 11400000, guid: f402e5518c0ea304b88eaff994dbfe76, type: 2}
   bulletTrailPrefab: {fileID: 9037001468008576588, guid: 0d9eead7569da68428a1f94a83115b11, type: 3}
-  chainingUnlocked: 1
+  chainingUnlocked: 0
   chainingRadius: 10
   chainingDamageMult: 1
   chainChance: 0.2
   maxChains: 1
-  riocochetSounds: []
+  riocochetSounds:
+  - {fileID: 8300000, guid: 4031e628cfc564d93ac39f8955afbbda, type: 3}
+  - {fileID: 8300000, guid: e8210ab1fe6784e7eb15956b135716c9, type: 3}
   enforceChance: 1
   enforceLOS: 1
   enforceEnemy: 1

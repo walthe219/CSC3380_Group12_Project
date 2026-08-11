@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1163c186fc93a4740a607c9418f61877, type: 3}
   m_Name: CurrentPlayerStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  health: 110
-  stamina: 100
-  ammo: 32
+  health: 90
+  ammo: 9
   damage: 20
+  critChance: 0
+  critMult: 1.5
+  multishot: 1
+  reloadSpeed: 0.4
+  Firerate: 2
+  gunRange: 25
+  stamina: 100
   moveSpeed: 7
-  numJumps: 2
-  jumpPower: 12
+  numJumps: 1
+  jumpPower: 20
   slidePower: 200
   dashPower: 50
-  reloadSpeed: 0.4
-  Firerate: -0.0033032522
-  gunRange: 50
-  numRoomsComp: 0
+  numRoomsComp: 2

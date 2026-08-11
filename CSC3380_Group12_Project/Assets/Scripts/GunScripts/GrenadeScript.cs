@@ -32,6 +32,8 @@ public class GrenadeScript : MonoBehaviour
         if (disabled) return;
 
         disablePhysics();
+        transform.parent = collision.transform;
+
         StartCoroutine(StartFuse(fuseDuration));
     }
 

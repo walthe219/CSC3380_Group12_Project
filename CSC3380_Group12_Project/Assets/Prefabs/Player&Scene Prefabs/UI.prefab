@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 7495779245061575362}
   - component: {fileID: 7960658390875274458}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: Wizard Cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -712,7 +712,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6762474667276419683}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6a0d317776e09f4c8a25cf262de8b57, type: 3}
+  m_Script: {fileID: 11500000, guid: 5550890801b6e014a814eed414bc5c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::PauseMenu
   InputAsset: {fileID: -944628639613478452, guid: 5ed8d681290318b4185183a4ed4b6f6c, type: 3}
