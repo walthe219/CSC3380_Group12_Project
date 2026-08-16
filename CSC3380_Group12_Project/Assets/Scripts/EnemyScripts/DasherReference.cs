@@ -3,16 +3,24 @@ using UnityEngine.AI;
 
 public class DasherReference : MonoBehaviour
 {
-    public NavMeshAgent agent;
+    [Header("References")]
     public Animator anim;
 
-    [Header("Attack and Damage Colliders")]
-    public Collider head;
-    public Collider body;
+    [Header("Targets")]
+    public Target target;
+    public SubTarget head;
+    public SubTarget body;
+    public SubTarget legs;
+    public SubTarget back;
+    public SubTarget guard;
+
+    [Header("Scripts")]
+    public DasherBehavior behavior;
+    public DasherGuard guardScript;
+    public DasherAttack dashAttack;
 
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
     }
 

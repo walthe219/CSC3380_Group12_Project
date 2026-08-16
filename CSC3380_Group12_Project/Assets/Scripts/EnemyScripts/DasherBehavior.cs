@@ -15,16 +15,21 @@ public class DasherBehavior : MonoBehaviour
         DASH,
         RECOVER,
         STUN,
-        STAGGER
+        STAGGER,
+        DEAD
     }
 
+
     [Header("References")]
-    [SerializeField] DasherReference reference;
+    [SerializeField] NavMeshAgent agent;
+    [SerializeField] DasherReference dasher;
     [SerializeField] Transform player;
     [SerializeField] LayerMask playerLayer;
 
     [Header("State")]
-    [SerializeField] State state;
+    [SerializeField] State currentState;
+    [SerializeField] State previousState;
+    [SerializeField] float timer = 0;
 
     [Header("Idle")]
     [SerializeField] float idleDuration;
@@ -40,74 +45,109 @@ public class DasherBehavior : MonoBehaviour
 
     [Header("Guard")]
     [SerializeField] float guardDist;
-    [SerializeField] float guardDamageResistMult;
     [SerializeField] float minGuardTime;
 
     [Header("Prepare")]
     [SerializeField] float prepareTime;
 
     [Header("Dash")]
-    [SerializeField] float dashDamage;
     [SerializeField] float minDashDist;
-    [SerializeField] float maxDashDist;
-    [SerializeField] float dashSpeed;
+    [SerializeField] float dashDuration;
+    [SerializeField] float dashDistance;
+
+    [Header("Recover")]
+    [SerializeField] float recoverDuration;
 
     [Header("Stun")]
     [SerializeField] float stunDuration;
-    [SerializeField] float stunDamageMultipler;
+
+
+    public event Action<String> OnStateChange;
 
 
     private float elapsed = 0;
-    private float timer = 0;
     private Vector3 startingPos;
-
 
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         startingPos = transform.position;
+
+        dasher.back.OnDamageTaken += () => { if (currentState == State.RECOVER) ChangeState(State.STUN); };
+        dasher.target.OnDeath += () => ChangeState(State.DEAD);
     }
 
     private void Update()
     {
         elapsed += Time.deltaTime;
+        timer += Time.deltaTime;
 
-        switch (state){
+        State newState = State.IDLE;
+        switch (currentState)
+        {
             case State.IDLE:
-                state = Idle();
+                newState = Idle();
                 break;
             case State.PACING:
-                state = Pacing();
+                newState = Pacing();
                 break;
             case State.CHASE:
-                state = Chase();
+                newState = Chase();
                 break;
             case State.SEARCH:
-                state = Search();
+                newState = Search();
                 break;
             case State.GUARD:
+                newState = Guard();
                 break;
             case State.PREPARE:
+                newState = Prepare();
                 break;
             case State.DASH:
+                newState = Dash();
                 break;
             case State.RECOVER:
+                newState = Recover();
+                break;
+            case State.STUN:
+                newState = Stun();
                 break;
         }
+
+        ChangeState(newState);
+            
     }
 
+    void ChangeState(State newState)
+    {
+        if (newState == currentState || currentState == State.DEAD)
+            return;
+
+        Debug.Log("Changing state from " + currentState + " to " + newState);
+
+        timer = 0;
+        elapsed = 0;
+
+        previousState = currentState;
+        currentState = newState;
+        OnStateChange?.Invoke(currentState.ToString());
+    }
 
     bool hasStopped()
     {
-        // 1. Check if the agent is currently calculating a path
-        if (!reference.agent.pathPending)
+        // 1. Wait if the path is still being calculated asynchronously
+        if (agent.pathPending) return false;
+
+        // 2. If it explicitly doesn't have a path, it is stopped
+        if (!agent.hasPath) return true;
+
+        // 3. Only safely check remaining distance once hasPath is confirmed true
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            // 2. Check if the distance to the target is within the stopping threshold
-            if (reference.agent.remainingDistance <= reference.agent.stoppingDistance)
-            {
-                // 3. Confirm the agent has no path or has completely stopped moving
-                return !reference.agent.hasPath || reference.agent.velocity.sqrMagnitude == 0f;
-            }
+            // 4. Double check it has ceased physical movement
+            return agent.velocity.sqrMagnitude == 0f;
         }
+
         return false;
     }
 
@@ -156,6 +196,18 @@ public class DasherBehavior : MonoBehaviour
         */
     }
 
+    void LookAt(Vector3 target)
+    {
+        Vector3 direction = (target - transform.position).normalized;
+        direction.y = 0; // Prevent looking up or down into the floor
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * agent.angularSpeed);
+        }
+    }
+
     State Idle()
     {
         if (playerInDetectRange() && playerInLOS())
@@ -163,19 +215,18 @@ public class DasherBehavior : MonoBehaviour
 
         if (timer <= idleDuration)
         {
-            timer += Time.deltaTime;
             return State.IDLE;
         }
         timer = 0;
 
-        Vector2 point = UnityEngine.Random.insideUnitCircle * pacingRadius;
-        reference.agent.SetDestination(startingPos + new Vector3(point.x, 0, point.y));
+        Vector2 point = UnityEngine.Random.insideUnitCircle * (pacingRadius + agent.stoppingDistance);
+        agent.SetDestination(startingPos + new Vector3(point.x, 0, point.y));
         return State.PACING;
     }
 
     State Pacing()
     {
-        reference.agent.speed = pacingSpeed;
+        agent.speed = pacingSpeed;
 
         if (playerInDetectRange() && playerInLOS()) return State.CHASE;
 
@@ -186,7 +237,7 @@ public class DasherBehavior : MonoBehaviour
 
     State Chase()
     {
-        reference.agent.speed = chaseSpeed;
+        agent.speed = chaseSpeed;
 
         if (elapsed <= pathUpdateDelay)
             return State.CHASE;
@@ -195,7 +246,14 @@ public class DasherBehavior : MonoBehaviour
         if (!playerInChaseRange())
             return State.SEARCH;
 
-        reference.agent.SetDestination(player.transform.position);
+        agent.SetDestination(player.transform.position);
+
+        if (hasStopped())
+            LookAt(player.position);
+
+        if (playerInGuardRange())
+            return State.GUARD;
+
         return State.CHASE;
     }
 
@@ -205,5 +263,82 @@ public class DasherBehavior : MonoBehaviour
             return State.IDLE;
 
         return State.SEARCH;
+    }
+
+    State Guard()
+    {
+        if (elapsed <= pathUpdateDelay)
+            return State.GUARD;
+        elapsed = 0;
+
+        if (!playerInChaseRange())
+            return State.SEARCH;
+
+        agent.SetDestination(player.transform.position);
+
+        if (hasStopped())
+            LookAt(player.position);
+
+        if (timer <= minGuardTime)
+        {
+            return State.GUARD;
+        }
+
+        if (playerInAttackRange())
+            return State.PREPARE;
+
+
+        return State.GUARD;
+    }
+
+    State Prepare()
+    {
+        agent.isStopped = true;
+        agent.ResetPath();
+        agent.velocity = Vector3.zero;
+
+        LookAt(player.position);
+
+        if (timer <= prepareTime)
+        {
+            return State.PREPARE;
+        }
+
+        return State.DASH;
+    }
+
+    State Dash()
+    {
+        dasher.dashAttack.ToggleOn();
+        if (timer <= dashDuration)
+        {
+            float dashSpeed = dashDistance / dashDuration;
+            agent.Move(transform.forward * dashSpeed * Time.deltaTime);
+            return State.DASH;
+        }
+
+        dasher.dashAttack.ToggleOFF();
+        agent.isStopped = false;
+        return State.RECOVER;
+    }
+
+    State Recover()
+    {
+        if (timer <= recoverDuration)
+        {
+            return State.RECOVER;
+        }
+
+        return State.CHASE;
+    }
+
+    State Stun()
+    {
+        if (timer <= recoverDuration)
+        {
+            return State.STUN;
+        }
+
+        return State.CHASE;
     }
 }

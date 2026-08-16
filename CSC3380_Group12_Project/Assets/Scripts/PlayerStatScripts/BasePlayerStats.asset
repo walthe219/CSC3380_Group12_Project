@@ -15,9 +15,9 @@ MonoBehaviour:
   health: 100
   ammo: 10
   damage: 20
-  critChance: 2
+  critChance: 0
   critMult: 1.5
-  multishot: 2
+  multishot: 1
   reloadSpeed: 0.4
   Firerate: 2
   gunRange: 25
