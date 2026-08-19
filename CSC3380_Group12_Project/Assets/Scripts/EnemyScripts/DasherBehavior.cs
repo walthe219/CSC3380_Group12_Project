@@ -183,24 +183,29 @@ public class DasherBehavior : MonoBehaviour
         return false;
     }
 
-    bool playerInDetectRange()
+    bool TargetInRange(Transform target, double range)
     {
         return player && Vector3.Distance(player.position, transform.position) <= detectionRadius;
     }
 
+    bool playerInDetectRange()
+    {
+        return TargetInRange(player, detectionRadius);
+    }
+
     bool playerInChaseRange()
     {
-        return player && Vector3.Distance(player.position, transform.position) <= detectionRadius * 1.5;
+        return TargetInRange(player, detectionRadius * 1.5);
     }
 
     bool playerInGuardRange()
     {
-        return player && Vector3.Distance(player.position, transform.position) <= guardingRadius;
+        return TargetInRange(player, guardingRadius);
     }
 
     bool playerInAttackRange()
     {
-        return player && Vector3.Distance(player.position, transform.position) <= attackRadius;
+        return TargetInRange(player, attackRadius);
     }
 
     bool playerInLOS()
@@ -255,6 +260,11 @@ public class DasherBehavior : MonoBehaviour
     {
         agent.isStopped = false;
     }
+
+
+    //==================================================================================
+    //                              STATE METHODS
+    //==================================================================================
 
     State Idle()
     {
