@@ -5,6 +5,8 @@ public class GrenadeScript : MonoBehaviour
 {
     [Header("Grendade")]
     [SerializeField] [Min(0)] float gravityMultiplier;
+    [SerializeField] AudioClip throwSound; 
+    [SerializeField] AudioClip fuseSound;
 
     [Header("Explosion")]
     [SerializeField] GameObject explosionPrefab;
@@ -14,11 +16,25 @@ public class GrenadeScript : MonoBehaviour
 
     private Rigidbody rb;
     private bool disabled;
+    private AudioSource fuseSource;
+    private AudioSource throwSource;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         GetComponent<Target>().OnDeath += explode;
+
+        if (fuseSound)
+        {
+            fuseSource = SoundFXManager.instance.PlaySoundFXClip(fuseSound, transform, 1f);
+            fuseSource.gameObject.transform.parent = gameObject.transform;
+        }
+            
+        if (throwSound)
+        {
+            throwSource = SoundFXManager.instance.PlaySoundFXClip(throwSound, transform, 1f);
+            throwSource.gameObject.transform.parent = gameObject.transform;
+        }
     }
 
     private void FixedUpdate()
@@ -48,6 +64,11 @@ public class GrenadeScript : MonoBehaviour
 
     IEnumerator StartFuse(float fuseDuration)
     {
+        if(fuseSound != null)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(fuseSound, transform, 1f);
+        }
+            
         yield return new WaitForSeconds(fuseDuration);
         explode();
     }

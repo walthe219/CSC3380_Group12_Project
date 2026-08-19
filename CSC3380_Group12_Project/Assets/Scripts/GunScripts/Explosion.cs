@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 
 public class Explosion : MonoBehaviour
 {
     [SerializeField] float explosionRadius;
     [SerializeField] float explosionDamage;
+    [SerializeField] AudioClip explosionSound;
 
     public static GameObject spawn(GameObject prefab, Vector3 pos,float damage, float radius)
     {
@@ -26,6 +26,14 @@ public class Explosion : MonoBehaviour
 
     void Start()
     {
+        playParticleEffect();
+
+        if (explosionSound != null)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(explosionSound,transform,1f);
+        }
+            
+
         Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius, LayerMask.GetMask("Enemy"));
 
         HashSet<Target> alreadyHit = new HashSet<Target>();
@@ -49,6 +57,16 @@ public class Explosion : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(transform.position, explosionRadius);
+    }
+
+    private void playParticleEffect()
+    {
+        var particle = GetComponent<ParticleSystem>();
+        if (particle != null)
+        {
+            particle.Play();
+            Destroy(gameObject, particle.main.duration);
+        }
     }
 
 

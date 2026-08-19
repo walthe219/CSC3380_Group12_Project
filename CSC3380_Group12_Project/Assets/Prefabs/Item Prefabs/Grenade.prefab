@@ -155,7 +155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts::GrenadeScript
   gravityMultiplier: 0.33
-  explosionPrefab: {fileID: 7233474374439594377, guid: 2278e3fca2e5f264aa422f158517b4e3, type: 3}
+  throwSound: {fileID: 8300000, guid: 5f1f7369f588066498beabea0ad9ee0c, type: 3}
+  fuseSound: {fileID: 0}
+  explosionPrefab: {fileID: 70449441001404126, guid: 03f0a87d40f488d4bb3b0e43a7562e7c, type: 3}
   explosionDamage: 100
   explosionRadius: 8
   fuseDuration: 3

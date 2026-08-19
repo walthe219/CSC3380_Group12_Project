@@ -4,9 +4,9 @@ using System.Collections;
 public class GunParticleFXs : MonoBehaviour
 {
     [SerializeField] Transform gunLocation;
-    [SerializeField] ParticleSystem impactEnemyParticleSystem;
-    [SerializeField] ParticleSystem impactGenericParticleSystem;
-    [SerializeField] ParticleSystem muzzleFlashParticleSystem;
+    [SerializeField] GameObject impactEnemyParticleSystem;
+    [SerializeField] GameObject impactGenericParticleSystem;
+    [SerializeField] GameObject muzzleFlashParticleSystem;
     [SerializeField] TrailRenderer bulletTrailPrefab;
 
     [SerializeField] float projectileDuration = 0.1f;
@@ -23,12 +23,11 @@ public class GunParticleFXs : MonoBehaviour
     void muzzleFlash()
     {
         //Debug.Log("Muzzle Flash");
-        ParticleSystem muzzleFlash = Instantiate(muzzleFlashParticleSystem, gunLocation.position, gunLocation.rotation);
-        muzzleFlash.transform.parent = gunLocation;
-        muzzleFlash.transform.localScale = Vector3.one;
+        GameObject muzzleFlash = Instantiate(muzzleFlashParticleSystem, gunLocation);
 
-        muzzleFlash.Play();
-        Destroy(muzzleFlash.gameObject, muzzleFlash.main.duration);
+        ParticleSystem particle = muzzleFlash.GetComponent<ParticleSystem>();
+        particle.Play();
+        Destroy(muzzleFlash.gameObject, particle.main.duration);
 
     }
 
@@ -44,7 +43,7 @@ public class GunParticleFXs : MonoBehaviour
 
     void onMiss(RaycastHit hit)
     {
-        StartCoroutine(SpawnTrail(null, gunLocation.position + transform.forward * currPlayerStats.gunRange, Vector3.zero, false, false));
+        StartCoroutine(SpawnTrail(null, gunLocation.position + gunLocation.forward * currPlayerStats.gunRange, Vector3.zero, false, false));
     }
 
 
@@ -69,14 +68,15 @@ public class GunParticleFXs : MonoBehaviour
         trail.transform.position = hit;
         if (madeImpact)
         {
+            GameObject impact = Instantiate(impactGenericParticleSystem, hit, Quaternion.FromToRotation(Vector3.up, hitNormal));
+            impact.GetComponent<ParticleSystem>().Play();
+            Destroy(impact, 2f);
+
             if (enemyHit)
             {
-                Instantiate(impactEnemyParticleSystem, hit, Quaternion.LookRotation(hitNormal));
-                //SoundFXManager.instance.PlayRandomSoundFXClip(gunHitEnemySounds, transform, 1f);
-            }
-            else
-            {
-                Instantiate(impactGenericParticleSystem, hit, Quaternion.LookRotation(hitNormal));
+                GameObject enemyImpact = Instantiate(impactEnemyParticleSystem, hit, Quaternion.FromToRotation(Vector3.up,hitNormal));
+                enemyImpact.GetComponent<ParticleSystem>().Play();
+                Destroy(enemyImpact, 2f);
             }
         }
 
