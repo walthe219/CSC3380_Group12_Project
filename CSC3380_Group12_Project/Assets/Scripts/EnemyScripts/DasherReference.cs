@@ -13,6 +13,7 @@ public class DasherReference : MonoBehaviour
     public SubTarget legs;
     public SubTarget back;
     public SubTarget guard;
+    public LineRenderer dashPreview;
 
     [Header("Scripts")]
     public DasherBehavior behavior;
@@ -21,6 +22,10 @@ public class DasherReference : MonoBehaviour
 
     private void Awake()
     {
+        if (!dashPreview)
+            dashPreview = GetComponentInChildren<LineRenderer>();
+        dashPreview.enabled = false;
+
         anim = GetComponent<Animator>();
     }
 

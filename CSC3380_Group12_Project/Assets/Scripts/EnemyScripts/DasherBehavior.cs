@@ -2,20 +2,32 @@ using UnityEngine;
 using System;
 using UnityEngine.AI;
 
+// Dasher enemy behavior controller using a finite state machine.
+// Performs dash attack when player in range
+
+// Has three primary state groups: Idling, Chasing, and Attacking
+// Will idle until player within detect range
+// Will chase player until within attack range
+// Will prepare attack then perform a dash
 public class DasherBehavior : MonoBehaviour
 {
     enum State
     {
+        // IDLE STATES
         IDLE,
         PACING,
+
+        //CHASE STATES
         CHASE,
         SEARCH,
         GUARD,
+
+        //ATTACKING STATES
         PREPARE,
+        LOCKED,
         DASH,
         RECOVER,
         STUN,
-        STAGGER,
         DEAD
     }
 
@@ -44,14 +56,19 @@ public class DasherBehavior : MonoBehaviour
     [SerializeField] float detectionRadius;
 
     [Header("Guard")]
-    [SerializeField] float guardDist;
-    [SerializeField] float minGuardTime;
+    [SerializeField] float guardingRadius;
+    [SerializeField] float minGuardDuration;
 
     [Header("Prepare")]
-    [SerializeField] float prepareTime;
+    [SerializeField] float attackRadius;
+    [SerializeField] float prepareDuration;
+    [SerializeField] float prepareTurningSpeed;
+    [SerializeField] float maxTurningAngle;
+
+    [Header("Locked")]
+    [SerializeField] float lockedDuration;
 
     [Header("Dash")]
-    [SerializeField] float minDashDist;
     [SerializeField] float dashDuration;
     [SerializeField] float dashDistance;
 
@@ -73,7 +90,19 @@ public class DasherBehavior : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         startingPos = transform.position;
 
-        dasher.back.OnDamageTaken += () => { if (currentState == State.RECOVER) ChangeState(State.STUN); };
+
+        dasher.back.OnDamageTaken += () => 
+        { 
+            if (currentState == State.RECOVER) 
+                ChangeState(State.STUN); 
+        };
+
+        dasher.target.OnDamageTaken += () => 
+        { 
+            if (currentState == State.IDLE || currentState == State.CHASE) 
+                ChangeState(State.CHASE); 
+        };
+
         dasher.target.OnDeath += () => ChangeState(State.DEAD);
     }
 
@@ -102,6 +131,9 @@ public class DasherBehavior : MonoBehaviour
                 break;
             case State.PREPARE:
                 newState = Prepare();
+                break;
+            case State.LOCKED:
+                newState = Locked();
                 break;
             case State.DASH:
                 newState = Dash();
@@ -163,12 +195,12 @@ public class DasherBehavior : MonoBehaviour
 
     bool playerInGuardRange()
     {
-        return player && Vector3.Distance(player.position, transform.position) <= guardDist;
+        return player && Vector3.Distance(player.position, transform.position) <= guardingRadius;
     }
 
     bool playerInAttackRange()
     {
-        return player && Vector3.Distance(player.position, transform.position) <= minDashDist;
+        return player && Vector3.Distance(player.position, transform.position) <= attackRadius;
     }
 
     bool playerInLOS()
@@ -196,16 +228,32 @@ public class DasherBehavior : MonoBehaviour
         */
     }
 
-    void LookAt(Vector3 target)
+    void LookAt(Vector3 target, float turnSpeed)
     {
+        DisableAgent();
+
         Vector3 direction = (target - transform.position).normalized;
         direction.y = 0; // Prevent looking up or down into the floor
 
         if (direction != Vector3.zero)
         {
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * agent.angularSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed * Mathf.Deg2Rad);
         }
+
+        EnableAgent();
+    }
+
+    void DisableAgent()
+    {
+        agent.isStopped = true;
+        agent.ResetPath();
+        agent.velocity = Vector3.zero;
+    }
+
+    void EnableAgent()
+    {
+        agent.isStopped = false;
     }
 
     State Idle()
@@ -239,6 +287,9 @@ public class DasherBehavior : MonoBehaviour
     {
         agent.speed = chaseSpeed;
 
+        if (hasStopped())
+            LookAt(player.position, agent.angularSpeed);
+
         if (elapsed <= pathUpdateDelay)
             return State.CHASE;
         elapsed = 0;
@@ -248,8 +299,6 @@ public class DasherBehavior : MonoBehaviour
 
         agent.SetDestination(player.transform.position);
 
-        if (hasStopped())
-            LookAt(player.position);
 
         if (playerInGuardRange())
             return State.GUARD;
@@ -262,11 +311,16 @@ public class DasherBehavior : MonoBehaviour
         if (hasStopped())
             return State.IDLE;
 
+        if (playerInDetectRange() && playerInLOS()) return State.CHASE;
+
         return State.SEARCH;
     }
 
     State Guard()
     {
+        if (hasStopped())
+            LookAt(player.position, agent.angularSpeed);
+
         if (elapsed <= pathUpdateDelay)
             return State.GUARD;
         elapsed = 0;
@@ -276,34 +330,44 @@ public class DasherBehavior : MonoBehaviour
 
         agent.SetDestination(player.transform.position);
 
-        if (hasStopped())
-            LookAt(player.position);
 
-        if (timer <= minGuardTime)
+        if (timer <= minGuardDuration)
         {
             return State.GUARD;
         }
 
-        if (playerInAttackRange())
-            return State.PREPARE;
+        if (!playerInAttackRange())
+            return State.GUARD;
 
+        DisableAgent();
+        dasher.dashPreview.enabled = true;
 
-        return State.GUARD;
+        return State.PREPARE;
     }
 
     State Prepare()
     {
-        agent.isStopped = true;
-        agent.ResetPath();
-        agent.velocity = Vector3.zero;
+        Vector3 playerDirection = player.position - transform.position;
 
-        LookAt(player.position);
+        if(Vector3.Angle(playerDirection, transform.forward) < maxTurningAngle)
+            LookAt(player.position, prepareTurningSpeed);
 
-        if (timer <= prepareTime)
+        if (timer <= prepareDuration)
         {
             return State.PREPARE;
         }
 
+        return State.LOCKED;
+    }
+
+    State Locked()
+    {
+        if (timer <= lockedDuration)
+        {
+            return State.LOCKED;
+        }
+
+        dasher.dashPreview.enabled = false;
         return State.DASH;
     }
 
@@ -318,7 +382,7 @@ public class DasherBehavior : MonoBehaviour
         }
 
         dasher.dashAttack.ToggleOFF();
-        agent.isStopped = false;
+        EnableAgent();
         return State.RECOVER;
     }
 
